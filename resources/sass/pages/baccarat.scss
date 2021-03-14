@@ -1,0 +1,66 @@
+@import "../variables";
+
+.game-content-baccarat {
+    svg {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 4.5em;
+    }
+
+    height: 600px !important;
+    min-height: 600px !important;
+}
+
+.deck {
+    position: absolute;
+    right: 100px;
+    top: 0;
+
+    div {
+        width: 100px;
+        height: 115px;
+        background: white;
+        border-bottom-left-radius: 8px;
+        padding: 9px;
+        border-bottom-right-radius: 8px;
+        box-shadow: 0 1px 0 rgba(0,0,0,.2);
+        position: absolute;
+        right: -45px;
+    }
+
+    div:first-child {
+        z-index: 5;
+    }
+
+    div:nth-child(2) {
+        margin-top: 2px;
+        z-index: 4;
+    }
+
+    div:nth-child(3) {
+        margin-top: 4px;
+        z-index: 3;
+    }
+
+    div:nth-child(4) {
+        margin-top: 6px;
+        z-index: 2;
+    }
+
+    div {
+        div {
+            background: url('/img/misc/cardback.svg');
+            width: 100%;
+            height: calc(100% + 9px);
+            background-size: cover;
+            position: relative;
+            background-position: center;
+            top: -9px;
+            border-bottom-left-radius: 6px;
+            border-bottom-right-radius: 6px;
+            right: unset;
+        }
+    }
+}
