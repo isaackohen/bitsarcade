@@ -135,7 +135,7 @@
 
 .modal {
     position: fixed;
-    width: 400px;
+    width: 430px;
     height: auto;
     z-index: 40002 !important;
     visibility: hidden;
@@ -172,10 +172,7 @@
     @include themed() {
         .content {
             color: t('text');
-            $contentbg: url('/img/misc/dots-content.svg');
-            $headerln: darken(t('header'), 4.5%);
-            $headerln2: darken(t('header'), 1.0%);
-            background: $contentbg repeat, linear-gradient(45deg, $headerln, $headerln2);
+            background: url(/img/misc/anim-model.svg) repeat, linear-gradient(45deg, #212121, #0f0f10);
             border-bottom: 0.5px solid lighten(t('secondary'), 1%);
             padding: 15px;
             border-radius: 6px;

@@ -3,16 +3,17 @@
 return [
     'rank' => [
         'level' => 'VIP level - :level',
-        '0' => 'New Player',
+        '0' => 'New',
         '1' => 'Bronze',
         '2' => 'Silver',
         '3' => 'Gold',
         '4' => 'Platinum',
         '5' => 'Diamond'
     ],
-    'description' => 'Your VIP level is calculated by your wager in your most wagered currency.',
+    'description' => 'Your VIP level increasing by placing bets on all games in any currency.',
+    'description.2' => 'Your progress to next level can be followed here.',
     'benefits_description' => 'VIP benefits:',
-    'benefits' => 'Benefits',
+    'benefits' => 'VIP Levels',
     'benefit_list' => [
         'bronze' => [
             '1' => 'Daily Bonus unlocked',

@@ -70,7 +70,7 @@ return [
         'through_social' => 'Social networks',
         'wrong_credentials' => 'Wrong login or password',
         'credentials' => [
-            'login' => 'Login',
+            'login' => 'Username',
             'password' => 'Password',
             'email' => 'Email'
         ],

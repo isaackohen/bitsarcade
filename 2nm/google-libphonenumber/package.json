@@ -1,0 +1,86 @@
+{
+  "_args": [
+    [
+      "google-libphonenumber@3.2.18",
+      "/var/www/html"
+    ]
+  ],
+  "_development": true,
+  "_from": "google-libphonenumber@3.2.18",
+  "_id": "google-libphonenumber@3.2.18",
+  "_inBundle": false,
+  "_integrity": "sha512-6u+PF7Nf6TXMUNekHxc7pO6iE9PI1n2/q+z80GzFckH5riSKn4K1EeFimA5UqHA4MpxgKHYsVpcj8YDq32ob9g==",
+  "_location": "/google-libphonenumber",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "google-libphonenumber@3.2.18",
+    "name": "google-libphonenumber",
+    "escapedName": "google-libphonenumber",
+    "rawSpec": "3.2.18",
+    "saveSpec": null,
+    "fetchSpec": "3.2.18"
+  },
+  "_requiredBy": [
+    "/class-validator"
+  ],
+  "_resolved": "https://registry.npmjs.org/google-libphonenumber/-/google-libphonenumber-3.2.18.tgz",
+  "_spec": "3.2.18",
+  "_where": "/var/www/html",
+  "author": {
+    "name": "Rui Marinho",
+    "email": "ruipmarinho@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/ruimarinho/google-libphonenumber/issues"
+  },
+  "description": "The up-to-date and reliable Google's libphonenumber package for node.js.",
+  "devDependencies": {
+    "browserify": "^13.1.0",
+    "eslint": "^7.13.0",
+    "google-closure-compiler": "^20201102.0.1",
+    "google-closure-library": "^20201006.0.0",
+    "mocha": "^8.2.1",
+    "should": "^11.1.0"
+  },
+  "engines": {
+    "node": ">=0.10"
+  },
+  "homepage": "https://ruimarinho.github.io/google-libphonenumber/",
+  "keywords": [
+    "browserify",
+    "e164",
+    "format",
+    "formatting",
+    "international",
+    "libphonenumber",
+    "number",
+    "phone",
+    "phonenumber",
+    "rfc3966",
+    "standardize",
+    "wrapper"
+  ],
+  "license": "(MIT AND Apache-2.0)",
+  "main": "dist/libphonenumber.js",
+  "name": "google-libphonenumber",
+  "options": {
+    "mocha": "--require should test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ruimarinho/google-libphonenumber.git"
+  },
+  "scripts": {
+    "build": "bin/build.sh",
+    "lint": "eslint src/index.js test",
+    "prepare": "npm run build",
+    "test": "npm run build && npm run testonly",
+    "testonly": "mocha $npm_package_options_mocha",
+    "update": "bin/update.sh",
+    "version": "npm run build && git add -A dist"
+  },
+  "sideEffects": false,
+  "version": "3.2.18"
+}

@@ -230,32 +230,32 @@ $.setUnit = function(unit) {
 }
 
 $.getPriceCurrency = function() {
-	if($.getCookie('demo') != 'true'){
-	if($.getCookie('unit') == 'usd') {
-	let current = $.getBalanceType();
-	try { 
-	return window.currencies[$.getBalanceType()].dollar;
-	}
-	catch(err) { 
+    if($.getCookie('demo') != 'true'){
+    if($.getCookie('unit') == 'usd') {
+    let current = $.getBalanceType();
+    try { 
+    return window.currencies[$.getBalanceType()].dollar;
+    }
+    catch(err) { 
     console.log('Currency usd for this crypto not stated');
-	}
-	}
+    }
+    }
     if($.getCookie('unit') == 'euro') {
-	let current = $.getBalanceType();
-	try { 
-	return window.currencies[$.getBalanceType()].euro;
-	}
-	catch(err) { 
+    let current = $.getBalanceType();
+    try { 
+    return window.currencies[$.getBalanceType()].euro;
+    }
+    catch(err) { 
     console.log('Currency euro for this crypto not stated');
-	}
-	}
-	} else {
-	return '0';
-	}
-	if($.getCookie('unit') == 'disabled')
-	{
-	return '0';
-	}
+    }
+    }
+    } else {
+    return '0';
+    }
+    if($.getCookie('unit') == 'disabled')
+    {
+    return '0';
+    }
 };
 
 $.getBalanceType = function() {
@@ -333,8 +333,8 @@ $.overview = function(game_id, api_id) {
                     $('.server_seed_target').text(response.info.server_seed).attr('href', `/fairness?verify=${response.info.game}-${response.info.server_seed}-${response.info.client_seed}-${response.info.nonce}`);
                     $('.client_seed_target').text(response.info.client_seed).attr('href', `/fairness?verify=${response.info.game}-${response.info.server_seed}-${response.info.client_seed}-${response.info.nonce}`);
                     if(api_id !== "slotmachine") {
-					$('.nonce_target').text(response.info.nonce).attr('href', `/fairness?verify=${response.info.game}-${response.info.server_seed}-${response.info.client_seed}-${response.info.nonce}`);
-					}
+                    $('.nonce_target').text(response.info.nonce).attr('href', `/fairness?verify=${response.info.game}-${response.info.server_seed}-${response.info.client_seed}-${response.info.nonce}`);
+                    }
                     if(response.user.private_bets !== true) $('.overview-player a').attr('href', '/user/'+response.info.user).html(response.user.name);
                     else $('.overview-player a').attr('href', 'javascript:void(0)').html($.lang('general.bets.hidden_name'));
 
@@ -436,12 +436,12 @@ $(document).ready(function() {
 
     $('#unitChanger').on('change', function() {
     $.setCookie('unit', this.value);
-	$(this).addClass('active');
-	try { 
+    $(this).addClass('active');
+    try { 
     $.sidebarData().currency(($.sidebarData().bet() * $.getPriceCurrency()).toFixed(4));
-	}
-	catch(err) {
-	}
+    }
+    catch(err) {
+    }
     });
 
     $('#liveTableEntries').on('select2:selecting', function(e) {
@@ -485,7 +485,7 @@ $(document).ready(function() {
 
             setTimeout(function() {
                 $.each($('i'), (i, e) => $.transformIcon($(e)));
-            }, 100);
+            }, 50);
         });
     });
 
@@ -551,16 +551,16 @@ $(document).ready(function() {
         e.find('[data-toggle="tooltip"]').tooltip();
 
         if(!force) {
-            if($('.live_games_selector').parent().find('tr').length < ($.getCookie('show') ?? 10)) e.fadeIn(300);
-            else $('.live_games_selector').parent().find('tr').last().fadeOut(300, function() {
-                $(this).delay(300).remove();
-                e.fadeIn(300);
+            if($('.live_games_selector').parent().find('tr').length < ($.getCookie('show') ?? 10)) e.fadeIn(50);
+            else $('.live_games_selector').parent().find('tr').last().fadeOut(50, function() {
+                $(this).delay(50).remove();
+                e.fadeIn(50);
             });
         }
         else e.show();
     };
 
-    setInterval($.putNextInLiveQueue, 1000);
+    setInterval($.putNextInLiveQueue, 850);
 
     window.Echo.channel(`laravel_database_Everyone`)
         .listen('ChatMessage', (e) => $.addChatMessage(e.message))
@@ -621,7 +621,7 @@ $(document).ready(function() {
                 $('.wallet .balance .animated').remove();
 
                 const animated = $(`<span class="animated text-${e.diff.action === 'subtract' ? 'danger' : 'success'}">${bitcoin(e.diff.value, 'btc').to($.unit()).value().toFixed(8)}</span>`);
-                animated.css({ 'top': '20px', 'opacity': 1 }).animate({ top: 0, opacity: 0 }, 700, function() {
+                animated.css({ 'top': '20px', 'opacity': 1 }).animate({ top: 0, opacity: 0 }, 150, function() {
                     animated.remove();
                 });
                 $('.wallet .balance').append(animated);
@@ -642,14 +642,14 @@ $(document).ready(function() {
             $('.wallet-switcher').toggleClass('active');
             $(this).toggleClass('active');
         });
-		
-		const walletmenu = $('.wallet-switcher');
-		
-		$(document).mouseup(e => {
-			if (!walletmenu.is(e.target) && walletmenu.has(e.target).length === 0) {
-				walletmenu.removeClass('active');
-			}
-		});
+        
+        const walletmenu = $('.wallet-switcher');
+        
+        $(document).mouseup(e => {
+            if (!walletmenu.is(e.target) && walletmenu.has(e.target).length === 0) {
+                walletmenu.removeClass('active');
+            }
+        });
 
         $('.wallet-switcher .option:not(.select-option)').on('click', function() {
             $('.wallet-switcher').removeClass('active');
@@ -658,8 +658,8 @@ $(document).ready(function() {
 
         $(`[data-set-currency]`).on('click', function() {
             $.setCurrency($(this).attr('data-set-currency'));
-			$.setWagerSelector();
-			walletmenu.removeClass('active');
+            $.setWagerSelector();
+            walletmenu.removeClass('active');
             $('.wallet .balance').html($('#switcher-real').html());
         });
 

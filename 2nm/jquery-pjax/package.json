@@ -1,0 +1,53 @@
+{
+  "_args": [
+    [
+      "jquery-pjax@2.0.1",
+      "/var/www/html"
+    ]
+  ],
+  "_from": "jquery-pjax@2.0.1",
+  "_id": "jquery-pjax@2.0.1",
+  "_inBundle": false,
+  "_integrity": "sha1-azoboW5kTmJL3P5y62s9lqhG9fI=",
+  "_location": "/jquery-pjax",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "jquery-pjax@2.0.1",
+    "name": "jquery-pjax",
+    "escapedName": "jquery-pjax",
+    "rawSpec": "2.0.1",
+    "saveSpec": null,
+    "fetchSpec": "2.0.1"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/jquery-pjax/-/jquery-pjax-2.0.1.tgz",
+  "_spec": "2.0.1",
+  "_where": "/var/www/html",
+  "bugs": {
+    "url": "https://github.com/defunkt/jquery-pjax/issues"
+  },
+  "description": "jQuery plugin for ajax + pushState navigation",
+  "devDependencies": {
+    "eslint": "^3.19.0"
+  },
+  "files": [
+    "LICENSE",
+    "jquery.pjax.js"
+  ],
+  "homepage": "https://github.com/defunkt/jquery-pjax#readme",
+  "license": "MIT",
+  "main": "jquery.pjax.js",
+  "name": "jquery-pjax",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/defunkt/jquery-pjax.git"
+  },
+  "scripts": {
+    "test": "./script/test"
+  },
+  "version": "2.0.1"
+}
