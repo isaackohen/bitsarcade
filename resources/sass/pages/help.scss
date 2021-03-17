@@ -6,6 +6,10 @@ body {
     }
 }
 
+.nav {
+    width: calc(100% + 55px) !important; 
+}
+
 .pageContent .heading {
     margin: 15px 0;
     padding-left: 16px;

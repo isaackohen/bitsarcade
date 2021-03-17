@@ -2,6 +2,10 @@
 
 $side-menu-width: 800px;
 
+.nav {
+    width: calc(100% + 55px) !important; 
+}
+
 .wheel-column {
     flex: 0 0 520px;
     position: relative;

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; display: block; z-index: 1; position: relative; shape-rendering: auto;" width="393" height="124" preserveAspectRatio="xMidYMid" viewBox="0 0 393 124">
+<g transform="translate(196.5,62) scale(1,1) translate(-196.5,-62)"><defs>
+  <linearGradient id="ldbk-photon-0ksjlroeqdgf-lg" x1="269.75" x2="393" y1="0" y2="0" gradientUnits="userSpaceOnUse">
+    <stop stop-color="#14524e" offset="0"></stop>
+    <stop stop-color="#0a5d58" offset="1"></stop>
+  </linearGradient>
+  <mask id="ldbk-photon-0ksjlroeqdgf-mask">
+  <g><path d="M693 -0.5 L294.92312416880793 -0.5 A15.5 15.5 0 0 1 294.92312416880793 31.5 L693 31.5" fill="#fff">
+  <animateTransform attributeName="transform" type="translate" dur="5s" repeatCount="indefinite" keyTimes="0;0.5;1" calcMode="spline" keySplines="0.5 0 0.5 1;0.5 0 0.5 1" values="45.75258130916869;0;45.75258130916869" begin="0s"></animateTransform>
+</path><path d="M435.01084694638644 -0.5 L446.0216938927729 -0.5 A15.5 15.5 0 0 1 446.0216938927729 31.5 L435.01084694638644 31.5 A15.5 15.5 0 0 1 435.01084694638644 -0.5" fill="#000">
+  <animateTransform attributeName="transform" type="translate" dur="10s" repeatCount="indefinite" keyTimes="0;1" values="0;-185.80796117136762" begin="0s"></animateTransform>
+  <animate attributeName="opacity" dur="10s" repeatCount="indefinite" keyTimes="0;0.3;1" values="1;1;0" begin="0s"></animate>
+</path><path d="M693 30.5 L247.55645818392568 30.5 A15.5 15.5 0 0 0 247.55645818392568 62.5 L693 62.5" fill="#fff">
+  <animateTransform attributeName="transform" type="translate" dur="3.3333333333333335s" repeatCount="indefinite" keyTimes="0;0.5;1" calcMode="spline" keySplines="0.5 0 0.5 1;0.5 0 0.5 1" values="-34.05797067619014;0;-34.05797067619014" begin="-7.5s"></animateTransform>
+</path><path d="M306.7322875856278 30.5 L334.60713174789333 30.5 A15.5 15.5 0 0 1 334.60713174789333 62.5 L306.7322875856278 62.5 A15.5 15.5 0 0 1 306.7322875856278 30.5" fill="#fff">
+  <animateTransform attributeName="transform" type="translate" dur="3.3333333333333335s" repeatCount="indefinite" keyTimes="0;1" values="0;0" begin="-7.5s"></animateTransform>
+  <animate attributeName="opacity" dur="3.3333333333333335s" repeatCount="indefinite" keyTimes="0;0.3;1" values="1;1;0" begin="-7.5s"></animate>
+</path><path d="M693 61.5 L286.08494785149423 61.5 A15.5 15.5 0 0 1 286.08494785149423 93.5 L693 93.5" fill="#fff">
+  <animateTransform attributeName="transform" type="translate" dur="3.3333333333333335s" repeatCount="indefinite" keyTimes="0;0.5;1" calcMode="spline" keySplines="0.5 0 0.5 1;0.5 0 0.5 1" values="31.704460226363153;0;31.704460226363153" begin="-15s"></animateTransform>
+</path><path d="M462.2329890463852 61.5 L500.46597809277046 61.5 A15.5 15.5 0 0 1 500.46597809277046 93.5 L462.2329890463852 93.5 A15.5 15.5 0 0 1 462.2329890463852 61.5" fill="#000">
+  <animateTransform attributeName="transform" type="translate" dur="5s" repeatCount="indefinite" keyTimes="0;1" values="0;-188.05467440631435" begin="-15s"></animateTransform>
+  <animate attributeName="opacity" dur="5s" repeatCount="indefinite" keyTimes="0;0.3;1" values="1;1;0" begin="-15s"></animate>
+</path><path d="M693 92.5 L276.63122963012245 92.5 A15.5 15.5 0 0 0 276.63122963012245 124.5 L693 124.5" fill="#fff">
+  <animateTransform attributeName="transform" type="translate" dur="5s" repeatCount="indefinite" keyTimes="0;0.5;1" calcMode="spline" keySplines="0.5 0 0.5 1;0.5 0 0.5 1" values="-27.886549994557043;0;-27.886549994557043" begin="-22.5s"></animateTransform>
+</path><path d="M354.85735022030826 92.5 L382.49563903550956 92.5 A15.5 15.5 0 0 1 382.49563903550956 124.5 L354.85735022030826 124.5 A15.5 15.5 0 0 1 354.85735022030826 92.5" fill="#fff">
+  <animateTransform attributeName="transform" type="translate" dur="5s" repeatCount="indefinite" keyTimes="0;1" values="0;0" begin="-22.5s"></animateTransform>
+  <animate attributeName="opacity" dur="5s" repeatCount="indefinite" keyTimes="0;0.3;1" values="1;1;0" begin="-22.5s"></animate>
+</path>    </g>
+  </mask>
+</defs>
+<rect x="0" y="0" width="393" height="124" fill="url(#ldbk-photon-0ksjlroeqdgf-lg)" mask="url(#ldbk-photon-0ksjlroeqdgf-mask)"></rect></g>
+</svg>

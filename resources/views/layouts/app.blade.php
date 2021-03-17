@@ -31,7 +31,7 @@
         <link rel="preload" href="{{ $hash('/fonts/fa-regular-400.woff2') }}" as="font" type="font/woff2" crossorigin="anonymous">
         <link rel="preload" href="{{ $hash('/fonts/fa-light-300.woff2') }}" as="font" type="font/woff2" crossorigin="anonymous">
         <link rel="preload" href="{{ $hash('/fonts/fa-brands-400.woff2') }}" as="font" type="font/woff2" crossorigin="anonymous">
-
+ 
         <link rel="stylesheet" href="{{ mix('/css/loader.css') }}">
         <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
         <link rel="manifest" href="/manifest.json">
@@ -108,6 +108,8 @@
                                 <i class="fas fa-bars"></i>
                             </a>
                             <div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuLink">
+                                <div class="home"><a href="/"><button class="btn btn-dropdownmenu"><i class="fad fa-certificate"></i>  Home</button></a></div>
+
                                 @if(!auth()->guest())
                                 <div class="profilemenu"  onclick="redirect('/user/{{ auth()->user()->_id }}')"><a><button class="btn btn-dropdownmenu"><i class="fas fa-user-cog"></i>  Profile</button></a></div>
                                 <div class="depositmenu" onclick="$.wallet()"><button class="btn btn-dropdownmenu"><i class="fad fa-gem"></i> Deposit</button></div>
@@ -121,8 +123,6 @@
                             </div>
                         </div>
                     <div class="menu">
-
-                        
                         <a href="/" data-page-trigger="'/','/index'" data-toggle-class="active">{{ __('general.head.index') }}</a>
                         <a href="/bonus" data-page-trigger="'/promotions'" data-toggle-class="active">{{ __('general.head.promotions') }}</a>
                         <a href="/partner" data-page-trigger="'/partner'" data-toggle-class="active">Affiliate</a>
