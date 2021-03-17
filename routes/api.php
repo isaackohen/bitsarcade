@@ -185,6 +185,7 @@ Route::middleware('auth')->prefix('wallet')->group(function() {
 
         return success([
             'currency' => $request->currency,
+            'mindeposit' => $mindeposit,
             'wallet' => $responseResult->pay_address
         ]);
     });
@@ -374,7 +375,7 @@ Route::middleware('auth')->prefix('settings')->group(function() {
     });
     Route::post('avatar', function(Request $request) {
         $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048'
+            'image' => 'required|image|mimes:jpeg,png,jpg,svg|max:50'
         ]);
 
         $path = auth()->user()->_id.time();
@@ -426,7 +427,8 @@ Route::middleware('auth')->prefix('chat')->group(function() {
 
     Route::post('rain', function(Request $request) {
         $usersLength = intval($request->users);
-        if($usersLength < 5 || $usersLength > 0) return reject(1, 'Invalid users length');
+        if($usersLength < 1 || $usersLength > 25) return reject(1, 'Invalid users length');
+        if(auth()->user()->access != 'admin') return reject(2, 'Not available');
         if(auth()->user()->balance(auth()->user()->clientCurrency())->get() < floatval($request->amount) || floatval($request->amount) < floatval(auth()->user()->clientCurrency()->option('rain')) / 3) return reject(2);
         auth()->user()->balance(auth()->user()->clientCurrency())->subtract(floatval($request->amount), \App\Transaction::builder()->message('Rain')->get());
 

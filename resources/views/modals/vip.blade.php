@@ -5,7 +5,7 @@
             <div class="loader"><div></div></div>
         </div>
         <div class="modal-scrollable-content">
-            <img class="vip-logo" src="/img/misc/vip-logo.svg" alt>
+            <img class="vip-logo" src="/img/misc/vip-icon.svg" alt>
 
             @php
                 $currency = auth()->user()->closestVipCurrency();
@@ -19,11 +19,14 @@
 
                 $percent = number_format(auth()->user()->vipLevel() == 5 ? 100 : (\Illuminate\Support\Facades\DB::table('games')->where('user', auth()->user()->_id)->where('currency', $currency->id())->where('demo', '!=', true)->where('status', '!=', 'in-progress')->where('status', '!=', 'cancelled')->sum('wager') / $breakpoints[auth()->user()->vipLevel() + 1]) * 100, 2, '.', '');
             @endphp
-            <div class="vipDesc m-1">Progress:</div>
+
+            <div class="vipDesc mb-4 mt-4">{{ __('vip.description', ['currency' => auth()->user()->closestVipCurrency()->name()]) }}</div>
+            <div class="vipDesc mb-2">{{ __('vip.description.2', ['currency' => auth()->user()->closestVipCurrency()->name()]) }}</div>
+
             <div class="progress">
                 <div class="progress-bar" role="progressbar" style="width: {{ $percent }}%;">{{ $percent < 8 ? '' : $percent.'%' }}</div>
             </div>
-            <div class="vipProgress">
+            <div class="vipProgress m-1 mb-4">
                 <div>
                     {{ __('vip.rank.'.(auth()->user()->vipLevel() == 5 ? 4 : auth()->user()->vipLevel())) }}
                 </div>
@@ -48,8 +51,7 @@
                     {{ __('vip.rank.'.(auth()->user()->vipLevel() == 5 ? 5 : auth()->user()->vipLevel() + 1)) }}
                 </div>
             </div>
-            <div class="vipDesc mb-2">{{ __('vip.description', ['currency' => auth()->user()->closestVipCurrency()->name()]) }}</div>
-            <div class="font-weight-bold" style="font-size: 1.05em">{{ __('vip.benefits') }}</div>
+            <div class="font-weight-bold mb-1">{{ __('vip.benefits') }}</div>
             <div class="expandableBlock">
                 <div class="expandableBlockHeader">
                     <svg><use href="#vip-bronze"></use></svg>

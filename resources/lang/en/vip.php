@@ -3,16 +3,17 @@
 return [
     'rank' => [
         'level' => 'VIP level - :level',
-        '0' => 'New Player',
+        '0' => 'New',
         '1' => 'Bronze',
         '2' => 'Silver',
         '3' => 'Gold',
         '4' => 'Platinum',
         '5' => 'Diamond'
     ],
-    'description' => 'Your VIP level is calculated by your wager in your most wagered currency.',
+    'description' => 'Your VIP level increasing by placing bets on all games in any currency.',
+    'description.2' => 'Your progress to next level can be followed here.',
     'benefits_description' => 'VIP benefits:',
-    'benefits' => 'Benefits',
+    'benefits' => 'VIP Levels',
     'benefit_list' => [
         'bronze' => [
             '1' => 'Daily Bonus unlocked',
@@ -46,8 +47,8 @@ return [
         'tooltip' => 'Daily VIP Bonus',
         'title' => 'Daily Bonus',
         'progress_title' => 'Progress',
-        'description' => "As a reward for being VIP. you get a Daily bonus. Each bet unlocks 0.1% of your Daily Bonus.<br>
-                          <br>The total size of which is determined by your VIP status. Once you have reached<b>Bronze</b> level (after wagering 500$) you can use the Daily Bonus feature indefinitely.<br>
+        'description' => "As a reward for being VIP. you get a Daily bonus. Each bet over 0.5$ work towards your daily bonus total.<br>
+                          <br>The total size of which is determined by your VIP status. Once you have reached <b>Bronze</b> level, you can use the Daily Bonus feature indefinitely.<br>
                           <br>You can withdraw your Daily bonus at any time, but keep in mind that after this you will not be able to receive this bonus for the rest of the day.
                           <br><br>We reset bonus progress every day at midnight. Remember to take the reward before midnight!",
         'timeout' => "<br><strong>You have already received the bonus.</strong><br>Come back tomorrow!<br><br>"

@@ -23,14 +23,14 @@ class TipNotification extends Notification {
 
     public function toArray($notifiable) {
         return [
-            'title' => 'JackBet',
+            'title' => 'Bitsarcade',
             'message' => $this->message
         ];
     }
 
     public function toWebPush($notifiable, $notification) {
         return (new WebPushMessage)
-            ->title('JackBet')
+            ->title('Bitsarcade')
             ->body($this->message);
     }
 

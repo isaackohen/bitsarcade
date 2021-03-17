@@ -32,11 +32,11 @@ class Kernel extends ConsoleKernel {
      * @return void
      */
     protected function schedule(Schedule $schedule) {
-        $schedule->command(SendVkPromocode::class)->everyThirtyMinutes();
-        $schedule->command(SendVipPromocode::class)->everyThirtyMinutes();
+        #$schedule->command(SendVkPromocode::class)->everyThirtyMinutes();
+        #$schedule->command(SendVipPromocode::class)->everyThirtyMinutes();
         //$schedule->command(Quiz::class)->everyTenMinutes();
         $schedule->command(ResetWeeklyBonus::class)->daily();
-        $schedule->command(Rain::class)->everyFifteenMinutes();
+        #$schedule->command(Rain::class)->everyFifteenMinutes();
         //$schedule->command(ProcessTRXPayments::class)->everyMinute();
 
         $expression = Cache::get('schedule:expressions:rain');

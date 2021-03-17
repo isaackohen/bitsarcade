@@ -38,7 +38,7 @@ $.game('dice', function(container, overviewData) {
 
     $(container).find('.dice-number').on('input', function() {
         const value = parseInt($(this).val());
-        if(isNaN(value) || (currentTarget === 'lower' && value > 98) || (currentTarget === 'higher' && value < 2) || value < 1 || value > 99) {
+        if(isNaN(value) || (currentTarget === 'lower' && value > 95) || (currentTarget === 'higher' && value < 5) || value < 4 || value > 96) {
             $(this).toggleClass('error', true);
             return;
         }
@@ -54,9 +54,9 @@ $.game('dice', function(container, overviewData) {
         max: 100,
         value: 50,
         slide: function(event, ui) {
-            if(ui.value < 1 || ui.value > 99) return false;
-            if(currentTarget === 'lower' && ui.value > 98) return false;
-            if(currentTarget === 'higher' && ui.value < 2) return false;
+            if(ui.value < 4 || ui.value > 96) return false;
+            if(currentTarget === 'lower' && ui.value > 95) return false;
+            if(currentTarget === 'higher' && ui.value < 5) return false;
 
             $('#tooltip-value').html(ui.value);
             setTimeout(function() {
@@ -102,9 +102,9 @@ $.game('dice', function(container, overviewData) {
         });
 
         let v = 100 - $(container).find('.dice-slider').slider('value');
-        if(currentTarget === 'higher' && v < 2) v = 2;
-        if(currentTarget === 'lower' && v > 98) v = 98;
-        if(v < 1) v = 1; if(v > 99) v = 99;
+        if(currentTarget === 'higher' && v < 5) v = 5;
+        if(currentTarget === 'lower' && v > 95) v = 95;
+        if(v < 4) v = 4; if(v > 96) v = 96;
         $(container).find('.dice-slider').slider('value', v);
         $('#tooltip-value').html(v);
 

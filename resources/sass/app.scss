@@ -17,16 +17,16 @@
 
 @import 'modals/modal';
 
-$sidebar-width: 45px;
-$header-height: 65px;
-$chat-width: 295px;
+$sidebar-width: 40px;
+$header-height: 55px;
+$chat-width: 300px;
 
 $card: 0 0 10px rgba(28, 39, 60, .05);
 
 
 .slider {
     margin-top: -15px;
-    height: 270px;
+    height: 150px;
     margin-bottom: 0 !important;
 
     .glide {
@@ -109,7 +109,7 @@ $card: 0 0 10px rgba(28, 39, 60, .05);
             }
 
             .slideContent {
-                width: 70%;
+                width: 75%;
                 display: flex;
                 margin-left: auto;
                 margin-right: auto;
@@ -124,27 +124,36 @@ $card: 0 0 10px rgba(28, 39, 60, .05);
                     flex-direction: column;
                     margin-top: auto;
                     filter: drop-shadow(1px 1px 6px #232325);
-                    background: url(/img/misc/dots-content.svg) repeat, linear-gradient(45deg, #00000087, #000000b8);
-                    padding: 15px 5px 15px 30px;
-                    border-radius: 15px;
+                    background: url(/img/misc/arrows.svg), linear-gradient(59deg, #2b2d2d, #262829) !important;
+                    padding: 10px 15px 10px 15px;
+                    border-radius: 12px;
+                    transform-style: preserve-3d;
+                    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 20%), 0 2px 4px -1px rgb(0 0 0 / 12%);
                     width: fit-content;
                     margin-bottom: auto;
+                            
+                    .js-tilt-glare {
+                      border-radius: 12px;
+                    }
                 }
 
+
+
                 .header, .description {
-                    text-shadow: 1px 1px 3px rgba(black, 0.2);
+                    text-shadow: 1px 1px 3px rgba(black, 0.4);
                 }
 
                 .header {
                     font-weight: 600;
-                    font-size: 2em;
-                    margin-bottom: 25px;
+                    font-size: 1.5em;
+                    transform: translateZ(40px);
+                    margin-bottom: 2px;
                 }
 
                 .description {
-                    font-size: 1.5em;
-                    margin-bottom: 25px;
-                    width: 420px;
+                    font-size: 1.2em;
+                    transform: translateZ(40px);
+                    margin-bottom: 2px;
                 }
 
                 .button {
@@ -182,6 +191,87 @@ $card: 0 0 10px rgba(28, 39, 60, .05);
     }
 }
 
+
+.s-buttons{
+    position:relative;
+    -ms-flex-wrap:wrap;
+    flex-wrap:wrap;
+    justify-content: center;
+}
+.s-buttons,.s-buttons a{
+    display:-webkit-box;
+    display:-ms-flexbox;
+    display:flex;
+    -webkit-box-sizing:border-box;
+    box-sizing:border-box
+}
+.s-buttons a{
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    appearance:none;
+    border-radius:999em;
+    text-decoration:none;
+    font-weight:600;
+    font-size:14px;
+    text-transform:uppercase;
+    padding:10px 20px;
+    -webkit-box-shadow:0 3px 6px rgba(0,0,0,.16);
+    box-shadow:0 3px 6px rgba(0,0,0,.16);
+    margin:0 5px 10px;
+    color:#fff !important;
+    overflow:hidden
+}
+.s-buttons a:last-child{
+    margin-right:0
+}
+.s-buttons a span{
+    max-width:0;
+    opacity:0;
+    -webkit-transition:opacity .35s ease-in-out,max-width .35s ease-in-out,padding-left .35s ease-in-out;
+    transition:opacity .35s ease-in-out,max-width .35s ease-in-out,padding-left .35s ease-in-out
+}
+.s-buttons a.is-twitter{
+    background:-webkit-gradient(linear,left top,left bottom,from(#1da1f2),to(#265d82));
+    background:linear-gradient(#1da1f2,#265d82)
+}
+.s-buttons a.is-telegram{
+    background:-webkit-gradient(linear,left top,left bottom,from(#08c),to(#1e597d));
+    background:linear-gradient(#08c,#1e597d)
+}
+.s-buttons a.is-discord{
+    background:-webkit-gradient(linear,left top,left bottom,from(#7289da),to(#4c5984));
+    background:linear-gradient(#7289da,#4c5984)
+}
+.s-buttons a.is-facebook{
+    background:-webkit-gradient(linear,left top,left bottom,from(#3b5998),to(#2f4a7d));
+    background:linear-gradient(#3b5998,#2f4a7d)
+}
+.s-buttons a.is-instagram{
+    background:linear-gradient(45deg,#fd1d1d,#833ab4)
+}
+.s-buttons a.is-medium{
+    background:-webkit-gradient(linear,left top,left bottom,from(#00ab6c),to(#207650));
+    background:linear-gradient(#00ab6c,#207650)
+}
+.s-buttons a:hover span{
+    opacity:1;
+    max-width:200px;
+    padding-left:10px
+}
+@media (max-width:710px){
+    .s-buttons a:hover span{
+        display:none
+    }
+}
+.s-buttons a:active{
+    color: white;
+}
+.s-buttons a svg{
+    width:18px;
+    height:18px;
+    fill: white;
+}
+
 @include media-breakpoint-up(lg) {
     .slider {
         margin-left: -65px;
@@ -193,7 +283,7 @@ $card: 0 0 10px rgba(28, 39, 60, .05);
     .slider {
         margin-left: -15px;
         width: calc(100% + 30px);
-        height: 250px;
+        height: 200px;
 
         .glide__arrow--left {
             left: 2em !important;
@@ -227,6 +317,24 @@ $card: 0 0 10px rgba(28, 39, 60, .05);
 
         box-shadow: 0 0 10px rgba(28, 39, 60, .05);
 
+        .header, .description {
+                    text-shadow: 1px 1px 3px rgba(black, 0.6);
+                    padding-left: 10px;
+                }
+
+                .header {
+                    font-weight: 600;
+                    font-size: 2em;
+                    margin-bottom: -2px;
+                }
+
+}
+
+.our-games-box {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin: auto;
         .header, .description {
                     text-shadow: 1px 1px 3px rgba(black, 0.6);
                     padding-left: 10px;
@@ -284,9 +392,9 @@ $card: 0 0 10px rgba(28, 39, 60, .05);
 
 .game_poster {
     display: inline-flex;
-    width: 190px;
-    height: 195px;
-    margin: 12px;
+    width: 180px;
+    height: 185px;
+    margin: 6px;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -773,7 +881,28 @@ $card: 0 0 10px rgba(28, 39, 60, .05);
     }
 }
 
+.button-bar-small {
+        border-radius: 12px;
+        margin-bottom: 20px;
+        text-shadow: 1px 1px #2b2b2b;
+        display: flex;
+        cursor: pointer;
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 20%), 0 2px 4px -1px rgb(0 0 0 / 12%);
+        flex-wrap: wrap;
 
+        .js-tilt-glare {
+        border-radius: 13px;
+        }
+        .js-tilt-glare-inner {
+        background-image: linear-gradient(0deg, rgb(0 0 0 / 5%) 0%, rgb(0 0 0 / 20%) 100%) !important;
+        }
+        .text {
+        padding: 12px;
+        padding-bottom: 3px;
+        -webkit-box-shadow: inset 0 -4px 0 rgb(0 0 0 / 35%);
+        box-shadow: inset 0 -2px 0 rgb(0 0 0 / 35%);
+        }
+    }
 
 .bonus-box {
     flex-wrap: nowrap;
@@ -1812,6 +1941,31 @@ p {
         &:hover, &:active, &:focus {
             color: #0fd560;
             background: linear-gradient(#272a2b, #1f2122);
+
+       .unavailable {
+        z-index: 4;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(black, 0.7);
+        border-radius: 5px;
+        color: white;
+        .slanting {
+            transform: skewY(-5deg) translateY(-50%);
+            padding: 25px;
+            position: absolute;
+            top: 50%;
+            background: rgba(black, 0.85);
+            width: 100%;
+            .content {
+                font-size: 15px;
+                transform: skewY(5deg);
+                text-align: center;
+            }
+         }
+      }
         }
     }
 }
@@ -1961,15 +2115,15 @@ header {
 
     @include themed() {
         $headerbg: t('headerbg');
-        $headerln: darken(t('header'), 3.5%);
+        $headerln: lighten(t('header'), 2.0%);
         $headerln2: darken(t('header'), 0.5%);
         background: $headerbg repeat, linear-gradient($headerln, $headerln2);
     }
 
         .logo {
-    width: 70px;
-    height: 52px;
-    margin-bottom: 5px;
+            width: 70px;
+            height: 52px;
+            margin-bottom: 5px;
             cursor: pointer;
             @include themed() {
                 background: t('logo') no-repeat;
@@ -2189,7 +2343,7 @@ header {
         }
 
         @include themed() {
-            border-bottom: 1px solid darken(t('secondary'), 2%);
+            border-bottom: 1px solid #333333;
             box-shadow: 0 4px 6px 3px rgb(0 0 0 / 20%), 0 2px 4px 2px rgb(0 0 0 / 25%);
             transition: border-bottom 0.15s ease;
         }
@@ -2500,7 +2654,7 @@ header {
 
             .messages {
                 height: calc(100% - #{$send-height});
-                padding: 15px;
+                padding: 10px;
 
                 .highlight {
                     display: inline-flex;
@@ -2618,11 +2772,11 @@ header {
                     border-radius: 3px;
                     $message1: lighten(t('body'), 1.0%);
                     $message2: lighten(t('body'), 3.0%);
-                    background: url("/img/misc/dots-message.svg") repeat, linear-gradient($message1, $message2);
+                    background: url("/img/misc/arrows.svg") repeat, linear-gradient($message1, $message2);
                     flex-wrap: wrap;
                     box-shadow: 0 0 1px 1px #3c3c3c;
                     flex-direction: column;
-                    padding: 8px;
+                    padding: 6px;
                     margin-bottom: 10px;
                     position: relative;
 
@@ -2632,13 +2786,13 @@ header {
 
                         .avatar {
                             display: inline-flex;
-                            width: 22px;
-                            height: 22px;
+                            width: 17px;
+                            height: 17px;
                             margin-right: 7px;
                             border-radius: 3px;
                             img {
-                                width: 22px;
-                                height: 22px;
+                                width: 17px;
+                                height: 17px;
                                 border-radius: 3px;
                             }
                         }
@@ -2650,13 +2804,13 @@ header {
 
                             .vipRank {
                                 position: absolute;
-                                top: 5px;
-                                right: 10px;
+                                top: 4px;
+                                right: 8px;
                                 z-index: 1;
 
                                 svg {
-                                    width: 14px;
-                                    height: 14px;
+                                    width: 17px;
+                                    height: 17px;
                                 }
                             }
                         }
@@ -2700,7 +2854,7 @@ header {
                 }
 
                 .message.from-moderator {
-                    box-shadow: 0 0 1px 1px #8371ff;
+                    box-shadow: inset 0 0 1px 1px #8371ff;
                     .user {
                         .avatar {
                             box-shadow: 0 0 1px 1px #8371ff;
@@ -2709,10 +2863,13 @@ header {
                 }
 
                 .message.from-admin {
-                    box-shadow: 0 0 1px 1px #e74c3c;
+                    box-shadow: inset 0 0 1px 1px #e74c3c;
                     .user {
                         .avatar {
-                            box-shadow: 0 0 1px 1px #e74c3c;
+
+                        }
+                        .name {
+                            color: #e74c3c;
                         }
                     }
                 }
@@ -2721,7 +2878,7 @@ header {
 
             .message-send {
                 height: $send-height;
-                padding: 15px;
+                padding: 10px;
                 display: flex;
                 margin-top: 5px;
                 background: url(/img/misc/arrows.svg), linear-gradient(59deg, #212224, #272a2c) !important;
@@ -2927,11 +3084,12 @@ footer {
         background: $headerbg repeat, linear-gradient($headerln2, $headerln);
     }
     font-size: 11px;
+    border-top: 1px solid #333333;
     padding-bottom: 10px;
     padding-top: 10px;
-    -webkit-box-shadow: 0px -4px 11px 0px rgb(0 0 0 / 45%);
-    -moz-box-shadow: 0px -4px 11px 0px rgb(0 0 0 / 45%);
-    box-shadow: 0px -4px 11px 0px rgb(0 0 0 / 45%);
+    -webkit-box-shadow: 0px 1px 8px 0px rgb(0 0 0 / 25%);
+    -moz-box-shadow: 0px 1px 8px 0px rgb(0 0 0 / 25%);
+    box-shadow: 0px 1px 8px 0px rgb(0 0 0 / 25%);
 
     .links {
         .link {
@@ -3173,17 +3331,14 @@ footer {
 }
 
 .globalNotification {
-    padding: 15px 15px 15px 55px;
-    margin-left: -55px;
-    width: calc(100% + 70px);
+    padding: 10px;
+    width: 100%;
     display: flex;
     flex-direction: row;
+    border-radius: 6px;
     align-content: center;
-    background: url(/img/misc/carbon-pattern.png) repeat;
-    margin-bottom: 20px;
+    background: url(/img/misc/news-ticker.svg) repeat;
     color: white;
-    border-top: 1px solid #6b6b6b;
-    border-bottom: 1px solid #6b6b6b;
     box-shadow: 0 0 10px rgb(2 2 2 / 32%);
 
     a {
@@ -3263,15 +3418,15 @@ footer {
 
 .nav {
     @include themed() {
-        $linearnav: darken(t('sidebar'), 2.0%);
-        $linearnav2: darken(t('sidebar'), 0.2%);
-        background: linear-gradient($linearnav, $linearnav2);
+        background: url(/img/misc/arrows.svg), linear-gradient(59deg, #2b2d2d, #262829) !important;
         padding-left: 25px;
+        padding-top: 6px;
+        padding-bottom: 6px;
         margin-left: -40px;
-        width: calc(100% + 40px);
+        width: calc(100% + 55px);
         box-shadow: 0 4px 6px -1px rgb(0 0 0 / 20%), 0 2px 4px -1px rgb(0 0 0 / 12%);
         margin-bottom: 15px;
-        margin-top: -15px;
+        margin-top: -12px;
         display: flex;
         flex-direction: row;
 
@@ -3279,23 +3434,25 @@ footer {
             cursor: pointer;
             display: inline-flex;
             position: relative;
-            color: #b1b1b1;
-            padding: 11px 25px;
+            margin-right: 4px;
+            color: #d6d6d6;
+            text-shadow: 1px 1px #383636;
+            padding: 10px 10px;
             align-items: center;
-            font-size: 12px;
+            font-size: 13px;
             justify-content: center;
             transition: color 0.3s ease-in;
 
             i, svg {
-                margin-right: 3px;
-                padding-bottom: 3px;
-                font-size: 12px;
+                margin-right: 1px;
+                padding-bottom: 2px;
+                font-size: 11px;
             }
 
             &:after {
                 content: '';
                 background: rgb(42 255 111 / 20%);
-                transition: background 0.3s ease;
+                transition: background 0.3s ease-in;
                 position: absolute;
                 width: 100%;
                 left: 0;

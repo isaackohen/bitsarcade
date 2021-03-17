@@ -1,7 +1,7 @@
 $(document).ready(function() {
     $(document).on('click', '.expandableBlockHeader', function() {
         $(this).parent().find('.expandableBlockContent').slideToggle('fast');
-        $(this).find('svg:last-child').toggleClass('fa-angle-left').toggleClass('fa-angle-up');
+        $(this).find('svg:last-child').toggleClass('fa-angle-up').toggleClass('fa-angle-left');
     });
 
     $(document).on('click', '.vip_bonus .btn', function() {

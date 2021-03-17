@@ -139,10 +139,22 @@
                         </thead>
                         <tbody>
                         <tr>
-                            <td>Total</td>
 							@php
 							$statistics = \App\Statistics::where('_id', $user->_id)->first();	
 							@endphp
+                        @if($statistics == null)
+                            @foreach(\App\Currency\Currency::all() as $currency)
+                                <td>{{ $currency->name() }}</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td><input data-currency-balance="{{ $currency->id() }}" class="form-control form-control-sm" placeholder="{{ $currency->name() }} balance" value="{{ number_format($user->balance($currency)->get(), 8, '.', '') }}"></td>
+                            </tr>
+                                                        @endforeach
+                         @else
+                            <td>Total</td>
                             <td>{{ $statistics->bets_btc + $statistics->bets_eth + $statistics->bets_ltc + $statistics->bets_doge + $statistics->bets_bch + $statistics->bets_trx }}</td>
                             <td>{{ $statistics->wins_btc + $statistics->wins_eth + $statistics->wins_ltc + $statistics->wins_doge + $statistics->wins_bch + $statistics->wins_trx }}</td>
                             <td>{{ $statistics->loss_btc + $statistics->loss_eth + $statistics->loss_ltc + $statistics->loss_doge + $statistics->loss_bch + $statistics->loss_trx }}</td>
@@ -204,6 +216,7 @@
                         @endforeach
                         </tbody>
                     </table>
+                    @endif
                     <hr>
                     <table id="datatable" class="table dt-responsive nowrap">
                         <thead>
@@ -238,6 +251,7 @@
                         </tbody>
                     </table>
                     <hr>
+
                     <table id="transactions" class="table dt-responsive nowrap">
                         <thead>
                         <tr>

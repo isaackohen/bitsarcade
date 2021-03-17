@@ -53,6 +53,14 @@ $.on('/', function(){
  });
 
 
+$('.button-bar-small').tilt({
+        glare: true,
+        perspective: 900,
+        scale: 1.05,
+        maxGlare: .7
+
+})
+
 $('.slots_poster').tilt({
         glare: true,
         scale: 1.05,
@@ -77,7 +85,7 @@ $('.game_poster').tilt({
             perView: 1,
             focusAt: 'center',
             gap: 0,
-            autoplay: 10000,
+            autoplay: 20000,
             keyboard: false
         });
         glide.mount();

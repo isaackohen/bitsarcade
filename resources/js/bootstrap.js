@@ -68,7 +68,7 @@ const reconnect = function() {
             if(secondsLeft <= 0) {
                 $('.pageLoader .error').html($.lang('general.error.token_grant_reconnecting'));
                 callback();
-            } else setTimeout(timer, 1000);
+            } else setTimeout(timer, 5000);
         };
         timer();
     };
@@ -107,7 +107,7 @@ $(window).on('load', function() {
 const unloadLoader = setInterval(function() {
     if(assetsLoaded && successfullyGrantedToken) {
         $(document).trigger('bootstrap:load');
-        $('.pageLoader').delay(300).fadeOut('normal');
+        $('.pageLoader').delay(200).fadeOut('normal');
         clearInterval(unloadLoader);
     }
-}, 10);
+}, 20);

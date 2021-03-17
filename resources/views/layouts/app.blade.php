@@ -56,8 +56,8 @@
                         'referralBonusWheel' => floatval($c->option('referral_bonus_wheel')),
                         'investMin' => floatval($c->option('min_invest')),
                         'highRollerRequirement' => floatval($c->option('high_roller_requirement')),
-						'min_bet' => $c->option('min_bet'),
-						'max_bet' => $c->option('max_bet')
+                        'min_bet' => $c->option('min_bet'),
+                        'max_bet' => $c->option('max_bet')
                     ]
                 ]);
             @endphp
@@ -69,16 +69,16 @@
                 'vapidPublicKey' => config('webpush.vapid.public_key'),
                 'access' => auth()->guest() ? 'user' : auth()->user()->access,
                 'currency' => $currency]) !!};
-			window.currencies = {!! json_encode([
+            window.currencies = {!! json_encode([
                 'btc' => ['dollar' => \App\Http\Controllers\Api\WalletController::rateDollarBtc(), 'euro' => \App\Http\Controllers\Api\WalletController::rateDollarBtcEur()],
                 'bch' => ['dollar' => \App\Http\Controllers\Api\WalletController::rateDollarBtcCash(), 'euro' => \App\Http\Controllers\Api\WalletController::rateDollarBtcCashEur()],
-                'eth' => ['dollar' => \App\Http\Controllers\Api\WalletController::rateDollarEth(), 'euro' => \App\Http\Controllers\Api\WalletController::rateDollarEthEur()],	
-				'xmr' => ['dollar' => \App\Http\Controllers\Api\WalletController::rateDollarXmr(), 'euro' => \App\Http\Controllers\Api\WalletController::rateDollarXmrEur()],	
-				'ltc' => ['dollar' => \App\Http\Controllers\Api\WalletController::rateDollarLtc(), 'euro' => \App\Http\Controllers\Api\WalletController::rateDollarLtcEur()],	
-				'iota' => ['dollar' => \App\Http\Controllers\Api\WalletController::rateDollarIota(), 'euro' => \App\Http\Controllers\Api\WalletController::rateDollarIotaEur()],
-				'doge' => ['dollar' => \App\Http\Controllers\Api\WalletController::rateDollarDoge(), 'euro' => \App\Http\Controllers\Api\WalletController::rateDollarDogeEur()],
-				'trx' => ['dollar' => \App\Http\Controllers\Api\WalletController::rateDollarTron(), 'euro' => \App\Http\Controllers\Api\WalletController::rateDollarTronEur()]
-				]) !!};
+                'eth' => ['dollar' => \App\Http\Controllers\Api\WalletController::rateDollarEth(), 'euro' => \App\Http\Controllers\Api\WalletController::rateDollarEthEur()],   
+                'xmr' => ['dollar' => \App\Http\Controllers\Api\WalletController::rateDollarXmr(), 'euro' => \App\Http\Controllers\Api\WalletController::rateDollarXmrEur()],   
+                'ltc' => ['dollar' => \App\Http\Controllers\Api\WalletController::rateDollarLtc(), 'euro' => \App\Http\Controllers\Api\WalletController::rateDollarLtcEur()],   
+                'iota' => ['dollar' => \App\Http\Controllers\Api\WalletController::rateDollarIota(), 'euro' => \App\Http\Controllers\Api\WalletController::rateDollarIotaEur()],
+                'doge' => ['dollar' => \App\Http\Controllers\Api\WalletController::rateDollarDoge(), 'euro' => \App\Http\Controllers\Api\WalletController::rateDollarDogeEur()],
+                'trx' => ['dollar' => \App\Http\Controllers\Api\WalletController::rateDollarTron(), 'euro' => \App\Http\Controllers\Api\WalletController::rateDollarTronEur()]
+                ]) !!};
         </script>
 
         <script src="{{ mix('/js/bootstrap.js') }}" type="text/javascript" defer></script>
@@ -156,14 +156,6 @@
                                             <option value="usd" {{ ($_COOKIE['unit'] ?? 'usd') == 'usd' ? 'selected' : '' }}>USD</option>
                                             <option value="euro" {{ ($_COOKIE['unit'] ?? 'euro') == 'euro' ? 'selected' : '' }}>EURO</option>
                                         </select>
-                                    </div>
-                                </div>
-                                <div class="option mt-1 mb-1" onclick="$.setDemo(!$.isDemo())">
-                                    <div class="wallet-switcher-icon">
-                                        <i data-demo-check></i>
-                                    </div>
-                                    <div class="wallet-switcher-content">
-                                        {{ __('general.head.wallet_demo') }}
                                     </div>
                                 </div>
                             </div>

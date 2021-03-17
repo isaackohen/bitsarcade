@@ -31,9 +31,9 @@ class Dice extends QuickGame implements MultiplierCanBeLimited {
 
     public function start($user, Data $data) {
         if($data->game()->target !== 'lower' && $data->game()->target !== 'higher') return new RejectedGameResult(1, 'Invalid dice target');
-        if($data->game()->target == 'lower' && $data->game()->value > 98) return new RejectedGameResult(2, 'Invalid value');
-        if($data->game()->target == 'higher' && $data->game()->value < 2) return new RejectedGameResult(2, 'Invalid value');
-        if($data->game()->value < 1 || $data->game()->value > 99) return new RejectedGameResult(2, 'Invalid value');
+        if($data->game()->target == 'lower' && $data->game()->value > 95) return new RejectedGameResult(2, 'Invalid value');
+        if($data->game()->target == 'higher' && $data->game()->value < 5) return new RejectedGameResult(2, 'Invalid value');
+        if($data->game()->value < 4 || $data->game()->value > 96) return new RejectedGameResult(2, 'Invalid value');
 
         return new SuccessfulQuickGameResult((new ProvablyFair($this))->result(), function(SuccessfulQuickGameResult $result, array $transformedResults) use($user, $data) {
             $low = $data->game()->target == 'lower' ? 0 : $data->game()->value;

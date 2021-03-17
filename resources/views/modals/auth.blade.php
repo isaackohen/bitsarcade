@@ -35,6 +35,11 @@
         </div>
         <div class="auth-footer" id="register-footer" style="display: none">
            <button class="btn btn-auth w-50 p-1" onclick="$.auth()">{{ __('general.auth.login') }}</button>
+
+        <div class="alert alert-danger mb-0" role="alert"><p class="mb-1">Make sure to not forget your account details. </p>
+
+            <p class="mb-0"><b>We are unable to recover your password</b> for security reasons.</p>
+        </div>
         </div>
     </div>
 </div>

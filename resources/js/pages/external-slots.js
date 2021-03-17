@@ -24,7 +24,7 @@ $.on('/slots', function(){
 
     if(destroy == null) {
         $(document).on('win5x:chatToggle', function() {
-            setTimeout(init, 301);
+            setTimeout(init, 100);
         });
     }
 
