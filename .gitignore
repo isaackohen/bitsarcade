@@ -5,6 +5,7 @@
 /storage
 /geth-linux-amd64-1.9.15-0f77f34b
 /dogecoin-1.14.2
+/resources/img/slots
 /vendor
 .env
 bitsarcade.com.key

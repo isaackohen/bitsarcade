@@ -392,9 +392,9 @@ $card: 0 0 10px rgba(28, 39, 60, .05);
 
 .game_poster {
     display: inline-flex;
-    width: 180px;
-    height: 185px;
-    margin: 6px;
+    width: 140px;
+    height: 150px;
+    margin: 5px;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -737,9 +737,9 @@ $card: 0 0 10px rgba(28, 39, 60, .05);
 
 .slots_poster {
     display: inline-flex;
-    width: 190px;
-    height: 190px;
-    margin: 8px;
+    width: 160px;
+    height: 165px;
+    margin: 7px;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -1932,7 +1932,7 @@ p {
         text-transform: uppercase;
         font-size: 12px;
         padding: 6px;
-        margin: -3px;
+        margin-top: -3px;
         border: none;
         box-shadow: 0 3px 6px rgb(0 0 0 / 25%);
         transition: all 0.15s ease-in-out;
@@ -3423,7 +3423,7 @@ footer {
         padding-top: 6px;
         padding-bottom: 6px;
         margin-left: -40px;
-        width: calc(100% + 55px);
+        width: calc(100% + 40px);
         box-shadow: 0 4px 6px -1px rgb(0 0 0 / 20%), 0 2px 4px -1px rgb(0 0 0 / 12%);
         margin-bottom: 15px;
         margin-top: -12px;
