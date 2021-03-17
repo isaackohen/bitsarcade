@@ -158,18 +158,21 @@
                     <div class="icon">
                         <i class="fal fa-exclamation-triangle"></i>
                     </div>
-                    <div class="description">
-                        {{ __('general.error.offline_node') }}
-                    </div>
+                    <div class="description">{{ __('general.error.offline_node') }}</div>
+                </div>
+               <div class="walletMinDeposit" style="display: none">
+                    <div class="icon">
+                        <i class="fal fa-exclamation-triangle"></i>
+                    </div>                            
+                    <div class="description">{{ __('wallet.deposit.minimumdepo') }} <b><span id="minimumdepo"> </span>$</b>.</div>
                 </div>
                 <div id="currency-label"></div>
                 <div class="input-loader">
                     <input onclick="this.select()" style="cursor: pointer !important;" data-toggle="tooltip" data-placement="top" title="{{ __('wallet.copy') }}" type="text" readonly>
                 </div>
-                <div class="btn btn-more" onclick="getDepositAddress()" style="margin: 0px; padding: 10px; margin-top:10px;margin-bottom:10px;">Generate deposit address</div>
-                <div class="qr" style="display:none;"></div>
-                <div id="deposit-warning"></div>
+                <div class="btn btn-more" onclick="getDepositAddress()" id="generatorbutton" style="margin: 0px; padding: 10px; margin-top:10px;margin-bottom:10px;">Generate deposit address</div>
             </div>
+                <div id="deposit-warning"></div>
             <div data-wallet-tab-content="withdraw" style="display: none">
                 <select class="currency-selector-withdraw">
                     @foreach(\App\Currency\Currency::all() as $currency)
@@ -201,19 +204,25 @@
 </div>
 <script>
         function getDepositAddress() {
+            $('#generatorbutton').toggleClass('disabled');
+            $('#generatorbutton').text('Generating new wallet...').button("refresh");
             $.request('wallet/getDepositWallet', { currency: $.currency() }).then(function(response) {
                 if(response.currency !== $.currency()) return;
 
                 $(`[data-wallet-tab-content="deposit"] .input-loader .loader`).remove();
                 $(`[data-wallet-tab-content="deposit"] input`).val(response.wallet);
+                $(`[data-wallet-tab-content="deposit"] #minimumdepo`).html("");
+                document.getElementById('minimumdepo').innerHTML += response.mindeposit;
+                $(`[data-wallet-tab-content="deposit"] .walletMinDeposit`).fadeIn('fast');
+                $('#generatorbutton').text('Generate deposit address').button("refresh");
+                setTimeout(function(){
+                    $('#generatorbutton').toggleClass('disabled');
+                }, 500);
 
-                qr.toCanvas(canvas[0], response.wallet, function () {
-                    $(`[data-wallet-tab-content="deposit"] .qr .loader`).remove();
-                });
             }, function() {
                 $(`[data-wallet-tab-content="deposit"] .walletNotification`).fadeIn('fast');
             });
-	    document.getElementById('qr').style.display="block"
+	    //document.getElementById('#generatorbutton').style.display="none";
         }
     </script>
 @endif

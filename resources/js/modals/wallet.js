@@ -69,7 +69,7 @@ function loadHistory(callback = null) {
 function updateDepositCurrency() {
     const currency = window.Laravel.currency[$.currency()];
     $(`#currency-label`).html($.lang('wallet.deposit.address', { currency: currency.name }));
-    $(`#deposit-warning`).html($.lang('wallet.deposit.confirmations', { currency: currency.name, confirmations: currency.requiredConfirmations }));
+    //$(`#deposit-warning`).html($.lang('wallet.deposit.confirmations', { currency: currency.name, confirmations: currency.requiredConfirmations }));
 
     const canvas = $(`<canvas></canvas>`);
     $(`[data-wallet-tab-content="deposit"] .qr`).html(`
@@ -90,6 +90,7 @@ function updateDepositCurrency() {
 
     $(`[data-wallet-tab-content="deposit"] input`).val(``);
     $(`[data-wallet-tab-content="deposit"] .walletNotification`).fadeOut('fast');
+    $(`[data-wallet-tab-content="deposit"] .walletMinDeposit`).fadeOut('fast');
 
     setTimeout(function() {
         $.each($('i'), (i, e) => $.transformIcon($(e)));

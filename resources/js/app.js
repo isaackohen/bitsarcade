@@ -169,7 +169,7 @@ function loadStyleSheet(path, fn, unload = true) {
         head.removeChild(link);
         fn.call(window, false, link);
         console.error(path + ' loading error');
-    }, 15000);
+    }, 5000);
     head.appendChild(link);
     return link;
 }
@@ -404,7 +404,7 @@ $(document).ready(function() {
             $('.connectionLostContainer').fadeOut('fast', function() {
                 $('body').css({ 'padding-top': 0 });
             });
-        }, 2000);
+        }, 5000);
     });
 
     const disconnectNotify = function() {
@@ -485,7 +485,7 @@ $(document).ready(function() {
 
             setTimeout(function() {
                 $.each($('i'), (i, e) => $.transformIcon($(e)));
-            }, 50);
+            }, 10);
         });
     });
 

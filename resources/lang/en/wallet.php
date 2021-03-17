@@ -10,7 +10,9 @@ return [
     ],
     'deposit' => [
         'address' => 'Your :currency deposit address',
-        'confirmations' => 'Only send :currency to this address, :confirmations confirmation(s) required.'
+        'minimumdepo' => 'Minimum deposit in dollar value for this currency: ',
+        'confirmations' => ' '
+        //'confirmations' => 'Only send :currency to this address, :confirmations confirmation(s) required.'
     ],
     'withdraw' => [
         'address' => '<i class=":icon"></i> :currency Address',
