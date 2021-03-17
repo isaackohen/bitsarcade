@@ -2772,11 +2772,11 @@ header {
                     border-radius: 3px;
                     $message1: lighten(t('body'), 1.0%);
                     $message2: lighten(t('body'), 3.0%);
-                    background: url("/img/misc/dots-message.svg") repeat, linear-gradient($message1, $message2);
+                    background: url("/img/misc/arrows.svg") repeat, linear-gradient($message1, $message2);
                     flex-wrap: wrap;
                     box-shadow: 0 0 1px 1px #3c3c3c;
                     flex-direction: column;
-                    padding: 8px;
+                    padding: 6px;
                     margin-bottom: 10px;
                     position: relative;
 
@@ -2786,13 +2786,13 @@ header {
 
                         .avatar {
                             display: inline-flex;
-                            width: 22px;
-                            height: 22px;
+                            width: 17px;
+                            height: 17px;
                             margin-right: 7px;
                             border-radius: 3px;
                             img {
-                                width: 22px;
-                                height: 22px;
+                                width: 17px;
+                                height: 17px;
                                 border-radius: 3px;
                             }
                         }
@@ -2804,13 +2804,13 @@ header {
 
                             .vipRank {
                                 position: absolute;
-                                top: 5px;
-                                right: 10px;
+                                top: 4px;
+                                right: 8px;
                                 z-index: 1;
 
                                 svg {
-                                    width: 14px;
-                                    height: 14px;
+                                    width: 17px;
+                                    height: 17px;
                                 }
                             }
                         }
@@ -2854,7 +2854,7 @@ header {
                 }
 
                 .message.from-moderator {
-                    box-shadow: 0 0 1px 1px #8371ff;
+                    box-shadow: inset 0 0 1px 1px #8371ff;
                     .user {
                         .avatar {
                             box-shadow: 0 0 1px 1px #8371ff;
@@ -2863,10 +2863,13 @@ header {
                 }
 
                 .message.from-admin {
-                    box-shadow: 0 0 1px 1px #e74c3c;
+                    box-shadow: inset 0 0 1px 1px #e74c3c;
                     .user {
                         .avatar {
-                            box-shadow: 0 0 1px 1px #e74c3c;
+
+                        }
+                        .name {
+                            color: #e74c3c;
                         }
                     }
                 }
@@ -2875,7 +2878,7 @@ header {
 
             .message-send {
                 height: $send-height;
-                padding: 15px;
+                padding: 10px;
                 display: flex;
                 margin-top: 5px;
                 background: url(/img/misc/arrows.svg), linear-gradient(59deg, #212224, #272a2c) !important;
@@ -3332,11 +3335,10 @@ footer {
     width: 100%;
     display: flex;
     flex-direction: row;
+    border-radius: 6px;
     align-content: center;
-    background: url(/img/misc/carbon-pattern.png) repeat;
+    background: url(/img/misc/news-ticker.svg) repeat;
     color: white;
-    border-top: 1px solid #6b6b6b;
-    border-bottom: 1px solid #6b6b6b;
     box-shadow: 0 0 10px rgb(2 2 2 / 32%);
 
     a {
@@ -3421,10 +3423,10 @@ footer {
         padding-top: 6px;
         padding-bottom: 6px;
         margin-left: -40px;
-        width: calc(100% + 40px);
+        width: calc(100% + 55px);
         box-shadow: 0 4px 6px -1px rgb(0 0 0 / 20%), 0 2px 4px -1px rgb(0 0 0 / 12%);
         margin-bottom: 15px;
-        margin-top: -15px;
+        margin-top: -12px;
         display: flex;
         flex-direction: row;
 

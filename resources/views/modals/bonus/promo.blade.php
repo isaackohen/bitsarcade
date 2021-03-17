@@ -6,5 +6,5 @@
     <div class="mt-2">
         <input id="code" type="text" placeholder="{{ __('bonus.promo.placeholder') }}">
     </div>
-    <button id="activate" class="btn btn-primary bonus-button mt-2">{{ __('bonus.promo.activate') }}</button>
+    <button id="activate" class="btn btn-primary bonus-button m-3">{{ __('bonus.promo.activate') }}</button>
 </div>

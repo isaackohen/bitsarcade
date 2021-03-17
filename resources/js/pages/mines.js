@@ -98,7 +98,7 @@ $.game('mines', function(container, overviewData) {
     }
 }, function() {
     return {
-        mines: mines < 2 || mines > 24 ? 3 : mines
+        mines: mines < 4 || mines > 24 ? 5 : mines
     };
 }, function(response) {
     historyIndex = 1;
@@ -130,16 +130,16 @@ $.on('/game/mines', function() {
         component.history('mines', true);
 
         component.buttons($.lang('general.mines'))
-            .add('3', function() {
-                mines = 3;
-                updateHistory();
-            })
             .add('5', function() {
                 mines = 5;
                 updateHistory();
             })
             .add('10', function() {
                 mines = 10;
+                updateHistory();
+            })
+            .add('15', function() {
+                mines = 15;
                 updateHistory();
             })
             .add('24', function() {
@@ -151,7 +151,7 @@ $.on('/game/mines', function() {
                     e.html(`<input type="number" placeholder="${$.lang('general.mines')}">`);
                     e.find('input').on('keyup change input', function() {
                         mines = parseInt(e.find('input').val());
-                        if(isNaN(mines) || mines < 2 || mines > 24) e.find('input').toggleClass('error', true);
+                        if(isNaN(mines) || mines < 4 || mines > 24) e.find('input').toggleClass('error', true);
                         else {
                             e.find('input').toggleClass('error', false);
                             updateHistory();
@@ -159,7 +159,7 @@ $.on('/game/mines', function() {
                     });
                 } else mines = e.find('input').val();
 
-                if(mines < 2 || mines > 24) e.find('input').toggleClass('error', true);
+                if(mines < 4 || mines > 24) e.find('input').toggleClass('error', true);
                 else {
                     e.find('input').toggleClass('error', false);
                     updateHistory();

@@ -38,20 +38,20 @@
         <div class="games" style="max-width: 1370px;">
 
             <div class="header">
-            <h5>
-                <i class="fad fa-diamond" style="color: #0fbc55;"></i> BitsArcade Originals  <button style="float: right;"class="btn btn-more" onclick="redirect('/fairness')">Provably Fair</button>  
-            </h5>
+            <h6>
+                <i class="fad fa-certificate" style="color: #0fbc55;"></i> News Ticker
+            </h6>
         </div>
-                    <div class="our-games">
+                    <div class="our-games mb-2">
 
                 @if(!auth()->guest() && auth()->user()->isDismissed($notification)) @continue @endif
-                <div class="globalNotification" id="emailNotification">
+                <div class="globalNotification m-1" id="emailNotification">
                     <div class="icon"><i class="{{ $notification->icon }}"></i></div>
                     <div class="text">{{ $notification->text }}</div>
                 </div>
-            @endforeach
         </div>
-                </div>
+    </div>
+            @endforeach
 
               <div class="games" style="max-width: 1370px;">
         @if(!auth()->guest())

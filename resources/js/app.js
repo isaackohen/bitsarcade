@@ -169,7 +169,7 @@ function loadStyleSheet(path, fn, unload = true) {
         head.removeChild(link);
         fn.call(window, false, link);
         console.error(path + ' loading error');
-    }, 5000);
+    }, 15000);
     head.appendChild(link);
     return link;
 }
@@ -404,7 +404,7 @@ $(document).ready(function() {
             $('.connectionLostContainer').fadeOut('fast', function() {
                 $('body').css({ 'padding-top': 0 });
             });
-        }, 5000);
+        }, 2000);
     });
 
     const disconnectNotify = function() {
@@ -485,7 +485,7 @@ $(document).ready(function() {
 
             setTimeout(function() {
                 $.each($('i'), (i, e) => $.transformIcon($(e)));
-            }, 10);
+            }, 50);
         });
     });
 
@@ -551,10 +551,10 @@ $(document).ready(function() {
         e.find('[data-toggle="tooltip"]').tooltip();
 
         if(!force) {
-            if($('.live_games_selector').parent().find('tr').length < ($.getCookie('show') ?? 10)) e.fadeIn(50);
-            else $('.live_games_selector').parent().find('tr').last().fadeOut(50, function() {
-                $(this).delay(50).remove();
-                e.fadeIn(50);
+            if($('.live_games_selector').parent().find('tr').length < ($.getCookie('show') ?? 10)) e.fadeIn(300);
+            else $('.live_games_selector').parent().find('tr').last().fadeOut(300, function() {
+                $(this).delay(300).remove();
+                e.fadeIn(300);
             });
         }
         else e.show();
@@ -621,7 +621,7 @@ $(document).ready(function() {
                 $('.wallet .balance .animated').remove();
 
                 const animated = $(`<span class="animated text-${e.diff.action === 'subtract' ? 'danger' : 'success'}">${bitcoin(e.diff.value, 'btc').to($.unit()).value().toFixed(8)}</span>`);
-                animated.css({ 'top': '20px', 'opacity': 1 }).animate({ top: 0, opacity: 0 }, 150, function() {
+                animated.css({ 'top': '20px', 'opacity': 1 }).animate({ top: 0, opacity: 0 }, 400, function() {
                     animated.remove();
                 });
                 $('.wallet .balance').append(animated);
