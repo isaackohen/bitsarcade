@@ -5,6 +5,7 @@ namespace App\Console;
 use App\Console\Commands\ProcessTRXPayments;
 use App\Console\Commands\Quiz;
 use App\Console\Commands\Rain;
+use App\Console\Commands\PremiumRain;
 use App\Console\Commands\ResetWeeklyBonus;
 use App\Console\Commands\SendVipPromocode;
 use App\Console\Commands\SendVkPromocode;
@@ -36,7 +37,8 @@ class Kernel extends ConsoleKernel {
         #$schedule->command(SendVipPromocode::class)->everyThirtyMinutes();
         //$schedule->command(Quiz::class)->everyTenMinutes();
         $schedule->command(ResetWeeklyBonus::class)->daily();
-        #$schedule->command(Rain::class)->everyFifteenMinutes();
+        $schedule->command(PremiumRain::class)->everyTenMinutes();
+        //$schedule->command(Rain::class)->everyFifteenMinutes();
         //$schedule->command(ProcessTRXPayments::class)->everyMinute();
 
         $expression = Cache::get('schedule:expressions:rain');

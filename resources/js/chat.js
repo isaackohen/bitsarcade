@@ -42,8 +42,6 @@ $.addChatMessage = function(message) {
                             currency: window.Laravel.currency[message.data.currency].name
                         })}${message.data.from === undefined ? '' : `&nbsp;(<a style="color: #a8a8a8" href="/user/${message.data.from._id}" class="disable-pjax" target="_blank">${$.formatName(message.data.from.name)}</a>)`}</div>
                 </div>
-                ${summer ? `<div class="rain front-row"></div>
-                          <div class="rain back-row"></div>` : `<div class="snow-back"></div>`}
                 </div>
             </div>
         `);
@@ -51,6 +49,30 @@ $.addChatMessage = function(message) {
         makeItSnow();
         makeItRain();
     }
+
+    if(message.type === 'premiumrain') {
+        let users = '', month = new Date().getMonth(), summer = !(month === 11 || month === 0 || month === 1);
+        _.forEach(message.data.users, function(e) {
+            users += `<a href="/user/${e._id}" class="disable-pjax" target="_blank">${$.formatName(e.name)}</a>${message.data.users.indexOf(e) === message.data.users.length - 1 ? '' : ', '}`;
+        });
+
+        $(`.chat .messages .os-content`).append(`
+            <div class="message vip-rain_bot">
+                <div class="content">
+                    <div class="rain_users">${users}</div>
+                    <div class="mt-2 rain_desc">${$.lang(`general.${summer ? 'premiumrain' : 'premiumsnow'}`, {
+                            sum: bitcoin(message.data.reward, 'btc').to($.unit()).value().toFixed($.unit() === 'satoshi' ? 0 : 8),
+                            currency: window.Laravel.currency[message.data.currency].name
+                        })}${message.data.from === undefined ? '' : `&nbsp;(<a style="color: #a8a8a8" href="/user/${message.data.from._id}" class="disable-pjax" target="_blank">${$.formatName(message.data.from.name)}</a>)`}</div>
+                </div>
+                </div>
+            </div>
+        `);
+
+        makeItSnow();
+        makeItRain();
+    }
+
 
     if(message.type === 'quiz') {
         $(`.chat .messages .os-content`).append(`

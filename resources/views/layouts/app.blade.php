@@ -22,7 +22,6 @@
             <meta http-equiv="Expires" content="Mon, 26 Jul 1997 05:00:00 GMT">
             <meta http-equiv="Pragma" content="no-cache">
         @endif
-
         <link rel="preload" href="{{ mix('/js/app.js') }}" as="script">
         <link rel="preload" href="{{ mix('/css/app.css') }}" as="style">
         <link rel="preload" href="{{ mix('/css/loader.css') }}" as="style">
@@ -31,7 +30,6 @@
         <link rel="preload" href="{{ $hash('/fonts/fa-regular-400.woff2') }}" as="font" type="font/woff2" crossorigin="anonymous">
         <link rel="preload" href="{{ $hash('/fonts/fa-light-300.woff2') }}" as="font" type="font/woff2" crossorigin="anonymous">
         <link rel="preload" href="{{ $hash('/fonts/fa-brands-400.woff2') }}" as="font" type="font/woff2" crossorigin="anonymous">
- 
         <link rel="stylesheet" href="{{ mix('/css/loader.css') }}">
         <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
         <link rel="manifest" href="/manifest.json">
@@ -108,8 +106,7 @@
                                 <i class="fas fa-bars"></i>
                             </a>
                             <div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuLink">
-                                <div class="home"><a href="/"><button class="btn btn-dropdownmenu"><i class="fad fa-certificate"></i>  Home</button></a></div>
-
+                                <div class="home"><a href="/"><button class="btn btn-dropdownmenu"><i class="fa fa-certificate"></i>  Home</button></a></div>
                                 @if(!auth()->guest())
                                 <div class="profilemenu"  onclick="redirect('/user/{{ auth()->user()->_id }}')"><a><button class="btn btn-dropdownmenu"><i class="fas fa-user-cog"></i>  Profile</button></a></div>
                                 <div class="depositmenu" onclick="$.wallet()"><button class="btn btn-dropdownmenu"><i class="fad fa-gem"></i> Deposit</button></div>
