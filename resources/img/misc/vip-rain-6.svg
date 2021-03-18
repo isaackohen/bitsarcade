@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="background: rgb(20, 67, 106); display: block; position: relative; shape-rendering: auto; animation-play-state: running; animation-delay: 0s;" width="112" height="112" preserveAspectRatio="xMidYMid" viewBox="0 0 112 112"><g transform="scale(0.44000000000000006)"><path d="M 6 6 L 45.2 6 L 45.2 45.2 L 6 45.2 Z" fill="#e6261f">
+  <animate attributeName="fill" begin="-0.6696712269980942s" values="#e6261f;#eb7532;#f7d038;#a3e048;#49da9a;#34bbe6;#4355db;#d23be7;#e6261f" keyTimes="0;0.125;0.25;0.375;0.5;0.625;0.75;0.875;1" dur="1s" repeatCount="indefinite"></animate>
+</path><path d="M 6 57.2 L 45.2 57.2 L 45.2 96.4 L 6 96.4 Z" fill="#e6261f">
+  <animate attributeName="fill" begin="-0.7037415338201489s" values="#e6261f;#eb7532;#f7d038;#a3e048;#49da9a;#34bbe6;#4355db;#d23be7;#e6261f" keyTimes="0;0.125;0.25;0.375;0.5;0.625;0.75;0.875;1" dur="1s" repeatCount="indefinite"></animate>
+</path><path d="M 6 108.4 L 45.2 108.4 L 45.2 147.60000000000002 L 6 147.60000000000002 Z" fill="#e6261f">
+  <animate attributeName="fill" begin="-0.032583962690458046s" values="#e6261f;#eb7532;#f7d038;#a3e048;#49da9a;#34bbe6;#4355db;#d23be7;#e6261f" keyTimes="0;0.125;0.25;0.375;0.5;0.625;0.75;0.875;1" dur="1s" repeatCount="indefinite"></animate>
+</path><path d="M 6 159.60000000000002 L 45.2 159.60000000000002 L 45.2 198.8 L 6 198.8 Z" fill="#e6261f">
+  <animate attributeName="fill" begin="-0.3634577847347231s" values="#e6261f;#eb7532;#f7d038;#a3e048;#49da9a;#34bbe6;#4355db;#d23be7;#e6261f" keyTimes="0;0.125;0.25;0.375;0.5;0.625;0.75;0.875;1" dur="1s" repeatCount="indefinite"></animate>
+</path><path d="M 6 210.8 L 45.2 210.8 L 45.2 250 L 6 250 Z" fill="#e6261f">
+  <animate attributeName="fill" begin="-0.058298272867360446s" values="#e6261f;#eb7532;#f7d038;#a3e048;#49da9a;#34bbe6;#4355db;#d23be7;#e6261f" keyTimes="0;0.125;0.25;0.375;0.5;0.625;0.75;0.875;1" dur="1s" repeatCount="indefinite"></animate>
+</path><path d="M 57.2 6 L 96.4 6 L 96.4 45.2 L 57.2 45.2 Z" fill="#e6261f">
+  <animate attributeName="fill" begin="-0.28162945620673474s" values="#e6261f;#eb7532;#f7d038;#a3e048;#49da9a;#34bbe6;#4355db;#d23be7;#e6261f" keyTimes="0;0.125;0.25;0.375;0.5;0.625;0.75;0.875;1" dur="1s" repeatCount="indefinite"></animate>
+</path><path d="M 57.2 57.2 L 96.4 57.2 L 96.4 96.4 L 57.2 96.4 Z" fill="#e6261f">
+  <animate attributeName="fill" begin="-0.9351205423305424s" values="#e6261f;#eb7532;#f7d038;#a3e048;#49da9a;#34bbe6;#4355db;#d23be7;#e6261f" keyTimes="0;0.125;0.25;0.375;0.5;0.625;0.75;0.875;1" dur="1s" repeatCount="indefinite"></animate>
+</path><path d="M 57.2 108.4 L 96.4 108.4 L 96.4 147.60000000000002 L 57.2 147.60000000000002 Z" fill="#e6261f">
+  <animate attributeName="fill" begin="-0.05830665378321731s" values="#e6261f;#eb7532;#f7d038;#a3e048;#49da9a;#34bbe6;#4355db;#d23be7;#e6261f" keyTimes="0;0.125;0.25;0.375;0.5;0.625;0.75;0.875;1" dur="1s" repeatCount="indefinite"></animate>
+</path><path d="M 57.2 159.60000000000002 L 96.4 159.60000000000002 L 96.4 198.8 L 57.2 198.8 Z" fill="#e6261f">
+  <animate attributeName="fill" begin="-0.06958734260326427s" values="#e6261f;#eb7532;#f7d038;#a3e048;#49da9a;#34bbe6;#4355db;#d23be7;#e6261f" keyTimes="0;0.125;0.25;0.375;0.5;0.625;0.75;0.875;1" dur="1s" repeatCount="indefinite"></animate>
+</path><path d="M 57.2 210.8 L 96.4 210.8 L 96.4 250 L 57.2 250 Z" fill="#e6261f">
+  <animate attributeName="fill" begin="-0.46193843031643644s" values="#e6261f;#eb7532;#f7d038;#a3e048;#49da9a;#34bbe6;#4355db;#d23be7;#e6261f" keyTimes="0;0.125;0.25;0.375;0.5;0.625;0.75;0.875;1" dur="1s" repeatCount="indefinite"></animate>
+</path><path d="M 108.4 6 L 147.60000000000002 6 L 147.60000000000002 45.2 L 108.4 45.2 Z" fill="#e6261f">
+  <animate attributeName="fill" begin="-0.06822114759258135s" values="#e6261f;#eb7532;#f7d038;#a3e048;#49da9a;#34bbe6;#4355db;#d23be7;#e6261f" keyTimes="0;0.125;0.25;0.375;0.5;0.625;0.75;0.875;1" dur="1s" repeatCount="indefinite"></animate>
+</path><path d="M 108.4 57.2 L 147.60000000000002 57.2 L 147.60000000000002 96.4 L 108.4 96.4 Z" fill="#e6261f">
+  <animate attributeName="fill" begin="-0.3510026032674165s" values="#e6261f;#eb7532;#f7d038;#a3e048;#49da9a;#34bbe6;#4355db;#d23be7;#e6261f" keyTimes="0;0.125;0.25;0.375;0.5;0.625;0.75;0.875;1" dur="1s" repeatCount="indefinite"></animate>
+</path><path d="M 108.4 108.4 L 147.60000000000002 108.4 L 147.60000000000002 147.60000000000002 L 108.4 147.60000000000002 Z" fill="#e6261f">
+  <animate attributeName="fill" begin="-0.22433381609228453s" values="#e6261f;#eb7532;#f7d038;#a3e048;#49da9a;#34bbe6;#4355db;#d23be7;#e6261f" keyTimes="0;0.125;0.25;0.375;0.5;0.625;0.75;0.875;1" dur="1s" repeatCount="indefinite"></animate>
+</path><path d="M 108.4 159.60000000000002 L 147.60000000000002 159.60000000000002 L 147.60000000000002 198.8 L 108.4 198.8 Z" fill="#e6261f">
+  <animate attributeName="fill" begin="-0.5807112400069849s" values="#e6261f;#eb7532;#f7d038;#a3e048;#49da9a;#34bbe6;#4355db;#d23be7;#e6261f" keyTimes="0;0.125;0.25;0.375;0.5;0.625;0.75;0.875;1" dur="1s" repeatCount="indefinite"></animate>
+</path><path d="M 108.4 210.8 L 147.60000000000002 210.8 L 147.60000000000002 250 L 108.4 250 Z" fill="#e6261f">
+  <animate attributeName="fill" begin="-0.5078295691742309s" values="#e6261f;#eb7532;#f7d038;#a3e048;#49da9a;#34bbe6;#4355db;#d23be7;#e6261f" keyTimes="0;0.125;0.25;0.375;0.5;0.625;0.75;0.875;1" dur="1s" repeatCount="indefinite"></animate>
+</path><path d="M 159.60000000000002 6 L 198.8 6 L 198.8 45.2 L 159.60000000000002 45.2 Z" fill="#e6261f">
+  <animate attributeName="fill" begin="-0.6674431247918571s" values="#e6261f;#eb7532;#f7d038;#a3e048;#49da9a;#34bbe6;#4355db;#d23be7;#e6261f" keyTimes="0;0.125;0.25;0.375;0.5;0.625;0.75;0.875;1" dur="1s" repeatCount="indefinite"></animate>
+</path><path d="M 159.60000000000002 57.2 L 198.8 57.2 L 198.8 96.4 L 159.60000000000002 96.4 Z" fill="#e6261f">
+  <animate attributeName="fill" begin="-0.1573227646782227s" values="#e6261f;#eb7532;#f7d038;#a3e048;#49da9a;#34bbe6;#4355db;#d23be7;#e6261f" keyTimes="0;0.125;0.25;0.375;0.5;0.625;0.75;0.875;1" dur="1s" repeatCount="indefinite"></animate>
+</path><path d="M 159.60000000000002 108.4 L 198.8 108.4 L 198.8 147.60000000000002 L 159.60000000000002 147.60000000000002 Z" fill="#e6261f">
+  <animate attributeName="fill" begin="-0.816168346638581s" values="#e6261f;#eb7532;#f7d038;#a3e048;#49da9a;#34bbe6;#4355db;#d23be7;#e6261f" keyTimes="0;0.125;0.25;0.375;0.5;0.625;0.75;0.875;1" dur="1s" repeatCount="indefinite"></animate>
+</path><path d="M 159.60000000000002 159.60000000000002 L 198.8 159.60000000000002 L 198.8 198.8 L 159.60000000000002 198.8 Z" fill="#e6261f">
+  <animate attributeName="fill" begin="-0.7103504303083548s" values="#e6261f;#eb7532;#f7d038;#a3e048;#49da9a;#34bbe6;#4355db;#d23be7;#e6261f" keyTimes="0;0.125;0.25;0.375;0.5;0.625;0.75;0.875;1" dur="1s" repeatCount="indefinite"></animate>
+</path><path d="M 159.60000000000002 210.8 L 198.8 210.8 L 198.8 250 L 159.60000000000002 250 Z" fill="#e6261f">
+  <animate attributeName="fill" begin="-0.8447148488319838s" values="#e6261f;#eb7532;#f7d038;#a3e048;#49da9a;#34bbe6;#4355db;#d23be7;#e6261f" keyTimes="0;0.125;0.25;0.375;0.5;0.625;0.75;0.875;1" dur="1s" repeatCount="indefinite"></animate>
+</path><path d="M 210.8 6 L 250 6 L 250 45.2 L 210.8 45.2 Z" fill="#e6261f">
+  <animate attributeName="fill" begin="-0.16146269659490753s" values="#e6261f;#eb7532;#f7d038;#a3e048;#49da9a;#34bbe6;#4355db;#d23be7;#e6261f" keyTimes="0;0.125;0.25;0.375;0.5;0.625;0.75;0.875;1" dur="1s" repeatCount="indefinite"></animate>
+</path><path d="M 210.8 57.2 L 250 57.2 L 250 96.4 L 210.8 96.4 Z" fill="#e6261f">
+  <animate attributeName="fill" begin="-0.09939287980354972s" values="#e6261f;#eb7532;#f7d038;#a3e048;#49da9a;#34bbe6;#4355db;#d23be7;#e6261f" keyTimes="0;0.125;0.25;0.375;0.5;0.625;0.75;0.875;1" dur="1s" repeatCount="indefinite"></animate>
+</path><path d="M 210.8 108.4 L 250 108.4 L 250 147.60000000000002 L 210.8 147.60000000000002 Z" fill="#e6261f">
+  <animate attributeName="fill" begin="-0.33941869752093723s" values="#e6261f;#eb7532;#f7d038;#a3e048;#49da9a;#34bbe6;#4355db;#d23be7;#e6261f" keyTimes="0;0.125;0.25;0.375;0.5;0.625;0.75;0.875;1" dur="1s" repeatCount="indefinite"></animate>
+</path><path d="M 210.8 159.60000000000002 L 250 159.60000000000002 L 250 198.8 L 210.8 198.8 Z" fill="#e6261f">
+  <animate attributeName="fill" begin="-0.6933102602652867s" values="#e6261f;#eb7532;#f7d038;#a3e048;#49da9a;#34bbe6;#4355db;#d23be7;#e6261f" keyTimes="0;0.125;0.25;0.375;0.5;0.625;0.75;0.875;1" dur="1s" repeatCount="indefinite"></animate>
+</path><path d="M 210.8 210.8 L 250 210.8 L 250 250 L 210.8 250 Z" fill="#e6261f">
+  <animate attributeName="fill" begin="-0.3241274454890708s" values="#e6261f;#eb7532;#f7d038;#a3e048;#49da9a;#34bbe6;#4355db;#d23be7;#e6261f" keyTimes="0;0.125;0.25;0.375;0.5;0.625;0.75;0.875;1" dur="1s" repeatCount="indefinite"></animate>
+</path></g></svg>

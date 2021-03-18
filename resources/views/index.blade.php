@@ -123,9 +123,11 @@
             @else
             @endif
         @endforeach
-                             <div class="game_poster"  onclick="redirect('/bonus/')">
+                             <div class="game_poster"  onclick="redirect('/fairness/')">
                         <div class="text"  style="padding: 20px; background: url(/img/misc/arrows.svg), linear-gradient(#ff7907, #a04625) !important; border-radius: 12px;">
-                            <p>You play, <b>we pay</b>. After reaching Bronze VIP level you are eligible for a daily juicy cashback & bonus.</p>
+                            <h6>Our Games</h6>
+                            <p>Play our in-house turnkey crypto games.</p>
+                            <p>All games are RNG certified and are <b>provably fair</b>.</p>
                         </div></div>
         </div>
              <div class="header">
