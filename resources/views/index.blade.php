@@ -4,7 +4,7 @@
             <div class="glide__track" data-glide-el="track">
                 <ul class="glide__slides">
                     <li class="glide__slide" style="background: url({{ asset('/img/misc/animtop-2.svg') }}) repeat, linear-gradient(50deg, rgb(10, 93, 88), rgb(33, 34, 36)); background-size: contain;">
-                        <div class="image" style="background-image: url({{ asset('/img/logo/logo_loader.png') }}); background-size: contain;"></div>
+                        <div class="image" style="background-image: url({{ asset('/img/misc/get-start.png') }}); background-size: contain;"></div>
                         <div class="slideContent">
                         <div class="slideContentWrapper" style="box-shadow: 0 0 10px rgb(28 39 60 / 5%); background: url(/img/misc/arrows.svg), linear-gradient( #16928d, #084643) !important;">
                                 <div class="description">Join the community!</div>
@@ -15,7 +15,7 @@
                         </div>
                     </li>
                     <li class="glide__slide" style="background: url({{ asset('/img/misc/confetti.svg') }}) repeat, linear-gradient(302deg, rgb(212 109 28), rgb(101 38 0)); background-size: contain;">
-                        <div class="image" style="background-image: url({{ asset('/img/logo/logo_loader.png') }}); background-size: contain;"></div>
+                        <div class="image" style="background-image: url({{ asset('/img/misc/slide_vip.png') }}); background-size: contain;"></div>
                         <div class="slideContent">
                             <div class="slideContentWrapper" style="box-shadow: 0 0 10px rgb(28 39 60 / 5%); background: url(/img/misc/arrows.svg),linear-gradient(#ff7907, #a04625)  !important;">
                                 <div class="description">Promotions and freebies!</div>
@@ -123,6 +123,10 @@
             @else
             @endif
         @endforeach
+                             <div class="game_poster"  onclick="redirect('/bonus/')">
+                        <div class="text"  style="padding: 20px; background: url(/img/misc/arrows.svg), linear-gradient(#ff7907, #a04625) !important; border-radius: 12px;">
+                            <p>You play, <b>we pay</b>. After reaching Bronze VIP level you are eligible for a daily juicy cashback & bonus.</p>
+                        </div></div>
         </div>
              <div class="header">
             <h6>
@@ -252,7 +256,7 @@
         @endforeach
 </div></div>
             </div><div class="our-games" style="background: transparent !important; box-shadow: none;">
-              <button class="btn btn-auth p-4" onclick="redirect('/')">check out our provably fair in-house games<br><img src="/img/logo/logo_temp.png" width="40px" height="32px"></button>
+              <button class="btn btn-auth p-4" onclick="redirect('/')">check out our provably fair in-house games<br><img src="/img/logo/logo_temp.png" width="110px" height="50px"></button>
             </div>
         </div>
     </div>

@@ -33,8 +33,8 @@ class QuizAnswered implements ShouldBroadcastNow {
             'user' => $this->user->toArray(),
             'question' => $this->question,
             'correct' => $this->correct,
-            'currency' => "doge",
-            'reward' => floatval("19.00")
+            'currency' => $this->user->clientCurrency()->id(),
+            'reward' => floatval($this->user->clientCurrency()->option('quiz'))
         ];
     }
 

@@ -392,9 +392,9 @@ $card: 0 0 10px rgba(28, 39, 60, .05);
 
 .game_poster {
     display: inline-flex;
-    width: 140px;
-    height: 150px;
-    margin: 5px;
+    width: 190px;
+    height: 195px;
+    margin: 8px;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -1822,7 +1822,7 @@ p {
 
 .pageContent {
     flex: 1 0 auto;
-    padding-top: 12px;
+    padding-top: 5px;
 }
 
 .btn {
@@ -2750,9 +2750,52 @@ header {
                     }
 
                     .rain_users {
-                        color: #b1becf !important;
+                        color: #e5e6e7 !important;
                         a {
-                            color: #b1becf !important;
+                            color: #e5e6e7 !important;
+                            &:hover {
+                                color: white !important;
+                            }
+                        }
+                    }
+
+                    .content {
+                        z-index: 22;
+                        flex-wrap: wrap;
+                        white-space: break-spaces;
+                        text-shadow: 0 0 1px black;
+                    }
+                }
+
+                .message.vip-rain_bot {
+                    overflow: hidden;
+                    border-top: 2px solid #fdcf09;
+                    border-bottom: 2px solid #fdcf09;
+                    background-size: cover;
+                    background: url(/img/misc/vip-rain-6.svg);
+                    color: white;
+                    text-shadow: 2px 2px #000000d4 !important;
+                    &:before {
+                        content: '';
+                        z-index: 1;
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                        width: 100%;
+                        height: 100%;
+                        background: rgba(black, 0.50);
+                    }
+
+                    .rain_desc {
+                        font-weight: 600;
+                        color: white;
+                    }
+
+                    .rain_users {
+                        color: #e5e6e7 !important;
+                        font-weight: 600;
+                        a {
+                            color: #e5e6e7 !important;
                             &:hover {
                                 color: white !important;
                             }
