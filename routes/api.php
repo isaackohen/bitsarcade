@@ -63,7 +63,7 @@ Route::get('callback/offertoro', function(Request $request) {
     Route::post('callback/nowpayments', function(Request $request) {
          Log::critical(json_encode($request->all()));
 
-	 if (!$request->has('order_description') || Invoice::where('hash', $request->get('order_description'))->count() === 0) {   
+     if (!$request->has('order_description') || Invoice::where('hash', $request->get('order_description'))->count() === 0) {   
             return response('Ok', 200)  
                 ->header('Content-Type', 'text/plain'); 
         }   
@@ -81,9 +81,9 @@ Route::get('callback/offertoro', function(Request $request) {
             //})  
             ->first();  
 
-	$user = \App\User::find($invoice->user);
+    $user = \App\User::find($invoice->user);
  
-	$user->balance(\App\Currency\Currency::find($invoice->currency))->add($request->get('outcome_amount')); 
+    $user->balance(\App\Currency\Currency::find($invoice->currency))->add($request->get('outcome_amount')); 
         $invoice->update(['status' => 1, 'sum' => $request->get('outcome_amount')]);  
         return response('Ok', 200)  
             ->header('Content-Type', 'text/plain'); 
@@ -491,8 +491,16 @@ Route::middleware('auth')->prefix('chat')->group(function() {
 
 Route::middleware('auth')->prefix('promocode')->group(function() {
     Route::post('activate', function() {
+        $user = auth()->user();
         $promocode = \App\Promocode::where('code', \request()->get('code'))->first();
+
+        $same_register_hash = \App\User::where('register_multiaccount_hash', $user->register_multiaccount_hash)->get();
+        $same_login_hash = \App\User::where('login_multiaccount_hash', $user->login_multiaccount_hash)->get();
+        $same_register_ip = \App\User::where('register_ip', $user->register_ip)->get();
+        $same_login_ip = \App\User::where('login_ip', $user->login_ip)->get();
+
         if($promocode == null) return reject(1, 'Invalid promocode');
+        if((auth()->user()->vipLevel() != 0 && $user->register_multiaccount_hash == null) || $user->login_multiaccount_hash == null) return reject(3, 'Expired (usages)');
         if($promocode->expires->timestamp != \Carbon\Carbon::minValue()->timestamp && $promocode->expires->isPast()) return reject(2, 'Expired (time)');
         if($promocode->usages != -1 && $promocode->times_used >= $promocode->usages) return reject(3, 'Expired (usages)');
         if(($promocode->vip ?? false) && auth()->user()->vipLevel() == 0) return reject(7, 'VIP only');
@@ -524,11 +532,11 @@ Route::middleware('auth')->prefix('promocode')->group(function() {
         ]);
         if($promocode->currency != 'freespin'){
         auth()->user()->balance(Currency::find($promocode->currency))->add($promocode->sum, \App\Transaction::builder()->message('Promocode crypto')->get());
-		}
-		if($promocode->currency == 'freespin'){
-		auth()->user()->freegames = auth()->user()->freegames + $promocode->sum;
+        }
+        if($promocode->currency == 'freespin'){
+        auth()->user()->freegames = auth()->user()->freegames + $promocode->sum;
         auth()->user()->save();
-		}
+        }
         return success();
     });
 

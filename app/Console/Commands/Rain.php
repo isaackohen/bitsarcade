@@ -47,7 +47,7 @@ class Rain extends Command
 
 
     public function handle() {
-        $usersLength = mt_rand(3, 10);
+        $usersLength = mt_rand(3, 7);
         $last3Hours = \Carbon\Carbon::now()->subHours(3);
         $last24Hours = \Carbon\Carbon::now();
 
