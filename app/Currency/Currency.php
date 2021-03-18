@@ -157,6 +157,14 @@ abstract class Currency {
             },
             new class extends WalletOption {
                 public function id() {
+                    return 'premiumrain';
+                }
+                public function name(): string {
+                    return 'Premium rain reward for depositors';
+                }
+            },
+            new class extends WalletOption {
+                public function id() {
                     return 'bonus_wheel';
                 }
                 public function name(): string {
