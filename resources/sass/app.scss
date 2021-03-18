@@ -1364,8 +1364,12 @@ border: 2px solid #333333
     .slots_poster {
         width: calc(50% - 15px);
     }
-    .smalL_slots_poster {
-        width: calc(50% - 20px);
+    .slots_small_poster {
+        width: calc(40%);
+    }
+    
+    .img-small-slots {
+        width: calc(40%);
     }
 
     .image {
