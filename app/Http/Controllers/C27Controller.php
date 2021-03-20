@@ -114,11 +114,11 @@ class C27Controller extends Controller
             $this->client->setPlayer(['Id' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-final' , 'BankGroupId' => 'bits_usd']);
             $game = $this->client->createSession(
                 [
-                'GameId' => $slug,
-                'PlayerId' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-final',
-                'AlternativeId' => time() . '_' . $user->id . '_' . auth()->user()->clientCurrency()->id(),
-                'RestorePolicy' => 'Restore'
-            ]
+                    'GameId' => $slug,
+                    'PlayerId' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-final',
+                    'AlternativeId' => time() . '_' . $user->id . '_' . auth()->user()->clientCurrency()->id(),
+                    'RestorePolicy' => 'Restore'
+                ]
             );
         }
 
@@ -153,6 +153,27 @@ class C27Controller extends Controller
         $stats = \App\Statistics::where('_id', $user->id)->first();
 
         $balance = $user->balance(Currency::find($currency))->get();
+
+        if ($content->params->chargeFreerounds > 0) {
+            if (($user->freegames - $content->params->chargeFreerounds) > 0) {
+
+                $user->freegames = $user->freegames - $content->params->chargeFreerounds;
+                $user->freegames_balance = $user->freegames_balance + $content->params->deposit;
+                $user->save();
+
+                return response()->json([
+                    'result' => [
+                        'newBalance' => $balance,
+                        'transactionId' => $content->params->transactionRef,
+                        'freeroundsLeft' => $user->freegames
+                    ],
+                    'id' => $content->id,
+                    'jsonrpc' => '2.0'
+                ]);
+            } else {
+                $content->params->deposit = $user->freegames_balance;
+            }
+        }
 
         if ($currency == 'BTC' || $currency == 'btc') {
             $balanceB = (int) ((((string) $balance) * \App\Http\Controllers\Api\WalletController::rateDollarBtc()) * 100);
@@ -190,6 +211,7 @@ class C27Controller extends Controller
         }
 
         if ($content->params->chargeFreerounds > 0) {
+
 
         } else {
             $user->balance(Currency::find($currency))->subtract($subtract, json_decode($request->getContent(), true));
@@ -307,20 +329,10 @@ class C27Controller extends Controller
             'data' => json_decode($request->getContent(), true),
             'type' => 'quick',
             'balance-before' => number_format($balanceB/100, 2, '.', ''),
-        'balance-after' => number_format($balance/100, 2, '.', ''),
+            'balance-after' => number_format($balance/100, 2, '.', ''),
             'currency' => strtolower($currency)
         ]);
         event(new \App\Events\LiveFeedGame($game, 10));
-
-        $freegames = 0;
-
-        if ($content->params->chargeFreerounds > 0) {
-            $user->freegames = $user->freegames - $content->params->chargeFreerounds;
-            $user->save();
-
-            $freegames = $user->freegames;
-        }
-
 
         if ($user != null && $user->referral != null) {
             $referrer = \App\User::where('_id', $user->referral)->first();
@@ -332,7 +344,6 @@ class C27Controller extends Controller
             'result' => [
                 'newBalance' => $balance,
                 'transactionId' => $content->params->transactionRef,
-                'freeroundsLeft' => $freegames
             ],
             'id' => $content->id,
             'jsonrpc' => '2.0'
@@ -378,7 +389,7 @@ class C27Controller extends Controller
         $freegames = 0;
 
         if ($user->freegames > 0 ) {
-           $freegames = $user->freegames;
+            $freegames = $user->freegames;
         }
 
         return response()->json([

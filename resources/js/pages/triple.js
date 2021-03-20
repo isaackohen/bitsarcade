@@ -31,16 +31,16 @@ $.game('triple', function(container, overviewData) {
 		const tripleres = overviewData.game.data.tiles[user_tiles];
             $(`.overview-render-target [data-triple-id="${user_tiles}"]`).addClass('selected');
         if(tripleres == 0) {
-		 $(`.overview-render-target [data-triple-id="${user_tiles}"]`).append($(`<img class="triple-icon" src="${orange}" alt="">`).hide().fadeIn(200));
-		 $.playSound(`/sounds/open.mp3`);
+		 $(`.overview-render-target [data-triple-id="${user_tiles}"]`).append($(`<img class="triple-icon" src="${orange}" alt="">`).hide().fadeIn(300));
+		 $.playSound(`/sounds/ball2.mp3`);
 		}
 		if(tripleres == 1) {
-		 $(`.overview-render-target [data-triple-id="${user_tiles}"]`).append($(`<img class="triple-icon" src="${blue}" alt="">`).hide().fadeIn(200));
-		 $.playSound(`/sounds/open.mp3`);
+		 $(`.overview-render-target [data-triple-id="${user_tiles}"]`).append($(`<img class="triple-icon" src="${blue}" alt="">`).hide().fadeIn(300));
+		 $.playSound(`/sounds/ball2.mp3`);
 		}
 		if(tripleres == 2) {
-		 $(`.overview-render-target [data-triple-id="${user_tiles}"]`).append($(`<img class="triple-icon" src="${purple}" alt="">`).hide().fadeIn(200));
-		 $.playSound(`/sounds/open.mp3`); 
+		 $(`.overview-render-target [data-triple-id="${user_tiles}"]`).append($(`<img class="triple-icon" src="${purple}" alt="">`).hide().fadeIn(300));
+		 $.playSound(`/sounds/ball2.mp3`);
 		}
 		if(i === 4) {
 			for (let s = 0; s < 36; s++) {
@@ -49,13 +49,13 @@ $.game('triple', function(container, overviewData) {
 			if (s != user_tiles) {
 			$(`.overview-render-target [data-triple-id="${s}"]`).addClass('selected');
 			if(tripleres == 0) {
-			$(`.overview-render-target [data-triple-id="${s}"]`).append($(`<img class="triple-icon" src="${orange}" alt="">`).hide().fadeIn(500));
+			$(`.overview-render-target [data-triple-id="${s}"]`).append($(`<img class="triple-icon" src="${orange}" alt="">`).hide().fadeIn(300));
 			}
 			if(tripleres == 1) {
-			$(`.overview-render-target [data-triple-id="${s}"]`).append($(`<img class="triple-icon" src="${blue}" alt="">`).hide().fadeIn(500));
+			$(`.overview-render-target [data-triple-id="${s}"]`).append($(`<img class="triple-icon" src="${blue}" alt="">`).hide().fadeIn(300));
 			}
 			if(tripleres == 2) {
-			$(`.overview-render-target [data-triple-id="${s}"]`).append($(`<img class="triple-icon" src="${purple}" alt="">`).hide().fadeIn(500));
+			$(`.overview-render-target [data-triple-id="${s}"]`).append($(`<img class="triple-icon" src="${purple}" alt="">`).hide().fadeIn(300));
 					}
 				}
 			}
@@ -77,16 +77,16 @@ $.game('triple', function(container, overviewData) {
 		const tripleres = response.game.data.tiles[user_tiles];
         $(`.game-container [data-triple-id="${user_tiles}"]`).addClass('selected');
 		if(tripleres == 0) {
-		 $(`.game-container [data-triple-id="${user_tiles}"]`).append($(`<img class="triple-icon" src="${orange}" alt="">`).hide().fadeIn(200));
-		 $.playSound(`/sounds/open.mp3`);
+		 $(`.game-container [data-triple-id="${user_tiles}"]`).append($(`<img class="triple-icon" src="${orange}" alt="">`).hide().fadeIn(300));
+		 $.playSound(`/sounds/ball2.mp3`);
 		}
 		if(tripleres == 1) {
-		 $(`.game-container [data-triple-id="${user_tiles}"]`).append($(`<img class="triple-icon" src="${blue}" alt="">`).hide().fadeIn(200));
-		 $.playSound(`/sounds/open.mp3`);
+		 $(`.game-container [data-triple-id="${user_tiles}"]`).append($(`<img class="triple-icon" src="${blue}" alt="">`).hide().fadeIn(300));
+		 $.playSound(`/sounds/ball2.mp3`);
 		}
 		if(tripleres == 2) {
-		 $(`.game-container [data-triple-id="${user_tiles}"]`).append($(`<img class="triple-icon" src="${purple}" alt="">`).hide().fadeIn(200));
-		 $.playSound(`/sounds/open.mp3`);
+		 $(`.game-container [data-triple-id="${user_tiles}"]`).append($(`<img class="triple-icon" src="${purple}" alt="">`).hide().fadeIn(30));
+		 $.playSound(`/sounds/ball2.mp3`);
 		}
 
         if(i === 4) {
@@ -95,6 +95,8 @@ $.game('triple', function(container, overviewData) {
         }
 
         if(i === 4) {
+        	let win = response.game.win;
+	        $.playSound(`/sounds/${win ? 'guessed' : 'lose'}.mp3`);
             $.blockPlayButton(false);
             $.resultPopup(response.game);
         }
@@ -152,9 +154,9 @@ $.on('/game/triple', function() {
       e.attr('data-m', '0.10').append("<div>x0.10</div>");
       var c = $(`<div class="block-icons"></div>`);
       e.append(c);
-      append(c, blue);
-      append(c, blue);
-      append(c, blue);
+      append(c, purple);
+      append(c, purple);
+      append(c, orange);
     }, 'append');
 	$.history().add(function (e) {
       e.attr('data-m', '0.25').append("<div>x0.25</div>");
@@ -173,23 +175,23 @@ $.on('/game/triple', function() {
       append(c, blue);
     }, 'append');
 	$.history().add(function (e) {
+      e.attr('data-m', '0.60').append("<div>x0.60</div>");
+      var c = $(`<div class="block-icons"></div>`);
+      e.append(c);
+      append(c, purple);
+      append(c, orange);
+      append(c, blue);
+    }, 'append');
+	$.history().add(function (e) {
       e.attr('data-m', '1.50').append("<div>x1.50</div>");
       var c = $(`<div class="block-icons"></div>`);
       e.append(c);
-      append(c, purple);
-      append(c, orange);
-      append(c, blue);
-    }, 'append');
-	$.history().add(function (e) {
-      e.attr('data-m', '2.30').append("<div>x2.30</div>");
-      var c = $(`<div class="block-icons"></div>`);
-      e.append(c);
       append(c, orange);
       append(c, orange);
       append(c, blue);
     }, 'append');
 	$.history().add(function (e) {
-      e.attr('data-m', '5.30').append("<div>x5.30</div>");
+      e.attr('data-m', '2.00').append("<div>x2.00</div>");
       var c = $(`<div class="block-icons"></div>`);
       e.append(c);
       append(c, purple);
@@ -197,15 +199,7 @@ $.on('/game/triple', function() {
       append(c, blue);
     }, 'append');
 	$.history().add(function (e) {
-      e.attr('data-m', '6.50').append("<div>x6.50</div>");
-      var c = $(`<div class="block-icons"></div>`);
-      e.append(c);
-      append(c, purple);
-      append(c, orange);
-      append(c, orange);
-    }, 'append');
-	$.history().add(function (e) {
-      e.attr('data-m', '10.00').append("<div>x10.00</div>");
+      e.attr('data-m', '3.50').append("<div>x3.50</div>");
       var c = $(`<div class="block-icons"></div>`);
       e.append(c);
       append(c, orange);
@@ -213,15 +207,15 @@ $.on('/game/triple', function() {
       append(c, orange);
     }, 'append');
 	$.history().add(function (e) {
-      e.attr('data-m', '15.00').append("<div>x15.00</div>");
+      e.attr('data-m', '7.50').append("<div>7.50</div>");
       var c = $(`<div class="block-icons"></div>`);
       e.append(c);
-      append(c, purple);
-      append(c, purple);
-      append(c, orange);
+      append(c, blue);
+      append(c, blue);
+      append(c, blue);
     }, 'append');
 	$.history().add(function (e) {
-      e.attr('data-m', '25.00').append("<div>x25.00</div>");
+      e.attr('data-m', '14.00').append("<div>x14.00</div>");
       var c = $(`<div class="block-icons"></div>`);
       e.append(c);
       append(c, purple);
@@ -235,19 +229,19 @@ $.on('/game/triple', function() {
 
 const setGrid = function(response) {
 	console.log('Display other grid');
-	for (let s = 0; s < 36; s++) {
+	for(let s = 0; s < 6 * 6; s++) {
 		const user_tiles = response.game.data.user_tiles[s];
 		const tripleres = response.game.data.tiles[s];
 		if (s != user_tiles) {
 		$(`.game-container [data-triple-id="${s}"]`).addClass('selected');
 		if(tripleres == 0) {
-		 $(`.game-container [data-triple-id="${s}"]`).append($(`<img class="triple-icon" src="${orange}" alt="">`).hide().fadeIn(500));
+		 $(`.game-container [data-triple-id="${s}"]`).append($(`<img class="triple-icon" src="${orange}" alt="">`).hide().fadeIn(450));
 		}
 		if(tripleres == 1) {
-		 $(`.game-container [data-triple-id="${s}"]`).append($(`<img class="triple-icon" src="${blue}" alt="">`).hide().fadeIn(500));
+		 $(`.game-container [data-triple-id="${s}"]`).append($(`<img class="triple-icon" src="${blue}" alt="">`).hide().fadeIn(450));
 		}
 		if(tripleres == 2) {
-		 $(`.game-container [data-triple-id="${s}"]`).append($(`<img class="triple-icon" src="${purple}" alt="">`).hide().fadeIn(500));
+		 $(`.game-container [data-triple-id="${s}"]`).append($(`<img class="triple-icon" src="${purple}" alt="">`).hide().fadeIn(450));
 		}
 		}
 	}

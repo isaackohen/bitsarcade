@@ -6,9 +6,8 @@
     }
 @endphp
 
-@include('modals.nav')
 <div class="container-fluid">
-    <div class="game-container">
+    <div class="game-container mt-2">
         <div class="row">
             <div class="col {{-- d-none d-md-block --}}">
                 <div class="game-sidebar"></div>
@@ -19,6 +18,10 @@
         </div>
     </div>
 </div>
+
+            <div class="our-games mt-4" style="border-radius: 12px; background: url(/img/misc/arrows.svg), linear-gradient(59deg, #2b2d2d, #262829) !important;">
+            <button class="btn btn-signup" onclick="redirect('/home')">Games</button> <img src="/img/logo/logo_temp.png" width="40px" height="32px" style="margin-left: 10px; margin-right: 10px;">
+        </div>
 
 @if(!auth()->guest())
     @php $latest_game = \App\Game::latest()->where('game', $data)->where('user', auth()->user()->_id)->where('status', 'in-progress')->first(); @endphp

@@ -3,7 +3,7 @@
 		<clipPath clipPathUnits="userSpaceOnUse" id="cp1">
 			<path d="M4 0L82 0C84.21 0 86 1.79 86 4L86 136.7C86 138.91 84.21 140.7 82 140.7L4 140.7C1.79 140.7 0 138.91 0 136.7L0 4C0 1.79 1.79 0 4 0Z" />
 		</clipPath>
-		<image width="45" height="30" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC0AAAAeCAYAAAC49JeZAAADY0lEQVR42r2YaUhUURTHJ0eTKVMzk4pIrA8hLUQL9KVSW2ilDdqIIDK/hNBGpUG0UBBRECRRHzKhDQuCIjORkGilomglgmij1cg2K5KZfkeOMgzz7rvjjO/Aj/vem/vu/b/7zj3nvPH5EmChUGhAMBishTccv21DzuESx3mW4+TLWD4vjIlGIa4xFMW4/oOm0GKMPFgA3bwSPRJxnwyii1zu7w3rINfnlcUjmt/SYBeshC5eihb3+ByraK6nwlY4Bhk+L60jormWIi7B799oG+AgHIJ9UApToH+nrX6sojlPghXwNeRsv+CxPsSIhIuP1ac5n831dyF7ewlrExpZVLTrSstqwVQVEav9hnIIeOoetMkwB8pgYxjl9NtLWw/NTqr1bRZ6JbpAVgj8LuNkQIXc5jCWbNqZXog+RzMa1kC6xVjTdBNGG+s7zazOFn0VxkKV1Ca03S3GKtK3E82aYLp06gVDYHgEQyE7DtESrsbBbvinhVPAYqx58MdhpV9L+JNOx+GDOHk4XPuowb5rrKI5fk+zGDaFbax6LYpylCz14XQlWx6Se+sMEaQGMmXCh4bdWmsTG8NFa7W3DErUB9uTBefPdD7hLtyEG1y/Dvc5/mLQ8pRmfOuEnDxwebKApehG+MnxKkkeWlPHaxJFXsEBcdn2CRMoWjLcdpioK5oIa2GsW7SrYZCt6HpL9yjQ8lI23h3DeH81szkRdPaOVvdY2hrrTY6v/lkMfTQ5pCrJSg+NPCXQD/YbxnpEMx8mOSBV3XKo1oeLZuIqE3w6YbOp2pK3oQ9Xo5zh/LTEYdrDtAO1rqg0iJaQl2Lx1jLhskFPlXTKYcCLHfS52xLPdTI/HDGIrrPcH/LwRw1zNrR1lGRy3il9OtgTGBM2WaJEJ7mIPhX5WuYy+EnaF/oAToWL/FUwI2Iyv4t7xLLSVQbRldFu6qo+Olk34QbYptGhRrPdksgvCb2v2iUSpVqIzlW3c7KKWIqiLE35xdFKTP3mO2FYaakbtuiH7A5ls36RCOthj2bJFkOZu8hWsF/FljpFAA2JF0Kda2elwLMVPUxXIs3QJ6DhsDOsRevywbaCe8JC6OvSLxBH6HSqO5o0jZfZlsnh4TDfol+y/rV1Ba7FiKT+53BPE4u4wU6JUJJHIuf6D9F6xwmAiw71AAAAAElFTkSuQmCC"/>
+		<image width="45" height="30" id="img1" href="https://bitsarcade.com/img/logo/logo_temp.png"/>
 	</defs>
 	<style>
 		tspan { white-space:pre }

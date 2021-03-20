@@ -4,6 +4,7 @@ use App\Currency\Currency;
 use App\Events\BalanceModification;
 use App\Games\Kernel\Data;
 use App\Games\Kernel\Game;
+use App\Games\Kernel\Multiplayer\MultiplayerGame;
 use App\Games\Kernel\ProvablyFairResult;
 use App\Transaction;
 use App\User;
@@ -19,6 +20,7 @@ abstract class ExtendedGame extends Game {
 
     public function process(Data $data) {
         if(!$this->acceptsDemo() && ($data->guest() || $data->demo())) return ['error' => [-7, 'This game does not accept any demo bets']];
+        if($this instanceof MultiplayerGame && $this->state()->hasBetFrom($data->user()->_id)) return ['code' => -6, 'message' => "Can't place more than one bet"];
         if(!$this->acceptBet($data)) return ['error' => [-6, 'Game won\'t accept any bets right now']];
 
         if(!$data->guest()) $data->user()->balance(Currency::find($data->currency()))->demo($data->demo())->subtract($data->bet(), Transaction::builder()->game($data->id())->message('Game')->get());
@@ -93,7 +95,7 @@ abstract class ExtendedGame extends Game {
                 'user_data' => $data->toArray()
             ],
             'demo' => $data->demo(),
-            'type' => 'extended'
+            'type' => $this instanceof MultiplayerGame ? 'multiplayer' : 'extended'
         ]);
 
         $this->start($game);
@@ -181,6 +183,7 @@ abstract class ExtendedGame extends Game {
     }
 
     protected function handleCancellation(\App\Game $game) {
+        if($this instanceof MultiplayerGame && !$this->allowCancellation()) return;
         $game->update([
             'status' => 'cancelled'
         ]);

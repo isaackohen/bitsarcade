@@ -47,23 +47,16 @@ class Triple extends QuickGame {
 	    $o = [];
 		sort($tiles);
 		array_push($o, "".$transformedResults[$tiles[0]]."", "".$transformedResults[$tiles[1]]."", "".$transformedResults[$tiles[2]]."");
-		if($o == [1,1,1]) return 0.10;
-		if($o == [0,0,0]) return 10.00;	
-		if($o == [2,2,2]) return 25.00;		
-	/*	if(($o == [0,1,1]) || ($o == [1,1,0])) return 0.25; 
-		if(($o == [2,1,1]) || ($o == [1,1,2])) return 0.40; 
-		if(($o == [2,0,1]) || ($o == [1,0,2])) return 1.50; 
-		if(($o == [0,0,1]) || ($o == [1,0,0])) return 2.30;
-		if(($o == [2,2,1]) || ($o == [1,2,2])) return 5.30;
-		if(($o == [2,0,0]) || ($o == [0,0,2])) return 8.00;
-		if(($o == [2,2,0]) || ($o == [0,2,2])) return 15.00; */
-		if($o == [0,1,1]) return 0.25; 
-		if($o == [2,1,1]) return 0.40; 
-		if($o == [2,0,1]) return 1.50; 
-		if($o == [0,0,1]) return 2.30;
-		if($o == [2,2,1]) return 5.30;
-		if($o == [2,0,0]) return 8.00;
-		if($o == [2,2,0]) return 15.00;
+        // 0 = yellow, 1 = blue, 2 = purple
+        if($o == [2,2,0]) return 0.10;
+        if($o == [0,1,1]) return 0.25;
+        if($o == [2,1,1]) return 0.40;
+        if($o == [2,0,1]) return 0.60;
+        if($o == [0,0,1]) return 1.20;
+        if($o == [2,2,1]) return 1.80;
+        if($o == [0,0,0]) return 3.50;
+        if($o == [1,1,1]) return 7.50;
+        if($o == [2,2,2]) return 15.00;
 		return 0;
     }
 

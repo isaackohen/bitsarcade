@@ -19,7 +19,7 @@
 
 $sidebar-width: 40px;
 $header-height: 55px;
-$chat-width: 300px;
+$chat-width: 285px;
 
 $card: 0 0 10px rgba(28, 39, 60, .05);
 
@@ -1261,7 +1261,7 @@ $card: 0 0 10px rgba(28, 39, 60, .05);
 }
 
 .game-triple {
-    background-image: url('/img/game/triple.png');
+    background-image: url('/img/game/Triple.png');
 }
 
 .game-blackjack {
@@ -1409,7 +1409,7 @@ border: 2px solid #333333
 
 }
 
-    .slots_poster {
+    .slots_poster { 
         height: 35vw;
         padding: 0px !important;
         width: calc(50vw - 50px);
@@ -1424,8 +1424,16 @@ border: 2px solid #333333
     }
 
 
+    .dropdown show {
+        display: none;
+     }
+
     .slots_small_poster .name {
         opacity: 0.8;
+    }
+
+    .slots_small_poster .name-text {
+    padding-top: 5% !important;
     }
 
     .slots_small_poster .label-name {
@@ -1545,6 +1553,7 @@ svg:not(:root).svg-inline--fa {
 
 html, body {
     height: 100%;
+    transition: all 0.10s ease-in-out;
     scroll-behavior: smooth;
     font-family: $font-family-sans-serif;
 }
@@ -1561,7 +1570,7 @@ body {
     display: flex;
     width: 100%;
     scroll-behavior: smooth;
-    transition: background 0.15s ease-in;
+    transition: all 0.10s ease-in-out;
 background-color: #333333;
 background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 1000'%3E%3Cg %3E%3Ccircle fill='%23333333' cx='50' cy='0' r='50'/%3E%3Cg fill='%23323232' %3E%3Ccircle cx='0' cy='50' r='50'/%3E%3Ccircle cx='100' cy='50' r='50'/%3E%3C/g%3E%3Ccircle fill='%23323232' cx='50' cy='100' r='50'/%3E%3Cg fill='%23313131' %3E%3Ccircle cx='0' cy='150' r='50'/%3E%3Ccircle cx='100' cy='150' r='50'/%3E%3C/g%3E%3Ccircle fill='%23303030' cx='50' cy='200' r='50'/%3E%3Cg fill='%23303030' %3E%3Ccircle cx='0' cy='250' r='50'/%3E%3Ccircle cx='100' cy='250' r='50'/%3E%3C/g%3E%3Ccircle fill='%232f2f2f' cx='50' cy='300' r='50'/%3E%3Cg fill='%232e2e2e' %3E%3Ccircle cx='0' cy='350' r='50'/%3E%3Ccircle cx='100' cy='350' r='50'/%3E%3C/g%3E%3Ccircle fill='%232e2e2e' cx='50' cy='400' r='50'/%3E%3Cg fill='%232d2d2d' %3E%3Ccircle cx='0' cy='450' r='50'/%3E%3Ccircle cx='100' cy='450' r='50'/%3E%3C/g%3E%3Ccircle fill='%232d2d2d' cx='50' cy='500' r='50'/%3E%3Cg fill='%232c2c2c' %3E%3Ccircle cx='0' cy='550' r='50'/%3E%3Ccircle cx='100' cy='550' r='50'/%3E%3C/g%3E%3Ccircle fill='%232b2b2b' cx='50' cy='600' r='50'/%3E%3Cg fill='%232b2b2b' %3E%3Ccircle cx='0' cy='650' r='50'/%3E%3Ccircle cx='100' cy='650' r='50'/%3E%3C/g%3E%3Ccircle fill='%232a2a2a' cx='50' cy='700' r='50'/%3E%3Cg fill='%23292929' %3E%3Ccircle cx='0' cy='750' r='50'/%3E%3Ccircle cx='100' cy='750' r='50'/%3E%3C/g%3E%3Ccircle fill='%23292929' cx='50' cy='800' r='50'/%3E%3Cg fill='%23282828' %3E%3Ccircle cx='0' cy='850' r='50'/%3E%3Ccircle cx='100' cy='850' r='50'/%3E%3C/g%3E%3Ccircle fill='%23272727' cx='50' cy='900' r='50'/%3E%3Cg fill='%23272727' %3E%3Ccircle cx='0' cy='950' r='50'/%3E%3Ccircle cx='100' cy='950' r='50'/%3E%3C/g%3E%3Ccircle fill='%23262626' cx='50' cy='1000' r='50'/%3E%3C/g%3E%3C/svg%3E");
 background-attachment: fixed;
@@ -3199,10 +3208,9 @@ header {
 footer {
     
     @include themed() {
-        $headerbg: t('headerbg');
         $headerln: darken(t('header'), 4.5%);
         $headerln2: darken(t('header'), 1.5%);
-        background: $headerbg repeat, linear-gradient($headerln2, $headerln);
+        background: linear-gradient($headerln2, $headerln);
     }
     font-size: 11px;
     border-top: 1px solid #333333;
@@ -3314,6 +3322,27 @@ footer {
     }
 }
 
+
+.module {
+  max-width: 400px;
+  padding: 3rem;
+  background: #f06d06;
+  
+  notchSize: 20px;
+  
+  clip-path: 
+    polygon(
+      0% var(--notchSize), 
+      var(--notchSize) 0%, 
+      calc(100% - var(--notchSize)) 0%, 
+      100% var(--notchSize), 
+      100% calc(100% - var(--notchSize)), 
+      calc(100% - var(--notchSize)) 100%, 
+      var(--notchSize) 100%, 
+      0% calc(100% - var(--notchSize))
+    );
+}
+
 .overview-bet {
     display: flex;
     margin-top: 5px;
@@ -3366,6 +3395,8 @@ footer {
         margin-bottom: -30px;
     }
 }
+
+
 
 .live-table {
     @include themed() {

@@ -12,6 +12,7 @@ $.game('mines', function(container, overviewData) {
 
     const turn = function(mineId, callback = null) {
         $.turn({ id: mineId }, function(response) {
+            if(response.type === 'fail') return;
             if(response.type === 'lose') {
                 if(!Array.isArray(mineId)) $.setMine(container, mineId, MINE_TYPE_LOSE, true);
                 $.finishExtended(false);
@@ -30,7 +31,7 @@ $.game('mines', function(container, overviewData) {
                     $(`.history-mines:nth-child(${historyIndex})`).addClass('highlight');
                     historyIndex++;
                 }
-                if(response.type === 'finish' || response.type === 'fail') {
+                if(response.type === 'finish') {
                     $.resultPopup(response.game);
                     $.finishExtended(false);
                 }
