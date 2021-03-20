@@ -2,7 +2,7 @@
 <html lang="en" class="theme--{{ $_COOKIE['theme'] ?? 'dark' }}">
     <head>
         <title>BitsArcade - Crypto Gambling Platform</title>
-        <link href="//cloud.typenetwork.com/projects/5358/fontface.css/" rel="stylesheet" type="text/css">
+        <link href="/css/webfonts.css" rel="stylesheet" type="text/css">
         <link rel="icon" type="image/png" href="/img/logo/ico.png"/>
         <meta charset="utf-8">
         <noscript><meta http-equiv="refresh" content="0; /no_js"></noscript>

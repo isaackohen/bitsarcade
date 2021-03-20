@@ -1358,14 +1358,24 @@ border: 2px solid #333333
 
 @include media-breakpoint-down(sm) {
     .game_poster {
-        width: calc(50% - 15px);
+        width: calc(50% - 20px);
     }
 
     .slots_poster {
-        width: calc(50% - 15px);
-    }
-    .smalL_slots_poster {
         width: calc(50% - 20px);
+    }
+
+    .btn btn-more p-1 {
+    display: none;
+    }
+
+    .slots_small_poster {
+        width: calc(50% - 20px);
+    }
+    
+    .img-small-slots {
+        width: 100%;
+        height: 100%;
     }
 
     .image {
@@ -1405,6 +1415,48 @@ border: 2px solid #333333
         width: calc(50vw - 50px);
         background-position-y: center;
     }
+
+    .slots_small_poster {
+        height: 35vw;
+        padding: 0px !important;
+        width: calc(50vw - 50px);
+        background-position-y: center;
+    }
+
+
+    .slots_small_poster .name {
+        opacity: 0.8;
+    }
+
+    .slots_small_poster .label-name {
+        display: none;
+    }
+
+     .slots_small_poster .label-red {
+     display: none;
+     }
+
+    .slots_small_poster .label-red {
+     display: none;
+     }
+
+    .slots_small_poster .label-fair {
+        display: none;
+     }
+
+    .slots_small_poster .label {
+        display: none;
+    }
+
+    .btn btn-more p-1 {
+    display: none;
+    }
+    
+    .slots_small_poster .name-text .desc {
+        display: none;
+    }
+
+
 
     .game_poster {
         height: 35vw;
@@ -1926,6 +1978,27 @@ p {
     }
 }
 
+.btn-betting {
+  padding: 15px 25px;
+  font-size: 24px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+.btn-betting:hover {background-color: #3e8e41}
+
+.btn-betting:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
 .btn-more {
     @include themed() {
         background: linear-gradient(#0fd560, #12773b);
@@ -1942,9 +2015,10 @@ p {
         transition: all 0.15s ease-in-out;
 
 
-        &:hover, &:active, &:focus {
+        &:hover, &:active {
             color: #0fd560;
             background: linear-gradient(#272a2b, #1f2122);
+            box-shadow: 0 3px 6px rgb(0 0 0 / 25%) !important;
 
        .unavailable {
         z-index: 4;
@@ -2371,7 +2445,7 @@ header {
 }
                         .select2-dropdown {
                                     @include themed() {
-
+                        border: 1px solid #323435 !important;
                          background-color: t('sidebar') !important;
                         }
                         }
@@ -3859,6 +3933,8 @@ footer {
             .game-sidebar-buttons-container-button.active {
                 background: #0fc258;
                 border-bottom: 3px solid #188243;
+                border-top-left-radius: 10px !important;
+                border-bottom-left-radius: 10px !important;
                 color: white;
             }
         }
@@ -4080,13 +4156,14 @@ footer {
                 background: t('input');
                 border-radius: 3px;
                 padding: 8px;
-                padding-bottom: 12px;
+                padding-bottom: 20px;
                 color: t('text');
                 width: 100%;
                 cursor: text;
-                transition: background 0.3s ease;
+                transition: background 0.3s ease-in, border 0.2 ease-in;
 
                 &:hover, &:active {
+                    border: 1px solid #0eba55;
                     background: darken(t('input'), 0.5%);
                 }
             }
