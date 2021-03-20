@@ -9,7 +9,7 @@
     height: 100vh;
 
     @include themed() {
-        background: t('header');
+        background: url(../img/misc/animtop-2.svg) repeat, linear-gradient(#303032, #242527);
     }
 
     .error {
@@ -37,8 +37,9 @@
     }
 }
 .loading__container-logo {
-    width: 325px;
-    height: 272px;
+    width: 72px;
+    height: 52px;
+    margin-bottom: 5px;
     -webkit-transition: -webkit-transform .25s ease-in-out;
     transition: -webkit-transform .25s ease-in-out;
     transition: transform .25s ease-in-out;
@@ -175,11 +176,11 @@
     -ms-flex-align: center;
     align-items: center;
     z-index: 10000000;
-    background: linear-gradient(-45deg, #313536, #212224)
+    background: linear-gradient(#2b2d2f, #232526);
 }
 
 .loading__container:before {
-    background-image: url("../img/misc/dots-content.svg");
+    background-image: linear-gradient(#2b2d2f, #232526);
     background-repeat: repeat;
     background-position: 50%;
 }
@@ -195,14 +196,13 @@
 }
 
 .loading__container:after {
-    background: radial-gradient(rgba(49, 53, 54, .8), rgba(19, 20, 21, .7) 80%)
+    background: radial-gradient(rgba(0, 0, 0, .05), rgba(0, 0, 0, .15) 80%)
 }
 
 .loading__container .loading {
     position: relative;
     z-index: 3;
     color: #707070;
-    font-family: Arial, Helvetica, sans-serif;
     font-weight: 600;
     font-size: 18px;
     z-index: 9;

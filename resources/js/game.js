@@ -226,7 +226,7 @@ class SidebarComponentBuilder {
     }
 
     play() {
-        $('.game-sidebar').append(`<button class="btn btn-auth m-4 play-button">${$.lang('general.play')}</button>`);
+        $('.game-sidebar').append(`<button class="btn btn-more m-4 play-button">${$.lang('general.play')}</button>`);
         $('.play-button').on('click', function() {
             if($(this).hasClass('disabled')) return;
 

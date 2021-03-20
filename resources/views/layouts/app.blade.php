@@ -93,7 +93,7 @@
     </head>
     <body>
         <div class="pageLoader">
-<div class="loading__container"><div class="loading"><img src="/img/logo/logo_loader.png" class="loading__container-logo"><div class="loading__container-animation"><div class="yellow"></div><div class="red"></div><div class="blue"></div><div class="green"></div></div></div></div>
+<div class="loading__container"><div class="loading"><div class="loading__container-animation"><div class="yellow"></div><div class="red"></div><div class="blue"></div><div class="green"></div></div></div></div>
 
             <div class="error" style="display: none"></div>
         </div>
@@ -122,7 +122,6 @@
                     <div class="menu">
                         <a href="/" data-page-trigger="'/','/index'" data-toggle-class="active">{{ __('general.head.index') }}</a>
                         <a href="/bonus" data-page-trigger="'/promotions'" data-toggle-class="active">{{ __('general.head.promotions') }}</a>
-                        <a href="/partner" data-page-trigger="'/partner'" data-toggle-class="active">Affiliate</a>
                     </div>
 
                     @if(!auth()->guest())
@@ -193,7 +192,6 @@
                         <div class="tabs">
                             @if(!auth()->guest()) <div class="tab" data-live-tab="mine">{{ __('general.bets.mine') }}</div> @endif
                             <div class="tab active" id="allBetsTab" data-live-tab="all">{{ __('general.bets.all') }}</div>
-                            <div class="tab" data-live-tab="high_rollers">{{ __('general.bets.high_rollers') }}</div>
                             <div class="tab" data-live-tab="lucky_wins">{{ __('general.bets.lucky_wins') }}</div>
                         </div>
                         <select id="liveTableEntries">
