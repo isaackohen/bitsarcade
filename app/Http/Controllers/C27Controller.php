@@ -64,22 +64,12 @@ class C27Controller extends Controller
     {
         $user = auth()->user();
 
-
-        try {
-            $dollars = \App\Http\Controllers\Api\WalletController::rateDollarBtc() * (string) auth()->user()->btc ?? 0;
-        } catch (\Exception $e) {
-            $dollars = 0;
-        }
-
-        $dollars = $dollars * 100;
-        $dollars = (int) $dollars;
-
         if (!$user) {
             return redirect('/');
         }
 
         $this->client->setPlayer(['Id' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-final' , 'BankGroupId' => 'bits_usd']);
-        sleep(1);
+        sleep(0.1);
 
         if($user->freegames > 0) {
             try {
@@ -113,21 +103,21 @@ class C27Controller extends Controller
                 'BonusId' => 'shared',
                 'PlayerId' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-final',
                 'AlternativeId' => time() . '_' . $user->id . '_' . auth()->user()->clientCurrency()->id(),
-                    'Params' => [
-                        'freeround_bet' => 1
-                    ],
-                    'RestorePolicy' => 'Restore'
+                'Params' => [
+                    'freeround_bet' => 1
+                ],
+                'RestorePolicy' => 'Restore'
             ]
             );
         } catch (\Exception $exception) {
-            Log::critical('ERROR' . $slug . ' ' . $user->id . ' ' . auth()->user()->clientCurrency()->id() . ' ' . $exception->getMessage());
-            sleep(1);
+            sleep(0.3);
             $this->client->setPlayer(['Id' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-final' , 'BankGroupId' => 'bits_usd']);
             $game = $this->client->createSession(
                 [
                 'GameId' => $slug,
                 'PlayerId' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-final',
-                'AlternativeId' => time() . '_' . $user->id . '_' . auth()->user()->clientCurrency()->id()
+                'AlternativeId' => time() . '_' . $user->id . '_' . auth()->user()->clientCurrency()->id(),
+                'RestorePolicy' => 'Restore'
             ]
             );
         }
@@ -148,7 +138,6 @@ class C27Controller extends Controller
         $content = json_decode($request->getContent());
 
         $sessionAlternativeId = $content->params->sessionAlternativeId;
-        $currency = strtolower($content->params->currency);
         $currency = explode('_', $sessionAlternativeId);
         $currency = $currency[2];
         $playerName = explode('-', $content->params->playerName);
@@ -323,9 +312,6 @@ class C27Controller extends Controller
         ]);
         event(new \App\Events\LiveFeedGame($game, 10));
 
-        //Log::critical(json_encode($request->all()));
-
-
         $freegames = 0;
 
         if ($content->params->chargeFreerounds > 0) {
@@ -355,20 +341,11 @@ class C27Controller extends Controller
 
     public function getBalance(Request $request)
     {
-        sleep(1);
+        sleep(0.2);
         try {
             $content = json_decode($request->getContent());
 
-            $callerId = $request->input('CallerId');
-            $playerName = $request->input('playerName');
-            $currency = strtolower($content->params->currency);
-
-            $gameId = $request->input('gameId');
-            $sessionId = $request->input('sessionId');
             $sessionAlternativeId = $content->params->sessionAlternativeId;
-            $bonusId = $request->input('bonusId');
-            $seriesId = $request->input('seriesId');
-
 
             $currency = explode('_', $sessionAlternativeId);
             $currency = $currency[2];
