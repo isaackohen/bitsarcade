@@ -86,7 +86,7 @@
                 @endif
         <div class="header">
             <h6>
-                <i class="fad fa-diamond" style="color: #0fbc55;"></i> BitsArcade Originals  <button style="float: right;"class="btn btn-more p-1" onclick="redirect('/fairness')">Provably Fair</button>  
+                <i class="fad fa-diamond" style="color: #0fbc55;"></i> BitsArcade Originals  <button style="font-family: Proxima Nova Reg; float: right;"class="btn btn-more p-1" onclick="redirect('/fairness')">Provably Fair</button>  
             </h6>
         </div>
         <div class="our-games mb-3">
@@ -123,16 +123,15 @@
             @else
             @endif
         @endforeach
-                             <div class="game_poster"  onclick="redirect('/fairness/')">
-                        <div class="text"  style="padding: 20px; background: url(/img/misc/arrows.svg), linear-gradient(#ff7907, #a04625) !important; border-radius: 12px;">
-                            <h6>Our Games</h6>
-                            <p>Play our in-house turnkey crypto games.</p>
-                            <p>All games are RNG certified and are <b>provably fair</b>.</p>
+                             <div class="game_poster inhousegame" onclick="redirect('/fairness/')">
+                        <div class="text" style="padding: 10%; background: url(/img/misc/arrows.svg), linear-gradient(#c63de6, #930094) !important; text-shadow: 0px 1px black; border-radius: 12px;">
+                            <p>All in-house games are RNG certified and are <b>provably fair</b>.</p>
+                            <p>Have fun!</p>
                         </div></div>
         </div>
              <div class="header">
             <h6>
-                <i class="fad fa-diamond" style="color: #f2ae29;"></i> Featured Slots <button style="float: right;"class="btn btn-more p-1" onclick="redirect('/gamelist')">All Games</button>     
+                <i class="fad fa-diamond" style="color: #f2ae29;"></i> Featured Slots <button style="font-family: Proxima Nova Reg; float: right;"class="btn btn-more p-1" onclick="redirect('/gamelist')">All Games</button>     
             </h6>
         </div>
         <div class="our-games mb-4">
@@ -168,7 +167,7 @@
     </div>
     <div class="header">
             <h6>
-                <i class="fad fa-star-christmas" style="color: #2e9beb;"></i> All Games <button style="float: right;"class="btn btn-more p-1" onclick="redirect('/bonus')">Bonus</button>     
+                <i class="fad fa-star-christmas" style="color: #2e9beb;"></i> All Games <button style="font-family: Proxima Nova Reg; float: right;"class="btn btn-more p-1" onclick="redirect('/bonus')">Bonus</button>     
             </h6>
         </div>
     <div class="our-games">
@@ -258,7 +257,7 @@
         @endforeach
 </div></div>
             </div><div class="our-games" style="background: transparent !important; box-shadow: none;">
-              <button class="btn btn-auth p-4" onclick="redirect('/')">check out our provably fair in-house games<br><img src="/img/logo/logo_temp.png" width="110px" height="50px"></button>
+              <img src="/img/logo/logo_temp.png" width="100px" height="78px">
             </div>
         </div>
     </div>

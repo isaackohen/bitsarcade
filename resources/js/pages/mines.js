@@ -12,11 +12,9 @@ $.game('mines', function(container, overviewData) {
 
     const turn = function(mineId, callback = null) {
         $.turn({ id: mineId }, function(response) {
-            if(response.type === 'fail') return;
             if(response.type === 'lose') {
                 if(!Array.isArray(mineId)) $.setMine(container, mineId, MINE_TYPE_LOSE, true);
                 $.finishExtended(false);
-
                 $.blockPlayButton(true);
                 if(Array.isArray(mineId)) $(container).find('.mine').attr('data-type', null).removeClass('mines-0').removeClass('mines-1');
                 setTimeout(function () {
@@ -32,7 +30,7 @@ $.game('mines', function(container, overviewData) {
                     $(`.history-mines:nth-child(${historyIndex})`).addClass('highlight');
                     historyIndex++;
                 }
-                if(response.type === 'finish') {
+                if(response.type === 'finish' || response.type === 'fail') {
                     $.resultPopup(response.game);
                     $.finishExtended(false);
                 }
@@ -171,7 +169,7 @@ $.on('/game/mines', function() {
 
         component.footer().help().sound().stats();
     }, function() {
-			$.sidebarData().currency(($.sidebarData().bet() * $.getPriceCurrency()).toFixed(4));
+            $.sidebarData().currency(($.sidebarData().bet() * $.getPriceCurrency()).toFixed(4));
     });
 }, ['/css/pages/mines.css']);
 

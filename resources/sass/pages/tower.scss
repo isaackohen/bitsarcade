@@ -36,12 +36,13 @@
 
                 .cell {
                     display: inline-flex;
-                    width: 40px;
-                    height: 40px;
-                    margin-right: 10px;
-                    background: t('secondary');
+                    width: 50px;
+                    height: 45px;
+                    margin-right: 12px;
+                    background: rgba(255, 255, 255, 0.10);
                     border-radius: 3px;
-                    transition: background 0.3s ease;
+                    border-bottom: 4px solid rgba(255, 255, 255, 0.25);
+                    transition: background 0.2s ease-in;
                     align-items: center;
                     justify-content: center;
 
@@ -50,22 +51,34 @@
                     }
 
                     img {
-                        width: 65%;
+                        width: 30px;
                         user-select: none;
                         -webkit-user-drag: none;
                     }
                 }
 
                 .cell.active {
+                    background: rgba(255, 255, 255, 0.25);
+                    border-bottom: 4px solid rgba(255, 255, 255, 0.10);
                     cursor: pointer;
-                }
+                  &:hover {
+                    background: rgba(255, 255, 255, 0.15);
+                    border-bottom: 4px solid rgba(255, 255, 255, 0.05);
+                    }
+                 }
 
-                .cell.active, .cell.selected {
-                    background: t('text') !important;
-                }
+                .cell.selected {
+                 border: 2px solid t('secondary');
+                 border-bottom: 2px solid t('secondary') !important;
+                 }
 
                 .cell.red {
                     background: #db4437;
+                    img {
+                        width: 28px;
+                        user-select: none;
+                        -webkit-user-drag: none;
+                    }
                 }
 
                 .cell.green {
@@ -88,10 +101,16 @@
                     margin: 2px 0;
 
                     .cell {
-                        width: 20px;
-                        height: 20px;
+                        width: 30px;
+                        height: 25px;
                         margin-right: 5px;
                         border-radius: 1px;
+                     img {
+                        width: 11px;
+                        display: none;
+                        user-select: none;
+                        -webkit-user-drag: none;
+                    }
                     }
                 }
             }

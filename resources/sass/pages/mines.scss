@@ -67,7 +67,7 @@
         border-bottom: 4px solid rgba(255, 255, 255, 0.05);
         text-align: center;
         border-radius: 2px;
-        transition: background-color .3s ease,color .3s ease,top .3s ease,border-color .3s ease;
+        transition: background-color .2s ease-in, color .2 ease, top .2s ease-in, border-color .3s ease-in;
         cursor: pointer;
         display: flex;
         align-items: center;
@@ -78,10 +78,10 @@
             user-select: none;
             -webkit-user-drag: none;
             display: none;
-                        -webkit-animation-name: fadeInmines;
+            -webkit-animation-name: fadeInmines;
             animation-name: fadeInmines;
-            -webkit-animation-duration: 0.85;
-            animation-duration: 0.85s;
+            -webkit-animation-duration: 0.01s;
+            animation-duration: 0.01s;
             -webkit-animation-fill-mode: both;
             animation-fill-mode: both;
         }
@@ -110,13 +110,13 @@
         background: #2ecc71 !important;
         border-bottom-color: #079644 !important;
         color: white !important;
-  -webkit-animation-name: rubberBand;
-  animation-name: rubberBand;
-  -webkit-animation-duration: 0.75s;
-  -webkit-animation-fill-mode: both;
-  animation-duration: 0.75s;
+        -webkit-animation-name: rubberBand;
+        animation-name: rubberBand;
+        -webkit-animation-duration: 0.01s;
+        -webkit-animation-fill-mode: both;
+        animation-duration: 0.01s;
         opacity: 1.0;
-  animation-fill-mode: both;
+        animation-fill-mode: both;
       }
 
     div.mines-1.selected {
@@ -126,8 +126,8 @@
         opacity: 1.0;
  -webkit-animation-name: wobble;
   animation-name: wobble;
-  -webkit-animation-duration: 0.4s;
-  animation-duration: 0.4s;
+  -webkit-animation-duration: 0.01s;
+  animation-duration: 0.01s;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
 

@@ -42,15 +42,13 @@ class C27Controller extends Controller
             return $this->withdrawAndDeposit($request);
         } elseif ($content->method === 'rollbackTransaction') {
             return response()->json([
-                'result' => [
-                ],
+                'result' => (json_decode ("{}")),
                 'id' => $content->id,
                 'jsonrpc' => '2.0'
             ]);
         } else {
             return response()->json([
-                'result' => [
-                ],
+                'result' => (json_decode ("{}")),
                 'id' => $content->id,
                 'jsonrpc' => '2.0'
             ]);
@@ -407,10 +405,10 @@ class C27Controller extends Controller
         }
 
         return response()->json([
-            'result' => [
+            'result' => ([
                 'balance' => $balance,
                 'freeroundsLeft' => (int) $freegames
-            ],
+            ]),
             'id' => $content->id,
             'jsonrpc' => '2.0'
         ]);
