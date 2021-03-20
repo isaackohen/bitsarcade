@@ -154,6 +154,27 @@ class C27Controller extends Controller
 
         $balance = $user->balance(Currency::find($currency))->get();
 
+        if ($content->params->chargeFreerounds > 0) {
+            if (($user->freegames - $content->params->chargeFreerounds) > 0) {
+
+                $user->freegames = $user->freegames - $content->params->chargeFreerounds;
+                $user->freegames_balance = $user->freegames_balance + $content->params->deposit;
+                $user->save();
+
+                return response()->json([
+                    'result' => [
+                        'newBalance' => $balance,
+                        'transactionId' => $content->params->transactionRef,
+                        'freeroundsLeft' => $user->freegames
+                    ],
+                    'id' => $content->id,
+                    'jsonrpc' => '2.0'
+                ]);
+            } else {
+                $content->params->deposit = $user->freegames_balance;
+            }
+        }
+
         if ($currency == 'BTC' || $currency == 'btc') {
             $balanceB = (int) ((((string) $balance) * \App\Http\Controllers\Api\WalletController::rateDollarBtc()) * 100);
         } elseif ($currency == 'doge' || $currency == "DOGE") {
@@ -190,6 +211,7 @@ class C27Controller extends Controller
         }
 
         if ($content->params->chargeFreerounds > 0) {
+
 
         } else {
             $user->balance(Currency::find($currency))->subtract($subtract, json_decode($request->getContent(), true));
@@ -312,16 +334,6 @@ class C27Controller extends Controller
         ]);
         event(new \App\Events\LiveFeedGame($game, 10));
 
-        $freegames = 0;
-
-        if ($content->params->chargeFreerounds > 0) {
-            $user->freegames = $user->freegames - $content->params->chargeFreerounds;
-            $user->save();
-
-            $freegames = $user->freegames;
-        }
-
-
         if ($user != null && $user->referral != null) {
             $referrer = \App\User::where('_id', $user->referral)->first();
             $referrer->balance(Currency::find($currency))->add($subtract * 0.0009, \App\Transaction::builder()->message('referral bonus')->get());
@@ -332,7 +344,6 @@ class C27Controller extends Controller
             'result' => [
                 'newBalance' => $balance,
                 'transactionId' => $content->params->transactionRef,
-                'freeroundsLeft' => $freegames
             ],
             'id' => $content->id,
             'jsonrpc' => '2.0'
