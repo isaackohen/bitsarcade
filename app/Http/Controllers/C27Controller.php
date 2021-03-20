@@ -99,6 +99,7 @@ class C27Controller extends Controller
         try {
             $game = $this->client->createSession(
                 [
+<<<<<<< HEAD
                     'GameId' => $slug,
                     'BonusId' => 'shared',
                     'PlayerId' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-final',
@@ -108,17 +109,36 @@ class C27Controller extends Controller
                     ],
                     'RestorePolicy' => 'Restore'
                 ]
+=======
+                'GameId' => $slug,
+                'BonusId' => 'shared',
+                'PlayerId' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-final',
+                'AlternativeId' => time() . '_' . $user->id . '_' . auth()->user()->clientCurrency()->id(),
+                'Params' => [
+                    'freeround_bet' => 1
+                ],
+                'RestorePolicy' => 'Restore'
+            ]
+>>>>>>> 0eee081cf35824779a4fb619dac1e248f2302433
             );
         } catch (\Exception $exception) {
             sleep(0.3);
             $this->client->setPlayer(['Id' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-final' , 'BankGroupId' => 'bits_usd']);
             $game = $this->client->createSession(
                 [
+<<<<<<< HEAD
                     'GameId' => $slug,
                     'PlayerId' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-final',
                     'AlternativeId' => time() . '_' . $user->id . '_' . auth()->user()->clientCurrency()->id(),
                     'RestorePolicy' => 'Restore'
                 ]
+=======
+                'GameId' => $slug,
+                'PlayerId' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-final',
+                'AlternativeId' => time() . '_' . $user->id . '_' . auth()->user()->clientCurrency()->id(),
+                'RestorePolicy' => 'Restore'
+            ]
+>>>>>>> 0eee081cf35824779a4fb619dac1e248f2302433
             );
         }
 
