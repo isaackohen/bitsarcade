@@ -47,6 +47,7 @@ abstract class Game {
         return [
             new \App\Games\Mines(),
             new \App\Games\Dice(),
+            new \App\Games\Baccarat(),
             new \App\Games\Wheel(),
             new \App\Games\Plinko(),
             new \App\Games\Coinflip(),

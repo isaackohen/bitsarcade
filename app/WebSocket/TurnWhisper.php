@@ -38,7 +38,7 @@ class TurnWhisper extends WebSocketWhisper {
         switch($turnData['type']) {
             case 'fail':
                 $game->update(['status' => 'cancelled']);
-                $game->data['turn'] -1;
+                $game->data['turn'] - 1;
                 $api_game->finish($game);
                 break;
             case 'lose':

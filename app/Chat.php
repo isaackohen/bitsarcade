@@ -15,7 +15,7 @@ class Chat extends Model {
      * @var array
      */
     protected $fillable = [
-        'user', 'data', 'type', 'deleted', 'vipLevel'
+        'user', 'data', 'type', 'deleted', 'vipLevel', 'channel', 'user_id'
     ];
 
     /**
