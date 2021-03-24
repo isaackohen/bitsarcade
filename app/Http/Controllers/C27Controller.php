@@ -69,7 +69,7 @@ class C27Controller extends Controller
         }
 
         $this->client->setPlayer(['Id' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-final' , 'BankGroupId' => 'bits_usd']);
-        sleep(0.25);
+        sleep(0.1);
 
         if($user->freegames > 0) {
             try {
@@ -110,7 +110,7 @@ class C27Controller extends Controller
                 ]
             );
         } catch (\Exception $exception) {
-            sleep(0.45);
+            sleep(0.3);
             $this->client->setPlayer(['Id' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-final' , 'BankGroupId' => 'bits_usd']);
             $game = $this->client->createSession(
                 [
@@ -359,7 +359,7 @@ class C27Controller extends Controller
 
     public function getBalance(Request $request)
     {
-        sleep(0.30);
+        sleep(0.2);
         try {
             $content = json_decode($request->getContent());
 
