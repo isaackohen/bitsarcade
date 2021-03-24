@@ -1,8 +1,0 @@
-{
-  "name": "mdb-ui-kit",
-  "version": "3.3.0",
-  "main": "js/mdb.min.js",
-  "repository": "https://git.mdbootstrap.com/mdb/standard/mdb-ui-kit-pro-essential.git",
-  "author": "MDBootstrap",
-  "license": "SEE LICENSE IN <License.pdf>"
-}
