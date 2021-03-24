@@ -2,8 +2,7 @@
 @import "~select2/dist/css/select2.min.css";
 
 .wallet_modal {
-    width: 600px !important;
-
+    
     .walletMinDeposit {
         display: flex;
         align-content: center;
@@ -39,13 +38,30 @@
     }
 
     [data-wallet-tab-content="deposit"] {
+        width: 90%;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+
+        .btn {
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-bottom: 10px;
+            margin-top: 10px;
+        }
+
+        input {
+            margin-bottom: 10px;
+        }
+        
         .select2 {
             width: 90px !important;
         }
     }
 
     [data-wallet-tab-content="withdraw"] {
-        width: 60%;
+        width: 90%;
         position: relative;
         left: 50%;
         transform: translateX(-50%);
@@ -64,7 +80,7 @@
 
         #withdraw-address, #withdraw-min {
             @include themed() {
-                color: t('link');
+                color: t('text');
                 font-size: 0.9em;
                 margin-bottom: 5px;
             }
@@ -72,7 +88,7 @@
 
         #withdraw-warning {
             @include themed() {
-                color: t('link');
+                color: t('text');
                 margin-top: 5px;
             }
         }
@@ -182,7 +198,6 @@
 
 @media(max-width: 600px) {
     .wallet_modal {
-        width: 100vw !important;
         border-radius: 0 !important;
     }
 }

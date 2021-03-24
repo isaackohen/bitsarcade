@@ -2,7 +2,6 @@
 
 @endphp
 
-@include('modals.nav')
 <div class="container-fluid">
                 <div class="game-content" style="padding: 4px; width: auto;height: 700px;margin-left: auto;margin-right: auto;">
 				<style>

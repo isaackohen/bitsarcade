@@ -10,6 +10,7 @@ $themes: (
         link-hover: black,
         input: #f0f3f6,
         green: #27ae60,
+        uiblock: lighten(#000000, 0.2%),
         bodybg: url('/img/misc/stars.png'),       
         headerbg: url('/img/misc/animtop-2.svg'),
         red: #e74c3c,
@@ -18,18 +19,18 @@ $themes: (
         draggableWindowText: white
     ),
     dark: (
-        header: #252628,
-        body: #27282a,
-        secondary: #2584c9,
-        text: white,
+        header: darken(#303030, 5.33%),
+        body: darken(#303030, 3.33%),
+        secondary: #2f8be6,
+        text: #f8f8f8,
         headerbg: url('/img/misc/animtop-2.svg'),
-        bodybg: url('/img/misc/stars.png'),
         logo: url('/img/logo/logo_temp.png'),
-        sidebar: lighten(#26282a, 2.0%),
-        link: #ffb72a,
+        sidebar: lighten(#303030, 0.5%),
+        link: #72a4f7,
         link-hover: white,
-        input: #222425,
-        green: #0fd560,
+        input: #333333,
+        uiblock: lighten(#000000, 4.2%),
+        green: #2ecc71,
         red: #e74c3c,
         draggableWindowHeader: darken(white, 5.5%),
         draggableWindowBody: white,
@@ -55,4 +56,3 @@ $themes: (
     //noinspection SassScssUnresolvedVariable
     @return map-get($theme-map, $key);
 }
-

@@ -1,0 +1,47 @@
+{
+  "name": "laravel-echo-server-whisper",
+  "version": "1.6.2-alfa-3",
+  "description": "Laravel Echo Node JS Server for Socket.io with listen Whisper",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/haric655/laravel-echo-server.git"
+  },
+  "main": "dist/index.js",
+  "keywords": [
+    "laravel",
+    "socket.io"
+  ],
+  "author": "Vlad Potar",
+  "license": "MIT",
+  "jshintConfig": {
+    "esversion": 6
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc -w",
+    "prepublish": "npm run build"
+  },
+  "dependencies": {
+    "colors": "^1.4.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "inquirer": "^7.1.0",
+    "ioredis": "^4.16.0",
+    "lodash": "^4.17.15",
+    "request": "^2.88.2",
+    "socket.io": "^2.3.0",
+    "socket.io-redis": "^5.3.0",
+    "yargs": "^15.3.1"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.149",
+    "@types/node": "^13.9.1",
+    "typescript": "^3.8.3"
+  },
+  "peerDependecies": {
+    "sqlite3": "^3.1.13"
+  },
+  "bin": {
+    "laravel-echo-server": "bin/server.js"
+  }
+}

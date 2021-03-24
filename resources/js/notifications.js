@@ -16,11 +16,11 @@ const notifications = {
 
 const addNotification = function(id, title, message, icon) {
     $('.notifications-content .os-content').prepend(`
-        <div role="alert" class="toast" data-autohide="false" data-toast-id="${id}">
+        <div role="alert" style="opacity: 1;" class="toast fade show" data-autohide="false" data-toast-id="${id}">
             <div class="toast-header">
                 <i class="${icon}" style="margin-right: 5px"></i>
                 <span class="mr-auto">${title}</span>
-                <i data-notification-dismiss="${id}" class="fal fa-times" data-dismiss="toast"></i>
+                <i data-notification-dismiss="${id}" style="margin-left: auto;" class="fal fa-times" data-dismiss="toast"></i>
             </div>
             <div class="toast-body">
                 ${message}

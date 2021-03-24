@@ -4,9 +4,9 @@ $.auth = function() {
     $.modal('auth', 'show').then(() => {
         currentAuthMethod = 'auth';
 
-        $('.auth .heading').html($.lang('general.auth.login'));
+        $('.auth .modal-title').html($.lang('general.auth.login'));
         $('.auth .btn-block').html($.lang('general.auth.login'));
-        $('#auth-footer').show();
+        $('#auth-footer').fadeIn(100);
         $('#register-footer').hide();
     });
 };
@@ -15,10 +15,10 @@ $.register = function() {
     $.modal('auth', 'show').then(() => {
         currentAuthMethod = 'register';
 
-        $('.auth .heading').html($.lang('general.auth.register'));
+        $('.auth .modal-title').html($.lang('general.auth.register'));
         $('.auth .btn-block').html($.lang('general.auth.register'));
         $('#auth-footer').hide();
-        $('#register-footer').show();
+        $('#register-footer').fadeIn(100);
     });
 };
 

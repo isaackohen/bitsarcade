@@ -69,7 +69,7 @@ class C27Controller extends Controller
         }
 
         $this->client->setPlayer(['Id' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-final' , 'BankGroupId' => 'bits_usd']);
-        sleep(0.1);
+        sleep(0.25);
 
         if($user->freegames > 0) {
             try {
@@ -99,7 +99,6 @@ class C27Controller extends Controller
         try {
             $game = $this->client->createSession(
                 [
-<<<<<<< HEAD
                     'GameId' => $slug,
                     'BonusId' => 'shared',
                     'PlayerId' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-final',
@@ -109,36 +108,17 @@ class C27Controller extends Controller
                     ],
                     'RestorePolicy' => 'Restore'
                 ]
-=======
-                'GameId' => $slug,
-                'BonusId' => 'shared',
-                'PlayerId' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-final',
-                'AlternativeId' => time() . '_' . $user->id . '_' . auth()->user()->clientCurrency()->id(),
-                'Params' => [
-                    'freeround_bet' => 1
-                ],
-                'RestorePolicy' => 'Restore'
-            ]
->>>>>>> 0eee081cf35824779a4fb619dac1e248f2302433
             );
         } catch (\Exception $exception) {
-            sleep(0.3);
+            sleep(0.45);
             $this->client->setPlayer(['Id' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-final' , 'BankGroupId' => 'bits_usd']);
             $game = $this->client->createSession(
                 [
-<<<<<<< HEAD
                     'GameId' => $slug,
                     'PlayerId' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-final',
                     'AlternativeId' => time() . '_' . $user->id . '_' . auth()->user()->clientCurrency()->id(),
                     'RestorePolicy' => 'Restore'
                 ]
-=======
-                'GameId' => $slug,
-                'PlayerId' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-final',
-                'AlternativeId' => time() . '_' . $user->id . '_' . auth()->user()->clientCurrency()->id(),
-                'RestorePolicy' => 'Restore'
-            ]
->>>>>>> 0eee081cf35824779a4fb619dac1e248f2302433
             );
         }
 
@@ -183,7 +163,7 @@ class C27Controller extends Controller
 
                 return response()->json([
                     'result' => [
-                        'newBalance' => $balance,
+                        'newBalance' => (int) ($user->freegames_balance),
                         'transactionId' => $content->params->transactionRef,
                         'freeroundsLeft' => $user->freegames
                     ],
@@ -192,7 +172,14 @@ class C27Controller extends Controller
                 ]);
             } else {
                 $content->params->deposit = $user->freegames_balance;
+                $user->freegames = 0;
+                $user->freegames_balance = 0;
+                $user->save();
             }
+        } else if ($user->freegames_balance > 0) {
+            $content->params->deposit = $user->freegames_balance;
+            $user->freegames_balance = 0;
+            $user->save();
         }
 
         if ($currency == 'BTC' || $currency == 'btc') {
@@ -372,7 +359,7 @@ class C27Controller extends Controller
 
     public function getBalance(Request $request)
     {
-        sleep(0.2);
+        sleep(0.30);
         try {
             $content = json_decode($request->getContent());
 
@@ -410,6 +397,7 @@ class C27Controller extends Controller
 
         if ($user->freegames > 0 ) {
             $freegames = $user->freegames;
+            $balance = (int) $user->freegames_balance;
         }
 
         return response()->json([

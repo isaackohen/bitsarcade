@@ -5,8 +5,8 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-4">
-            <div class="card">
+        <div class="col-md-2">
+            <div class="card text-white bg-gradient-primary">
                 <div class="card-body p-0">
                     <div class="media p-3">
                         <div class="media-body">
@@ -17,8 +17,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card">
+        <div class="col-md-2">
+            <div class="card text-white bg-gradient-primary">
                 <div class="card-body p-0">
                     <div class="media p-3">
                         <div class="media-body">
@@ -29,13 +29,13 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card">
+        <div class="col-sm-8 cocol-md-8">
+            <div class="card text-white bg-gradient-primary">
                 <div class="card-body p-0">
                     <div class="media p-3">
                         <div class="media-body">
-                            <span class="text-muted text-uppercase font-size-12 font-weight-bold">Average response time</span>
-                            <h2 class="mb-0">{{ number_format(\Illuminate\Support\Facades\Cache::get('average_response_time', 'N/A'), 4, '.', '') }}s</h2>
+<coin-ponent shadow="none" border-radius="5"></coin-ponent>
+
                         </div>
                     </div>
                 </div>

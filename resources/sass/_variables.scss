@@ -1,11 +1,13 @@
-@import "node_modules/bootstrap/scss/functions";
-@import "node_modules/bootstrap/scss/variables";
-@import "node_modules/bootstrap/scss/mixins/_breakpoints";
+@import "node_modules/mdb-ui-kit/src/scss/bootstrap/functions";
+@import "node_modules/mdb-ui-kit/src/scss/bootstrap/variables";
+@import "node_modules/mdb-ui-kit/src/scss/bootstrap/mixins/_breakpoints";
+@import "node_modules/mdb-ui-kit/src/scss/pro/_animate-extended";
+
 @import "themes";
 
 $font-family-sans-serif: 'Proxima Nova Med', sans-serif;
-$font-size-base: 0.91rem;
-$line-height-base: 1.4;
+$font-size-base: 0.90rem;
+$line-height-base: 1.5;
 
 $input-btn-focus-box-shadow: none;
 $btn-focus-box-shadow: none;

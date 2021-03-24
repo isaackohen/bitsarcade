@@ -226,7 +226,7 @@ class SidebarComponentBuilder {
     }
 
     play() {
-        $('.game-sidebar').append(`<button class="btn btn-more m-4 play-button">${$.lang('general.play')}</button>`);
+        $('.game-sidebar').append(`<button class="btn btn-primary m-4 play-button">${$.lang('general.play')}</button>`);
         $('.play-button').on('click', function() {
             if($(this).hasClass('disabled')) return;
 
@@ -269,10 +269,10 @@ class SidebarComponentBuilder {
                             if(this.guest_notified === undefined) this.guest_notified = 0;
                             this.guest_notified += 1;
                             if(this.guest_notified % 3 === 1) {
-                                $.modal('demo-notify');
+                                $.modal('auth');
                                 if ($.currentBettingType() === 'auto' && currentGameInstance.game.autoBetSettings.state) stop();
                             }
-                        }, 1500);
+                        }, 2500);
                     }
                 }, function (error) {
                     if(error === 0) {

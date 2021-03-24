@@ -1,10 +1,25 @@
-<div class="overview modal">
-    <div class="content">
-        <i class="fas fa-close-symbol"></i>
+<div
+  class="overview modal fade "
+  id="overview modal"
+  tabindex="-1"
+    style="display: block; padding-right: 15px;"
+  aria-labelledby="overview modal"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{ __('general.auth.login') }}</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-mdb-dismiss="overview modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
         <div class="ui-blocker" style="display: none;">
             <div class="loader"><div></div></div>
         </div>
-
         <div class="modal-scrollable-content">
             <div class="overview-share-options">
                 <a data-share="link" href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="{{ __('general.share_link') }}">
@@ -51,5 +66,7 @@
                 <a onclick="$.modal('overview')" class="nonce_target"></a>
             </div>
         </div>
+    </div>
+</div>
     </div>
 </div>

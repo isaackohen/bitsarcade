@@ -1,5 +1,5 @@
 @if(isset($data))
-    <div data-history-tab="payments" class="mt-2">
+    <div data-history-tab="payments" data-mdb-perfect-scrollbar="true" class="mt-2">
         @if(\App\Invoice::where('user', auth()->user()->_id)->count() == 0)
             <div class="walletHistoryEmpty">
                 <i class="fas fa-waiting"></i>
@@ -12,28 +12,23 @@
                         <th>
                             {{ __('wallet.history.name') }}
                         </th>
-                        <th class="d-none d-md-table-cell">
-                            {{ __('wallet.history.sum') }}
-                        </th>
                         <th>
                             {{ __('wallet.history.date') }}
                         </th>
-                        <th>
-                            {{ __('wallet.history.confirmations') }}
+                        <th class="d-none d-md-table-cell">
+                            {{ __('wallet.history.sum') }}
                         </th>
                     </tr>
                 </thead>
                 <tbody class="live_games">
-                    @foreach(\App\Invoice::where('user', auth()->user()->_id)->latest()->get() as $invoice)
+                    @foreach(\App\Invoice::where('user', auth()->user()->_id)->where('ledger', '!=', null)->latest()->get() as $invoice)
                         <tr>
                             <th>
                                 <div>
-                                    <div><i class="{{ \App\Currency\Currency::find($invoice->currency)->icon() }}" style="color: {{ \App\Currency\Currency::find($invoice->currency)->style() }}"></i> {{ \App\Currency\Currency::find($invoice->currency)->name() }}</div>
+                                    <div><i class="{{ \App\Currency\Currency::find($invoice->currency)->icon() }}" style="color: {{ \App\Currency\Currency::find($invoice->currency)->style() }}"></i> -   {{ \App\Currency\Currency::find($invoice->currency)->name() }}</div>
                                 </div>
-                            </th>
-                            <th class="d-none d-md-table-cell">
                                 <div>
-                                    {{ $invoice->sum }}
+                                   <small>{{ $invoice->ledger }}</small>
                                 </div>
                             </th>
                             <th>
@@ -41,9 +36,13 @@
                                     {{ $invoice->created_at->diffForHumans() }}
                                 </div>
                             </th>
-                            <th>
+                            <th class="d-none d-md-table-cell">
                                 <div>
-                                    {{ $invoice->status }}
+                                @if($invoice->status == 0)
+                                    <i class="fal fa-clock"></i>
+                                @else
+                                    {{ $invoice->sum }}
+                                @endif
                                 </div>
                             </th>
                         </tr>
@@ -127,15 +126,18 @@
         @endif
     </div>
 @else
-<div class="wallet_modal modal">
-    <div class="content">
-        <i class="fas fa-close-symbol"></i>
-        <div class="ui-blocker" style="display: none;">
-            <div class="loader"><div></div></div>
-        </div>
 
-        <div class="modal-scrollable-content">
-            <div class="tabs">
+<div
+  class="wallet_modal modal fade"
+  id="wallet_modal modal"
+  tabindex="-1"
+    style="display: block; padding-right: 15px;"
+  aria-labelledby="wallet_modal"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content" style="min-height: 500px;">
+      <div class="modal-header">
+                    <div class="tabs">
                 <div class="tab active" data-wallet-toggle-tab="deposit">
                     {{ __('wallet.tabs.deposit') }}
                 </div>
@@ -146,8 +148,21 @@
                     {{ __('wallet.tabs.history') }}
                 </div>
             </div>
+        <button
+          type="button"
+          class="btn-close"
+          data-mdb-dismiss="wallet_modal modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="ui-blocker" style="display: none;">
+            <div class="loader"><div></div></div>
+        </div>
+
+        <div class="modal-scrollable-content">
             <div data-wallet-tab-content="deposit">
-                <select id="currency-selector-deposit">
+                <select id="currency-selector-deposit" style="min-width: 200px;">
                     @foreach(\App\Currency\Currency::all() as $currency)
                         <option value="{{ $currency->id() }}" data-icon="{{ $currency->icon() }}" data-style="{{ $currency->style() }}">
                             {{ $currency->name() }}
@@ -160,6 +175,8 @@
                     </div>
                     <div class="description">{{ __('general.error.offline_node') }}</div>
                 </div>
+                            <div class="alert alert-info mb-4 p-2 text-center" role="alert">Check out the Bonus page for the latest bonus offers!</div>
+
                <div class="walletMinDeposit" style="display: none">
                     <div class="icon">
                         <i class="fal fa-exclamation-triangle"></i>
@@ -168,12 +185,11 @@
                 </div>
                 <div id="currency-label"></div>
                 <div class="input-loader">
-                    <input onclick="this.select()" style="cursor: pointer !important;" data-toggle="tooltip" data-placement="top" title="{{ __('wallet.copy') }}" type="text" readonly>
+                    <input onclick="this.select()" style="cursor: pointer !important;" data-mdb-toggle="tooltip" title="{{ __('wallet.copy') }}" type="text" readonly>
                 </div>
-                <div class="btn btn-more" onclick="getDepositAddress()" id="generatorbutton" style="margin: 0px; padding: 10px; margin-top:10px;margin-bottom:10px;">Generate deposit address</div>
+                <div class="btn btn-primary" onclick="getDepositAddress()" id="generatorbutton" style="margin: 0px; padding: 10px; margin-top:10px;margin-bottom:10px;">Generate deposit address</div>
             </div>
-                <div id="deposit-warning"></div>
-            <div data-wallet-tab-content="withdraw" style="display: none">
+                <div data-wallet-tab-content="withdraw" style="display: none">
                 <select class="currency-selector-withdraw">
                     @foreach(\App\Currency\Currency::all() as $currency)
                         <option value="{{ $currency->id() }}" data-icon="{{ $currency->icon() }}" data-style="{{ $currency->style() }}">
@@ -186,7 +202,7 @@
                 <div id="withdraw-min"></div>
                 <input id="withdraw-amount-value" type="text">
                 <button class="btn btn-primary" id="withdraw">{{ __('wallet.withdraw.button') }}</button>
-                <div id="withdraw-warning"></div>
+                        <div class="alert alert-info mb-1 p-2 text-center" role="alert"> <div id="withdraw-warning" style="color: #22738e !important;"></div></div>
             </div>
             <div data-wallet-tab-content="history" style="display: none;">
                 <div class="tabs mt-2">
@@ -202,10 +218,11 @@
         </div>
     </div>
 </div>
+</div>
+</div>
 <script>
         function getDepositAddress() {
             $('#generatorbutton').toggleClass('disabled');
-            $('#generatorbutton').text('Generating new wallet...').button("refresh");
             $.request('wallet/getDepositWallet', { currency: $.currency() }).then(function(response) {
                 if(response.currency !== $.currency()) return;
 
@@ -214,7 +231,6 @@
                 $(`[data-wallet-tab-content="deposit"] #minimumdepo`).html("");
                 document.getElementById('minimumdepo').innerHTML += response.mindeposit;
                 $(`[data-wallet-tab-content="deposit"] .walletMinDeposit`).fadeIn('fast');
-                $('#generatorbutton').text('Generate deposit address').button("refresh");
                 setTimeout(function(){
                     $('#generatorbutton').toggleClass('disabled');
                 }, 500);

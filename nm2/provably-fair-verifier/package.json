@@ -1,0 +1,22 @@
+{
+  "name": "provably-fair-verifier",
+  "version": "1.0.0",
+  "description": "Win5X provably fair verifier",
+  "main": "bundle",
+  "author": "Win5X",
+  "license": "ISC",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Win5X/provably-fair-verifier.git"
+  },
+  "dependencies": {
+    "js-sha256": "^0.9.0"
+  },
+  "bugs": {
+    "url": "https://github.com/Win5X/provably-fair-verifier/issues"
+  },
+  "homepage": "https://github.com/Win5X/provably-fair-verifier#readme"
+}

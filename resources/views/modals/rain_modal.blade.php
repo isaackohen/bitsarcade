@@ -1,10 +1,24 @@
-<div class="rain_modal modal">
-    <div class="content">
-        <i class="fas fa-close-symbol"></i>
+<div
+  class="rain_modal modal fade"
+  id="rain_modal modal"
+  tabindex="-1"
+    style="display: block; padding-right: 15px;"
+  aria-labelledby="rain_modal modal"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">Rain
+        <button
+          type="button"
+          class="btn-close"
+          data-mdb-dismiss="rain_modal modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
         <div class="ui-blocker" style="display: none;">
             <div class="loader"><div></div></div>
         </div>
-
         <select class="currency-selector-withdraw">
             @foreach(\App\Currency\Currency::all() as $currency)
                 <option value="{{ $currency->id() }}" data-icon="{{ $currency->icon() }}" data-style="{{ $currency->style() }}">
@@ -19,4 +33,6 @@
         <input id="rainusers" type="text" value="10">
         <button class="btn btn-primary">{{ __('general.chat_commands.modal.rain.send') }}</button>
     </div>
+</div>
+</div>
 </div>

