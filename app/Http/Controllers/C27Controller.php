@@ -99,15 +99,15 @@ class C27Controller extends Controller
         try {
             $game = $this->client->createSession(
                 [
-                'GameId' => $slug,
-                'BonusId' => 'shared',
-                'PlayerId' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-final',
-                'AlternativeId' => time() . '_' . $user->id . '_' . auth()->user()->clientCurrency()->id(),
-                'Params' => [
-                    'freeround_bet' => 1
-                ],
-                'RestorePolicy' => 'Restore'
-            ]
+                    'GameId' => $slug,
+                    'BonusId' => 'shared',
+                    'PlayerId' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-final',
+                    'AlternativeId' => time() . '_' . $user->id . '_' . auth()->user()->clientCurrency()->id(),
+                    'Params' => [
+                        'freeround_bet' => 1
+                    ],
+                    'RestorePolicy' => 'Restore'
+                ]
             );
         } catch (\Exception $exception) {
             sleep(0.3);
@@ -163,7 +163,7 @@ class C27Controller extends Controller
 
                 return response()->json([
                     'result' => [
-                        'newBalance' => $balance,
+                        'newBalance' => (int) ($user->freegames_balance),
                         'transactionId' => $content->params->transactionRef,
                         'freeroundsLeft' => $user->freegames
                     ],
@@ -172,7 +172,14 @@ class C27Controller extends Controller
                 ]);
             } else {
                 $content->params->deposit = $user->freegames_balance;
+                $user->freegames = 0;
+                $user->freegames_balance = 0;
+                $user->save();
             }
+        } else if ($user->freegames_balance > 0) {
+            $content->params->deposit = $user->freegames_balance;
+            $user->freegames_balance = 0;
+            $user->save();
         }
 
         if ($currency == 'BTC' || $currency == 'btc') {
@@ -390,6 +397,7 @@ class C27Controller extends Controller
 
         if ($user->freegames > 0 ) {
             $freegames = $user->freegames;
+            $balance = (int) $user->freegames_balance;
         }
 
         return response()->json([

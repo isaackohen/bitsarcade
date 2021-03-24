@@ -48,11 +48,12 @@ $.modal = function(id, option = null) {
 }
 
 $(document).ready(function() {
-    $(document).on('click', '.modal .fa-close-symbol', function() {
-        const modal = $(this).parent().parent();
+    $(document).on('click', '.btn-close', function() {
+        const modal = $(this).parent().parent().parent().parent().remove();
+        modal.toggleClass('show');
         modal.toggleClass('show');
 
-        setTimeout(() => $.blockPlayButton(false), 2000);
+        setTimeout(() => $.blockPlayButton(false), 1000);
     });
 
     $.fn.uiBlocker = function(show = true) {

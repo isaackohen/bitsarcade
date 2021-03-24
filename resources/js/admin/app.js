@@ -4,10 +4,11 @@ window.ApexCharts = ApexCharts;
 import MetisMenu from 'metismenujs';
 window.flatpickr = require('flatpickr');
 window.clipboard = require('clipboard-polyfill');
+window.$ = window.jQuery = require('jquery');
 
 import NProgress from 'nprogress';
 const feather = require('feather-icons');
-require('../bootstrap');
+require('bootstrap');
 require('jquery-pjax');
 require('jquery-slimscroll');
 require('datatables.net');

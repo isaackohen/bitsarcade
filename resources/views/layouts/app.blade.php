@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" class="theme--{{ $_COOKIE['theme'] ?? 'dark' }}">
     <head>
-        <title>BitsArcade - Crypto Gambling Platform</title>
+        <title>BITSArcade - Crypto Gambling Platform</title>
         <link href="/css/webfonts.css" rel="stylesheet" type="text/css">
-        <link rel="icon" type="image/png" href="/img/logo/ico.png"/>
+        <link rel="icon" type="image/png" href="/img/logo/favicon.ico"/>
         <meta charset="utf-8">
         <noscript><meta http-equiv="refresh" content="0; /no_js"></noscript>
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, height=device-height, minimum-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="description" content="{{ __('general.head.description') }}">
 
@@ -22,6 +22,7 @@
             <meta http-equiv="Expires" content="Mon, 26 Jul 1997 05:00:00 GMT">
             <meta http-equiv="Pragma" content="no-cache">
         @endif
+
         <link rel="preload" href="{{ mix('/js/app.js') }}" as="script">
         <link rel="preload" href="{{ mix('/css/app.css') }}" as="style">
         <link rel="preload" href="{{ mix('/css/loader.css') }}" as="style">
@@ -33,6 +34,7 @@
         <link rel="stylesheet" href="{{ mix('/css/loader.css') }}">
         <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
         <link rel="manifest" href="/manifest.json">
+        <script src="{{ mix('/js/bootstrap.js') }}" type="text/javascript" defer></script>
 
         <script>
             window._locale = '{{ app()->getLocale() }}';
@@ -79,49 +81,38 @@
                 ]) !!};
         </script>
 
-        <script src="{{ mix('/js/bootstrap.js') }}" type="text/javascript" defer></script>
-
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-F3HRVS6QVR"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-F3HRVS6QVR');
-</script>
     </head>
     <body>
-        <div class="pageLoader">
-<div class="loading__container"><div class="loading"><div class="loading__container-animation"><div class="yellow"></div><div class="red"></div><div class="blue"></div><div class="green"></div></div></div></div>
-
+        <div class="pageLoader" style="background: #212121;">
+            <div class="loader" style="background-image: url(/img/logo/logo_temp.png); background-position: center; opacity: 0.8; background-size: 60%; background-repeat: no-repeat;">
+               <div></div>
+            </div>
             <div class="error" style="display: none"></div>
         </div>
+    
+
         <div class="wrapper">
             <header>
                 <div class="fixed">
                     <div class="logo" onclick="redirect('/')"></div>
-                    <div class="dropdown show">
-                            <a class="btn btn-dropdownmenu-2 dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-bars"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuLink">
-                                <div class="home"><a href="/"><button class="btn btn-dropdownmenu"><i class="fa fa-certificate"></i>  Home</button></a></div>
-                                @if(!auth()->guest())
-                                <div class="profilemenu"  onclick="redirect('/user/{{ auth()->user()->_id }}')"><a><button class="btn btn-dropdownmenu"><i class="fas fa-user-cog"></i>  Profile</button></a></div>
-                                <div class="depositmenu" onclick="$.wallet()"><button class="btn btn-dropdownmenu"><i class="fad fa-gem"></i> Deposit</button></div>
-                                <div class="vipmenu" onclick="$.vip()"><a><button class="btn btn-dropdownmenu"><i class="fas fa-trophy"></i> VIP Rewards</button></a></div>
-                                @endif
-                                <div class="partners"><a href="/partner"><button class="btn btn-dropdownmenu"><i class="fab fa-affiliatetheme"></i>  Affiliate</button></a></div>
-                                <div class="earn"><a href="/earn"><button class="btn btn-dropdownmenu"><i class="fad fa-money-check-edit-alt"></i>  Earn Wall</button></a></div>
-                                <div class="supportmenu"><a href="/help"><button class="btn btn-dropdownmenu"><i class="fas fa-headphones"></i>  Help</button></a></div>
-                                <div class="menu-games"><a href="/gamelist"><button class="btn btn-dropdownmenu"><i class="fas fa-gamepad"></i>  All Games</button></a></div>
-                                <div class="togglechat"><a href="#" data-chat-toggle><button class="btn btn-dropdownmenu"><i class="fas fa-comment-alt-check"></i> Toggle Chat</button></a></div>
-                            </div>
-                        </div>
+
+
                     <div class="menu">
-                        <a href="/" data-page-trigger="'/','/index'" data-toggle-class="active">{{ __('general.head.index') }}</a>
-                        <a href="/bonus" data-page-trigger="'/promotions'" data-toggle-class="active">{{ __('general.head.promotions') }}</a>
+<button
+  data-mdb-toggle="sidenav"
+  data-mdb-target="#sidenav-1"
+  class="btn btn-pink"
+  aria-controls="#sidenav-1"
+  aria-haspopup="true"
+  style="    color: #0fd560;
+    background: linear-gradient(#363636, #2c2c2c) !important;
+    border-radius: 16px;
+    font-size: 1rem;
+    box-shadow: 0 3px 6px rgb(0 0 0 / 25%);"
+>
+  <i class="fas fa-bars"></i>
+</button>
+
                     </div>
 
                     @if(!auth()->guest())
@@ -160,13 +151,13 @@
                                 <i class="fal fa-angle-down"></i>
                             </div>
                             <div class="balance"></div>
-                            <div class="btn btn-blue wallet-open" style="text-shadow: 0.9px 0.9px #363d42; border-top-left-radius: 0px; border-bottom-left-radius: 0px;"></div>
+                            <div class="btn btn-danger btn-rounded wallet-open" style="text-shadow: 0.9px 0.9px #363d42; border-top-left-radius: 0px; border-bottom-left-radius: 0px;"></div>
                         </div>
                     @endif
                     <div class="right">
                         @if(auth()->guest())
-                            <button class="btn btn-signup" onclick="$.register()">{{ __('general.auth.register') }}</button>
-                            <button class="btn btn-login" onclick="$.auth()">{{ __('general.auth.login') }}</button>
+                            <button class="btn btn-primary" onclick="$.register()">{{ __('general.auth.register') }}</button>
+                            <button class="btn btn-secondary" onclick="$.auth()">{{ __('general.auth.login') }}</button>
                         @else
                             <img onclick="redirect('/user/{{ auth()->user()->_id }}')" src="{{ auth()->user()->avatar }}" alt>
                             <div class="action" data-notification-view onclick="$.displayNotifications()">
@@ -181,10 +172,101 @@
                 <div class="text"><span></span></div>
             </div>
 
+
             <div class="pageContent" style="opacity: 0">
                 {!! $page !!}
             </div>
+ 
+
             <div class="container-fluid">
+ <div class="collapse-sidebar">
+<nav id="sidenav-1" class="sidenav" data-mdb-hidden="true" data-mdb-mode="over" data-mdb-content="#content">
+  <ul class="sidenav-menu"> <li class="sidenav-item mt-2 mb-0"> <a class="sidenav-link">
+        <i class="fad fa-home me-2"></i><span>Home</span></a>
+    </li>
+
+    <li class="sidenav-item mt-2 mb-0"> <a class="sidenav-link"
+        ><i style="color: #5cb9ff" class="fad fa-user-circle me-2"></i><span style="font-family: 'Proxima Nova Semi Bd'"> Account</span></a>
+      <ul class="sidenav-collapse show">
+       @if(auth()->guest())
+       <li class="sidenav-item">
+          <a onclick="$.auth()" class="sidenav-link">Login</a>
+        </li>
+        <li class="sidenav-item">
+         <a onclick="$.register()" class="sidenav-link">Register</a>
+        </li>
+        @else
+        <li class="sidenav-item">
+          <a onclick="$.wallet()" class="sidenav-link">Deposit</a>
+        </li>
+        <li class="sidenav-item">
+          <a onclick="$.wallet()" class="sidenav-link">Withdraw</a>
+        </li>
+        <li class="sidenav-item">
+          <a onclick="$.vip()" class="sidenav-link">Your VIP Progress</a>
+        </li>
+        <li class="sidenav-item">
+          <a href='/user/{{ auth()->user()->_id }}' class="sidenav-link">Settings</a>
+        </li>
+        @endif
+      </ul>
+    </li>
+    <li class="sidenav-item mt-2 mb-0"> <a class="sidenav-link"
+        ><i style="color: #5cb9ff" class="fad fa-gift me-3"></i><span style="font-family: 'Proxima Nova Semi Bd'">Promotions</span></a>
+      <ul class="sidenav-collapse">
+       <li class="sidenav-item">
+          <a onclick="redirect('/bonus')" class="sidenav-link">New Player Bonus</a>
+        </li>
+        <li class="sidenav-item">
+         <a onclick="redirect('/bonus')" class="sidenav-link">Faucet</a>
+        </li>
+        <li class="sidenav-item">
+          <a onclick="redirect('/bonus')" class="sidenav-link">Promocode</a>
+        </li>
+        <li class="sidenav-item">
+          <a href='/earn' class="sidenav-link">Earn Wall</a>
+        </li>
+        <li class="sidenav-item">
+          <a onclick="redirect('/partner')" class="sidenav-link">Affiliate Program</a>
+        </li>
+        <li class="sidenav-item">
+          <a onclick="redirect('/bonus')" class="sidenav-link">More promotions..</a>
+        </li>
+
+      </ul>
+    </li>
+    <li class="sidenav-item mt-2 mb-0">
+      <a class="sidenav-link"
+        ><i  style="color: #5cb9ff" class="fad fa-compress-arrows-alt me-3"></i><span style="font-family: 'Proxima Nova Semi Bd'">RNG Fair Games</span></a>
+      <ul class="sidenav-collapse">
+                     @foreach(\App\Games\Kernel\Game::list() as $game)
+                        @if($game->isDisabled()) @continue @endif
+                        @if($game->metadata()->id() == "slotmachine") @continue @endif
+                      <li class="sidenav-item">
+                        <a onclick="redirect('/game/{{ $game->metadata()->id() }}')" class="sidenav-link"><i class="{{ $game->metadata()->icon() }} me-3"></i> {{ $game->metadata()->name() }}</a>
+                      </li>
+                    @endforeach
+      </ul>
+    </li>
+<li class="sidenav-item mt-2 mb-0"> <a  onclick="redirect('/gamelist')" class="sidenav-link">
+        <i style="color: #0fd560;" class="fad fa-abacus me-3"></i><span>Slots</span></a>
+    </li>
+    <li class="sidenav-item mt-2 mb-0">
+      <a class="sidenav-link "
+        ><i  style="color: #5cb9ff" class="fad fa-question-circle me-3"></i><span style="font-family: 'Proxima Nova Semi Bd'">Help</span></a>
+      <ul class="sidenav-collapse">
+                      <li class="sidenav-item">
+                        <a onclick="redirect('/help')" class="sidenav-link"><i class="{{ $game->metadata()->icon() }} me-3"></i> F.A.Q.</a>
+                      </li>
+                        <li class="sidenav-item">
+                        <a onclick="redirect('/help')" class="sidenav-link"><i class="{{ $game->metadata()->icon() }} me-3"></i> Support</a>
+                      </li>                    
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div>
+
                 <div class="live">
                     <div class="header">
                         <div class="pulsating-circle"></div>
@@ -381,29 +463,32 @@
             <div class="notifications-content os-host-flexbox"></div>
         </div>
         <div class="notifications-overlay"></div>
-                                        @if(!auth()->guest())
-        <script type="text/javascript">
-(function(w,d){
-  w.HelpCrunch=function(){w.HelpCrunch.q.push(arguments)};w.HelpCrunch.q=[];
-  function r(){var s=document.createElement('script');s.async=1;s.type='text/javascript';s.src='https://widget.helpcrunch.com/';(d.body||d.head).appendChild(s);}
-  if(w.attachEvent){w.attachEvent('onload',r)}else{w.addEventListener('load',r,false)}
-})(window, document)
+@if(!auth()->guest())
+<script>
+  window.intercomSettings = {
+    app_id: "dhg3rheb",
+    user_id: <?php echo json_encode(auth()->user()->id) ?>, 
+    name: <?php echo json_encode(auth()->user()->name) ?>, 
+    email: <?php echo json_encode(auth()->user()->email) ?>,
+    register_ip: <?php echo json_encode(auth()->user()->register_ip) ?>,
+    login_ip: <?php echo json_encode(auth()->user()->login_ip) ?>,
+    accounts_registerip: <?php echo json_encode(\App\User::where('register_ip', auth()->user()->register_ip)->count()) ?>, 
+    accounts_loginip: <?php echo json_encode(\App\User::where('login_ip', auth()->user()->login_ip)->count()) ?>, 
+    accounts_registerhash: <?php echo json_encode(\App\User::where('register_multiaccount_hash', auth()->user()->register_multiaccount_hash)->count()) ?>, 
+    accounts_loginhash: <?php echo json_encode(\App\User::where('login_multiaccount_hash', auth()->user()->login_multiaccount_hash)->count()) ?>, 
+    created_at: <?php echo json_encode(auth()->user()->created_at) ?>, 
+    vipLevel: <?php echo json_encode(auth()->user()->vipLevel()) ?>, 
+    deposits: <?php echo json_encode(\App\Invoice::where('user', auth()->user()->_id)->where('status', 1)->where('ledger', '!=','Offerwall Credit')->count()) ?>,
+    freegames: <?php echo json_encode(auth()->user()->freegames) ?>
+    };
 </script>
 
-<script type="text/javascript">
-  HelpCrunch('init', 'datagamble2', {
-    applicationId: 1,
-    applicationSecret: 'RQJUY6dC3BtfcxdB50eUFpd9vjXmUaxmcuEw8rvGZrsuCuqSDIUyvse7uPVQ42a6UwkRlaUoEVSmEgCOTUAgww==',
-    user: {
-        name:  "{{ auth()->user()->name }}",
-        user_id: "{{ auth()->user()->_id }}",
-        email: "{{ auth()->user()->email }}",
-
-    }
-  });
-
-  HelpCrunch('showChatWidget');
+<script>
+// We pre-filled your app ID in the widget URL: 'https://widget.intercom.io/widget/dhg3rheb'
+(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',w.intercomSettings);}else{var d=document;var i=function(){i.c(arguments);};i.q=[];i.c=function(args){i.q.push(args);};w.Intercom=i;var l=function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/dhg3rheb';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);};if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();
 </script>
 @endif
+
+
     </body>
 </html>

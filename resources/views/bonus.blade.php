@@ -1,6 +1,4 @@
 <div class="container-fluid">
-        @include('modals.nav')
-
                                 <div class="bonus-box" style="max-width: 1370px;">
     <div class="row">
                     <div class="col-12 col-sm-6 col-md-4">
@@ -14,7 +12,7 @@
 
 <p>Time left till next reset: <?php $timeLeft = 86400 - (time() - strtotime("today"));
 echo date("H\\h  i\\m", $timeLeft); ?></p>
-<div class="btn-auth-main" onclick="$.vipBonus()">Claim Bonus</div>
+<div class="btn btn-primary p-2" onclick="$.vipBonus()">Claim Bonus</div>
 </div></div>
 </div>
 
@@ -28,7 +26,7 @@ echo date("H\\h  i\\m", $timeLeft); ?></p>
 <p>For every 1.00$ you get 2 Free Spins credited, so if your first deposit was 50$ you get 100 Free Spins. To claim your first player deposit spins, contact our live support.</p>
 
 <p>This only applies to new players, not to multi-accounts.</p>
-<div class="btn-auth-main" onclick="HelpCrunch('openChat');">Contact support after deposit</div>
+<div class="btn btn-primary p-2" onclick="HelpCrunch('openChat');">Contact support after deposit</div>
 </div></div>
 </div>
 
@@ -42,7 +40,7 @@ echo date("H\\h  i\\m", $timeLeft); ?></p>
 <p>Our Discord bot automatically dispurses promocodes for instant DOGE Coins, every 30 minutes.</p>
 
 <p>Limit on amount of promocodes you can use every day is based on your VIP Level.</p>
-<div class="btn-auth m-2" onclick="redirect('https://discord.gg/ztNmeWADWq')">Join Discord</div><div class="btn-auth-main" data-toggle-bonus-sidebar="promo">Enter Promocode</div>
+<div class="btn btn-secondary p-2" onclick="redirect('https://discord.gg/ztNmeWADWq')">Join Discord</div><div class="btn btn-primary p-2" data-toggle-bonus-sidebar="promo">Enter Promocode</div>
 
 </div></div>
 </div>
@@ -57,7 +55,7 @@ echo date("H\\h  i\\m", $timeLeft); ?></p>
 <p>Get instant rewarded free faucet. Pick DOGE currency and get 50% increased reward!</p>
 
 <p>You are only able to spin faucet if your balance is low enough. </p>
-<div class="btn-auth-main"  data-toggle-bonus-sidebar="wheel">Spin Wheel</div>
+<div class="btn btn-primary p-2"  data-toggle-bonus-sidebar="wheel">Spin Wheel</div>
             <div class="wheel-popup" style="display: none">
                 {!! __('bonus.wheel.prompt') !!}
             </div>
@@ -74,7 +72,7 @@ echo date("H\\h  i\\m", $timeLeft); ?></p>
 <p>Get various rewards, such as bigger daily bonus, using VIP promocodes and more.</p>
 
 <p>Unlock the first VIP level by only wagering 500.00$!</p>
-<div class="btn-auth-main" onclick="$.vip()">Check VIP Progress & Rewards</div>
+<div class="btn btn-primary p-2" onclick="$.vip()">Check VIP Progress & Rewards</div>
 </div></div>
 </div>
 
@@ -89,7 +87,7 @@ echo date("H\\h  i\\m", $timeLeft); ?></p>
 <p>Be active and get rewarded by our DOGE Rain Bot, dropping every 10 minutes!</p>
 
 <p>Activity threshold is based on games played and chat participation.</p>
-<div class="btn-auth-main" onclick="redirect('https://discord.gg/ztNmeWADWq')">Join Discord</div>
+<div class="btn btn-primary p-2" onclick="redirect('https://discord.gg/ztNmeWADWq')">Join Discord</div>
 </div></div>
 </div>
 

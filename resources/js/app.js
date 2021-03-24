@@ -3,13 +3,14 @@ require('jquery-pjax');
 require('./routes');
 require('./toast');
 require('./game');
+
 require('./chat');
 require('./profit-monitoring');
 require('./notifications');
-
 import bitcoin from 'bitcoin-units';
 import NProgress from 'nprogress';
 import ApexCharts from 'apexcharts';
+
 window.ApexCharts = ApexCharts;
 
 const feather = require('feather-icons');
@@ -366,10 +367,8 @@ $.overview = function(game_id, api_id) {
         });
     });
 };
-
-
   $.moveNumbers = function moveNumbers(num) { 
-    $('.slots_small_poster').hide();
+    $('.card').hide();
     document.getElementById("gamelist-search").value='';
 
       var txt=document.getElementById("gamelist-search").value; 
@@ -380,14 +379,12 @@ $.overview = function(game_id, api_id) {
           bind: "event"
         });
 
-    $('.slots_small_poster').each(function(){
+    $('.card').each(function(){
       if($(this).text().toLowerCase().indexOf(""+num+"") != -1 ){
-      $(this).closest('.slots_small_poster').show();
+      $(this).closest('.card').show();
     }
     });
 };
-
-
 
 let currentLiveTab = 'all';
 $(document).ready(function() {

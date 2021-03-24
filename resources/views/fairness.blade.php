@@ -1,4 +1,3 @@
-@include('modals.nav')
 <div class="container-fluid">
     <div class="row">
         <div class="col vertical-tabs-column">

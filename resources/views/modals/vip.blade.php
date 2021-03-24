@@ -1,10 +1,37 @@
-<div class="vip modal">
-    <div class="content">
-        <i class="fas fa-close-symbol"></i>
+<div
+  class="vip modal fade"
+  id="vip"
+  tabindex="-1"
+    style="display: block; padding-right: 15px;"
+  aria-labelledby="vip"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+                    <div class="tabs">
+                <div class="tab active" data-wallet-toggle-tab="vip-rewards">
+                    {{ __('wallet.tabs.deposit') }}
+                </div>
+                <div class="tab" data-wallet-toggle-tab="withdraw">
+                    {{ __('wallet.tabs.withdraw') }}
+                </div>
+                <div class="tab" data-wallet-toggle-tab="history">
+                    {{ __('wallet.tabs.history') }}
+                </div>
+            </div>
+        <button
+          type="button"
+          class="btn-close"
+          data-mdb-dismiss="vip modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
         <div class="ui-blocker" style="display: none;">
             <div class="loader"><div></div></div>
         </div>
-        <div class="modal-scrollable-content">
+        <div data-wallet-tab-content="vip-rewards">
+        <div class="modal-scrollable-content" >
             <img class="vip-logo" src="/img/misc/vip-icon.svg" alt>
 
             @php
@@ -125,5 +152,12 @@
                 </div>
             </div>
         </div>
+   
+
+
+</div>
+        </div>
     </div>
+</div>
+</div>
 </div>

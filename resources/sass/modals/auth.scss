@@ -1,8 +1,8 @@
 @import "../variables";
 
 .auth {
-    width: 370px !important;
-
+    display: unset;
+    
     .auth-button-group {
         display: flex;
         button {
@@ -22,7 +22,7 @@
 
     .auth-footer {
         text-align: center;
-        margin-top: 10px;
+        margin-top: 15px;
 
         div:first-child {
             font-size: 11px;
@@ -32,7 +32,6 @@
         span:first-of-type, span:last-of-type {
             @include themed() {
                 color: t('link');
-                transition: color 0.3s ease;
                 cursor: pointer;
                 &:hover {
                     color: t('link-hover');

@@ -42,6 +42,10 @@ $.on('/user', function() {
         }).then(function() {
             $('[data-update-email]').removeClass('disabled');
             $.success($.lang('general.profile.email_update_success'));
+            var metadata = {
+            email: $('#emailUpdate').val()
+            };
+            Intercom('trackEvent', 'emailset', metadata);
             $('#emailNotification').slideUp('fast', function() { $(this).remove(); });
         }, function() {
             $('[data-update-email]').removeClass('disabled');

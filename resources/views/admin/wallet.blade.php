@@ -19,6 +19,8 @@
                     <div class="row">
                         @foreach(\App\Withdraw::where('status', 0)->get() as $withdraw)
                             @php $user = \App\User::where('_id', $withdraw->user)->first(); @endphp
+                            @php $withdrawals = \App\Withdraw::where('user', $user->id)->where('status', 1)->count(); @endphp
+                            @php $deposits = \App\Invoice::where('user', $user->id)->where('status', 1)->where('ledger', '!=','Offerwall Credit')->count(); @endphp
                             <div class="col-sm-6 col-md-6 col-lg-4 {{ $user->vipLevel() == 5 ? 'order-1' : 'order-2' }}" data-w-id="{{ $withdraw->_id }}">
                                 <div class="card" @if($user->vipLevel() == 5) style="border: 1px solid #00fffb" @endif>
                                     <div class="card-body p-3">
@@ -31,8 +33,11 @@
                                                     <a href="/admin/user/{{ $user->_id }}">{{ '@'.substr_replace($user->_id, '...', 8 / 2, strlen($user->_id) - 8) }}</a>
                                                 </h6>
                                                 <p class="text-muted">
-                                                    <strong>Balance:</strong>
+                                                    <strong>Deposits:</strong> {{ $deposits }}
+                                                    <strong>Withdrawals:</strong> {{ $withdrawals }}
                                                     <br>
+                                                    <strong>Balance:</strong>
+                                                
                                                     {{ number_format($user->balance(\App\Currency\Currency::find($withdraw->currency))->get(), 8, '.', ' ') }}
                                                     {{ \App\Currency\Currency::find($withdraw->currency)->name() }}
                                                 </p>

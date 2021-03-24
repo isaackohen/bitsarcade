@@ -8,7 +8,6 @@
     $isOwner = !auth()->guest() && $user->_id == auth()->user()->id;
 @endphp
 
-@include('modals.nav')
 <div class="container-fluid" data-user-profile-id="{{ $user->_id }}">
     <div class="profile-container h-100">
         <div class="row profile_row">
@@ -257,7 +256,7 @@
                                     @endif
                                 </span>
                             </div>
-
+                            <!--
                             @if(auth()->user()->vipLevel() > 0)
                                 <div class="settingsNotify mt-2">
                                     @if(auth()->user()->discord == null)
@@ -277,6 +276,7 @@
                                 <label for="stackedCheck2" class="form-check-label">{{ __('general.profile.set_private_bets') }}</label>
                                 <input onchange="$.request('settings', ['privacy_bets_toggle'], 'get')" {{ auth()->user()->private_bets ? 'checked' : '' }} data-on="<i class='fal fa-check'></i>" data-off="<i class='fal fa-times'></i>" id="stackedCheck2" class="form-check-input" type="checkbox" data-toggle="toggle">
                             </div>
+                            !-->
                             <div class="cat">{{ __('general.profile.fairness') }}</div>
                             <div>{{ __('general.profile.client_seed') }}</div>
                             <a href="javascript:void(0)" onclick="$.modal('change_client_seed')" data-toggle="tooltip" data-placement="bottom" title="{{ __('general.profile.change') }}">{{ auth()->user()->client_seed }}</a>

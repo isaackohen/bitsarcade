@@ -428,7 +428,7 @@ Route::middleware('auth')->prefix('chat')->group(function() {
     Route::post('rain', function(Request $request) {
         $usersLength = intval($request->users);
         if($usersLength < 1 || $usersLength > 25) return reject(1, 'Invalid users length');
-        if(auth()->user()->access != 'admin') return reject(2, 'Not available');
+        if(auth()->user()->access = 'user') return reject(2, 'Not available');
         if(auth()->user()->balance(auth()->user()->clientCurrency())->get() < floatval($request->amount) || floatval($request->amount) < floatval(auth()->user()->clientCurrency()->option('rain')) / 3) return reject(2);
         auth()->user()->balance(auth()->user()->clientCurrency())->subtract(floatval($request->amount), \App\Transaction::builder()->message('Rain')->get());
 
@@ -584,6 +584,9 @@ Route::middleware('auth')->prefix('promocode')->group(function() {
     Route::post('bonus', function() {
         if(auth()->user()->bonus_claim != null && !auth()->user()->bonus_claim->isPast()) return reject(1, 'Reloading');
         if(auth()->user()->balance(auth()->user()->clientCurrency())->get() > auth()->user()->clientCurrency()->option('min_bet')) return reject(2, 'Balance is greater than zero'); 
+        $user = auth()->user();
+        $progresscheck = \App\Game::where('user', $user)->where('status', 'in-progress')->get();
+        if($progresscheck) return reject(3, 'Game in progress');
 
         $v = floatval(auth()->user()->clientCurrency()->option('bonus_wheel'));
         $slices = [

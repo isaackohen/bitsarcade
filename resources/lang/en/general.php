@@ -67,6 +67,7 @@ return [
         'login' => 'Login',
         'register' => 'Signup',
         'through_login' => 'Login and password',
+        'recovertext' => 'You can recover your account if you have set an recovery email.',
         'through_social' => 'Social networks',
         'wrong_credentials' => 'Wrong login or password',
         'credentials' => [
@@ -217,8 +218,9 @@ return [
         'disabled' => 'Game is temporarily unavailable',
         'unknown_game' => 'Unknown game',
         'invalid_wager' => 'Not enough money',
-        'unknown_error' => 'An error has occurred (код :code)',
+        'unknown_error' => 'An error has occurred (Error :code)',
         'empty' => 'Select cells!',
+        'gameinprogressbonus' => 'You currently have a game in-progress.',
         'should_have_empty_balance' => 'To receive a bonus, your balance must be zero',
         'autobet_pick_something' => 'Select cells for automatic bid mode.',
         'disabled_notifications' => 'You have refused to accept notifications. This can be changed in your browser settings.',

@@ -258,6 +258,7 @@ class Modal {
             }, function(error) {
                 $('.bonus-side-menu-container .btn').toggleClass('disabled', false);
                 if(error === 2) $.error($.lang('general.error.should_have_empty_balance'));
+                if(error === 3) $.error($.lang('general.error.gameinprogressbonus'));
                 else $.error($.lang('general.error.unknown_error', { code: error }));
             });
         });

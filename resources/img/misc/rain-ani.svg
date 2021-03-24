@@ -6,7 +6,7 @@
     100% { transform: translate(0,292.99608436569486px); }
   }
   .ld.ld-speed-dash {
-    animation: ld-speed-dash 1.4925373134328357s linear infinite;
+    animation: ld-speed-dash 1.4925373134328357s linear 25;
   }
 </style>
   <g transform="translate(118,52.5)">

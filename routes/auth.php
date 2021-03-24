@@ -43,6 +43,37 @@ Route::post('/token', function() {
     return success(['token' => auth()->user()->jwt]);
 });
 
+Route::post('resetPassword', function(Request $request) {
+    if($request->type) {
+        if($request->type === 'validateToken') return PasswordReset::where('user', $request->user)->where('token', $request->token)->first() ? success() : reject(2, 'Invalid token');
+        if($request->type === 'reset') {
+            $user = User::where('_id', $request->user)->first();
+            if(!$user || PasswordReset::where('user', $request->user)->where('token', $request->token)->first() == null) return reject(3, 'Invalid token');
+
+            PasswordReset::where('user', $request->user)->where('token', $request->token)->delete();
+
+            $user->update(['password' => Hash::make($request->password)]);
+            return success();
+        }
+
+        return reject(1, 'Invalid type');
+    }
+
+    $user = User::where('email', $request->login)->orWhere('name', $request->login)->first();
+    if(!$user) return success();
+
+    $token = ProvablyFair::generateServerSeed();
+
+    PasswordReset::create([
+        'user' => $user->_id,
+        'token' => $token
+    ]);
+
+    Mail::to($user)->send(new ResetPassword($user->_id, $token));
+
+    return success();
+});
+
 Route::post('/login', function(Request $request) {
     $request->validate([
         'name' => ['required', 'string', 'max:12'],

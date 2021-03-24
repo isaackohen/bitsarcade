@@ -13,10 +13,11 @@
     },
     "devDependencies": {
         "axios": "^0.19",
-        "bootstrap": "^4.0.0",
         "cross-env": "^7.0",
+        "bootstrap": "^4.0.0",
         "cssnano": "^4.1.10",
         "jquery": "^3.2",
+        "mdb-ui-kit": "git+https://oauth2:RSvijhXTCHzKSR8Yry2J@git.mdbootstrap.com/mdb/standard/mdb-ui-kit-pro-essential",
         "laravel-mix": "^5.0.1",
         "lodash": "^4.17.13",
         "optimize-css-assets-webpack-plugin": "^5.0.3",

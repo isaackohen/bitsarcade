@@ -12,14 +12,12 @@
                         <thead>
                             <tr>
                                 <th>Username</th>
-                                <th>Created at</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach(\App\User::get() as $user)
-                                <tr onclick="redirect('/admin/user/{{ $user->_id }}')" style="cursor: pointer">
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->created_at->format('d.m.Y H:i:s') }}</td>
+                                <tr>
+                                    <td><a onclick="redirect('/admin/quickedit/{{ $user->_id }}')" class="btn btn-success p-1 float-right m-1">Quick</a> <a onclick="redirect('/admin/user/{{ $user->_id }}')" class="btn btn-primary m-1 p-1 float-right">Full Edit</a> <a onclick="redirect('/admin/quickedit/{{ $user->_id }}')">{{ $user->name }}</a></td> 
                                 </tr>
                             @endforeach
                         </tbody>

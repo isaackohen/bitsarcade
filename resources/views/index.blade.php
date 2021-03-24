@@ -1,9 +1,8 @@
-<div class="container-fluid">
     <div class="slider">
         <div class="glide" id="slider">
             <div class="glide__track" data-glide-el="track">
                 <ul class="glide__slides">
-                    <li class="glide__slide" style="background: url({{ asset('/img/misc/animtop-2.svg') }}) repeat, linear-gradient(50deg, rgb(10, 93, 88), rgb(33, 34, 36)); background-size: contain;">
+                    <li class="glide__slide" style="background: linear-gradient(50deg, rgb(10, 93, 88), rgb(33, 34, 36)); background-size: contain;">
                         <div class="image" style="background-image: url({{ asset('/img/misc/get-start.png') }}); background-size: contain;"></div>
                         <div class="slideContent">
                         <div class="slideContentWrapper" style="box-shadow: 0 0 10px rgb(28 39 60 / 5%); background: url(/img/misc/arrows.svg), linear-gradient( #16928d, #084643) !important;">
@@ -14,7 +13,7 @@
                             </div>
                         </div>
                     </li>
-                    <li class="glide__slide" style="background: url({{ asset('/img/misc/confetti.svg') }}) repeat, linear-gradient(302deg, rgb(212 109 28), rgb(101 38 0)); background-size: contain;">
+                    <li class="glide__slide" style="background: linear-gradient(302deg, rgb(212 109 28), rgb(101 38 0)); background-size: contain;">
                         <div class="image" style="background-image: url({{ asset('/img/misc/slide_vip.png') }}); background-size: contain;"></div>
                         <div class="slideContent">
                             <div class="slideContentWrapper" style="box-shadow: 0 0 10px rgb(28 39 60 / 5%); background: url(/img/misc/arrows.svg),linear-gradient(#ff7907, #a04625)  !important;">
@@ -24,7 +23,12 @@
                                     <svg height="512pt" viewBox="0 -61 512 512" width="512pt" xmlns="http://www.w3.org/2000/svg"><path d="m91 300v90h330v-90zm0 0" fill="#ff9f00"/><path d="m256 300h165v90h-165zm0 0" fill="#ff7816"/><path d="m422.5 169.199219-24.300781 47.398437h-284.398438l-24.300781-47.398437c35.699219-49.5 97.800781-79.199219 166.5-79.199219s130.800781 29.699219 166.5 79.199219zm0 0" fill="#ff4b00"/><path d="m422.5 169.199219-24.300781 47.398437h-142.199219v-126.597656c68.699219 0 130.800781 29.699219 166.5 79.199219zm0 0" fill="#cc1e0d"/><path d="m477.101562 139.199219-56.101562 190.800781h-330l-56.101562-190.800781 37.800781-14.398438c17.101562 32.699219 49.800781 51.898438 76.5 55.199219h15.601562c34.5-5.398438 60.296875-58.199219 70.800781-108.601562h40.800782c10.5 50.402343 36.300781 103.203124 70.796875 108.601562h15.601562c26.699219-3.300781 59.398438-22.5 76.5-55.199219zm0 0" fill="#fdbf00"/><path d="m477.101562 139.199219-56.101562 190.800781h-165v-258.601562h20.398438c10.503906 50.402343 36.300781 103.203124 70.800781 108.601562h15.601562c26.699219-3.300781 59.398438-22.5 76.5-55.199219zm0 0" fill="#ff9f00"/><path d="m46 150c-24.8125 0-46-20.1875-46-45s21.1875-45 46-45 45 20.1875 45 45-20.1875 45-45 45zm0 0" fill="#ff9f00"/><path d="m466 150c-24.8125 0-45-20.1875-45-45s20.1875-45 45-45 46 20.1875 46 45-21.1875 45-46 45zm0 0" fill="#ff7816"/><path d="m256 0c-24.902344 0-45 20.097656-45 45 0 24.898438 20.097656 45 45 45s45-20.101562 45-45c0-24.902344-20.097656-45-45-45zm0 0" fill="#ff9f00"/><path d="m256 173.699219-51.300781 51.300781 51.300781 51.300781 51.300781-51.300781zm0 0" fill="#ff4b00"/><path d="m346 233.785156 21.210938 21.210938-21.210938 21.210937-21.210938-21.210937zm0 0" fill="#cc1e0d"/><path d="m166 233.785156 21.210938 21.210938-21.210938 21.210937-21.210938-21.210937zm0 0" fill="#ff4b00"/><path d="m256 90v-90c24.902344 0 45 20.097656 45 45 0 24.898438-20.097656 45-45 45zm0 0" fill="#ff7816"/><path d="m307.300781 225-51.300781 51.300781v-102.601562zm0 0" fill="#cc1e0d"/></svg><span>VIP</span></a><a href="/bonus/" target="_blank" class="is-twitter"><svg id="Capa_1" enable-background="new 0 0 512 512" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><g><g><path d="m497 241h15v-150h-361l-15 30-15-30h-121v150h15c8.401 0 15 6.599 15 15s-6.599 15-15 15h-15v150h121l15-30 15 30h361v-150h-15c-8.401 0-15-6.599-15-15s6.599-15 15-15z" fill="#ff5959"/></g><path d="m316 421h196v-150h-15c-8.401 0-15-6.599-15-15s6.599-15 15-15h15v-150h-196z" fill="#e63a57"/><g id="Coupon_1_"><path d="m256 151c-24.814 0-45 20.186-45 45s20.186 45 45 45 45-20.186 45-45-20.186-45-45-45zm0 60c-8.271 0-15-6.729-15-15s6.729-15 15-15 15 6.729 15 15-6.729 15-15 15z" fill="#f3f5f9"/><path d="m376 271c-24.814 0-45 20.186-45 45s20.186 45 45 45 45-20.186 45-45-20.186-45-45-45zm0 60c-8.271 0-15-6.729-15-15s6.729-15 15-15 15 6.729 15 15-6.729 15-15 15z" fill="#e1e6f0"/><g><path d="m216.149 241.002h199.702v29.997h-199.702z" fill="#f3f5f9" transform="matrix(.707 -.707 .707 .707 -88.465 298.426)"/></g><g><path d="m121 361h30v60h-30z" fill="#54548c"/></g><g><path d="m121 271h30v60h-30z" fill="#54548c"/></g><g><path d="m121 181h30v60h-30z" fill="#54548c"/></g><g><path d="m121 91h30v60h-30z" fill="#54548c"/></g></g><path d="m316 277.211 81.211-81.211-21.211-21.211-60 60z" fill="#e1e6f0"/></g></svg><span>Promocode</span></a><a href="/earn/" target="_blank" class="is-telegram"><svg id="Capa_1" enable-background="new 0 0 512 512" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><g><path d="m121 0c-66.167 0-121 53.833-121 120s54.833 120 121 120 120-53.833 120-120-53.833-120-120-120z" fill="#fed843"/><path d="m121 0v240c66.167 0 120-53.833 120-120s-53.833-120-120-120z" fill="#ffb64c"/><g fill="#ffb64c"><path d="m106 180v28.488c4.904.828 9.862 1.512 15 1.512s10.096-.685 15-1.512v-28.488h-15z"/><path d="m121 30c-5.138 0-10.096.685-15 1.512v28.488h15 15v-28.488c-4.904-.827-9.862-1.512-15-1.512z"/></g><path d="m136 180h-15v30c5.138 0 10.096-.685 15-1.512z" fill="#ff9100"/><path d="m136 31.512c-4.904-.827-9.862-1.512-15-1.512v30h15z" fill="#ff9100"/><g><g><path d="m391 0c-66.301 0-120 53.699-120 120s53.699 120 120 120 121-53.699 121-120-54.699-120-121-120z" fill="#ff7b4a"/></g></g><path d="m512 120c0 66.301-54.699 120-121 120v-240c66.301 0 121 53.699 121 120z" fill="#ec5569"/><path d="m482 120c0 49.799-41.201 90-91 90s-90-40.201-90-90 40.201-90 90-90 91 40.201 91 90z" fill="#f0f7ff"/><path d="m482 120c0 49.799-41.201 90-91 90v-180c49.799 0 91 40.201 91 90z" fill="#dfe7f4"/><g><path d="m436 105v30h-60v-75h30v45z" fill="#47568c"/></g><circle cx="256" cy="330" fill="#a19ce4" r="60"/><path d="m316 330c0-33.091-26.909-60-60-60v120c33.091 0 60-26.909 60-60z" fill="#7984eb"/><path d="m409.223 286.626-6.738 13.315c-28.082 55.547-84.214 90.059-146.485 90.059s-118.389-34.497-146.484-90.044l-6.738-13.315-53.687 26.792 6.797 13.462c23.555 46.611 62.686 83.687 110.118 104.37l.014 80.735h89.98 90v-80.735c47.446-20.698 86.543-57.773 110.098-104.385l6.797-13.447z" fill="#a19ce4"/><path d="m346 431.265c47.446-20.698 86.543-57.773 110.098-104.385l6.797-13.447-53.672-26.807-6.738 13.315c-28.082 55.547-84.214 90.059-146.485 90.059v122h90z" fill="#7984eb"/><path d="m436 105v30h-45v-75h15v45z" fill="#29376d"/><path d="m121 105c-8.276 0-15-6.724-15-15s6.724-15 15-15 15 6.724 15 15h30c0-24.814-20.186-45-45-45s-45 20.186-45 45 20.186 45 45 45c8.276 0 15 6.724 15 15s-6.724 15-15 15-15-6.724-15-15h-30c0 24.814 20.186 45 45 45s45-20.186 45-45-20.186-45-45-45z" fill="#ffb64c"/><g fill="#ff9100"><path d="m136 90h30c0-24.814-20.186-45-45-45v30c8.276 0 15 6.724 15 15z"/><path d="m166 150c0-24.814-20.186-45-45-45v30c8.276 0 15 6.724 15 15s-6.724 15-15 15v30c24.814 0 45-20.186 45-45z"/></g></g></svg><span>Surveys</span></a><a href="/bonus/" target="_blank" class="is-discord"><svg height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><g id="Flat"><path d="m320 456h-128l30.86-144 17.14-80h32l17.14 80 4.04 18.84z" fill="#eedc9a"/><path d="m320 456h-128c58.34009 0 103.52-47.62988 103.52-103.25977a104.46244 104.46244 0 0 0 -2.34009-21.90039z" fill="#eebe33"/><circle cx="256" cy="232" fill="#d3e1e9" r="176"/><path d="m256 128v-16" fill="none" stroke="#000" stroke-linejoin="round" stroke-width="16"/><path d="m301.56006 61.96-45.56006 170.04-45.56006-170.04a177.11865 177.11865 0 0 1 91.12012 0z" fill="#e88604"/><path d="m380.45 107.55005-124.45 124.44995 45.56006-170.04a175.78173 175.78173 0 0 1 78.88994 45.59005z" fill="#e44b4d"/><path d="m432 232a175.94173 175.94173 0 0 1 -5.96 45.56006l-170.04-45.56006 170.04-45.56006a175.94036 175.94036 0 0 1 5.96 45.56006z" fill="#396795"/><path d="m426.04 277.56006a175.78193 175.78193 0 0 1 -45.59 78.89014l-124.45-124.4502z" fill="#802787"/><path d="m380.45 356.4502a175.78348 175.78348 0 0 1 -78.88994 45.5898l-45.56006-170.04z" fill="#349966"/><path d="m301.56006 402.04a177.11865 177.11865 0 0 1 -91.12012 0l45.56006-170.04z" fill="#e88604"/><path d="m256 232-45.56006 170.04a175.78348 175.78348 0 0 1 -78.88989-45.58984z" fill="#e44b4d"/><path d="m256 232-170.04 45.56006a177.11865 177.11865 0 0 1 0-91.12012z" fill="#396795"/><path d="m256 232-170.04-45.56006a175.78109 175.78109 0 0 1 45.59009-78.88989z" fill="#802787"/><path d="m256 232-124.44995-124.44995a175.78173 175.78173 0 0 1 78.88989-45.59005z" fill="#349966"/><g fill="#2f4054"><path d="m184 97.149h16v48h-16z" transform="matrix(.866 -.5 .5 .866 -34.851 112.231)"/><path d="m137.149 144h15.999v48h-15.999z" transform="matrix(.5 -.866 .866 .5 -72.918 209.703)"/><path d="m104 224h48v16h-48z"/><path d="m121.149 288h48v15.999h-48z" transform="matrix(.866 -.5 .5 .866 -128.559 112.239)"/><path d="m168 334.851h48v16h-48z" transform="matrix(.5 -.866 .866 .5 -200.918 337.703)"/><path d="m248 336h16v48h-16z"/><path d="m312 318.851h16v48h-16z" transform="matrix(.866 -.5 .5 .866 -128.554 205.933)"/><path d="m358.851 272h15.999v48h-15.999z" transform="matrix(.5 -.866 .866 .5 -72.918 465.703)"/><path d="m360 224h48v16h-48z"/><path d="m342.851 160h48v15.999h-48z" transform="matrix(.866 -.5 .5 .866 -34.85 205.945)"/><path d="m296 113.149h48v16h-48z" transform="matrix(.5 -.866 .866 .5 55.082 337.703)"/><path d="m248 80h16v48h-16z"/></g><path d="m368 472a15.97876 15.97876 0 0 1 -16 16h-192a16 16 0 1 1 0-32h192a15.99564 15.99564 0 0 1 16 16z" fill="#eedc9a"/><circle cx="256" cy="232" fill="#2f4054" r="32"/><path d="m243.19223 24h25.61554a16 16 0 0 1 13.98652 23.77029l-26.79429 48.22971-26.79429-48.22971a16 16 0 0 1 13.98652-23.77029z" fill="#eedc9a"/><path d="m236.19873 43.88574a8.00079 8.00079 0 0 1 6.99365-11.88574h25.61524a8.00079 8.00079 0 0 1 6.99365 11.88574l-19.80127 35.6416z" fill="#e44b4d"/><path d="m368 472a15.97876 15.97876 0 0 1 -16 16h-192a15.99564 15.99564 0 0 1 -16-16h192a15.97876 15.97876 0 0 0 16-16 15.99564 15.99564 0 0 1 16 16z" fill="#eebe33"/></g></svg><span>Faucet</span></a></div></div></div></li></ul></div>
         </div>
     </div>
-    @include('modals.nav')
+        @include('modals.nav')
+
+    <div class="container">
+
+
+
       <?php
         $client = new \outcomebet\casino25\api\client\Client(array(
             'url' => 'https://api.c27.games/v1/',
@@ -33,17 +37,14 @@
         $games = $client->listGames();
         $games = array_slice($games['Games'], 0, 1500);
         $featuredslots = \App\Settings::where('name', 'slots_featured_1')->first()->value;
+
             ?>
 
-                            @foreach(\App\GlobalNotification::get() as $notification)
-
-        <div class="games" style="max-width: 1370px;">
-
-
-            <div class="our-games mb-2">
-
+            @foreach(\App\GlobalNotification::get() as $notification)
+       <div class="d-flex p-2">
+            <div class="our-games mb-3">
                 @if(!auth()->guest() && auth()->user()->isDismissed($notification)) @continue @endif
-                <div class="globalNotification m-1" id="emailNotification">
+                <div class="globalNotification p-2 m-1" id="emailNotification" style="border-radius: 8px; background: url(/img/misc/arrows.svg),linear-gradient(#ff7907, #a04625)  !important;">
                     <div class="icon"><i class="{{ $notification->icon }}"></i></div>
                     <div class="text">{{ $notification->text }}</div>
                 </div>
@@ -51,11 +52,11 @@
     </div>
             @endforeach
 
-              <div class="games" style="max-width: 1370px;">
+              <div class="games">
         @if(!auth()->guest())
 
                 @else
-                    <div class="noempty-margin-box">
+                    <div class="noempty-margin-box mt-4 p-2">
                     <div class="row">
                     <div class="col-12 col-sm-6 col-md-4">
                     <div class="button-bar-small" onclick="redirect('/partner/')">
@@ -65,45 +66,80 @@
                             </div></div>
                         </div>
                    <div class="col-12 col-sm-6 col-md-4">
+                    <div class="button-bar-small" onclick="redirect('/bonus/')">
+                        <div class="text" style="background: url(/img/misc/arrows.svg), linear-gradient(#ff7907, #a04625) !important; border-radius: 12px;">
+                            <h5 style="margin-bottom: 1px; font-weight: 600;">Daily Bonus</h5>
+                            <p>You play, <b>we pay</b>. After reaching Bronze VIP level you are eligible for a daily juicy bonuses.</p>
+                        </div></div>
+                    </div>
+                   <div class="col-12 col-sm-6 col-md-4">
                     <div class="button-bar-small" onclick="redirect('/earn/')">
                         <div class="text" style="background: url(/img/misc/arrows.svg), linear-gradient(#0fc359, #11813f) !important; border-radius: 12px;">
                             <h5 style="margin-bottom: 1px; font-weight: 600;">Earn</h5>
                             <p>Get credited <b>straight DOGE</b> to your account doing surveys and other tasks.</p>
                         </div></div>
                     </div>
-                   <div class="col-12 col-sm-6 col-md-4">
-                    <div class="button-bar-small" onclick="redirect('/bonus/')">
-                        <div class="text" style="background: url(/img/misc/arrows.svg), linear-gradient(#ff7907, #a04625) !important; border-radius: 12px;">
-                            <h5 style="margin-bottom: 1px; font-weight: 600;">Daily Bonus</h5>
-                            <p>You play, <b>we pay</b>. After reaching Bronze VIP level you are eligible for a daily juicy cashback & bonus.</p>
-                        </div></div>
-                    </div>
-
             </div>
             </div>
                 @endif
-             <div class="header">
-            <h6>
-                <i class="fad fa-diamond" style="color: #f2ae29;"></i> Provably Fair Games
-            </h6>
-        </div>
-        <div class="our-games mb-3">
+
+              <div class="our-games mb-0 mt-2" style="border-top-right-radius: 12px !important; border-top-left-radius: 12px !important; border-radius: 0px; background: url(/img/misc/arrows.svg), linear-gradient(59deg, #2b2d2d, #262829) !important;">
+
+<ul class="nav nav-tabs" id="ex1" role="tablist">
+  <li class="btn btn-primary p-1 m-1 nav-item"  role="presentation">
+    <a
+      class="nav-link active"
+      id="ex3-tab-1"
+      data-mdb-toggle="tab"
+      href="#ex3-tabs-1"
+      role="tab"
+      aria-controls="ex3-tabs-1"
+      aria-selected="true"
+      >Featured</a
+    >
+  </li>
+  <li class="btn btn-primary p-1 m-1 nav-item" role="presentation">
+    <a
+      class="nav-link"
+      href="/bonus"
+      >Freebies</a
+    >
+  </li>
+  <li class="btn btn-primary p-1 m-1 nav-item" role="presentation">
+    <a
+      class="nav-link"
+      href="/gamelist/"
+      >All Games</a
+    >
+  </li>
+</ul>
+    </div>
+                <div class="tab-content" id="ex2-content">
+  <div
+    class="tab-pane fade show active"
+    id="ex3-tabs-1"
+    role="tabpanel"
+    aria-labelledby="ex3-tab-1"
+  >
+        <div class="our-games">
             
 
 @foreach(\App\Games\Kernel\Game::list() as $game)
         @if(!$game->isDisabled() &&  $game->metadata()->id() !== "slotmachine")
-            
-            <div class="game_poster game-{{ $game->metadata()->id() }}" @if(!$game->isDisabled()) onclick="redirect('/game/{{ $game->metadata()->id() }}')" @endif>
+            <div class="card gamepostercard m-2" style="cursor: pointer; border-radius: 8px;" onclick="redirect('/game/{{ $game->metadata()->id() }}')">
+
+            <div class="game_poster card-img-top game-{{ $game->metadata()->id() }}" @if(!$game->isDisabled()) onclick="redirect('/game/{{ $game->metadata()->id() }}')" @endif>
         <?php
         $getname = $game->metadata()->name();
          ?>
-
         @if($getname == "Dice") 
                 <div class="label-red">
                     HOT!
                 </div>
             @elseif($getname == "Triple") 
-                <div class="label-red">
+                <div
+
+                 class="label-red">
                     NEW GAME!
                 </div>
                     @endif
@@ -114,27 +150,28 @@
                     <div class="name-text">
                             <div class="title">
                     {{ $game->metadata()->name() }}
-                                    </div>
-                            <button class="btn btn-login" onclick="redirect('/game/{{ $game->metadata()->id() }}')">Play</button>                  
+                            </div>
+                    <button class="btn btn-secondary"  onclick="redirect('/game/{{ $game->metadata()->id() }}')">Play</button>                  
                  </div>
                 </div>
+            </div>
+            
+            <div class="card-footer p-2">
+                <h5 class="card-title">{{ $game->metadata()->name() }}</h5>
+                by <a href="#" style="text-transform: capitalize;">BitsArcade</a></div>
             </div>
             @else
             @endif
         @endforeach
-        </div>
-             <div class="header">
-            <h6>
-                <i class="fad fa-diamond" style="color: #f2ae29;"></i> Featured Slots  
-            </h6>
-        </div>
-        <div class="our-games mb-4">
-        @foreach($games as $game)
+
+            @foreach($games as $game)
         @if(in_array($game["Id"], explode(',', $featuredslots))) 
+        
+        <div class="card gamepostercard m-2" style="cursor: pointer; border-radius: 8px;">
         @if(!auth()->guest())
-            <div class="slots_poster" style="background-image:url(/img/slots/{{$game['SectionId']}}/{{$game['Id']}}.jpg)" loading="lazy"  onclick="redirect('/slots/{{$game['Id']}}')"  >
+            <div class="game_poster" style="background-image:url(/img/slots/{{$game['SectionId']}}/{{$game['Id']}}.jpg)" loading="lazy"  onclick="redirect('/slots/{{$game['Id']}}')"  >
              @else          
-                <div class="slots_poster" style="background-image:url(/img/slots/{{$game['SectionId']}}/{{$game['Id']}}.jpg)" loading="lazy"  onclick="$.register()">
+                <div class="game_poster" style="background-image:url(/img/slots/{{$game['SectionId']}}/{{$game['Id']}}.jpg)" loading="lazy"  onclick="$.register()">
             @endif
                     <div class="label">
                     {{ $game['SectionId'] }}
@@ -144,45 +181,88 @@
                             <div class="title">{{ $game['Name'] }}</div>
                 @if(!auth()->guest())
                                  
-                            <button class="btn btn-login" onclick="redirect('/slots/{{$game['Id']}}')">Play</button>                  
+                            <button class="btn btn-secondary" onclick="redirect('/slots/{{$game['Id']}}')">Play</button>                  
                 @else          
-                            <button class="btn btn-signup" onclick="$.register()">
+                            <button class="btn btn-primary" onclick="$.register()">
                                 Login
                             </button>
                 @endif   
                         </div>
                     </div>
                 </div>
+               <div class="card-footer p-2">
+                <h5 class="card-title">{{ $game['Name'] }}</h5>
+                by <a href="#" style="text-transform: capitalize;">{{ $game['SectionId'] }}</a></div>
+            </div>
                 @endif
         @endforeach
             </div>
-            <div class="our-games mb-5" style="border-radius: 12px; background: url(/img/misc/arrows.svg), linear-gradient(59deg, #2b2d2d, #262829) !important;">
-            <button class="btn btn-signup" onclick="redirect('/bonus')">Check our on-going bonuses</button> <img src="/img/logo/logo_temp.png" width="40px" height="32px" style="margin-left: 10px; margin-right: 10px;">
+
     </div>
-    <div class="header">
-            <h6>
-                <i class="fad fa-star-christmas" style="color: #2e9beb;"></i> All Games  
-            </h6>
+
+  <div class="tab-pane slide-in" id="ex3-tabs-2" role="tabpanel" aria-labelledby="ex3-tab-2"> <div class="our-games mb-4" >
+        @foreach($games as $game)
+        @if(in_array($game["Id"], explode(',', $featuredslots))) 
+        
+        @if(!auth()->guest())
+        <div class="card m-2 gamepostercard" onclick="redirect('/slots/{{$game['Id']}}')"  >
+            <div class="game_poster" style="background-image:url(/img/slots/{{$game['SectionId']}}/{{$game['Id']}}.jpg)" loading="lazy"  onclick="redirect('/slots/{{$game['Id']}}')"  >
+             @else
+        <div class="card m-2 gamepostercard" onclick="$.register()">         
+                <div class="game_poster" style="background-image:url(/img/slots/{{$game['SectionId']}}/{{$game['Id']}}.jpg)" loading="lazy"  onclick="$.register()">
+            @endif
+                    <div class="label">
+                    {{ $game['SectionId'] }}
+                </div>
+                    <div class="name">
+                        <div class="name-text">
+                            <div class="title">{{ $game['Name'] }}</div>
+                @if(!auth()->guest())
+                                 
+                            <button class="btn btn-secondary" onclick="redirect('/slots/{{$game['Id']}}')">Play</button>                  
+                @else          
+                            <button class="btn btn-primary" onclick="$.register()">
+                                Login
+                            </button>
+                @endif   
+                        </div>
+                    </div>
+                </div>
+               <div class="card-footer p-2">
+                <h5 class="card-title">{{ $game['Name'] }}</h5>
+                by <a href="#">{{ $game['SectionId'] }}</a></div>
+            </div>
+                @endif
+        @endforeach
+            </div>
         </div>
+
+    <div
+    class="tab-pane slide-in"
+    id="ex3-tabs-3"
+    role="tabpanel"
+    aria-labelledby="ex3-tab-3"
+  >
+
     <div class="our-games">
             <input type="text" id="gamelist-search" placeholder="Search game or provider..">
                 <div class="empty-nomargin-box p-1 d-none d-md-block">
-                    <button class="btn btn-blue m-1 active" value="" onclick="$.moveNumbers(this.value )">all slots</button>
-                    <button class="btn btn-more-yellow m-1" value="feature" onclick="$.moveNumbers(this.value )">featured</button>
-                    <button class="btn btn-more-yellow m-1" value="bonus" onclick="$.moveNumbers(this.value )">bonus slots</button>
-                    <button class="btn btn-more-yellow m-1" value="wilds" onclick="$.moveNumbers(this.value )">wilds</button>
-                    <button class="btn btn-more-yellow m-1" value="free" onclick="$.moveNumbers(this.value )">free spins</button>
-                    <button class="btn btn-more-yellow m-1" value="respin" onclick="$.moveNumbers(this.value )">respin</button>
-                    <button class="btn btn-more m-1" value="bitsarcade" onclick="$.moveNumbers(this.value )">bitsarcade</button>
-                    <button class="btn btn-more m-1" value="netent" onclick="$.moveNumbers(this.value )">netent</button>
-                    <button class="btn btn-more m-1" value="quickspin" onclick="$.moveNumbers(this.value )">quickspin</button>
-                    <button class="btn btn-more m-1" value="microgaming" onclick="$.moveNumbers(this.value )">microgaming</button>
-                    <button class="btn btn-more m-1" value="booongo" onclick="$.moveNumbers(this.value )">booongo</button>
-                    <button class="btn btn-more m-1" value="wazdan" onclick="$.moveNumbers(this.value )">wazdan</button>
-                    <button class="btn btn-more m-1" value="playson" onclick="$.moveNumbers(this.value )">playson</button>
-                    <button class="btn btn-more m-1" value="amatic" onclick="$.moveNumbers(this.value )">amatic</button>
-                    <button class="btn btn-more m-1" value="igrosoft" onclick="$.moveNumbers(this.value )">igrosoft</button>
-                    <button class="btn btn-more m-1" value="apollo" onclick="$.moveNumbers(this.value )">apollo</button>
+                    <button class="btn btn-primary m-1 active" value="" onclick="$.moveNumbers(this.value )">all slots</button>
+                    <button class="btn btn-info m-1" value="feature" onclick="$.moveNumbers(this.value )">featured</button>
+                    <button class="btn btn-info m-1" value="bonus" onclick="$.moveNumbers(this.value )">bonus slots</button>
+                    <button class="btn btn-info m-1" value="wilds" onclick="$.moveNumbers(this.value )">wilds</button>
+                    <button class="btn btn-info m-1" value="free" onclick="$.moveNumbers(this.value )">free spins</button>
+                    <button class="btn btn-info m-1" value="respin" onclick="$.moveNumbers(this.value )">respin</button>
+                    <button class="btn btn-danger m-1" value="bitsarcade" onclick="$.moveNumbers(this.value )">bitsarcade</button>
+                    <button class="btn btn-danger m-1" value="netent" onclick="$.moveNumbers(this.value )">netent</button>
+                    <button class="btn btn-danger m-1" value="quickspin" onclick="$.moveNumbers(this.value )">quickspin</button>
+                    <button class="btn btn-danger m-1" value="microgaming" onclick="$.moveNumbers(this.value )">microgaming</button>
+                    <button class="btn btn-danger m-1" value="booongo" onclick="$.moveNumbers(this.value )">booongo</button>
+                    <button class="btn btn-danger m-1" value="wazdan" onclick="$.moveNumbers(this.value )">wazdan</button>
+                    <button class="btn btn-danger m-1" value="playson" onclick="$.moveNumbers(this.value )">playson</button>
+                    <button class="btn btn-danger m-1" value="amatic" onclick="$.moveNumbers(this.value )">amatic</button>
+                    <button class="btn btn-danger m-1" value="igrosoft" onclick="$.moveNumbers(this.value )">igrosoft</button>
+                    <button class="btn btn-danger m-1" value="apollo" onclick="$.moveNumbers(this.value )">apollo</button>
             </div>
         <div class="games">
             <div class="row">
@@ -212,7 +292,7 @@
                     {{ $ourgame->metadata()->name() }}
                                     </div>
                             <div class="desc">Provably Fair, In-house</div>
-                            <button class="btn btn-login" onclick="redirect('/game/{{ $ourgame->metadata()->id() }}')">Play</button>                  
+                            <button class="btn btn-secondary" onclick="redirect('/game/{{ $ourgame->metadata()->id() }}')">Play</button>                  
                  </div>
                 </div>
             </div>
@@ -237,9 +317,9 @@
                             <div class="title">{{ $game['Name'] }}</div>
                             <div class="desc">{{ $game['Description'] }}</div>
                 @if(!auth()->guest())               
-                            <button class="btn btn-login" onclick="redirect('/slots/{{$game['Id']}}')">Play</button>                  
+                            <button class="btn btn-secondary" onclick="redirect('/slots/{{$game['Id']}}')">Play</button>                  
                 @else
-                            <button class="btn btn-signup" onclick="$.register()">
+                            <button class="btn btn-primary" onclick="$.register()">
                                 Login
                             </button>
                 @endif                                    
@@ -254,4 +334,6 @@
             </div>
         </div>
     </div>
+</div>
+</div>
     </div>
