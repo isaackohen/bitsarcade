@@ -11,7 +11,7 @@ $.modal = function(id, option = null) {
             e.find('.ui-blocker').fadeOut('fast');
 
             if(firstTime) {
-                e.find('.modal-scrollable-content').overlayScrollbars({
+                e.find('.modal-content').overlayScrollbars({
                     scrollbars: {
                         autoHide: 'leave'
                     }
@@ -49,9 +49,9 @@ $.modal = function(id, option = null) {
 
 $(document).ready(function() {
     $(document).on('click', '.btn-close', function() {
-        const modal = $(this).parent().parent().parent().parent().remove();
+        const modal = $(this).parent().parent().parent().parent().parent().parent().parent().remove();
         modal.toggleClass('show');
-        modal.toggleClass('show');
+        modal.removeData();
 
         setTimeout(() => $.blockPlayButton(false), 1000);
     });
@@ -59,5 +59,6 @@ $(document).ready(function() {
     $.fn.uiBlocker = function(show = true) {
         if(show) this.find('.ui-blocker').fadeIn('fast');
         else this.find('.ui-blocker').fadeOut('fast');
+
     };
 });

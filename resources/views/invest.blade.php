@@ -4,7 +4,6 @@
         $.auth();
     </script>
 @else
-@include('modals.nav')
 <div class="container-fluid">
     <div class="row investRow">
         <div class="col">

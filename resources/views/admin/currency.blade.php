@@ -78,10 +78,43 @@
                             </div>
                             <div class="mt-2">
                                 @foreach($currency->getOptions() as $option)
-                                    <div class="form-group mt-2">
-                                        <label data-toggle="tooltip" data-placement="top" title="{{ $option->id() }}">{{ $option->name() }}</label>
+                                  <div class="form-group mt-2">
+                                        <label data-toggle="tooltip" data-placement="top" title="{{ $option->id() }}">{{ $option->name() }} <br><small>
+                                    @php
+                                        $getvalue = $currency->option($option->id())
+                                        @endphp
+                                        @if(is_numeric($getvalue) == true)
+                                        @if($currency->id() == 'btc')
+                                        {{ number_format((\App\Http\Controllers\Api\WalletController::rateDollarBtc() * $getvalue), 3, '.', '') }}$
+                                                                                @endif
+
+                                        @if($currency->id() == 'eth')
+                                        {{ number_format((\App\Http\Controllers\Api\WalletController::rateDollarEth() * $getvalue), 3, '.', '') }}$
+                                                                                @endif
+
+                                        @if($currency->id() == 'ltc')
+                                        {{ number_format((\App\Http\Controllers\Api\WalletController::rateDollarLtc() * $getvalue), 3, '.', '') }}$
+                                                                                @endif 
+
+                                        @if($currency->id() == 'doge')
+
+                                        {{ number_format((\App\Http\Controllers\Api\WalletController::rateDollarDoge() * $getvalue), 3, '.', '') }}$
+                                        @endif
+
+                                        @if($currency->id() == 'bch')
+                                        {{ number_format((\App\Http\Controllers\Api\WalletController::rateDollarBtcCash() * $getvalue), 3, '.', '') }}$
+                                                                                @endif
+
+                                        @if($currency->id() == 'trx')
+                                        {{ number_format((\App\Http\Controllers\Api\WalletController::rateDollarTron() * $getvalue), 3, '.', '') }}$
+                                                                                @endif
+
+                                        @endif
+                                        </small></label> 
                                         <input data-currency="{{ $currency->id() }}" data-option="{{ $option->id() }}" type="text" value="{{ $currency->option($option->id()) }}" class="form-control">
                                     </div>
+                                
+
                                 @endforeach
                             </div>
                         </div>

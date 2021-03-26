@@ -4,6 +4,7 @@
             <button class="btn btn-primary" data-toggle="modal" data-target="#create">Create crypto promo</button>
 		    <button class="btn btn-success" data-toggle="modal" data-target="#create-freespin">Create free spin promo</button>
             <button class="btn btn-danger" onclick="$.request('/admin/promocode/remove_inactive').then(function() {redirect(window.location.pathname);});">Cleanup</button>
+
         </div>
         <h4 class="mb-1 mt-0">Promocodes</h4>
     </div>

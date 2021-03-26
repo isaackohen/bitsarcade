@@ -3392,19 +3392,38 @@ footer {
 }
 
 .btn-primary {
+    color: #fff !important;
     background: linear-gradient(-180deg, #399dff 0%, #297dcf 98%);
+    
+    &:hover {
+    background: linear-gradient(-101deg, #399dff 0%, #297dcf 98%);
+        }
 }
 
-.btn-secondary{
-    background: linear-gradient(101deg, #b644ff 0%, #9414e6 98%)
+.btn-secondary {
+    background: linear-gradient(101deg, #b644ff 0%, #9414e6 98%);
+    color: #fff !important;
+    &:hover {
+    background: linear-gradient(161deg, #b644ff 0%, #9414e6 98%);
+        }
 }
 
+.btn-info {
+    color: #fff !important;
+}
+
+
+.btn-danger {
+    color: #fff !important;
+}
 
 .btn-pink{
+    color: #fff !important;
     background: linear-gradient(101deg, #e34ea4 0%, #e34ea4 98%)
 }
 
 .btn-success {
+    color: #fff !important;
     background: linear-gradient(-180deg, #3db96d 0%, #1b904e 100%);
 
     &:hover {
@@ -3765,6 +3784,10 @@ footer {
         display: none;
     }
 
+    .intercom-container-body {
+        display: none;
+    }
+    
     .connectionLostContainer {
         z-index: 38001 !important;
     }

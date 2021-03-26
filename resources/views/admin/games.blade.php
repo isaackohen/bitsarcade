@@ -3,7 +3,7 @@
     <div class="col-xl-3">
         <div class="card">
             <div class="card-body pb-0" style="position: relative;">
-                <h5 class="card-title mb-0 header-title">All games</h5>
+                <h5 class="mb-0 mt-0 p-0">All games</h5>
 
                 @php
                     $xAxis = []; $data = [];
@@ -29,7 +29,7 @@
         <div class="col-xl-3">
             <div class="card">
                 <div class="card-body pb-0" style="position: relative;">
-                    <h5 class="card-title mb-0 header-title">{{ $game->metadata()->name() }}</h5>
+                    <h5 class="mb-0 mt-0 p-0">{{ $game->metadata()->name() }}</h5>
 
                     @php
                         $xAxis = []; $data = [];

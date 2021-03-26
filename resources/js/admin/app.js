@@ -66,6 +66,7 @@ const initializeRoute = function() {
     });
 };
 
+
 $(document).pjax('a:not(.disable-pjax)', container);
 
 window.redirect = function(page) {

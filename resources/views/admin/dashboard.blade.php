@@ -7,13 +7,13 @@
 
 <div class="row">
 
-    <div class="col-xl-4">
+    <div class="col-xl-6">
         <div class="card">
             <div class="card-body pt-2">
                 <a href="/admin/wallet" class="btn btn-primary btn-sm mt-2 float-right">
                     View Requests
                 </a>
-                <h6 class="header-title mb-4">Latest withdraws</h6>
+                <h5>Latest withdraws</h5>
                 @if(\App\Withdraw::where('auto', false)->count() == 0)
                     <i style="display: flex; margin-left: auto; margin-right: auto;" data-feather="clock"></i>
                     <div class="text-center mt-2">Nothing here</div>
@@ -26,7 +26,8 @@
                                 <h6 class="mt-1 mb-0 font-size-15"><a href="/admin/user/{{ $user->id }}/">{{ $user->name }}</a></h6><span class="font-weight-light">Requested {{ $withdraw->created_at->diffForHumans() }} -  <span class="badge badge-danger">Pending Moderation</span> </span>
 
                                 <h6 class="text-muted font-weight-normal mt-1 mb-3">{{ number_format($withdraw->sum, 8, '.', ' ') }} {{ \App\Currency\Currency::find($withdraw->currency)->name() }}
-                                    - <span class="font-weight-light">{{ $withdraw->address }}</span></h6>                                                                        
+                                <br>
+                                <span class="font-weight-light">{{ $withdraw->address }}</span></h6>                                                                        
                             </div>
                         </div>
                     @endforeach
@@ -38,7 +39,8 @@
                                 <h6 class="mt-1 mb-0 font-size-15"><a href="/admin/user/{{ $user->id }}/">{{ $user->name }}</a></h6><span class="font-weight-light">Requested {{ $withdraw->created_at->diffForHumans() }} -  <span class="badge badge-success">Accepted {{ $withdraw->updated_at->diffForHumans() }}</span> </span>
 
                                 <h6 class="text-muted font-weight-normal mt-1 mb-3">{{ number_format($withdraw->sum, 8, '.', ' ') }} {{ \App\Currency\Currency::find($withdraw->currency)->name() }}
-                                    - <span class="font-weight-light">{{ $withdraw->address }}</span></h6>                                                                        
+                                <br>
+                                <span class="font-weight-light">{{ $withdraw->address }}</span></h6>                                                                        
                             </div>
                         </div>
                     @endforeach
@@ -47,13 +49,13 @@
         </div>
 
     </div>
-    <div class="col-xl-4">
+    <div class="col-xl-6">
         <div class="card">
             <div class="card-body pt-2">
                 <a href="/admin/wallet" class="btn btn-primary btn-sm mt-2 float-right">
                     View
                 </a>
-                <h6 class="header-title mb-4">Latest deposits</h6>
+                <h5>Latest deposits</h5>
                 @if(\App\Invoice::where('status', 1)->count() == 0)
                     <i style="display: flex; margin-left: auto; margin-right: auto;" data-feather="clock"></i>
                     <div class="text-center mt-2">Nothing here</div>

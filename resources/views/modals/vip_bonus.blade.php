@@ -9,9 +9,8 @@
             </div>
         </div>
     @endif
-
-    <div class="font-weight-bold mb-2">{{ __('vip.bonus.progress_title') }}</div>
     <div class="bonus-image">
+              <h6 style="text-shadow: 1px 1px black;">Unlocked Bonus</h5>
         <div class="progress">
             @php $percent = number_format(auth()->user()->weekly_bonus ?? 0, 2, '.', ''); @endphp
             <div class="progress-bar" role="progressbar" style="width: {{ $percent }}%;">{{ $percent }}%</div>
@@ -27,20 +26,43 @@
         @case(4) @php $vip = "platinum"; @endphp @break
         @case(5) @php $vip = "diamond"; @endphp @break
     @endswitch
+        <br>
 
     <div class="font-weight-bold mt-2" style="font-size: 1.05em">{{ __('vip.bonus.title') }}</div>
     <div class="vipDesc">{!! __('vip.bonus.description', [
             'vip' => "<svg style='width: 14px; height: 14px;'><use href='#vip-$vip'></use></svg>"
         ]) !!}</div>
 @else
-    <div class="vip_bonus modal">
-        <div class="content">
-            <i class="fas fa-close-symbol"></i>
-            <div class="ui-blocker" style="display: none;">
-                <div class="loader"><div></div></div>
-            </div>
+
+<div
+  class="vip_bonus modal fade"
+  id="vip_bonus modal"
+  tabindex="-1"
+    style="display: block; padding-right: 15px;"
+  aria-labelledby="vip_bonus modal"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">Daily Bonus
+        <button
+          type="button"
+          class="btn-close"
+          data-mdb-dismiss="vip_bonus modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="ui-blocker" style="display: none;">
+            <div class="loader"><div></div></div>
+        </div> 
+        <div class="modal-scrollable-content">
+
 
             <div class="vip_bonus_content"></div>
         </div>
+    </div>    
     </div>
+    </div>
+    </div>
+
 @endif

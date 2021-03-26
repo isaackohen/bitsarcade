@@ -3,7 +3,7 @@
     <head>
         <title>BITSArcade - Crypto Gambling Platform</title>
         <link href="/css/webfonts.css" rel="stylesheet" type="text/css">
-        <link rel="icon" type="image/png" href="/img/logo/favicon.ico"/>
+        <link rel="icon" type="image/png" href="/img/logo/favicon.svg"/>
         <meta charset="utf-8">
         <noscript><meta http-equiv="refresh" content="0; /no_js"></noscript>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -84,7 +84,7 @@
     </head>
     <body>
         <div class="pageLoader" style="background: #212121;">
-            <div class="loader" style="background-image: url(/img/logo/logo_temp.png); background-position: center; opacity: 0.8; background-size: 60%; background-repeat: no-repeat;">
+            <div class="loader">
                <div></div>
             </div>
             <div class="error" style="display: none"></div>
@@ -95,8 +95,6 @@
             <header>
                 <div class="fixed">
                     <div class="logo" onclick="redirect('/')"></div>
-
-
                     <div class="menu">
 <button
   data-mdb-toggle="sidenav"
@@ -104,7 +102,7 @@
   class="btn btn-pink"
   aria-controls="#sidenav-1"
   aria-haspopup="true"
-  style="    color: #0fd560;
+  style="    color: #0fd560 !important;
     background: linear-gradient(#363636, #2c2c2c) !important;
     border-radius: 16px;
     font-size: 1rem;
@@ -156,8 +154,8 @@
                     @endif
                     <div class="right">
                         @if(auth()->guest())
-                            <button class="btn btn-primary" onclick="$.register()">{{ __('general.auth.register') }}</button>
-                            <button class="btn btn-secondary" onclick="$.auth()">{{ __('general.auth.login') }}</button>
+                            <button class="btn btn-primary m-1" onclick="$.register()">{{ __('general.auth.register') }}</button>
+                            <button class="btn btn-secondary m-1" onclick="$.auth()">{{ __('general.auth.login') }}</button>
                         @else
                             <img onclick="redirect('/user/{{ auth()->user()->_id }}')" src="{{ auth()->user()->avatar }}" alt>
                             <div class="action" data-notification-view onclick="$.displayNotifications()">
@@ -181,7 +179,7 @@
             <div class="container-fluid">
  <div class="collapse-sidebar">
 <nav id="sidenav-1" class="sidenav" data-mdb-hidden="true" data-mdb-mode="over" data-mdb-content="#content">
-  <ul class="sidenav-menu"> <li class="sidenav-item mt-2 mb-0"> <a class="sidenav-link">
+  <ul class="sidenav-menu"> <li class="sidenav-item mt-2 mb-0"> <a class="sidenav-link" href="/">
         <i class="fad fa-home me-2"></i><span>Home</span></a>
     </li>
 
@@ -224,9 +222,6 @@
           <a onclick="redirect('/bonus')" class="sidenav-link">Promocode</a>
         </li>
         <li class="sidenav-item">
-          <a href='/earn' class="sidenav-link">Earn Wall</a>
-        </li>
-        <li class="sidenav-item">
           <a onclick="redirect('/partner')" class="sidenav-link">Affiliate Program</a>
         </li>
         <li class="sidenav-item">
@@ -250,6 +245,12 @@
     </li>
 <li class="sidenav-item mt-2 mb-0"> <a  onclick="redirect('/gamelist')" class="sidenav-link">
         <i style="color: #0fd560;" class="fad fa-abacus me-3"></i><span>Slots</span></a>
+    </li>
+<li class="sidenav-item mt-2 mb-0"> <a  onclick="redirect('/earn')" class="sidenav-link">
+        <i style="color: #0fd560;" class="fad fa-money-bill-alt me-3"></i><span>Earn Wall</span></a>
+    </li>
+<li class="sidenav-item mt-2 mb-0"> <a  onclick="redirect('/invest')" class="sidenav-link">
+        <i style="color: #0fd560;" class="fad fa-piggy-bank me-3"></i><span>Be The Bank BETA</span></a>
     </li>
     <li class="sidenav-item mt-2 mb-0">
       <a class="sidenav-link "
@@ -330,7 +331,7 @@
                 <div class="message-send">
                     @if(auth()->guest())
                         <div class="message-auth-overlay">
-                            <button class="btn btn-block btn-auth-main" onclick="$.auth()">{{ __('general.auth.login') }}</button>
+                            <button class="btn btn-block btn-secondary" onclick="$.auth()">{{ __('general.auth.login') }}</button>
                         </div>
                     @elseif(auth()->user()->mute != null && !auth()->user()->mute->isPast())
                         <div class="message-auth-overlay" style="opacity: 1 !important; text-align: center; font-size: 0.8em;">
@@ -399,14 +400,17 @@
             </div>
         </div>
         <div class="mobile-menu-extended">
-            <div class="control theme-switcher">
-                <i class="fas fa-moon-stars" data-dark></i>
-                <i class="fas fa-sun" data-light></i>
-                <div>{{ __('general.head.theme') }}</div>
-            </div>
             <div class="control" data-page-trigger="'/help'" data-toggle-class="active" onclick="redirect('/help')">
                 <i class="fas fa-question-circle"></i>
                 <div>{{ __('general.head.help') }}</div>
+            </div>
+            <div class="control" data-page-trigger="'/invest'" data-toggle-class="active" onclick="redirect('/invest')">
+                <i class="fas fa-piggy-bank"></i>
+                <div>Be The Bank</div>
+            </div>
+            <div class="control" data-page-trigger="'/earn'" data-toggle-class="active" onclick="redirect('/earn')">
+                <i class="far fa-money-bill-wave"></i>
+                <div>Earn Wall</div>
             </div>
         </div>
         <div class="mobile-menu-games">
@@ -467,6 +471,7 @@
 <script>
   window.intercomSettings = {
     app_id: "dhg3rheb",
+    custom_launcher_selector:'#intercomopenlink',
     user_id: <?php echo json_encode(auth()->user()->id) ?>, 
     name: <?php echo json_encode(auth()->user()->name) ?>, 
     email: <?php echo json_encode(auth()->user()->email) ?>,

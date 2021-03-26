@@ -37,6 +37,7 @@ $(document).ready(function() {
             $('[data-wallet-toggle-tab]').removeClass('active');
             $('[data-wallet-toggle-tab="history"]').addClass('active');
             $('[data-wallet-tab-content]').hide();
+            Intercom('trackEvent', 'withdrawRequest');
             $('[data-wallet-tab-content="history"]').fadeIn('fast');
             loadHistory(function() {
                 $('[data-wallet-history-toggle-tab="withdraws"]').click();

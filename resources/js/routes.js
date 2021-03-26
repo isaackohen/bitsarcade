@@ -16,6 +16,7 @@ $.routes = function() {
         '/top-game': [`/js/pages/${window.location.pathname.substr(window.location.pathname.lastIndexOf('/') + 1)}.js`],
         '/admin': ['/js/admin/pages/dashboard.js'],
         '/admin/promo': ['/js/admin/pages/promo.js'],
+        '/admin/quickedit': ['/js/admin/pages/quickedit.js'],
         '/admin/settings': ['/js/admin/pages/settings.js'],
         '/admin/notifications': ['/js/admin/pages/notifications.js'],
         '/admin/users': ['/js/admin/pages/users.js'],

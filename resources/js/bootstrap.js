@@ -24,7 +24,6 @@ require('./modals/modals');
 import * as mdb from 'mdb-ui-kit'; // lib
 
 
-
 $.ajaxPrefilter(function(options) {
     if(options.type === 'GET' && options.dataType === 'script') options.cache = true;
 });

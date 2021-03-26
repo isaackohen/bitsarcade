@@ -25,6 +25,18 @@ $.vip = function() {
     $.modal('vip');
 };
 
+$.gotovipBonus = function() {
+    if($.isGuest()) {
+        $.auth();
+        return;
+    }
+
+
+        $.get('/modals.vip_bonus/info', function(response) {
+            $('.vip_bonus_content').html(response);
+        });
+};
+
 $.vipBonus = function() {
     if($.isGuest()) {
         $.auth();
