@@ -33,6 +33,8 @@ class WalletController extends Controller
         return $price;
     } 
 	
+
+
 	public static function rateDollarEth() {
         $value = self::apiRates();
 		$price = $value->ETH->USD;

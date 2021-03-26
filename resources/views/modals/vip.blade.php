@@ -1,22 +1,19 @@
 <div
   class="vip modal fade"
-  id="vip"
+  id="vip modal"
   tabindex="-1"
     style="display: block; padding-right: 15px;"
-  aria-labelledby="vip"
+  aria-labelledby="vip modal"
   aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
                     <div class="tabs">
                 <div class="tab active" data-wallet-toggle-tab="vip-rewards">
-                    {{ __('wallet.tabs.deposit') }}
+                    VIP Rewards
                 </div>
-                <div class="tab" data-wallet-toggle-tab="withdraw">
-                    {{ __('wallet.tabs.withdraw') }}
-                </div>
-                <div class="tab" data-wallet-toggle-tab="history">
-                    {{ __('wallet.tabs.history') }}
+                <div class="tab" onclick="$.gotovipBonus()" data-wallet-toggle-tab="vip-bonus">
+                    Daily Bonus
                 </div>
             </div>
         <button
@@ -31,7 +28,7 @@
             <div class="loader"><div></div></div>
         </div>
         <div data-wallet-tab-content="vip-rewards">
-        <div class="modal-scrollable-content" >
+        <div ss-container class="modal-scrollable-content" >
             <img class="vip-logo" src="/img/misc/vip-icon.svg" alt>
 
             @php
@@ -156,6 +153,13 @@
 
 
 </div>
+        <div data-wallet-tab-content="vip-bonus">
+        <div class="modal-scrollable-content" >
+
+            <div class="vip_bonus_content"></div>
+
+        </div>
+    </div>
         </div>
     </div>
 </div>

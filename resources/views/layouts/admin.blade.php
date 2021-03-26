@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
+<html lang="{{ app()->getLocale() }}" class="theme-dark">
 <head>
     <meta charset="utf-8" />
     <title>Datagamble - Admin Panel</title>
-    <link rel="icon" type="image/png" href="../../img/logo/ico.png"/>
+    <link rel="icon" type="image/png" href="../../img/logo/logo_black.png"/>
+    <link href="../css/webfonts_admin.css" rel="stylesheet" type="text/css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -13,7 +14,8 @@
     <link href="{{ mix('css/admin/app.css') }}" rel="stylesheet" type="text/css" />
 
     <script type="text/javascript" src="{{ mix('js/admin/app.js') }}"></script>
-
+    <link href="https://coderthemes.com/shreyu/preview/assets/css/bootstrap-dark.min.css" rel="stylesheet" type="text/css" /> 
+    <link href="https://coderthemes.com/shreyu/preview/assets/css/app-dark.min.css" rel="stylesheet" type="text/css">
     <script type="text/javascript">
         window.Laravel = {
             userId: "{{ auth()->user()->_id }}"
@@ -53,6 +55,7 @@
         <div class="sidebar-content">
             <div id="sidebar-menu" class="slimscroll-menu">
                 <ul class="metismenu" id="menu-bar">
+                    <!-- Crypto Converter ⚡ Widget --><crypto-converter-widget shadow symbol live background-color="#323742" border-radius="0" fiat="united-states-dollar" crypto="bitcoin" amount="1" font-family="sans-serif" decimal-places="4"><a href="https://cr.today/" target="_blank" rel="noopener">Converter Widget</a></crypto-converter-widget><script async src="https://cdn.jsdelivr.net/gh/dejurin/crypto-converter-widget/dist/latest.min.js"></script><!-- /Crypto Converter ⚡ Widget -->
                     <li class="menu-title">Website</li>
                     <li>
                         <a href="/admin">
@@ -99,6 +102,7 @@
                             <span> Currencies</span>
                         </a>
                     </li>
+
                     <li>
                         <a href="/admin/maileclipse" target="blank" class="disable-pjax">
                             <i data-feather="mail"></i>
@@ -112,6 +116,7 @@
                         </a>
                     </li>
                     <li class="menu-title">Server</li>
+
                     <li>
                         <a href="/admin/settings">
                             <i data-feather="settings"></i>
@@ -121,14 +126,6 @@
                     <li>
                         <a href="javascript:void(0)" onclick="window.open('/admin/logs', '_blank');">
                             <i data-feather="align-left"></i>
-                            <span data-toggle="tooltip" title="Critical" class="badge badge-danger float-right" style="background: #fd0c31">
-                                @php $total = App::make(\Arcanedev\LogViewer\Contracts\LogViewer::class)->total('critical'); @endphp
-                                {{ $total > 999 ? '999+' : $total }}
-                            </span>
-                            <span data-toggle="tooltip" title="Error" class="badge badge-danger float-right" style="position: relative; right: 5px">
-                                @php $total = App::make(\Arcanedev\LogViewer\Contracts\LogViewer::class)->total('error'); @endphp
-                                {{ $total > 999 ? '999+' : $total }}
-                            </span>
                             <span> Logs</span>
                         </a>
                     </li>

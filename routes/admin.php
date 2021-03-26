@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
+use Symfony\Component\Process\Process;
+use Symfony\Component\Process\Exception\ProcessFailedException;
 use MongoDB\BSON\Decimal128;
 
 Route::prefix('wallet')->group(function() {
@@ -151,6 +153,38 @@ Route::post('/role', function() {
     \App\User::where('_id', request('id'))->update([
         'access' => request('role')
     ]);
+    return success();
+});
+
+Route::post('start-rain', function () {
+    \Artisan::call('datagamble:rain');
+    return success();
+});
+Route::post('artisan-down', function () {
+    \Artisan::call('down');
+    return success();
+});
+
+
+Route::post('artisan-up', function () {
+    \Artisan::call('up');
+    return success();
+});
+
+Route::post('start-premiumrain', function () {
+    \Artisan::call('datagamble:premiumrain');
+    return success();
+});
+Route::post('discord-promocode', function () {
+    \Artisan::call('datagamble:sendvkpromocode');
+    return success();
+});
+Route::post('discord-vipcode', function () {
+    \Artisan::call('datagamble:sendvippromocode');
+    return success();
+});
+Route::post('start-quiz', function () {
+    \Artisan::call('datagamble:quiz');
     return success();
 });
 

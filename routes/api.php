@@ -585,8 +585,8 @@ Route::middleware('auth')->prefix('promocode')->group(function() {
         if(auth()->user()->bonus_claim != null && !auth()->user()->bonus_claim->isPast()) return reject(1, 'Reloading');
         if(auth()->user()->balance(auth()->user()->clientCurrency())->get() > auth()->user()->clientCurrency()->option('min_bet')) return reject(2, 'Balance is greater than zero'); 
         $user = auth()->user();
-        $progresscheck = \App\Game::where('user', $user)->where('status', 'in-progress')->get();
-        if($progresscheck) return reject(3, 'Game in progress');
+        //$progresscheck = \App\Game::where('user', $user)->where('status', 'in-progress')->get();
+        //if($progresscheck) return reject(3, 'Game in progress');
 
         $v = floatval(auth()->user()->clientCurrency()->option('bonus_wheel'));
         $slices = [

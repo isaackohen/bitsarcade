@@ -26,7 +26,7 @@ echo date("H\\h  i\\m", $timeLeft); ?></p>
 <p>For every 1.00$ you get 2 Free Spins credited, so if your first deposit was 50$ you get 100 Free Spins. To claim your first player deposit spins, contact our live support.</p>
 
 <p>This only applies to new players, not to multi-accounts.</p>
-<div class="btn btn-primary p-2" onclick="HelpCrunch('openChat');">Contact support after deposit</div>
+<button id="intercomopenlink" class="btn btn-primary p-2">Contact support after deposit</button>
 </div></div>
 </div>
 
@@ -40,7 +40,7 @@ echo date("H\\h  i\\m", $timeLeft); ?></p>
 <p>Our Discord bot automatically dispurses promocodes for instant DOGE Coins, every 30 minutes.</p>
 
 <p>Limit on amount of promocodes you can use every day is based on your VIP Level.</p>
-<div class="btn btn-secondary p-2" onclick="redirect('https://discord.gg/ztNmeWADWq')">Join Discord</div><div class="btn btn-primary p-2" data-toggle-bonus-sidebar="promo">Enter Promocode</div>
+<div class="btn btn-secondary m-1 p-2" onclick="redirect('https://discord.gg/ztNmeWADWq')">Join Discord</div><div class="btn btn-primary m-1 p-2" data-toggle-bonus-sidebar="promo">Enter Promocode</div>
 
 </div></div>
 </div>
