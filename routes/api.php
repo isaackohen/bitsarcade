@@ -589,7 +589,7 @@ Route::middleware('auth')->prefix('promocode')->group(function() {
 
     Route::post('bonus', function(Request $request) {
 		$validate = Validator::make($request->all(), [
-		'g-recaptcha-response' => 'required|captcha'
+		'captcha' => 'required|captcha'
 		]); 
 		if($validate->fails()) return reject(4, 'Please verify that you are not a robot');
         if(auth()->user()->bonus_claim != null && !auth()->user()->bonus_claim->isPast()) return reject(1, 'Reloading');
