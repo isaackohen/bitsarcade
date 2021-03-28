@@ -222,6 +222,7 @@ return [
         'empty' => 'Select cells!',
         'gameinprogressbonus' => 'You currently have a game in-progress.',
         'should_have_empty_balance' => 'To receive a bonus, your balance must be zero',
+		'captcha' => 'Please verify that you are not a robot',
         'autobet_pick_something' => 'Select cells for automatic bid mode.',
         'disabled_notifications' => 'You have refused to accept notifications. This can be changed in your browser settings.',
         'connection_lost' => 'Lost server connection',

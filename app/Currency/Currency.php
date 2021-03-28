@@ -242,6 +242,22 @@ abstract class Currency {
                 public function name(): string {
                     return "Diamond VIP wager requirement";
                 }
+            },
+            new class extends WalletOption {
+                public function id() {
+                    return "ref_normal";
+                }
+                public function name(): string {
+                    return "Ref calc normal (e; 0.00009)";
+                }
+            },
+            new class extends WalletOption {
+                public function id() {
+                    return "ref_mod";
+                }
+                public function name(): string {
+                    return "Ref calc moderator (e; 0.00009)";
+                }
             }
         ]);
     }

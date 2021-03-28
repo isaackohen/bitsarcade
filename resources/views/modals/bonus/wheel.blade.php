@@ -3,6 +3,7 @@
         window.next = {{ auth()->user()->bonus_claim->timestamp ?? 0 }};
         window.timeout();
     </script>
+	{!! NoCaptcha::renderJs() !!}
 
     <div class="modal-ui-block bonus-wheel-reload" style="display: none">
         <h1>{{ __('general.reload') }}</h1>
@@ -13,5 +14,8 @@
     <h2>{{ __('bonus.wheel.title') }}</h2>
 
     <div class="wheel"></div>
-    <button class="btn btn-primary btn-block mt-2">{{ __('general.spin') }}</button>
+	                                   <div style="height: 78px;">
+                                       {!! NoCaptcha::display() !!}
+                                    </div>
+    <button class="btn btn-primary btn-block mt-2" data-target="#captchaModal">{{ __('general.spin') }}</button>
 </div>

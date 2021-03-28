@@ -9,9 +9,6 @@
                     <div data-toggle-tab="list" class="option">
                         {{ __('partner.tabs.list') }}
                     </div>
-                    <div data-toggle-tab="analytics" class="option">
-                        {{ __('partner.tabs.analytics') }}
-                    </div>
                 @endif
             </div>
         </div>
@@ -22,6 +19,22 @@
                 </div>
                 @if(!auth()->guest())
                     <div class="tab-content" data-tab="list" style="display: none">
+                        <h6><b>Your current referral rake profit:</b></h6>
+                        <input id="balance" value="$ {{ auth()->user()->referral_balance_usd ?? 0 }}" disabled type="text">
+                        <br>
+                        <p>You get paid between 0.09% and 0.15% of each of your referral's wagers. Above 3$ you can payout your referral rake on this page. All payouts are credited instantly to your account in DOGE.</p>
+
+                        @if(auth()->user()->referral_balance_usd >= '3.00')
+                            <button class="btn btn-success m-0 p-2" onclick="$.request('/partner_cashout');">Perform Payout in DOGE</button>
+                        @else
+                        @endif
+                        
+                        <div>{!! __('partner.analytics.referrals', ['count' => \App\User::where('referral', auth()->user()->_id)->count()])  !!}</div>
+                        <div>{!! __('partner.analytics.referrals_bonus', ['count' => count(auth()->user()->referral_wager_obtained ?? [])]) !!}</div>
+                        <div>{!! __('partner.analytics.referrals_wheel', ['count' => auth()->user()->referral_bonus_obtained ?? 0]) !!}</div>
+
+                        <div class="divider"></div>
+                        <br>
                         <table id="refs" class="table dt-responsive nowrap">
                             <thead>
                             <tr>
@@ -45,9 +58,7 @@
                         </table>
                     </div>
                     <div class="tab-content" data-tab="analytics" style="display: none">
-                        <div>{!! __('partner.analytics.referrals', ['count' => \App\User::where('referral', auth()->user()->_id)->count()])  !!}</div>
-                        <div>{!! __('partner.analytics.referrals_bonus', ['count' => count(auth()->user()->referral_wager_obtained ?? [])]) !!}</div>
-                        <div>{!! __('partner.analytics.referrals_wheel', ['count' => auth()->user()->referral_bonus_obtained ?? 0]) !!}</div>
+
                     </div>
                 @endif
             </div>

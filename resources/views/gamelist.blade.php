@@ -41,7 +41,7 @@
         @if(!$game->isDisabled() &&  $game->metadata()->id() !== "slotmachine")
             <div class="card gamepostercard m-2" style="border-radius: 8px;" onclick="redirect('/game/{{ $game->metadata()->id() }}')">
 
-            <div class="game_poster card-img-top game-{{ $game->metadata()->id() }}" @if(!$game->isDisabled()) onclick="redirect('/game/{{ $game->metadata()->id() }}')" @endif>
+            <div style="background-size: cover;" class="slots_small_poster card-img-top game-{{ $game->metadata()->id() }}" @if(!$game->isDisabled()) onclick="redirect('/game/{{ $game->metadata()->id() }}')" @endif>
         <?php
         $getname = $game->metadata()->name();
          ?>

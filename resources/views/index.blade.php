@@ -89,6 +89,7 @@
 
 </div>
 </div>
+</div>
 
             @foreach(\App\GlobalNotification::get() as $notification)
 
@@ -123,6 +124,7 @@
         $featuredslots = \App\Settings::where('name', 'slots_featured_1')->first()->value;
 
             ?>
+       <div class="container">
 
 
               <div class="games">
@@ -192,7 +194,7 @@
 
 @foreach(\App\Games\Kernel\Game::list() as $game)
         @if(!$game->isDisabled() &&  $game->metadata()->id() !== "slotmachine")
-            <div class="card gamepostercard m-2" style="cursor: pointer; border-radius: 8px;" onclick="redirect('/game/{{ $game->metadata()->id() }}')">
+            <div class="card gamepostercard" style="cursor: pointer;  margin-left: 1.4vh; margin-right: 1.4vh; margin-bottom: 3.5vh;" onclick="redirect('/game/{{ $game->metadata()->id() }}')">
 
             <div class="game_poster card-img-top game-{{ $game->metadata()->id() }}" @if(!$game->isDisabled()) onclick="redirect('/game/{{ $game->metadata()->id() }}')" @endif>
         <?php
@@ -223,7 +225,7 @@
             </div>
             
             <div class="card-footer p-2">
-                <h5 class="card-title">{{ $game->metadata()->name() }}</h5>
+                <h6 class="card-title">{{ $game->metadata()->name() }}</h6>
                 by <a href="#" style="text-transform: capitalize;">BitsArcade</a></div>
             </div>
             @else
@@ -233,7 +235,7 @@
             @foreach($games as $game)
         @if(in_array($game["Id"], explode(',', $featuredslots))) 
         
-        <div class="card gamepostercard m-2" style="cursor: pointer; border-radius: 8px;">
+        <div class="card gamepostercard" style="cursor: pointer; margin-left: 1.4vh; margin-right: 1.4vh; margin-bottom: 3.5vh;">
         @if(!auth()->guest())
             <div class="game_poster" style="background-image:url(/img/slots/{{$game['SectionId']}}/{{$game['Id']}}.jpg)" loading="lazy"  onclick="redirect('/slots/{{$game['Id']}}')"  >
              @else          
@@ -257,150 +259,18 @@
                     </div>
                 </div>
                <div class="card-footer p-2">
-                <h5 class="card-title">{{ $game['Name'] }}</h5>
+                <h6 class="card-title">{{ $game['Name'] }}</h6>
                 by <a href="#" style="text-transform: capitalize;">{{ $game['SectionId'] }}</a></div>
             </div>
                 @endif
         @endforeach
             </div>
-
-    </div>
-
-  <div class="tab-pane slide-in" id="ex3-tabs-2" role="tabpanel" aria-labelledby="ex3-tab-2"> <div class="our-games mb-4" >
-        @foreach($games as $game)
-        @if(in_array($game["Id"], explode(',', $featuredslots))) 
-        
-        @if(!auth()->guest())
-        <div class="card m-2 gamepostercard" onclick="redirect('/slots/{{$game['Id']}}')"  >
-            <div class="game_poster" style="background-image:url(/img/slots/{{$game['SectionId']}}/{{$game['Id']}}.jpg)" loading="lazy"  onclick="redirect('/slots/{{$game['Id']}}')"  >
-             @else
-        <div class="card m-2 gamepostercard" onclick="$.register()">         
-                <div class="game_poster" style="background-image:url(/img/slots/{{$game['SectionId']}}/{{$game['Id']}}.jpg)" loading="lazy"  onclick="$.register()">
-            @endif
-                    <div class="label">
-                    {{ $game['SectionId'] }}
-                </div>
-                    <div class="name">
-                        <div class="name-text">
-                            <div class="title">{{ $game['Name'] }}</div>
-                @if(!auth()->guest())
-                                 
-                            <button class="btn btn-secondary" onclick="redirect('/slots/{{$game['Id']}}')">Play</button>                  
-                @else          
-                            <button class="btn btn-primary" onclick="$.register()">
-                                Login
-                            </button>
-                @endif   
-                        </div>
-                    </div>
-                </div>
-               <div class="card-footer p-2">
-                <h5 class="card-title">{{ $game['Name'] }}</h5>
-                by <a href="#">{{ $game['SectionId'] }}</a></div>
-            </div>
-                @endif
-        @endforeach
-            </div>
-        </div>
-
-    <div
-    class="tab-pane slide-in"
-    id="ex3-tabs-3"
-    role="tabpanel"
-    aria-labelledby="ex3-tab-3"
-  >
-
-    <div class="our-games">
-            <input type="text" id="gamelist-search" placeholder="Search game or provider..">
-                <div class="empty-nomargin-box p-1 d-none d-md-block">
-                    <button class="btn btn-primary m-1 active" value="" onclick="$.moveNumbers(this.value )">all slots</button>
-                    <button class="btn btn-info m-1" value="feature" onclick="$.moveNumbers(this.value )">featured</button>
-                    <button class="btn btn-info m-1" value="bonus" onclick="$.moveNumbers(this.value )">bonus slots</button>
-                    <button class="btn btn-info m-1" value="wilds" onclick="$.moveNumbers(this.value )">wilds</button>
-                    <button class="btn btn-info m-1" value="free" onclick="$.moveNumbers(this.value )">free spins</button>
-                    <button class="btn btn-info m-1" value="respin" onclick="$.moveNumbers(this.value )">respin</button>
-                    <button class="btn btn-danger m-1" value="bitsarcade" onclick="$.moveNumbers(this.value )">bitsarcade</button>
-                    <button class="btn btn-danger m-1" value="netent" onclick="$.moveNumbers(this.value )">netent</button>
-                    <button class="btn btn-danger m-1" value="quickspin" onclick="$.moveNumbers(this.value )">quickspin</button>
-                    <button class="btn btn-danger m-1" value="microgaming" onclick="$.moveNumbers(this.value )">microgaming</button>
-                    <button class="btn btn-danger m-1" value="booongo" onclick="$.moveNumbers(this.value )">booongo</button>
-                    <button class="btn btn-danger m-1" value="wazdan" onclick="$.moveNumbers(this.value )">wazdan</button>
-                    <button class="btn btn-danger m-1" value="playson" onclick="$.moveNumbers(this.value )">playson</button>
-                    <button class="btn btn-danger m-1" value="amatic" onclick="$.moveNumbers(this.value )">amatic</button>
-                    <button class="btn btn-danger m-1" value="igrosoft" onclick="$.moveNumbers(this.value )">igrosoft</button>
-                    <button class="btn btn-danger m-1" value="apollo" onclick="$.moveNumbers(this.value )">apollo</button>
-            </div>
-        <div class="games">
-            <div class="row">
-                <div class="col-12 col-md-12">
-        @foreach(\App\Games\Kernel\Game::list() as $ourgame)
-        @if(!$ourgame->isDisabled() &&  $ourgame->metadata()->id() !== "slotmachine")
-            
-            <div style="background-size: cover;" class="slots_small_poster game-{{ $ourgame->metadata()->id() }}" @if(!$ourgame->isDisabled()) onclick="redirect('/game/{{ $ourgame->metadata()->id() }}')" @endif>
-        <?php
-        $getname = $ourgame->metadata()->name();
-         ?>
-
-        @if($getname == "Dice") 
-
-            @elseif($getname == "Triple") 
-
-                    @endif
-                <div class="label-red">
-                    bitsarcade
-                </div>
-                <div class="label-fair">
-                    
-                </div>
-                <div class="name">
-                    <div class="name-text">
-                            <div class="title">
-                    {{ $ourgame->metadata()->name() }}
-                                    </div>
-                            <div class="desc">Provably Fair, In-house</div>
-                            <button class="btn btn-secondary" onclick="redirect('/game/{{ $ourgame->metadata()->id() }}')">Play</button>                  
-                 </div>
-                </div>
-            </div>
-            @else
-            @endif
-        @endforeach
-        @foreach($games as $game)
-            @if(!auth()->guest())
-            <div class="slots_small_poster" onclick="redirect('/slots/{{$game['Id']}}')"  >
-                    <div class="label-name">{{ $game['Name'] }}</div>
-                    <img class="img-small-slots" data-src="/img/slots_webp/{{$game['Id']}}.webp">
-             @else
-                <div class="slots_small_poster" onclick="$.register()">
-                    <div class="label-name">{{ $game['Name'] }}</div>
-                    <img class="img-small-slots" data-src="/img/slots_webp/{{$game['Id']}}.webp">
-            @endif
-                    <div class="label">
-                    {{ $game['SectionId'] }}
-                </div>
-                    <div class="name">
-                        <div class="name-text">
-                            <div class="title">{{ $game['Name'] }}</div>
-                            <div class="desc">{{ $game['Description'] }}</div>
-                @if(!auth()->guest())               
-                            <button class="btn btn-secondary" onclick="redirect('/slots/{{$game['Id']}}')">Play</button>                  
-                @else
-                            <button class="btn btn-primary" onclick="$.register()">
-                                Login
-                            </button>
-                @endif                                    
-                        </div>
-                    </div>
-                </div>
-
-        @endforeach
-</div></div>
-            </div><div class="our-games" style="background: transparent !important; box-shadow: none;">
-              <img src="/img/logo/logo_temp.png" width="100px" height="78px">
-            </div>
-        </div>
-    </div>
 </div>
 </div>
     </div>
+            <div class="our-games mt-4" style="border-radius: 12px; background: url(/img/misc/arrows.svg), linear-gradient(59deg, #2b2d2d, #262829) !important;">
+            <button class="btn btn-primary" onclick="redirect('/gamelist')">Check All 1102 Games</button> <img src="/img/logo/logo_temp.png" width="40px" height="32px" style="margin-left: 10px; margin-right: 10px;">
+        </div>
+    </div>
+
     <div class="bonus-side-menu"></div>

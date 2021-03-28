@@ -252,13 +252,16 @@ class Modal {
             if($(this).hasClass('disabled')) return;
             $(this).toggleClass('disabled', true);
 
-            $.request('promocode/bonus').then(function(response) {
+            $.request('promocode/bonus', {
+			captcha: $('.g-recaptcha-response').val()
+			}).then(function(response) {
                 window.next = response.next;
                 $('.wheel').wheel('start', response.slice);
             }, function(error) {
                 $('.bonus-side-menu-container .btn').toggleClass('disabled', false);
                 if(error === 2) $.error($.lang('general.error.should_have_empty_balance'));
                 if(error === 3) $.error($.lang('general.error.gameinprogressbonus'));
+				if(error === 4) $.error($.lang('general.error.captcha'));
                 else $.error($.lang('general.error.unknown_error', { code: error }));
             });
         });
