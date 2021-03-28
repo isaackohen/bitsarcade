@@ -169,7 +169,7 @@ class Blackjack extends ExtendedGame {
                     if ($playerScore == 21 && $playerHandSize < 3) $multiplier = 2.5;
                     else if ($playerScore <= 21) $multiplier = 2;
                 } else if ($playerScore < $dealerScore) {
-                    if ($playerScore <= 21 && $dealerScore > 21) $multiplier = 2.5;
+                    if ($playerScore <= 21 && $dealerScore > 21) $multiplier = 2.0;
                 }
 
                 if ($multiplier == 0 && count($this->gameData($game)['split']) > 0 && $this->gameData($game)['currentHand'] == 0) {
