@@ -34,10 +34,30 @@ class PlayWhisper extends WebSocketWhisper {
         ]);
 
 
-     //   if ($this->user != null && $this->user->referral != null) {
-     //       $referrer = \App\User::where('_id', $this->user->referral)->first();
-     //       $referrer->balance(Currency::find($data->currency))->add($data->bet() * 0.0009, \App\Transaction::builder()->message('referral bonus')->get());
-     //   }
+        if ($this->user != null && $this->user->referral != null) {
+            $referrer = \App\User::where('_id', $this->user->referral)->first();
+            $currency = $data->currency;
+            $balance = $data->bet();
+            if ($currency == 'BTC' || $currency == 'btc') {
+                $balanceB = (int) ((((string) $balance) * \App\Http\Controllers\Api\WalletController::rateDollarBtc()) * 100);
+            } elseif ($currency == 'doge' || $currency == "DOGE") {
+                $balanceB = (int)((((string)$balance) * \App\Http\Controllers\Api\WalletController::rateDollarDoge()) * 100);
+            } elseif ($currency == 'trx' || $currency == 'TRX') {
+                $balanceB = (int)((((string)$balance) * \App\Http\Controllers\Api\WalletController::rateDollarTron()) * 100);
+            } elseif ($currency == 'ltc' || $currency == 'LTC') {
+                $balanceB = (int)((((string)$balance) * \App\Http\Controllers\Api\WalletController::rateDollarLtc()) * 100);
+            } elseif ($currency == 'bch' || $currency == 'BCH') {
+                $balanceB = (int)((((string)$balance) * \App\Http\Controllers\Api\WalletController::rateDollarBtcCash()) * 100);
+            } elseif ($currency == 'eth' || $currency == 'ETH') {
+                $balanceB = (int)((((string)$balance) * \App\Http\Controllers\Api\WalletController::rateDollarEth()) * 100);
+            }
+            $balanceC = $balanceB * 0.0009;
+            if ($referrer->referral_balance_usd === "" OR $referrer->referral_balance_usd === null) {
+                $referrer->referral_balance_usd = 0;
+            }
+            $referrer->referral_balance_usd = $referrer->referral_balance_usd + $balanceC;
+            $referrer->save();
+        }
 
         if($this->user != null && $this->user->referral != null && $this->user->games() >= floatval(\App\Settings::where('name', 'referrer_activity_requirement')->first()->value)) {
             $referrer = \App\User::where('_id', $this->user->referral)->first();

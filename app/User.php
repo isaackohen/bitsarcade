@@ -36,7 +36,7 @@ class User extends \Jenssegers\Mongodb\Auth\User implements JWTSubject {
         'btc', 'ltc', 'eth', 'doge', 'bch', 'trx',
         'demo_btc', 'demo_ltc', 'demo_eth', 'demo_doge', 'demo_bch', 'demo_trx',
         'wallet_btc', 'wallet_ltc', 'wallet_eth', 'wallet_doge', 'wallet_bch', 'wallet_trx',
-        'wallet_trx_private_key', 'freegames', 'freegames_balance'
+        'wallet_trx_private_key', 'freegames', 'freegames_balance', 'referral_balance_usd'
     ];
 
     /**
