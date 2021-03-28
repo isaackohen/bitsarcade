@@ -255,6 +255,7 @@ class Modal {
             $.request('promocode/bonus', {
 			captcha: $('.g-recaptcha-response').val()
 			}).then(function(response) {
+				grecaptcha.reset();
                 window.next = response.next;
                 $('.wheel').wheel('start', response.slice);
             }, function(error) {
