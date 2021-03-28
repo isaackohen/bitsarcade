@@ -1,5 +1,5 @@
 @if(isset($data))
-
+    
     @if(auth()->user()->weekly_bonus_obtained)
         <div class="unavailable">
             <div class="slanting">
@@ -9,7 +9,8 @@
             </div>
         </div>
     @endif
-    <div class="bonus-image">
+
+    <div class="bonus-image" style="margin-top: 10px;">
               <h6 style="text-shadow: 1px 1px black;">Unlocked Bonus</h5>
         <div class="progress">
             @php $percent = number_format(auth()->user()->weekly_bonus ?? 0, 2, '.', ''); @endphp

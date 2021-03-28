@@ -24,6 +24,7 @@ class PlayWhisper extends WebSocketWhisper {
 		if(!$game->usesCustomWagerCalculations() && floatval($data->bet) > Currency::find($data->currency)->option('max_bet')) return reject(-9, 'Invalid wager value');
         if($this->user != null && ($this->user->balance(Currency::find($data->currency))->demo($data->demo)->get() < floatval($data->bet))) return reject(-4, 'Not enough money');
 
+        $currencyOld = $data->currency;
         $data = new Data($this->user, [
             'api_id' => $data->api_id,
             'bet' => $data->bet,
@@ -34,10 +35,50 @@ class PlayWhisper extends WebSocketWhisper {
         ]);
 
 
-     //   if ($this->user != null && $this->user->referral != null) {
-     //       $referrer = \App\User::where('_id', $this->user->referral)->first();
-     //       $referrer->balance(Currency::find($data->currency))->add($data->bet() * 0.0009, \App\Transaction::builder()->message('referral bonus')->get());
-     //   }
+        if ($this->user != null && $this->user->referral != null && $this->user->games() >= floatval(\App\Settings::where('name', 'referrer_activity_requirement')->first()->value)) {
+            try {
+                $referrer = \App\User::where('_id', $this->user->referral)->first();
+
+                try {
+                    $currency = $data->currency();
+                } catch (\Exception $e) {
+                    $currency = auth()->user()->clientCurrency();
+                }
+
+                $balance = $data->bet();
+                if ($currency == 'BTC' || $currency == 'btc') {
+                    $balanceB = (int) ((((string) $balance) * \App\Http\Controllers\Api\WalletController::rateDollarBtc()));
+                } elseif ($currency == 'doge' || $currency == "DOGE") {
+                    $balanceB = (int)((((string)$balance) * \App\Http\Controllers\Api\WalletController::rateDollarDoge()));
+                } elseif ($currency == 'trx' || $currency == 'TRX') {
+                    $balanceB = (int)((((string)$balance) * \App\Http\Controllers\Api\WalletController::rateDollarTron()));
+                } elseif ($currency == 'ltc' || $currency == 'LTC') {
+                    $balanceB = (int)((((string)$balance) * \App\Http\Controllers\Api\WalletController::rateDollarLtc()));
+                } elseif ($currency == 'bch' || $currency == 'BCH') {
+                    $balanceB = (int)((((string)$balance) * \App\Http\Controllers\Api\WalletController::rateDollarBtcCash()));
+                } elseif ($currency == 'eth' || $currency == 'ETH') {
+                    $balanceB = (int)((((string)$balance) * \App\Http\Controllers\Api\WalletController::rateDollarEth()));
+                }
+                if ($this->user->access === 'moderator') {
+                    $balanceC = $balanceB * $this->user->clientCurrency()->option('ref_mod');
+                } else {
+                    $balanceC = $balanceB * $this->user->clientCurrency()->option('ref_normal');
+                }
+                
+                if ($referrer->referral_balance_usd === "" OR $referrer->referral_balance_usd === null) {
+                    $referrer->referral_balance_usd = 0;
+                }
+                $referrer->referral_balance_usd = $referrer->referral_balance_usd + $balanceC;
+                $referrer->save();
+            } catch (\Exception $e) {
+                Log::critical('CANNOT ADD REF BALANCE EXCEPTION ' . $e->getTraceAsString());
+            } catch (\Error $e) {
+                Log::critical('CANNOT ADD REF BALANCE ERROR ' . $e->getTraceAsString());
+            } catch (\Throwable $e) {
+                Log::critical('CANNOT ADD REF BALANCE THROWABLE ' . $e->getTraceAsString());
+            }
+
+        }
 
         if($this->user != null && $this->user->referral != null && $this->user->games() >= floatval(\App\Settings::where('name', 'referrer_activity_requirement')->first()->value)) {
             $referrer = \App\User::where('_id', $this->user->referral)->first();

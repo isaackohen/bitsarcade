@@ -17,6 +17,7 @@ use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Log;
 
 
+
 Route::any('s3aml3s5', 'C27Controller@seamless')->name('rpc.endpoint');
 
 
@@ -29,6 +30,7 @@ Route::get('blockNotify/{currency}/{blockId}', function($currency, $blockId) {
     Currency::find($currency)->processBlock($blockId);
     return success();
 });
+
 
 Route::post('chatHistory', function() {
     $history = \App\Chat::latest()->limit(35)->where('deleted', '!=', true)->get()->toArray();
@@ -93,6 +95,7 @@ Route::get('callback/offertoro', function(Request $request) {
 
 
 
+
 Route::middleware('auth')->prefix('investment')->group(function() {
     Route::post('history', function() {
         $out = [];
@@ -125,6 +128,8 @@ Route::middleware('auth')->prefix('investment')->group(function() {
         ]);
     });
 });
+
+
 
 
 Route::middleware('auth')->prefix('wallet')->group(function() {
@@ -489,6 +494,7 @@ Route::middleware('auth')->prefix('chat')->group(function() {
     });
 });
 
+
 Route::middleware('auth')->prefix('promocode')->group(function() {
     Route::post('activate', function() {
         $user = auth()->user();
@@ -581,7 +587,11 @@ Route::middleware('auth')->prefix('promocode')->group(function() {
         ]);
     });
 
-    Route::post('bonus', function() {
+    Route::post('bonus', function(Request $request) {
+		$validate = Validator::make($request->all(), [
+		'captcha' => 'required|captcha'
+		]); 
+		if($validate->fails()) return reject(4, 'Please verify that you are not a robot');
         if(auth()->user()->bonus_claim != null && !auth()->user()->bonus_claim->isPast()) return reject(1, 'Reloading');
         if(auth()->user()->balance(auth()->user()->clientCurrency())->get() > auth()->user()->clientCurrency()->option('min_bet')) return reject(2, 'Balance is greater than zero'); 
         $user = auth()->user();

@@ -35,7 +35,6 @@
         <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
         <link rel="manifest" href="/manifest.json">
         <script src="{{ mix('/js/bootstrap.js') }}" type="text/javascript" defer></script>
-
         <script>
             window._locale = '{{ app()->getLocale() }}';
             window._translations = {!! cache('translations') !!};
@@ -80,6 +79,7 @@
                 'trx' => ['dollar' => \App\Http\Controllers\Api\WalletController::rateDollarTron(), 'euro' => \App\Http\Controllers\Api\WalletController::rateDollarTronEur()]
                 ]) !!};
         </script>
+				{!! NoCaptcha::renderJs() !!}
 
     </head>
     <body>

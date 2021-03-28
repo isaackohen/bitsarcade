@@ -76,8 +76,8 @@ Route::post('resetPassword', function(Request $request) {
 
 Route::post('/login', function(Request $request) {
     $request->validate([
-        'name' => ['required', 'string', 'max:12'],
-        'password' => ['required', 'string', 'min:8']
+        'name' => ['required', 'string', 'max:17'],
+        'password' => ['required', 'string', 'min:5']
     ]);
 
     $attempt = auth()->attempt(['name' => $request->name, 'password' => $request->password]);
@@ -93,7 +93,7 @@ Route::post('/login', function(Request $request) {
 
 Route::post('/register', function(Request $request) {
     $request->validate([
-        'name' => ['required', 'unique:users', 'string', 'max:24'],
+        'name' => ['required', 'unique:users', 'string', 'max:17'],
         'password' => ['required', 'string', 'min:5']
     ]);
 
