@@ -3920,3 +3920,18 @@ footer {
         font-size: 11px !important;
     }
 }
+
+.g-recaptcha {
+    margin: 15px auto !important;
+    width: auto !important;
+    height: auto !important;
+    text-align: -webkit-center;
+    text-align: -moz-center;
+    text-align: -o-center;
+    text-align: -ms-center;
+}
+
+.rc-anchor-pt {
+    transform: scale(0.9);
+    transform-origin: 0;
+}

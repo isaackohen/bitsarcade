@@ -111,6 +111,9 @@
   <i class="fas fa-bars"></i>
 </button>
 
+
+                            <button class="btn btn-secondary" style="padding: 3px; margin-left: 10px; margin-bottom: 1px;" onclick="redirect('/bonus')">Bonus</button>
+
                     </div>
 
                     @if(!auth()->guest())
@@ -182,7 +185,11 @@
   <ul class="sidenav-menu"> <li class="sidenav-item mt-2 mb-0"> <a class="sidenav-link" href="/">
         <i class="fad fa-home me-2"></i><span>Home</span></a>
     </li>
-
+	@if(!auth()->guest() && auth()->user()->access == 'admin')
+	  <ul class="sidenav-menu"> <li class="sidenav-item mt-2 mb-0"> <a class="sidenav-link" onclick="window.location.href='/admin'">
+        <i class="fad fa-unlock me-2"></i><span>Admin</span></a>
+    </li>
+	@endif
     <li class="sidenav-item mt-2 mb-0"> <a class="sidenav-link"
         ><i style="color: #5cb9ff" class="fad fa-user-circle me-2"></i><span style="font-family: 'Proxima Nova Semi Bd'"> Account</span></a>
       <ul class="sidenav-collapse show">
@@ -249,7 +256,7 @@
 <li class="sidenav-item mt-2 mb-0"> <a  onclick="redirect('/earn')" class="sidenav-link">
         <i style="color: #0fd560;" class="fad fa-money-bill-alt me-3"></i><span>Earn Wall</span></a>
     </li>
-<li class="sidenav-item mt-2 mb-0"> <a  onclick="redirect('/invest')" class="sidenav-link">
+<li class="sidenav-item mt-2 mb-0"> <a  @if(Auth::guest()) onclick="$.auth()" @else onclick="redirect('/invest')" @endif class="sidenav-link">
         <i style="color: #0fd560;" class="fad fa-piggy-bank me-3"></i><span>Be The Bank BETA</span></a>
     </li>
     <li class="sidenav-item mt-2 mb-0">
@@ -404,11 +411,11 @@
                 <i class="fas fa-question-circle"></i>
                 <div>{{ __('general.head.help') }}</div>
             </div>
-            <div class="control" data-page-trigger="'/invest'" data-toggle-class="active" onclick="redirect('/invest')">
+            <div class="control" @if(Auth::guest()) onclick="$.auth()" @else data-page-trigger="'/invest'" @endif data-toggle-class="active" onclick="redirect('/invest')">
                 <i class="fas fa-piggy-bank"></i>
                 <div>Be The Bank</div>
             </div>
-            <div class="control" data-page-trigger="'/earn'" data-toggle-class="active" onclick="redirect('/earn')">
+            <div class="control" @if(Auth::guest()) onclick="$.auth()" @else data-page-trigger="'/earn'" @endif data-toggle-class="active" onclick="redirect('/earn')">
                 <i class="far fa-money-bill-wave"></i>
                 <div>Earn Wall</div>
             </div>

@@ -10,6 +10,11 @@ $.on('/admin/promo', function() {
         dateFormat: "d-m-Y H:i",
         time_24hr: true
     });
+	flatpickr('#expiresmore', {
+        enableTime: true,
+        dateFormat: "d-m-Y H:i",
+        time_24hr: true
+    });
 
     $('#finish').on('click', function() {
         $('#close').click();
@@ -22,9 +27,32 @@ $.on('/admin/promo', function() {
         }).then(function() {
             window.location.reload();
         }, function(error) {
-            if(error >= 1) $.error('Ошибка ' + error);
+            if(error >= 1) $.error('Error ' + error);
             else $.error($.parseValidation(error, {
                 code: 'Code',
+                usages: 'Max usages',
+                expires: 'Expires',
+                sum: 'Sum',
+                currency: 'Currency'
+            }));
+        });
+    });
+	
+	    $('#finishmore').on('click', function() {
+        $('#close').click();
+        $.request('/admin/promocode/createmore', {
+            code: $('#amountmore').val(),
+            usages: $('#usagesmore').val(),
+            expires: $('#expiresmore').val(),
+            sum: $('#summore').val(),
+            currency: $('#currencymore').val()
+        }).then(function() {
+            window.location.reload();
+        }, function(error) {
+            if(error >= 1) $.error('Error ' + error);
+			if(error == 2) $.error('Amount of promos min. 10, max. 30');
+            else $.error($.parseValidation(error, {
+                code: 'Amounts promo',
                 usages: 'Max usages',
                 expires: 'Expires',
                 sum: 'Sum',
@@ -44,7 +72,7 @@ $.on('/admin/promo', function() {
         }).then(function() {
             window.location.reload();
         }, function(error) {
-            if(error >= 1) $.error('Ошибка ' + error);
+            if(error >= 1) $.error('Error ' + error);
             else $.error($.parseValidation(error, {
                 code: 'Code',
                 usages: 'Max usages',

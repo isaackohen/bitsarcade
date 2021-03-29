@@ -1,6 +1,7 @@
 <div class="row page-title">
     <div class="col-md-12">
         <div class="float-right">
+		<button class="btn btn-warning" data-toggle="modal" data-target="#createmore">Create more crypto promo</button>
             <button class="btn btn-primary" data-toggle="modal" data-target="#create">Create crypto promo</button>
 		    <button class="btn btn-success" data-toggle="modal" data-target="#create-freespin">Create free spin promo</button>
             <button class="btn btn-danger" onclick="$.request('/admin/promocode/remove_inactive').then(function() {redirect(window.location.pathname);});">Cleanup</button>
@@ -163,6 +164,57 @@
                         <div class="col-6 text-right">
                             <button type="button" class="btn btn-light mr-1" id="close" data-dismiss="modal">Close</button>
                             <div class="btn btn-success" id="finish-freespin">Create</div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="createmore" tabindex="-1" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header py-3 px-4 border-bottom-0 d-block">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h5 class="modal-title">More promocodes crypto</h5>
+            </div>
+            <div class="modal-body p-4">
+                <form class="needs-validation" name="event-form" id="form-event" novalidate="">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label class="control-label">Amount of promos</label>
+                                <input class="form-control" placeholder="Min. 10, max. 30" value="10" type="text" id="amountmore">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Max. usages</label>
+                                <input class="form-control" placeholder="Max. usages" type="text" id="usagesmore">
+                                <small><a href="javascript:void(0)" onclick="$('#usagesmore').val('%infinite%')">Unlimited</a></small>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Expire</label>
+                                <input class="form-control flatpickr-input" placeholder="Time" type="text" id="expiresmore" readonly>
+                                <small><a href="javascript:void(0)" onclick="$('#expiresmore').val('%unlimited%')">Unlimited</a></small>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Amount</label>
+                                <input class="form-control flatpickr-input" placeholder="Amount" value="0.00000000" type="text" id="summore">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Currency</label>
+                                <select class="form-control" id="currencymore">
+                                    @foreach(\App\Currency\Currency::all() as $currency)
+                                        <option value="{{ $currency->id() }}">{{ $currency->name() }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-6"></div>
+                        <div class="col-6 text-right">
+                            <button type="button" class="btn btn-light mr-1" id="close" data-dismiss="modal">Close</button>
+                            <div class="btn btn-success" id="finishmore">Create</div>
                         </div>
                     </div>
                 </form>

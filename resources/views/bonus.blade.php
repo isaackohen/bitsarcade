@@ -87,6 +87,7 @@ echo date("H\\h  i\\m", $timeLeft); ?></p>
 <p>Be active and get rewarded by our DOGE Rain Bot, dropping every 10 minutes!</p>
 
 <p>Activity threshold is based on games played and chat participation.</p>
+<br>
 <div class="btn btn-primary p-2" onclick="redirect('https://discord.gg/ztNmeWADWq')">Join Discord</div>
 </div></div>
 </div>

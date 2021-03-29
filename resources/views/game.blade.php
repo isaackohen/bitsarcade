@@ -20,7 +20,7 @@
 </div>
 
             <div class="our-games mt-4" style="border-radius: 12px; background: url(/img/misc/arrows.svg), linear-gradient(59deg, #2b2d2d, #262829) !important;">
-            <button class="btn btn-signup" onclick="redirect('/home')">Games</button> <img src="/img/logo/logo_temp.png" width="40px" height="32px" style="margin-left: 10px; margin-right: 10px;">
+            <button class="btn btn-secondary" onclick="redirect('/gamelist')">Games</button> <img src="/img/logo/logo_temp.png" width="40px" height="32px" style="margin-left: 10px; margin-right: 10px;">
         </div>
 
 @if(!auth()->guest())

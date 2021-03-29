@@ -257,6 +257,29 @@ Route::prefix('promocode')->group(function() {
         ]);
         return success();
     });
+	    Route::post('createmore', function() {
+		if(request('code') < 10 || request('code') > 30) return reject(2, 'Amount of promos min. 10, max. 30');
+        request()->validate([
+            'code' => 'required',
+            'usages' => 'required',
+            'expires' => 'required',
+            'sum' => 'required',
+            'currency' => 'required'
+        ]);
+
+        for($i = 0; $i < intval(request('code')); $i++) {
+        \App\Promocode::create([
+            'code' => \App\Promocode::generate(),
+            'currency' => request('currency'),
+            'used' => [],
+            'sum' => floatval(request('sum')),
+            'usages' => request('usages') === '%infinite%' ? -1 : intval(request('usages')),
+            'times_used' => 0,
+            'expires' => request('expires') === '%unlimited%' ? \Carbon\Carbon::minValue() : \Carbon\Carbon::createFromFormat('d-m-Y H:i', request()->get('expires'))
+        ]);
+		}
+        return success();
+    });
 });
 
 Route::get('/{page?}/{data?}', function($page = 'index', $data = null) {
