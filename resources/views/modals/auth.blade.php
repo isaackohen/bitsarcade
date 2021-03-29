@@ -1,3 +1,4 @@
+	{!! NoCaptcha::renderJs() !!}
 <div
   class="auth modal fade "
   id="auth modal"
@@ -38,7 +39,9 @@
   <input type="password" id="password" class="form-control form-control-lg" />
   <label class="form-label" style="color: #ffffff8a;" for="formControlLg">Password</label>
 </div>
-
+<div style="height: 78px; margin-bottom: 20px;">
+                                       {!! NoCaptcha::display(['data-theme' => 'dark'], ['data-callback' => 'recaptchaCallback']) !!}
+                                    </div>
         <button class="btn btn-primary btn-block p-2">{{ __('general.auth.login') }}</button>
           <div class="divider">
             <div class="line"></div>

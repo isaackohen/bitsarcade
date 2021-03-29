@@ -14,8 +14,8 @@
     <h2>{{ __('bonus.wheel.title') }}</h2>
 
     <div class="wheel"></div>
-	                                   <div style="height: 78px;">
-                                       {!! NoCaptcha::display() !!}
+	                                   <div style="height: 78px; margin-bottom: 20px;">
+                                       {!! NoCaptcha::display(['data-theme' => 'dark'], ['data-callback' => 'recaptchaCallback']) !!}
                                     </div>
     <button class="btn btn-primary btn-block mt-2" data-target="#captchaModal">{{ __('general.spin') }}</button>
 </div>

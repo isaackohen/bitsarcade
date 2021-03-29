@@ -75,10 +75,14 @@ Route::post('resetPassword', function(Request $request) {
 });
 
 Route::post('/login', function(Request $request) {
+	$validate = Validator::make($request->all(), [
+		'captcha' => 'required|captcha'
+	]); 
     $request->validate([
         'name' => ['required', 'string', 'max:17'],
         'password' => ['required', 'string', 'min:5']
     ]);
+	if($validate->fails()) return reject(4, 'Please verify that you are not a robot');
 
     $attempt = auth()->attempt(['name' => $request->name, 'password' => $request->password]);
     if($attempt) User::where('name', $request->name)->update([
@@ -92,10 +96,14 @@ Route::post('/login', function(Request $request) {
 });
 
 Route::post('/register', function(Request $request) {
+	$validate = Validator::make($request->all(), [
+		'captcha' => 'required|captcha'
+	]); 
     $request->validate([
         'name' => ['required', 'unique:users', 'string', 'max:17'],
         'password' => ['required', 'string', 'min:5']
     ]);
+	if($validate->fails()) return reject(4, 'Please verify that you are not a robot');
 
     createUser($request->name, $request->password);
     return success();

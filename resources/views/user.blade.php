@@ -148,19 +148,19 @@
                                                         </div>
                                                         <div class="name">
                                                             <div data-highlight>{{ $currency->name() }}</div>
-                                                        <span>{{ $bets }}</span>
+                                                        <span>{{ $bets == null ? 0 : $bets }}</span>
 
                                                         </div>
                                                     </div>
                                                 </th>
                                                 <th data-highlight class="d-none d-md-table-cell">
                                                     <div>
-                                                        <span>{{ $wins }}</span>
+                                                        <span>{{ $wins == null ? 0 : $wins }}</span>
                                                     </div>
                                                 </th>
                                                 <th data-highlight  class="d-none d-md-table-cell">
                                                     <div>
-                                                        <span>{{ $loss }}</span>
+                                                        <span>{{ $loss == null ? 0 : $loss }}</span>
                                                     </div>
                                                 </th>
                                                 <th data-highlight style="text-align: right">
