@@ -20,6 +20,7 @@ class PlayWhisper extends WebSocketWhisper {
         if($this->user != null && !$game->ignoresMultipleClientTabs() && DB::table('games')->where('game', $data->api_id)->where('user', $this->user->_id)->where('status', 'in-progress')->count() > 0) return reject(-8, 'Game already has started');
 
         if($this->user == null && !$data->demo) return reject(-2, 'Not authorized');
+        if($this->user == null && $data->demo) return reject(-2, 'Please login to play');
         if(!$game->usesCustomWagerCalculations() && floatval($data->bet) < Currency::find($data->currency)->option('min_bet')) return reject(-1, 'Invalid wager value');
 		if(!$game->usesCustomWagerCalculations() && floatval($data->bet) > Currency::find($data->currency)->option('max_bet')) return reject(-9, 'Invalid wager value');
         if($this->user != null && ($this->user->balance(Currency::find($data->currency))->demo($data->demo)->get() < floatval($data->bet))) return reject(-4, 'Not enough money');

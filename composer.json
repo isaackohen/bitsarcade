@@ -56,6 +56,7 @@
         "sajya/server": "1.0.0",
         "sc0vu/web3.php": "dev-master",
         "spatie/laravel-analytics": "^3.9",
+        "symfony/process": "^5.2",
         "torann/geoip": "^1.2",
         "tymon/jwt-auth": "^1.0",
         "vkcom/vk-php-sdk": "^5.101",
