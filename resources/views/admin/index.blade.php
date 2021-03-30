@@ -39,7 +39,7 @@
                             <button class="btn btn-danger m-0 p-2" onclick="$.request('/admin/start-rain');">Start Rain</button>
                             <button class="btn btn-success m-0 p-2" onclick="$.request('/admin/start-premiumrain');">Super Drop</button>
                             <button class="btn btn-info m-0 p-2" onclick="$.request('/admin/discord-promocode');">Discord-code</button>
-                            <button class="btn btn-info m-0 p-2" onclick="$.request('/admin/discord-vipcode');">Discord VIP-code</button></h2>
+                            <button class="btn btn-info m-0 p-2" onclick="$.request('/admin/discord-vipcode');">Discord VIP-code</button>
                         </div>
                     </div>
                 </div>
