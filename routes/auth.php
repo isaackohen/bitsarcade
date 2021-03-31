@@ -14,6 +14,7 @@ function createUser($login, $password, $avatar = null, $additionalData = []) {
         'password' => $password == null ? null : Hash::make($password),
         'avatar' => $avatar ?? '/avatar/'.uniqid(),
         'email' => null,
+        'freegames' => 0,
         'client_seed' => \App\Games\Kernel\ProvablyFair::generateServerSeed(),
         'access' => 'user',
         'stickers' => [],

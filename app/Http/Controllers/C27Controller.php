@@ -55,7 +55,6 @@ class C27Controller extends Controller
         }
     }
 
-
     /**
      * @param $slug
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
@@ -68,56 +67,45 @@ class C27Controller extends Controller
             return redirect('/');
         }
 
+
+        if($user->freegames > 1 && $slug == 'starburst_touch') {
         $this->client->setPlayer(['Id' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-final' , 'BankGroupId' => 'bits_usd']);
-        sleep(0.45);
-
-        if($user->freegames > 0) {
-            try {
-                $this->client->setBonus([
-                    'Id' => 'shared',
-                    'FsType' => 'original',
-                    'CounterType' => 'shared',
-                    'SharedParams' => [
-                        'Games' => [
-                            $slug => [
-                                'FsCount' => auth()->user()->freegames,
-                            ]
-                        ]
-                    ]
-                ]);
-
-
-                $this->client->activatePlayerBonus([
-                    'BonusId' => 'shared',
-                    'PlayerId' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-final',
-                ]);
-            } catch (\Exception $exception) {
-
-            }
-
+                    $this->client->setBonus([   
+                    'Id' => 'shared',   
+                    'FsType' => 'original', 
+                    'CounterType' => 'shared',  
+                    'SharedParams' => [ 
+                        'Games' => [    
+                            $slug => [  
+                                'FsCount' => auth()->user()->freegames, 
+                            ]   
+                        ]   
+                    ]   
+                ]);      
+         $game = $this->client->createSession(   
+                [   
+                    'GameId' => $slug,  
+                    'BonusId' => 'shared',  
+                    'PlayerId' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-final',  
+                    'AlternativeId' => time() . '_' . $user->id . '_' . auth()->user()->clientCurrency()->id(), 
+                    'Params' => [   
+                        'freeround_bet' => 1    
+                    ],  
+                    'RestorePolicy' => 'Create'
+                ]   
+            );  
         }
-        try {
-            $game = $this->client->createSession(
-                [
-                    'GameId' => $slug,
-                    'BonusId' => 'shared',
-                    'PlayerId' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-final',
-                    'AlternativeId' => time() . '_' . $user->id . '_' . auth()->user()->clientCurrency()->id(),
-                    'Params' => [
-                        'freeround_bet' => 1
-                    ],
-                    'RestorePolicy' => 'Restore'
-                ]
-            );
-        } catch (\Exception $exception) {
-            sleep(0.55);
-            $this->client->setPlayer(['Id' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-final' , 'BankGroupId' => 'bits_usd']);
-            $game = $this->client->createSession(
+        else
+        {
+        $this->client->setPlayer(['Id' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-final' , 'BankGroupId' => 'bits_usd']);
+        
+        sleep(0.65);
+        $game = $this->client->createSession(
                 [
                     'GameId' => $slug,
                     'PlayerId' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-final',
                     'AlternativeId' => time() . '_' . $user->id . '_' . auth()->user()->clientCurrency()->id(),
-                    'RestorePolicy' => 'Restore'
+                    'RestorePolicy' => 'Last'
                 ]
             );
         }
@@ -154,33 +142,33 @@ class C27Controller extends Controller
 
         $balance = $user->balance(Currency::find($currency))->get();
 
-        if ($content->params->chargeFreerounds > 0) {
-            if (($user->freegames - $content->params->chargeFreerounds) > 0) {
-
-                $user->freegames = $user->freegames - $content->params->chargeFreerounds;
-                $user->freegames_balance = $user->freegames_balance + $content->params->deposit;
-                $user->save();
-
-                return response()->json([
-                    'result' => [
-                        'newBalance' => (int) ($user->freegames_balance),
-                        'transactionId' => $content->params->transactionRef,
-                        'freeroundsLeft' => $user->freegames
-                    ],
-                    'id' => $content->id,
-                    'jsonrpc' => '2.0'
+    
+        if ($user->freegames > 0) {   
+            if (($user->freegames - $content->params->chargeFreerounds) > 0) {  
+                $user->freegames = $user->freegames - $content->params->chargeFreerounds;   
+                $user->freegames_balance = $user->freegames_balance + $content->params->deposit;    
+                $user->save();  
+                return response()->json([   
+                    'result' => [   
+                        'newBalance' => (int) ($user->freegames_balance),   
+                        'transactionId' => $content->params->transactionRef,    
+                        'freeroundsLeft' => $user->freegames    
+                    ],  
+                    'id' => $content->id,   
+                    'jsonrpc' => '2.0'  
                 ]);
-            } else {
-                $content->params->deposit = $user->freegames_balance;
-                $user->freegames = 0;
-                $user->freegames_balance = 0;
-                $user->save();
-            }
-        } else if ($user->freegames_balance > 0) {
-            $content->params->deposit = $user->freegames_balance;
-            $user->freegames_balance = 0;
-            $user->save();
+                } else {    
+                $content->params->deposit = $user->freegames_balance;   
+                $user->freegames = 0;   
+                $user->freegames_balance = 0;   
+                $user->save();  
+            }   
+        } else if ($user->freegames_balance > 0) {  
+            $content->params->deposit = $user->freegames_balance;   
+            $user->freegames_balance = 0;   
+            $user->save();  
         }
+
 
         if ($currency == 'BTC' || $currency == 'btc') {
             $balanceB = (int) ((((string) $balance) * \App\Http\Controllers\Api\WalletController::rateDollarBtc()) * 100);
@@ -217,13 +205,11 @@ class C27Controller extends Controller
             $add = bcdiv($content->params->deposit, \App\Http\Controllers\Api\WalletController::rateDollarEth() * 100, 8);
         }
 
-        if ($content->params->chargeFreerounds > 0) {
 
-
-        } else {
+        if($user->freegames < 1) {
             $user->balance(Currency::find($currency))->subtract($subtract, json_decode($request->getContent(), true));
-            $user->balance(Currency::find($currency))->add($add, json_decode($request->getContent(), true));
         }
+            $user->balance(Currency::find($currency))->add($add, json_decode($request->getContent(), true));
 
         $balance = $user->balance(Currency::find($currency))->get();
         if ($currency == 'BTC' || $currency == 'btc') {

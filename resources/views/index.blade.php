@@ -162,33 +162,15 @@
 
 <ul class="nav nav-tabs" id="ex1" role="tablist">
   <li class="btn btn-primary p-1 m-1 nav-item"  role="presentation">
-    <a
-      class="nav-link active"
-      id="ex3-tab-1"
-      data-mdb-toggle="tab"
-      href="#ex3-tabs-1"
-      role="tab"
-      aria-controls="ex3-tabs-1"
-      aria-selected="true"
-      >Featured</a
-    >
+    <a class="nav-link active" id="ex3-tab-1" data-mdb-toggle="tab" href="#ex3-tabs-1" role="tab" aria-controls="ex3-tabs-1" aria-selected="true">Featured</a>
   </li>
   <li class="btn btn-primary p-1 m-1 nav-item" role="presentation">
-    <a
-      class="nav-link"
-      href="/gamelist/"
-      >All Games</a
-    >
+    <a class="nav-link" href="/gamelist/">All Games</a>
   </li>
 </ul>
     </div>
-                <div class="tab-content" id="ex2-content">
-  <div
-    class="tab-pane fade show active"
-    id="ex3-tabs-1"
-    role="tabpanel"
-    aria-labelledby="ex3-tab-1"
-  >
+  <div class="tab-content" id="ex2-content">
+  <div class="tab-pane fade show active" id="ex3-tabs-1" role="tabpanel" aria-labelledby="ex3-tab-1">
         <div class="our-games">
             
 
@@ -237,7 +219,7 @@
         
         <div class="card gamepostercard" style="cursor: pointer; margin-left: 1.4vh; margin-right: 1.4vh; margin-bottom: 3.5vh;">
         @if(!auth()->guest())
-            <div class="game_poster" style="background-image:url(/img/slots/{{$game['SectionId']}}/{{$game['Id']}}.jpg)" loading="lazy"  onclick="redirect('/slots/{{$game['Id']}}')"  >
+             <a href="/slots/{{$game['Id']}}"><div class="game_poster" style="background-image:url(/img/slots/{{$game['SectionId']}}/{{$game['Id']}}.jpg)" loading="lazy"></a>
              @else          
                 <div class="game_poster" style="background-image:url(/img/slots/{{$game['SectionId']}}/{{$game['Id']}}.jpg)" loading="lazy"  onclick="$.register()">
             @endif
@@ -249,7 +231,7 @@
                             <div class="title">{{ $game['Name'] }}</div>
                 @if(!auth()->guest())
                                  
-                            <button class="btn btn-secondary" onclick="redirect('/slots/{{$game['Id']}}')">Play</button>                  
+                            <a href="/slots/{{$game['Id']}}"><button class="btn btn-secondary">Play</button></a>
                 @else          
                             <button class="btn btn-primary" onclick="$.register()">
                                 Login
