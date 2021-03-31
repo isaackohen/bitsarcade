@@ -94,7 +94,7 @@
         <div class="wrapper">
             <header>
                 <div class="fixed">
-                    <div class="logo" onclick="redirect('/')"></div>
+                    <a href="/"><div class="logo"></div></a>
                     <div class="menu">
 <button
   data-mdb-toggle="sidenav"
