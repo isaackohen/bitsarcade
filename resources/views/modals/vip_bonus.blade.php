@@ -8,7 +8,7 @@
                 </div>
             </div>
         </div>
-    @endif
+    @else
 
     <div class="bonus-image" style="margin-top: 10px;">
               <h6 style="text-shadow: 1px 1px black;">Unlocked Bonus</h5>
@@ -33,6 +33,7 @@
     <div class="vipDesc">{!! __('vip.bonus.description', [
             'vip' => "<svg style='width: 14px; height: 14px;'><use href='#vip-$vip'></use></svg>"
         ]) !!}</div>
+        @endif
 @else
 
 <div
@@ -52,7 +53,7 @@
           aria-label="Close"
         ></button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" style="min-height:300px;">
         <div class="ui-blocker" style="display: none;">
             <div class="loader"><div></div></div>
         </div> 

@@ -34,9 +34,9 @@
 
               <div class="games">
 
-            <div class="our-games mb-5" style="background: transparent !important;">
+            <div class="our-games mb-1" style="background: transparent !important;">
             <div class="row">
-  <div class="col-md-3 mt-2 mb-2">
+  <div class="col-md-3 col-sm-12 mt-2 mb-2">
 <div class="card text-center">
   <div class="card-header p-1" style="background: url(/img/misc/arrows.svg), linear-gradient(59deg, #2b2d2d, #262829) !important;">Profile</div>
   <div class="card-body" style="background: url(/img/misc/patternbg.png), linear-gradient(59deg, #2b2b2b, #2d2d2d) !important;">
@@ -45,14 +45,14 @@
         <img onclick="redirect('/user/{{ auth()->user()->_id }}')" src="{{ auth()->user()->avatar }}" alt>
     </p>
     <button onclick="$.wallet()" class="btn btn-secondary p-1 m-1">Wallet</button>
-    <button onclick="redirect('/help/')" class="btn btn-danger p-1 m-1">Support</button>
+    <button data-toggle-bonus-sidebar="promo" class="btn btn-danger p-1 m-1">Promocode</a>
 
   </div>
-  <div class="card-footer text-muted" style="background: url(/img/misc/arrows.svg), linear-gradient(59deg, #2b2d2d, #262829) !important;">Created at {{ auth()->user()->created_at }}</div>
+  <div class="card-footer text-muted" style="background: url(/img/misc/arrows.svg), linear-gradient(59deg, #2b2d2d, #262829) !important;">Created on {{ auth()->user()->created_at }}</div>
 </div>
   </div>
 
-  <div class="col-md-6 mt-2 mb-2">
+  <div class="col-md-6 col-sm-12 mt-2 mb-2">
     <div class="card text-center" style="{{ \App\Settings::where('name', 'featured_newsbox_bg')->first()->value }}">
   <div class="card-header" style="background: url(/img/misc/arrows.svg),linear-gradient(#389bfc, #2a80d4)  !important;">Featured News</div>
   <div class="card-body">
@@ -65,20 +65,19 @@
     </p>
     <a onclick="redirect('{{ \App\Settings::where('name', 'featured_newsbox_button')->first()->value }}')" class="btn btn-secondary p-2">More Info</a>
   </div>
-  <div class="card-footer text-muted" style="background: url(/img/misc/arrows.svg), linear-gradient(59deg, #2b2d2d, #262829) !important;">{{ \App\Settings::where('name', 'featured_newsbox_footer')->first()->value }}</div>
+  <div class="card-footer text-muted" style="background: url(/img/misc/arrows.svg), linear-gradient(59deg, #2b2d2d, #262829) !important;"><a href="{{ \App\Settings::where('name', 'telegram_link')->first()->value }}">@telegram</a> for updates & giveaways</div>
 </div>
 </div>
 
-  <div class="col-md-3 mt-2 mb-2">
+  <div class="col-md-3 col-sm-12 mt-2 mb-2">
     <div class="card text-center">
   <div class="card-header" style="background: url(/img/misc/arrows.svg), linear-gradient(59deg, #2b2d2d, #262829) !important;">Bonus</div>
   <div class="card-body" style="background: url(/img/misc/patternbg.png), linear-gradient(59deg, #2b2b2b, #2d2d2d) !important;">
-    <h5 class="card-title">We treat our players good!</h5>
+    <h5 class="card-title">Freebies!</h5>
     <p class="card-text">
         Check all promotions such as deposit bonus <a href="/bonus">here</a>!
     </p>
     <a href="/bonus" class="btn btn-secondary p-2 m-1">Faucet</a>
-    <a href="/bonus" class="btn btn-danger p-2 m-1">Promocode</a>
     <a onclick="$.vip()" class="btn btn-success p-2 m-1">VIP</a>
     <a onclick="$.vipBonus()" class="btn btn-pink p-2 m-1">Daily Bonus</a>
     <a href="/earn" class="btn btn-info p-2 m-1">Earn Wall</a>
@@ -97,7 +96,7 @@
 
        <div class="d-flex p-2">
                 @if(!auth()->guest() && auth()->user()->isDismissed($notification)) @continue @endif
-                <div class="globalNotification p-2 m-1" id="emailNotification" style="border-radius: 8px; background: url(/img/misc/arrows.svg),linear-gradient(#ff7907, #a04625)  !important;">
+                <div class="globalNotification p-2 m-1 mb-2" id="emailNotification" style="border-radius: 8px; background: url(/img/misc/arrows.svg),linear-gradient(#ff7907, #a04625)  !important;">
                     <div class="icon"><i class="{{ $notification->icon }}"></i></div>
                     <div class="text">{{ $notification->text }}</div>
                 </div>
@@ -160,7 +159,7 @@
 
               <div class="our-games mb-0 mt-2" style="border-top-right-radius: 12px !important; border-top-left-radius: 12px !important; border-radius: 0px; background: url(/img/misc/arrows.svg), linear-gradient(59deg, #2b2d2d, #262829) !important;">
 
-<ul class="nav nav-tabs" id="ex1" role="tablist">
+<ul class="nav nav-tabs" id="ex1" role="tablist" style="justify-content: center;">
   <li class="btn btn-primary p-1 m-1 nav-item"  role="presentation">
     <a class="nav-link active" id="ex3-tab-1" data-mdb-toggle="tab" href="#ex3-tabs-1" role="tab" aria-controls="ex3-tabs-1" aria-selected="true">Featured</a>
   </li>
@@ -207,8 +206,8 @@
             </div>
             
             <div class="card-footer p-2">
-                <h6 class="card-title">{{ $game->metadata()->name() }}</h6>
-                by <a href="#" style="text-transform: capitalize;">BitsArcade</a></div>
+                <h7 class="card-title">{{ $game->metadata()->name() }}</h7> - 
+                <a href="/fairness" target="_blank" style="text-transform: capitalize;">Provably Fair</a></div>
             </div>
             @else
             @endif
@@ -221,9 +220,9 @@
         @if(!auth()->guest())
              <a href="/slots/{{$game['Id']}}"><div class="game_poster" style="background-image:url(/img/slots/{{$game['SectionId']}}/{{$game['Id']}}.jpg)" loading="lazy"></a>
              @else          
-                <div class="game_poster" style="background-image:url(/img/slots/{{$game['SectionId']}}/{{$game['Id']}}.jpg)" loading="lazy"  onclick="$.register()">
+                <div class="game_poster" style="background-image:url(/img/slots/{{$game['SectionId']}}/{{$game['Id']}}.jpg)" loading="lazy">
             @endif
-                    <div class="label">
+                    <div class="label" style="opacity: 1;">
                     {{ $game['SectionId'] }}
                 </div>
                     <div class="name">
@@ -241,8 +240,7 @@
                     </div>
                 </div>
                <div class="card-footer p-2">
-                <h6 class="card-title">{{ $game['Name'] }}</h6>
-                by <a href="#" style="text-transform: capitalize;">{{ $game['SectionId'] }}</a></div>
+                <h7 class="card-title m-1">{{ $game['Name'] }}</h7></div>
             </div>
                 @endif
         @endforeach

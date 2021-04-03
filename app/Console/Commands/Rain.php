@@ -74,6 +74,7 @@ class Rain extends Command
         $currency = Currency::find("doge");
 
         foreach ($users as $user) {
+            if(!$user->balance($currency) > '10') return;
             $user->balance($currency)->add(floatval($currency->option('rain')), Transaction::builder()->message('Rain (Global)')->get());
             array_push($result, $user->toArray());
         }

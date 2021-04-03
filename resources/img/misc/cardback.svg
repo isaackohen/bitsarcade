@@ -3,7 +3,6 @@
 		<clipPath clipPathUnits="userSpaceOnUse" id="cp1">
 			<path d="M4 0L82 0C84.21 0 86 1.79 86 4L86 136.7C86 138.91 84.21 140.7 82 140.7L4 140.7C1.79 140.7 0 138.91 0 136.7L0 4C0 1.79 1.79 0 4 0Z" />
 		</clipPath>
-		<image width="45" height="30" id="img1" href="https://bitsarcade.com/img/logo/logo_temp.png"/>
 	</defs>
 	<style>
 		tspan { white-space:pre }

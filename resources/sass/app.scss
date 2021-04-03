@@ -14,8 +14,8 @@
 @import 'modals/modal';
 
 $sidebar-width: 205px;
-$header-height: 60px;
-$chat-width: 285px;
+$header-height: 62px;
+$chat-width: 290px;
 
 $card: 0 0 10px rgba(28, 39, 60, .05);
 
@@ -454,7 +454,7 @@ $card: 0 0 10px rgba(28, 39, 60, .05);
 .game_poster {
     display: inline-flex;
     width: 190px;
-    height: 200px;
+    height: 201px;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -466,10 +466,6 @@ $card: 0 0 10px rgba(28, 39, 60, .05);
     &:hover .name {
     opacity: 1;  
     transition: all 0.15s ease-in;
-
-    .label {
-    opacity: 1 !important;
-    }
 
     }
 
@@ -528,18 +524,17 @@ $card: 0 0 10px rgba(28, 39, 60, .05);
 
     .label {
     position: absolute;
-    opacity: 0 !important;
+    opacity: 1 !important;
     z-index: 5;
-    right: 10px;
-    border-radius: 10px;
+    right: 1px;
     opacity: 1.0;
-    top: 10px;
-    background: #151822;
+    top: 6px;
+    background: linear-gradient(#212729e0, #111618e0);
     -webkit-box-shadow: 0 8px 12px rgb(0 0 0 / 16%), inset 0 -2px 0 rgb(0 0 0 / 30%);
     box-shadow: 0 8px 12px rgb(0 0 0 / 16%), inset 0 -2px 0 rgb(0 0 0 / 30%);
     font-size: 10px;
     color: #fff;
-    font-weight: 600;
+    font-weight: 500;
     background-color: #1e44af;
     padding: 4px 10px;
     text-transform: uppercase;
@@ -1115,8 +1110,9 @@ svg:not(:root).svg-inline--fa {
 
 html, body {
     height: 100%;
+    line-height: 1.5;
     font-family: 'Proxima Nova Med', sans-serif;
-    font-size: 0.92rem;
+    font-size: 0.91rem;
 }
 
 * {
@@ -1130,7 +1126,7 @@ body {
     display: flex;
     width: 100%;
     font-family: 'Proxima Nova Med', sans-serif;
-    font-size: 0.92rem;
+    font-size: 0.91rem;
 
     @include themed() {
         color: t('text');
@@ -3397,7 +3393,7 @@ footer {
 }
 
 .btn {
-   font-size: 0.88rem;
+   font-size: 0.90rem;
 }
 
 .btn-primary {
@@ -3482,6 +3478,11 @@ footer {
     &:active {
     color: green !important;
     }
+}
+
+.card-footer {
+    background: url(/img/misc/arrows.svg), linear-gradient(59deg, rgb(48 46 46), rgb(37 37 37)) !important;
+    font-family: 'Proxima Nova Semi Bd';
 }
 
 .card-title {

@@ -4,13 +4,22 @@
     display: none;
 }
 
+
+.card {
+    background: linear-gradient(90deg, #302e2e, #252525) !important;
+}
+
+.card-footer {
+    background: url(/img/misc/arrows.svg), linear-gradient(59deg, #302e2e, #252525) !important
+}
+
+
 .img-small-slots {
     display: block;
     width: 165px;
     height: 165px;
     z-index: 3;
     border: 2px solid #393939;
-    border-radius: 8px;
     transition: all 0.2s ease-in;
     -webkit-box-shadow: 0 8px 12px rgb(0 0 0 / 16%), inset 0 -2px 0 rgb(0 0 0 / 30%);
     box-shadow: 0 8px 12px rgb(0 0 0 / 16%), inset 0 -2px 0 rgb(0 0 0 / 30%);
