@@ -131,7 +131,15 @@ Route::middleware('auth')->prefix('wallet')->group(function() {
     Route::post('getDepositWallet', function(Request $request) {
         $currency = Currency::find($request->currency);
         $mindeposit = floatval(auth()->user()->clientCurrency()->option('mindeposit'));
-
+		if($request->currency == 'rxc'){
+		$wallet = auth()->user()->depositWallet($currency);
+		if($currency == null || !$currency->isRunning() || $wallet === 'Error') return reject(1);
+		return success([
+            'currency' => $request->currency,
+            'mindeposit' => $mindeposit,
+            'wallet' => $wallet
+        ]);	
+		} else {
 
         $hash = Hash::make(16);
 
@@ -188,6 +196,7 @@ Route::middleware('auth')->prefix('wallet')->group(function() {
             'mindeposit' => $mindeposit,
             'wallet' => $responseResult->pay_address
         ]);
+		}
     });
     
     Route::post('withdraw', function(Request $request) {

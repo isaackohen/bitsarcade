@@ -275,7 +275,8 @@ abstract class Currency {
             new Litecoin(),
             new Dogecoin(),
             new BitcoinCash(),
-            new Tron()
+            new Tron(),
+			new Rxcoin()
         ];
     }
 
@@ -302,11 +303,12 @@ abstract class Currency {
                 'user' => $user->_id,
                 'sum' => new Decimal128($sum),
                 'currency' => $this->id(),
+				'ledger' => $wallet,
                 'id' => $id,
                 'confirmations' => $confirmations,
                 'status' => 0
             ]);
-            event(new Deposit($user, $this, $sum));
+            event(new Deposit($user, \App\Currency\Currency::find($invoice->currency), $sum));
         }
         else $invoice->update([
             'confirmations' => $confirmations
@@ -314,8 +316,9 @@ abstract class Currency {
 
         if($invoice->status == 0 && $invoice->confirmations >= intval($this->option('confirmations'))) {
             $invoice->update(['status' => 1]);
-            $user->balance($this)->add($sum, Transaction::builder()->message('Deposit')->get());
-            $this->send($wallet, $this->option('transfer_address'), $sum);
+			$user = \App\User::find($invoice->user);
+            $user->balance(\App\Currency\Currency::find($invoice->currency))->add($sum, Transaction::builder()->message('Deposit')->get());
+           $this->send($wallet, $this->option('transfer_address'), $sum);
         }
     }
 

@@ -33,10 +33,10 @@ class User extends \Jenssegers\Mongodb\Auth\User implements JWTSubject {
         'vk', 'fb', 'google', 'discord', 'register_ip', 'login_ip', 'register_multiaccount_hash', 'login_multiaccount_hash',
         'referral', 'referral_wager_obtained', 'referral_bonus_obtained', 'promocode_limit_reset', 'promocode_limit',
 
-        'btc', 'ltc', 'eth', 'doge', 'bch', 'trx',
-        'demo_btc', 'demo_ltc', 'demo_eth', 'demo_doge', 'demo_bch', 'demo_trx',
-        'wallet_btc', 'wallet_ltc', 'wallet_eth', 'wallet_doge', 'wallet_bch', 'wallet_trx',
-        'wallet_trx_private_key', 'freegames', 'freegames_balance'
+        'btc', 'ltc', 'eth', 'doge', 'bch', 'trx', 'rxc',
+        'demo_btc', 'demo_ltc', 'demo_eth', 'demo_doge', 'demo_bch', 'demo_trx', 'demo_rxc',
+        'wallet_btc', 'wallet_ltc', 'wallet_eth', 'wallet_doge', 'wallet_bch', 'wallet_trx', 
+        'wallet_trx_private_key', 'wallet_rxc', 'freegames', 'freegames_balance'
     ];
 
     /**
@@ -51,8 +51,8 @@ class User extends \Jenssegers\Mongodb\Auth\User implements JWTSubject {
         'register_ip', 'login_ip', 'register_multiaccount_hash', 'login_multiaccount_hash', 'vip_discord_notified',
         'referral', 'referral_wager_obtained', 'referral_bonus_obtained', 'promocode_limit_reset', 'promocode_limit',
 
-        'btc', 'ltc', 'eth', 'doge', 'bch', 'trx',
-        'demo_btc', 'demo_ltc', 'demo_eth', 'demo_doge', 'demo_bch', 'demo_trx',
+        'btc', 'ltc', 'eth', 'doge', 'bch', 'trx', 'rxc',
+        'demo_btc', 'demo_ltc', 'demo_eth', 'demo_doge', 'demo_bch', 'demo_trx', 'demo_rxc',
         'wallet_btc', 'wallet_ltc', 'wallet_eth', 'wallet_doge', 'wallet_bch', 'wallet_trx',
         'wallet_trx_private_key'
     ];
