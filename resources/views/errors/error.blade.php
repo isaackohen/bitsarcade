@@ -28,6 +28,6 @@
       
         <p class="error_section_subtitle alert alert-danger" style="font-size: 0.82rem; font-weight: 600;">{{ $code ?? -1 }}</p>
         <br>
-        <p class="error_section_subtitle alert-light p-2" style="border-radius: 8px;">{{ $desc ?? 'An error has occurred' }}   <a href="{{ \App\Settings::where('name', 'telegram_link')->first()->value }}" class="alert alert-info p-4" style="font-size: 0.85rem; font-weight: 600;">Telegram</a></p>
+        <p class="error_section_subtitle alert-light p-2" style="border-radius: 8px;">{{ $desc ?? 'An error has occurred' }} </p>
     </section>                            
 

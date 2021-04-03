@@ -1,8 +1,9 @@
 import Glide from '@glidejs/glide';
+import bitcoin from 'bitcoin-units';
 
 
 
-$.on('//', function() {
+$.on('/', function() {
     $('.bonus-overlay').on('click', function() {
         $('.bonus-side-menu').removeClass('active');
         $('.bonus-overlay').toggle();
