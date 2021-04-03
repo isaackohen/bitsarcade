@@ -1,5 +1,7 @@
 @import "../variables";
-
+.card-footer {
+  text-transform: capitalize;
+}
 
 .flipcontainer{
   -webkit-transform-style: preserve-3d;
