@@ -3,7 +3,7 @@
 @endphp
 
 <div class="container-fluid">
-                <div class="game-content" style="padding: 4px; width: auto;height: 700px;margin-left: auto;margin-right: auto;">
+                <div class="game-content" style="padding: 2px; width: auto;height: 85vh;margin-left: auto;margin-right: auto;">
 				<style>
 				.modal__iframe {
 					border-radius: 5px;
