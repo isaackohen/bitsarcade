@@ -18,7 +18,7 @@ return [
         'address' => '<i class=":icon"></i> :currency Address',
         'amount' => 'Amount (Min :min <i class=":icon"></i>)',
         'button' => 'Withdraw',
-        'fee' => 'Your withdrawal will have :fee <i class=":icon"></i> subtracted from your remaining balance to cover the transaction fee.'
+        'fee' => 'You need to have :fee <i class=":icon"></i> left on your account to cover the transaction fee.'
     ],
     'history' => [
         'empty' => 'You haven’t ordered anything yet.',

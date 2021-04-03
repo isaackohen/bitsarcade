@@ -12,9 +12,6 @@
                 <div class="tab active" data-wallet-toggle-tab="vip-rewards">
                     VIP Rewards
                 </div>
-                <div class="tab" onclick="$.gotovipBonus()" data-wallet-toggle-tab="vip-bonus">
-                    Daily Bonus
-                </div>
             </div>
         <button
           type="button"

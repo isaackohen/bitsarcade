@@ -1,5 +1,7 @@
 @import "../variables";
-
+.card-footer {
+  text-transform: capitalize;
+}
 
 .flipcontainer{
   -webkit-transform-style: preserve-3d;
@@ -166,6 +168,11 @@
 }
 
 @include media-breakpoint-down(sm) {
+    
+    .game_poster .name {
+    opacity: 1;
+    }
+    
     .sm-column {
         flex: 0 0 100%;
     }

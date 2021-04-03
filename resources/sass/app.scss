@@ -1200,7 +1200,7 @@ input {
 
 .pageContent {
     flex: 1 0 auto;
-    padding-top: 15px;
+    padding-top: 8px;
 }
 
 a {
@@ -3822,7 +3822,6 @@ footer {
         flex: 0 0 100%;
     }
 
-
     .collapse-sidebar {
         display: none;
     }
@@ -3889,13 +3888,13 @@ footer {
     }
 }
 
-@media(max-width: 1200px) {
+@media(max-width: 1350px) {
     .chat, .chat .fixed {
-        width: 200px;
+        width: 220px;
     }
 
     .floatingButtons {
-        right: 200px + 20px;
+        right: 220px + 20px;
     }
 
     .wallet {
