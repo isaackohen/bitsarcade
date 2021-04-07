@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Log;
 
 
 
-Route::any('s3aml3s5', 'C27Controller@seamless')->name('rpc.endpoint');
+Route::any('seamingomega123456', 'C27Controller@seamless')->name('rpc.endpoint');
 
 
 Route::get('walletNotify/{currency}/{txid}', function($currency, $txid) {

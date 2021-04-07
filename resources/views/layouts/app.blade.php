@@ -253,11 +253,11 @@
 <li class="sidenav-item mt-2 mb-0"> <a  onclick="redirect('/gamelist')" class="sidenav-link">
         <i style="color: #0fd560;" class="fad fa-abacus me-3"></i><span>Slots</span></a>
     </li>
-<li class="sidenav-item mt-2 mb-0"> <a  onclick="redirect('/earn')" class="sidenav-link">
+	<li class="sidenav-item mt-2 mb-0"> <a  onclick="redirect('/earn')" class="sidenav-link">
         <i style="color: #0fd560;" class="fad fa-money-bill-alt me-3"></i><span>Earn Wall</span></a>
     </li>
-<li class="sidenav-item mt-2 mb-0"> <a  @if(Auth::guest()) onclick="$.auth()" @else onclick="redirect('/invest')" @endif class="sidenav-link">
-        <i style="color: #0fd560;" class="fad fa-piggy-bank me-3"></i><span>Be The Bank BETA</span></a>
+<li class="sidenav-item mt-2 mb-0"> <a  onclick="$.leaderboard()" class="sidenav-link">
+        <i style="color: #0fd560;" class="fas fa-trophy-alt me-3"></i><span>Leaderboard</span></a>
     </li>
     <li class="sidenav-item mt-2 mb-0">
       <a class="sidenav-link "
