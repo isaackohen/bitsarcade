@@ -4,6 +4,7 @@ require('./vip');
 require('./change-name');
 require('./change-client-seed');
 require('./tfa');
+require('./leaderboard');
 
 $.modal = function(id, option = null) {
     return new Promise(function(resolve) {

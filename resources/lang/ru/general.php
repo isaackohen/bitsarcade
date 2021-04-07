@@ -237,6 +237,7 @@ return [
     'rain' => 'Попали под дождь!<br>:sum :currency',
     'snow' => 'Попали под снег!<br>:sum :currency',
     'quiz' => 'Вопрос:',
+	'lines' => 'Линии',
 	'currency_usd' => 'Примерно &dollar;',
 	'currency_euro' => 'Примерно &euro;',
     'quiz_answer' => 'Правильный ответ:',

@@ -8,6 +8,7 @@ use App\Games\Kernel\Module\ModuleSeeder;
 use App\Games\Kernel\ProvablyFair;
 use App\Games\Kernel\ProvablyFairResult;
 use App\Transaction;
+use App\Leaderboard;
 use App\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -125,6 +126,8 @@ abstract class QuickGame extends Game {
             ]);
 
             event(new \App\Events\LiveFeedGame($game, $result->delay));
+			
+			Leaderboard::insert($game);
         }
         return $result_data;
     }

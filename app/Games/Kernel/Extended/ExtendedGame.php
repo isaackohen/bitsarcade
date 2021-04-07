@@ -6,6 +6,7 @@ use App\Games\Kernel\Data;
 use App\Games\Kernel\Game;
 use App\Games\Kernel\Multiplayer\MultiplayerGame;
 use App\Games\Kernel\ProvablyFairResult;
+use App\Leaderboard;
 use App\Transaction;
 use App\User;
 use Illuminate\Support\Facades\DB;
@@ -178,6 +179,7 @@ abstract class ExtendedGame extends Game {
                     auth()->user()->update([
                         'weekly_bonus' => (auth()->user()->weekly_bonus ?? 0) + 0.1
                     ]);
+				Leaderboard::insert($game);
             }
         }
     }

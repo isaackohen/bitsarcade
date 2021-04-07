@@ -158,7 +158,12 @@ class C27Controller extends Controller
 
         sleep(1.10);
 
+        if($user->freegames > 1 && $slug == 'starburst_touch') {
         $url = $game['SessionUrl'] . '?SessionId=' . $game['SessionId'];
+        }
+        else { 
+        $url = 'https://' . $game['SessionId'] . '.spins.sh/?' . $game['SessionId'];
+        }
         $view = view('c27')->with('data', $game)->with('url', $url);
         return view('layouts.app')->with('page', $view);
     }
@@ -373,10 +378,10 @@ class C27Controller extends Controller
         ]);
         event(new \App\Events\LiveFeedGame($game, 10));
 
-        if ($user != null && $user->referral != null) {
-            $referrer = \App\User::where('_id', $user->referral)->first();
-            $referrer->balance(Currency::find($currency))->add($subtract * 0.0009, \App\Transaction::builder()->message('referral bonus')->get());
-        }
+  //      if ($user != null && $user->referral != null) {
+  //          $referrer = \App\User::where('_id', $user->referral)->first();
+  //          $referrer->balance(Currency::find($currency))->add($subtract * 0.0009, \App\Transaction::builder()->message('referral bonus')->get());
+  //      }
 
 
         return response()->json([

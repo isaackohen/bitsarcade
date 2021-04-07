@@ -251,6 +251,7 @@ return [
     'premiumsnow' => 'Super Drop! <br>:sum :currency',
     'snow' => 'It\'s raining!<br>:sum :currency',
     'quiz' => 'Quiz Time! - Answer and win free crypto!',
+	'lines' => 'Lines',
 	'currency_usd' => 'Aprox. &dollar;',
 	'currency_euro' => 'Aprox. &euro;',
     'quiz_answer' => 'Correct answer:',

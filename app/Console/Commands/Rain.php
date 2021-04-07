@@ -50,6 +50,7 @@ class Rain extends Command
         $usersLength = mt_rand(3, 7);
         $last3Hours = \Carbon\Carbon::now()->subHours(3);
         $last24Hours = \Carbon\Carbon::now();
+        $currency = Currency::find("doge");
 
         $all = \App\ActivityLog\ActivityLogEntry::onlineUsers()->toArray();
         if(count($all) < $usersLength) {
@@ -63,7 +64,7 @@ class Rain extends Command
         $dub = []; $users = [];
         foreach ($all as $list) {
             $user = User::where('_id', $list['_id'])->first();
-            if($user == null || in_array($list['_id'], $dub)) continue;
+            if($user == null || in_array($list['_id'], $dub) && ($user->balance($currency) < '12.0')) continue;
             array_push($dub, $list['_id']);
             array_push($users, $user);
         }
@@ -71,10 +72,8 @@ class Rain extends Command
         $users = array_slice($users, 0, $usersLength);
         $result = [];
         
-        $currency = Currency::find("doge");
 
         foreach ($users as $user) {
-            if($user->balance($currency) > '13') return;
             $user->balance($currency)->add(floatval($currency->option('rain')), Transaction::builder()->message('Rain (Global)')->get());
             array_push($result, $user->toArray());
         }

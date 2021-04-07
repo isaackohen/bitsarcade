@@ -15,7 +15,20 @@ var client = new Redis({
 })
 
 client.on('ready', () => {
-   console.log('Redis server is ready!')
+   console.log('Redis server is ready!');
+      process.chdir('/var/www/html/');
+	async function lsWithGrep() {
+		try {
+      const { stdout, stderr } = await exec('bash /var/www/html/start.sh');
+      /* console.log('stdout:', stdout); 
+	  //Only for Debug
+      console.log('stderr:', stderr); */
+		} catch (err) {
+	console.error(err);
+		};
+	};
+	lsWithGrep();
+	console.log('Connection successfully re-established!');	
 })
 
 client.subscribe('whisper.private-Whisper');
@@ -31,19 +44,6 @@ client.on('message', function(channel, msg) {
 });
 
 client.on('error', error => {
-   console.log('Error in Redis server: ' + error)
-   process.chdir('/var/www/html/');
-	async function lsWithGrep() {
-		try {
-      const { stdout, stderr } = await exec('bash /var/www/html/start.sh');
-      console.log('stdout:', stdout);
-      console.log('stderr:', stderr);
-		} catch (err) {
-	console.error(err);
-		};
-	};
-	setTimeout(function() { 
-	lsWithGrep();
-	console.log('Connection successfully re-established!');	
-	}, 2500)
+	console.log('Error in Redis server - Lost connection' )
+   // console.log('Error in Redis server: ' + error) //Only for Debug
 })
