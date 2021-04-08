@@ -52,7 +52,7 @@ $side-menu-width: 800px;
     width: $side-menu-width;
     z-index: 99999;
     @include themed() {
-        background: url("/img/misc/anim-model.svg") repeat, linear-gradient(#2a2b2d, #242527);
+        background: url("/img/misc/anim-model.svg") repeat, linear-gradient(#313841, #2a3340);
         border-left: 1px solid rgba(t('text'), 0.25);
     }
     transition: right 0.3s ease;

@@ -365,7 +365,7 @@ $card: 0 0 10px rgba(28, 39, 60, .05);
 
 
 .our-games {
-        background: url('/img/misc/patternbg.png') repeat, linear-gradient(#48484840, #48484821) !important;
+        background: linear-gradient(#313841, #2c323a) !important;
         padding: 5px;
         border-radius: 5px;
         width: 100%;
@@ -1141,7 +1141,7 @@ button:focus {
 
 input {
     @include themed() {
-        border: 1px solid darken(t('input'), 2%);
+        border: 1px solid darken(t('sidebar'), 1%);
         background: t('input');
         border-radius: 3px;
         padding: 10px;
@@ -1165,7 +1165,7 @@ input {
     box-shadow: none !important;
     @include themed() {
         background: lighten(t('input'), 10%) !important;
-        border: 1px solid darken(t('input'), 2%) !important;
+        border: 1px solid darken(t('sidebar'), 1%) !important;
     }
 }
 
@@ -1254,9 +1254,8 @@ header {
     }
 
         .logo {
-            width: 70px;
-            height: 52px;
-            margin-bottom: 5px;
+            width: 44px;
+            height: 44px;
             cursor: pointer;
             @include themed() {
                 background: t('logo') no-repeat;
@@ -1304,9 +1303,8 @@ header {
                 .wallet-switcher {
                     display: none;
                     position: absolute;
-                    top: 33px;
-                    width: 100%;
-                    background: t('body');
+                    top: 24px;
+                    width: 97%;
                     border-bottom-left-radius: 3px;
                     border-bottom-right-radius: 3px;
                     padding-top: 5px;
@@ -1379,15 +1377,11 @@ header {
                     display: inline-flex;
                     justify-content: center;
                     align-items: center;
-                    border-top-right-radius: 0;
-                    border-bottom-right-radius: 0;
                     padding: 8px;
                     color: #0fd560;
-                    background: linear-gradient(#272a2b, #1f2122) !important;
-                    border-radius: 16px;
-                    box-shadow: 0 3px 6px rgb(0 0 0 / 25%);
-                    border: none;
-                    transition: color 0.2s ease, background 0.2s ease-in-out;
+                    border-radius: 0px;
+                    border: none !important;
+                    transition: color 0.2s ease-in, background 0.2s ease-in-out;
                     min-width: 43px;
 
                     i:first-of-type {
@@ -1438,9 +1432,10 @@ header {
             align-items: center;
 
             img {
-                width: 35px;
-                height: 35px;
-                border-radius: 3px;
+                width: 40px;
+                height: 40px;
+                border-radius: 24px;
+                border: 2px solid #22272e;
                 box-shadow: $card;
                 cursor: pointer;
             }
@@ -1486,15 +1481,15 @@ header {
 
 .theme--dark .wallet {
     .balance {
-        background: linear-gradient(#252525, #1f2122) !important;
+        background: linear-gradient(#1e2227, #1e2227);
         color: #ffffff;
-        border: 1px solid #2f2f2f;
-        text-shadow: 2px 2px #2f2f2f;
+        border: none !important;
+        text-shadow: 1px 2px #000000;
 }
 
     .icon {
-        background: linear-gradient(#313131, #232323) !important;
-        border: 1px solid #2f2f2f !important;
+        background: linear-gradient(#1e2227, #1e2227);
+        border: none !important;
 
     }
 }
@@ -2042,8 +2037,8 @@ padding: 0.5rem 0.8rem;
                 padding: 10px;
                 display: flex;
                 margin-top: 5px;
-                background: url(/img/misc/arrows.svg), linear-gradient(59deg, #212224, #272a2c) !important;
-                border-top: 2px solid #2f2f2f;
+                background: url(/img/misc/arrows.svg), linear-gradient(#2b3038, #272d34);
+                border-top: 2px solid #22272e;
                 position: relative;
 
                 .message-auth-overlay {
@@ -2067,7 +2062,7 @@ padding: 0.5rem 0.8rem;
                     .os-host-textarea {
                         width: 100%;
                         height: 100%;
-                        border-bottom: 2px solid #feb629;
+                        border-bottom: 2px solid #2f8be6;
                         padding: 7px;
                         color: t('text');
                         font-size: 0.85em;
@@ -3480,8 +3475,13 @@ footer {
     }
 }
 
+.card-header {
+    border-bottom-color: #2f8be6 !important;
+}
+
 .card-footer {
-    background: url(/img/misc/arrows.svg), linear-gradient(59deg, rgb(48 46 46), rgb(37 37 37)) !important;
+    border-top-color: #22272e !important;
+    background: url(/img/misc/arrows.svg), linear-gradient(#2b3038, #272d34) !important;
     font-family: 'Proxima Nova Semi Bd';
 }
 

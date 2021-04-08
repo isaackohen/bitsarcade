@@ -10,9 +10,8 @@
 
     @include themed() {
         padding: 10px;
-        background: url("/img/misc/dots-message.svg") repeat, linear-gradient(#292b2d, #2e3032);
-        border-radius: 15px;
-        border: 6px solid #26282a;
+        background: url("/img/misc/arrows.svg") repeat, linear-gradient(#22272e, #22272e);
+        border: 6px solid #22272e;
     }
 }
 

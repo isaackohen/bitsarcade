@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" class="theme--{{ $_COOKIE['theme'] ?? 'dark' }}">
     <head>
-        <title>BITSArcade - Crypto Gambling Platform</title>
+        <title>BitsArcade</title>
         <link href="/css/webfonts.css" rel="stylesheet" type="text/css">
-        <link rel="icon" type="image/png" href="/img/logo/favicon.svg"/>
+        <link rel="icon" type="image/png" href="/img/logo/bits_icon.png"/>
         <meta charset="utf-8">
         <noscript><meta http-equiv="refresh" content="0; /no_js"></noscript>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -11,8 +11,8 @@
         <meta name="description" content="{{ __('general.head.description') }}">
 
         <meta property="og:description" content="{{ __('general.head.description') }}" />
-        <meta property="og:image" content="{{ asset('/img/logo/logo_carousel.png') }}" />
-        <meta property="og:image:secure_url" content="{{ asset('/img/logo/logo_carousel.png') }}" />
+        <meta property="og:image" content="{{ asset('/img/logo/logo_temp2.png') }}" />
+        <meta property="og:image:secure_url" content="{{ asset('/img/logo/logo_temp2.png') }}" />
         <meta property="og:image:type" content="image/svg+xml" />
         <meta property="og:image:width" content="295" />
         <meta property="og:image:height" content="295" />
@@ -83,10 +83,8 @@
 
     </head>
     <body>
-        <div class="pageLoader" style="background: #212121;">
-            <div class="loader">
-               <div></div>
-            </div>
+        <div class="pageLoader" style="background: #22272e;">
+           <img src="/img/logo/loader.gif" style="position: absolute;left: 50%;top: 50%;width: unset;height: unset;transform: translate(-50%, -50%);">              </div>
             <div class="error" style="display: none"></div>
         </div>
     
@@ -103,7 +101,7 @@
   aria-controls="#sidenav-1"
   aria-haspopup="true"
   style="    color: #0fd560 !important;
-    background: linear-gradient(#363636, #2c2c2c) !important;
+    background: linear-gradient(-180deg, #292f38 0%, #1a1c1f 98%);
     border-radius: 16px;
     font-size: 1rem;
     box-shadow: 0 3px 6px rgb(0 0 0 / 25%);"
@@ -112,7 +110,7 @@
 </button>
 
 
-                            <button class="btn btn-secondary" style="padding: 3px; margin-left: 10px; margin-bottom: 1px;" onclick="redirect('/bonus')">Bonus</button>
+                          <!--  <button class="btn btn-primary" style="padding: 3px; margin-left: 10px; margin-bottom: 1px;" onclick="redirect('/bonus')">Bonus</button> !-->
 
                     </div>
 
@@ -152,7 +150,7 @@
                                 <i class="fal fa-angle-down"></i>
                             </div>
                             <div class="balance"></div>
-                            <div class="btn btn-danger btn-rounded wallet-open" style="text-shadow: 0.9px 0.9px #363d42; border-top-left-radius: 0px; border-bottom-left-radius: 0px;"></div>
+                            <div class="btn btn-primary btn-rounded wallet-open p-2" style="margin-top: 1px; margin-bottom: 1px; text-shadow: 0.9px 0.9px #363d42; border-top-left-radius: 0px; border-bottom-left-radius: 0px;"></div>
                         </div>
                     @endif
                     <div class="right">
@@ -297,7 +295,7 @@
                 <div class="container-fluid">
                     <div class="links">
                         <div class="link">
-                    <img src="/img/logo/logo_loader.png" width="85px" height="70px" alt="BitsArcade Logo">
+                    <img src="/img/logo/logo_temp.png" width="64px" height="64px" style="margin-right: 20px;" alt="BitsArcade Logo">
                     <a href="https://www.bitsarcade.com/documents/RNG_Certificate_BITSARCADE_UK27February2021.pdf" target="_blank"><img width="40px" height="50px" src="/images/itechlabs.png" alt="RNG Certificate" style="margin-right: 6px;"></a>
                     <a href="https://secure.ecogra.biz/validator/operator/validate=bitsarcade.com&amp;seal_id=1626f5bc489211b07f8c75b57e41e9f1e78a5a8426e197e0c6437da9ebfaea4c624094439fad0cfdd61f49fc5924bca9&amp;stamp=d4f3109f8d3bce51ca70ded5e25fd3f7/" target="_blank"><img width="60px" height="60px" src="/img/misc/basic-large-validseal.png" alt="eCOGRA License Validation"></a>
                         </div>
@@ -410,10 +408,6 @@
             <div class="control" data-page-trigger="'/help'" data-toggle-class="active" onclick="redirect('/help')">
                 <i class="fas fa-question-circle"></i>
                 <div>{{ __('general.head.help') }}</div>
-            </div>
-            <div class="control" @if(Auth::guest()) onclick="$.auth()" @else data-page-trigger="'/invest'" @endif data-toggle-class="active" onclick="redirect('/invest')">
-                <i class="fas fa-piggy-bank"></i>
-                <div>Be The Bank</div>
             </div>
             <div class="control" @if(Auth::guest()) onclick="$.auth()" @else data-page-trigger="'/earn'" @endif data-toggle-class="active" onclick="redirect('/earn')">
                 <i class="far fa-money-bill-wave"></i>

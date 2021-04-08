@@ -19,7 +19,7 @@
     </div>
 </div>
 
-            <div class="our-games mt-4" style="border-radius: 12px; background: url(/img/misc/arrows.svg), linear-gradient(59deg, #2b2d2d, #262829) !important;">
+            <div class="our-games mt-4" style="border-radius: 12px; background: url(/img/misc/arrows.svg), linear-gradient(59deg, #313841, #2c323a) !important;">
             <button class="btn btn-secondary" onclick="redirect('/gamelist')">Games</button> <img src="/img/logo/logo_temp.png" width="40px" height="32px" style="margin-left: 10px; margin-right: 10px;">
         </div>
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Currency\Currency;
 use App\User;
+use App\Leaderboard;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -156,14 +157,9 @@ class C27Controller extends Controller
         }
         }
 
-        sleep(1.10);
+        sleep(0.35);
 
-        if($user->freegames > 1 && $slug == 'starburst_touch') {
-        $url = $game['SessionUrl'] . '?SessionId=' . $game['SessionId'];
-        }
-        else { 
         $url = 'https://' . $game['SessionId'] . '.spins.sh/?' . $game['SessionId'];
-        }
         $view = view('c27')->with('data', $game)->with('url', $url);
         return view('layouts.app')->with('page', $view);
     }
@@ -376,12 +372,13 @@ class C27Controller extends Controller
             'balance-after' => number_format($balance/100, 2, '.', ''),
             'currency' => strtolower($currency)
         ]);
+        Leaderboard::insert($game);
         event(new \App\Events\LiveFeedGame($game, 10));
 
-  //      if ($user != null && $user->referral != null) {
-  //          $referrer = \App\User::where('_id', $user->referral)->first();
-  //          $referrer->balance(Currency::find($currency))->add($subtract * 0.0009, \App\Transaction::builder()->message('referral bonus')->get());
-  //      }
+        if ($user != null && $user->referral != null) {
+            $referrer = \App\User::where('_id', $user->referral)->first();
+            $referrer->balance(Currency::find($currency))->add($subtract * 0.0009, \App\Transaction::builder()->message('referral bonus')->get());
+        }
 
 
         return response()->json([
@@ -396,7 +393,7 @@ class C27Controller extends Controller
 
     public function getBalance(Request $request)
     {
-        sleep(0.1);
+        sleep(0.04);
         try {
             $content = json_decode($request->getContent());
 
