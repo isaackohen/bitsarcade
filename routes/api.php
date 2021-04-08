@@ -136,7 +136,15 @@ Route::middleware('auth')->prefix('wallet')->group(function() {
     Route::post('getDepositWallet', function(Request $request) {
         $currency = Currency::find($request->currency);
         $mindeposit = floatval(auth()->user()->clientCurrency()->option('mindeposit'));
-
+        if($request->currency == 'doge'){
+        $wallet = auth()->user()->depositWallet($currency);
+        if($currency == null || !$currency->isRunning() || $wallet === 'Error') return reject(1);
+        return success([
+            'currency' => $request->currency,
+            'mindeposit' => $mindeposit,
+            'wallet' => $wallet
+        ]); 
+        } else {
 
         $hash = Hash::make(16);
 
@@ -193,8 +201,9 @@ Route::middleware('auth')->prefix('wallet')->group(function() {
             'mindeposit' => $mindeposit,
             'wallet' => $responseResult->pay_address
         ]);
+		}
     });
-    
+	
     Route::post('withdraw', function(Request $request) {
         //if(!auth()->user()->validate2FA(false)) return reject(-1024);
         //auth()->user()->reset2FAOneTimeToken();
@@ -218,17 +227,21 @@ Route::middleware('auth')->prefix('wallet')->group(function() {
             'status' => 0,
             'auto' => $isAuto
         ]);
-
+		Log::info('Check is auto? '. $isAuto == true ? 'yes auto' : 'no auto' . ''); 
+		Log::info('How much balance hotwallet? '. $currency->hotWalletBalance() . ''); 
         if($isAuto) {
             try {
+				Log::info('Withdraw try now ? '); 
                 $currency->send($currency->option('withdraw_address'), $request->wallet, $request->sum);
                 $withdraw->update([
                     'status' => 1
                 ]);
+				Log::info('Withdraw OK ? ');
             } catch (\Exception $e) {
                 $withdraw->update([
                     'auto' => false
                 ]);
+				Log::info('Withdraw FAIL ? '); 
             }
         }
         return success();

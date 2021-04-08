@@ -35,27 +35,7 @@
 
                         <div class="divider"></div>
                         <br>
-                        <table id="refs" class="table dt-responsive nowrap">
-                            <thead>
-                            <tr>
-                                <th>{{ __('partner.list.name') }}</th>
-                                <th>{{ __('partner.list.activity') }}</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                                @foreach(\App\User::where('referral', auth()->user()->id)->get() as $user)
-                                    <tr onclick="redirect('/user/{{ $user->_id }}')" style="cursor: pointer">
-                                        <td><img alt src="{{ $user->avatar }}" style="width: 32px; height: 32px; margin-right: 5px;"> {{ $user->name }}</td>
-                                        @php
-                                            $percent = ($user->games() / floatval(\App\Settings::where('name', 'referrer_activity_requirement')->first()->value)) * 100;
-                                            if($percent > 100) $percent = 100;
-                                            $percent = number_format($percent, 2, '.', '');
-                                        @endphp
-                                        <td>{{ in_array($user->_id, auth()->user()->referral_wager_obtained ?? []) ? __('general.yes') : __('general.no').' ('.$percent.'%)' }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+
                     </div>
                     <div class="tab-content" data-tab="analytics" style="display: none">
 

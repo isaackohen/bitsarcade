@@ -21,7 +21,7 @@
                     </tr>
                 </thead>
                 <tbody class="live_games">
-                    @foreach(\App\Invoice::where('user', auth()->user()->_id)->where('ledger', '!=', null)->latest()->get() as $invoice)
+                    @foreach(\App\Invoice::where('user', auth()->user()->_id)->where('sum', '!=', null)->latest()->get() as $invoice)
                         <tr>
                             <th>
                                 <div>
@@ -175,7 +175,7 @@
                     </div>
                     <div class="description">{{ __('general.error.offline_node') }}</div>
                 </div>
-                            <div class="alert alert-info mb-4 p-2 text-center" role="alert">Check out the Bonus page for the latest bonus offers!</div>
+                            <div class="alert alert-success mb-4 p-2 text-center" role="alert">We now offer 0 confirm (instant) deposits & automatic instant withdrawals on DOGE!</div>
 
                <div class="walletMinDeposit" style="display: none">
                     <div class="icon">

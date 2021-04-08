@@ -29,24 +29,36 @@
               <div class="games">
                 <div class="our-games mb-1" style="background: transparent !important;">
                   <div class="row">
+                    @foreach(\App\GlobalNotification::get() as $notification)
+              <div class="col-md-12">
+                <div class="d-flex">
+                  @if(!auth()->guest() && auth()->user()->isDismissed($notification)) @continue @endif
+                  <div class="globalNotification p-2 m-0 mb-2" id="emailNotification" style="background: url(/img/misc/arrows.svg), linear-gradient(#3596f5, #297dd0) !important; box-shadow: 0 10px 20px 0 rgb(0 0 0 / 25%);">
+                    <div class="icon"><i class="{{ $notification->icon }}"></i></div>
+                    <div class="text">{{ $notification->text }}</div>
+                  </div>
+                </div>
+              </div>
+              @endforeach
                     <div class="col-md-3 col-sm-12 mt-2 mb-">
                       <div class="card text-center">
-                        <div class="card-header p-1" style="background: url(/img/misc/arrows.svg), linear-gradient(59deg, #2b2d2d, #262829) !important;">Profile</div>
-                        <div class="card-body" style="background: url(/img/misc/patternbg.png), linear-gradient(59deg, #2b2b2b, #2d2d2d) !important;">
+                        <div class="card-header" style="background: url(/img/misc/arrows.svg), linear-gradient(59deg, #313841, #2c323a) !important;">Profile</div>
+                        <div class="card-body" style="background: url(/img/misc/patternbg.png), linear-gradient(59deg, #313841, #2c323a) !important;">
                           <h5 class="card-title">{{ auth()->user()->name }}</h5>
                           <p class="card-text">
                             <img onclick="redirect('/user/{{ auth()->user()->_id }}')" src="{{ auth()->user()->avatar }}" alt>
                           </p>
                           <button onclick="$.wallet()" class="btn btn-secondary p-1 m-1">Wallet</button>
+                          <button onclick="$.leaderboard()" class="btn btn-secondary p-1 m-1">Leaderboard</button>
                         <button data-toggle-bonus-sidebar="promo" class="btn btn-danger p-1 m-1">Promocode</a>
                       </div>
-                      <div class="card-footer text-muted" style="background: url(/img/misc/arrows.svg), linear-gradient(59deg, #2b2d2d, #262829) !important;">Created on {{ auth()->user()->created_at }}</div>
+                      <div class="card-footer text-muted" style="font-size: 0.79rem; background: url(/img/misc/arrows.svg), linear-gradient(59deg, #313841, #2c323a) !important;">Registered since {{ auth()->user()->created_at }}</div>
                     </div>
                   </div>
                   <div class="col-md-6 col-sm-12 mt-2 mb-3">
-                    <div class="card text-center" style="background: url(https://social-tournaments.s3.eu-central-1.amazonaws.com/wp-content/uploads/2020/02/21140315/PP-article-banner-670x360.jpg), linear-gradient(59deg, #2b2d2d, #262829) !important;background-size: cover !important;min-height: 270px;height: 100% !important;background-position: center;background-repeat: no-repeat; scale: 0.8;">
-                      <div class="card-header" style="background: url(/img/misc/arrows.svg),linear-gradient(#389bfc, #2a80d4)  !important;">Featured News</div>
-                      <div class="card-body" style="background: linear-gradient( #191919db,  #1c1c1cf0) !important;">
+                    <div class="card text-center" style="background: url(https://cdn.coingape.com/wp-content/uploads/2019/05/02174558/Dogecoin-DOGE-Price-On-Leap-As-Largest-Exchange-Bid-To-Support-DOGE-on-Official-Wallet-678x381.jpg), linear-gradient(59deg, #2b2d2d, #26282900) !important;background-size: contain !important;min-height: 270px;height: 100% !important;background-position: center;background-repeat: no-repeat; scale: 0.8;">
+                      <div class="card-header" style="background: url(/img/misc/arrows.svg), linear-gradient(59deg, #313841, #2c323a) !important;">Featured News</div>
+                      <div class="card-body" style="background: linear-gradient( #22272ef7,  #1f2226ed) !important;">
                         <h5 class="card-title">{{ \App\Settings::where('name', 'featured_newsbox_title')->first()->value }}</h5>
                         <p class="card-text" style="text-shadow: 2px 2px black !important;"><h6>
                           {{ \App\Settings::where('name', 'featured_newsbox_text')->first()->value }}</h6>
@@ -59,8 +71,8 @@
                   </div>
                   <div class="col-md-3 col-sm-12 mt-2 mb-2">
                     <div class="card text-center">
-                      <div class="card-header" style="background: url(/img/misc/arrows.svg), linear-gradient(59deg, #2b2d2d, #262829) !important;">Bonus</div>
-                      <div class="card-body" style="background: url(/img/misc/patternbg.png), linear-gradient(59deg, #2b2b2b, #2d2d2d) !important;">
+                      <div class="card-header" style="background: url(/img/misc/arrows.svg), linear-gradient(59deg, #313841, #2c323a) !important;">Bonus</div>
+                      <div class="card-body" style="background: url(/img/misc/patternbg.png), linear-gradient(59deg, #313841, #2c323a) !important;">
                         <h5 class="card-title">Freebies!</h5>
                         <p class="card-text">
                           Check all promotions such as deposit bonus <a href="/bonus">here</a>!
@@ -70,22 +82,11 @@
                         <a onclick="$.vipBonus()" class="btn btn-pink p-2 m-1">Daily Bonus</a>
                         <a href="/earn" class="btn btn-info p-2 m-1">Earn Wall</a>
                       </div>
-                      <div class="card-footer text-muted" style="background: url(/img/misc/arrows.svg), linear-gradient(59deg, #2b2d2d, #262829) !important;">VIP Level - {{ __('vip.rank.'.(auth()->user()->vipLevel() == 5 ? 4 : auth()->user()->vipLevel())) }}</div>
+                      <div class="card-footer text-muted" style="font-size: 0.79rem; background: url(/img/misc/arrows.svg), linear-gradient(59deg, #313841, #2c323a) !important;">VIP Level - {{ __('vip.rank.'.(auth()->user()->vipLevel() == 5 ? 4 : auth()->user()->vipLevel())) }}</div>
                     </div>
                   </div>
                 </div>
               </div>
-              @foreach(\App\GlobalNotification::get() as $notification)
-              <div class="col-md-12">
-                <div class="d-flex p-2">
-                  @if(!auth()->guest() && auth()->user()->isDismissed($notification)) @continue @endif
-                  <div class="globalNotification p-2 m-1 mb-2" id="emailNotification" style="border-radius: 8px; background: url(/img/misc/arrows.svg),linear-gradient(#ff7907, #a04625)  !important;">
-                    <div class="icon"><i class="{{ $notification->icon }}"></i></div>
-                    <div class="text">{{ $notification->text }}</div>
-                  </div>
-                </div>
-              </div>
-              @endforeach
             </div>
           </div>
           @endif
@@ -99,7 +100,6 @@
           $featuredslots = \App\Settings::where('name', 'slots_featured_1')->first()->value;
           ?>
           <div class="container">
-            <div class="games">
               @if(!auth()->guest())
               @else
               <div class="noempty-margin-box mt-4 p-2">
@@ -128,7 +128,7 @@
                       </div>
                     </div>
                     @endif
-                    <div class="our-games mb-0 mt-2" style="border-top-right-radius: 12px !important; border-top-left-radius: 12px !important; border-radius: 0px; background: url(/img/misc/arrows.svg), linear-gradient(59deg, #2b2d2d, #262829) !important;">
+                    <div class="our-games mb-0 mt-2" style="border-top-right-radius: 12px !important; border-top-left-radius: 12px !important; border-radius: 0px; background: url(/img/misc/arrows.svg), linear-gradient(59deg, #313841, #2c323a) !important;">
                       <ul class="nav nav-tabs" id="ex1" role="tablist" style="justify-content: center;">
                         <li class="btn btn-primary p-1 m-1 nav-item"  role="presentation">
                           <a class="nav-link active" id="ex3-tab-1" data-mdb-toggle="tab" href="#ex3-tabs-1" role="tab" aria-controls="ex3-tabs-1" aria-selected="true">Featured</a>
@@ -140,7 +140,7 @@
                     </div>
                     <div class="tab-content" id="ex2-content">
                       <div class="tab-pane fade show active" id="ex3-tabs-1" role="tabpanel" aria-labelledby="ex3-tab-1">
-                        <div class="our-games">
+                        <div class="our-games" style="border-radius: 0px !important;">
                           
                           @foreach(\App\Games\Kernel\Game::list() as $game)
                           @if(!$game->isDisabled() &&  $game->metadata()->id() !== "slotmachine")
@@ -214,8 +214,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="our-games mt-4" style="border-radius: 12px; background: url(/img/misc/arrows.svg), linear-gradient(59deg, #2b2d2d, #262829) !important;">
-                      <button class="btn btn-primary" onclick="redirect('/gamelist')">Check All 1102 Games</button> <img src="/img/logo/logo_temp.png" width="40px" height="32px" style="margin-left: 10px; margin-right: 10px;">
+                    <div class="our-games mt-4" style="border-radius: 12px; background: url(/img/misc/arrows.svg), linear-gradient(59deg, #313841, #2c323a) !important;">
+                      <button class="btn btn-primary" onclick="redirect('/gamelist')">Check All 1102 Games</button> <img src="/img/logo/logo_temp.png" width="32px" height="32px" style="margin-left: 10px; margin-right: 10px;">
                     </div>
-                  </div>
                   <div class="bonus-side-menu"></div>

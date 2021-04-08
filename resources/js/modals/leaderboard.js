@@ -1,10 +1,3 @@
-$(document).ready(function() {
-    $(document).on('click', '.expandableBlockHeader', function() {
-        $(this).parent().find('.expandableBlockContent').slideToggle('fast');
-        $(this).find('svg:last-child').toggleClass('fa-angle-up').toggleClass('fa-angle-left');
-    });
-});
-
 var currency = 'usd';
 
 function updateLeaderCurrency() {
