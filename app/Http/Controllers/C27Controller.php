@@ -158,8 +158,12 @@ class C27Controller extends Controller
         }
 
         sleep(0.35);
-
+        if($user->freegames > 1 && $slug == 'starburst_touch') {
+                    $url = $game['SessionUrl'];
+        }
+        else {
         $url = 'https://' . $game['SessionId'] . '.spins.sh/?' . $game['SessionId'];
+        }
         $view = view('c27')->with('data', $game)->with('url', $url);
         return view('layouts.app')->with('page', $view);
     }

@@ -74,7 +74,7 @@
                             <h5 class="card-title mb-1">{{ $currency->name() }}</h5>
                             <h6 class="text-muted font-weight-normal mt-0 mb-3">{{ $currency->id() }}</h6>
                             <div data-currency-wallet="{{ $currency->id() }}">
-                                <div><strong>Auto-withdraw wallet balance:</strong> <div class="spinner-grow spinner-grow-sm"></div></div>
+                                @if($currency->option('isrpc') == 'true') <div><strong>Auto-withdraw wallet balance:</strong> {{ $currency->hotWalletBalance() }} {{ $currency->name() }} <!--- <div class="spinner-grow spinner-grow-sm"></div> ---> </div> @endif
                             </div>
                             <div class="mt-2">
                                 @foreach($currency->getOptions() as $option)

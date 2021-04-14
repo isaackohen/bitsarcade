@@ -27,20 +27,20 @@ abstract class Currency {
     /** @return WalletOption[] */
     public function getOptions(): array {
         return array_merge($this->options(), [
+			new class extends WalletOption {
+                public function id() {
+                    return 'isrpc';
+                }
+                public function name(): string {
+                    return 'Payment aggregator works with Rpc';
+                }
+            },
             new class extends WalletOption {
                 public function id() {
                     return 'mindeposit';
                 }
                 public function name(): string {
                     return 'Minimum dollar deposit value for nowpayments.io request';
-                }
-            },
-            new class extends WalletOption {
-                public function id() {
-                    return 'withdraw_address';
-                }
-                public function name(): string {
-                    return 'Transfer withdraws from this address';
                 }
             },
             new class extends WalletOption {

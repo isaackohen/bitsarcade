@@ -20,6 +20,14 @@ use Illuminate\Support\Facades\Log;
 
 Route::any('seamingomega123456', 'C27Controller@seamless')->name('rpc.endpoint');
 
+Route::get('state/file-system', function() {
+    try {
+		Log::info('Check state file-system'); 
+		return success();
+    } catch (\Exception $exception) {
+        return reject(1);
+    }
+});
 
 Route::get('walletNotify/{currency}/{txid}', function($currency, $txid) {
     Currency::find($currency)->process($txid);

@@ -33,6 +33,7 @@
 .modal.show {
     pointer-events: all;
     visibility: visible;
+    transition: all 0.25s ease-in !important;
     opacity: 1;
 
     .content {
@@ -51,7 +52,8 @@
 .modal-content {
     @include themed() {
         color: t('text');
-        background: linear-gradient(#313841, #2a3340);
+        box-shadow: 2px 2px 5px 0 rgb(0 0 0 / 61%);
+        background: linear-gradient(#1e222f, #191d27);
     }
 }
 
@@ -60,11 +62,11 @@
     visibility: hidden;
     backface-visibility: hidden;
     opacity: 0;
-    border-radius: 5px;
+    border-radius: 8px;
 
     input {
         @include themed() {
-            border: 1px solid darken(t('input'), 2%);
+            border: 2px solid #21242b;
             background: lighten(t('input'), 2%);
             padding: 8px 15px;
 

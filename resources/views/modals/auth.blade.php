@@ -1,6 +1,6 @@
 	{!! NoCaptcha::renderJs() !!}
 <div
-  class="auth modal fade "
+  class="auth modal show"
   id="auth modal"
   tabindex="-1"
     style="display: block; padding-right: 15px;"
@@ -30,14 +30,14 @@
             <div class="line"></div>
         </div>
 
-<div class="input form-outline form-white mt-3 mb-3">
-  <input type="text" id="login" class="form-control form-control-lg" />
-  <label class="form-label" style="color: #ffffff8a;" for="formControlLg">Display Name</label>
+<div class="form-outline mt-3 mb-3">
+  <input type="text" id="login" class="form-control" />
+  <label class="form-label" for="typeText">Display Name</label>
 </div>
 
-<div class="input form-outline form-white mt-3 mb-3">
-  <input type="password" id="password" class="form-control form-control-lg" />
-  <label class="form-label" style="color: #ffffff8a;" for="formControlLg">Password</label>
+<div class="form-outline mt-3 mb-3">
+  <input type="password" id="password" class="form-control" />
+  <label class="form-label" for="typeText">Password</label>
 </div>
 <div style="height: 78px; margin-bottom: 20px;">
                                        {!! NoCaptcha::display(['data-theme' => 'dark'], ['data-callback' => 'recaptchaCallback']) !!}
@@ -49,13 +49,13 @@
             <div class="line"></div>
         </div>
         <div class="modal-footer" id="auth-footer" style="display: none">
-    <button class="btn btn-secondary w-20 p-2" onclick="$.register()">{{ __('general.auth.register') }}</button>
+    <button class="btn btn-secondary w-25 p-2" onclick="$.register()">{{ __('general.auth.register') }}</button>
 <a class="btn btn-danger p-2" data-mdb-toggle="collapse" href="#collapseExample" role="button" data-mdb-toggle="animation" data-mdb-animation-reset="true" data-mdb-animation="slide-in" aria-expanded="false" aria-controls="collapseExample">
   Lost Access
 </a>
         </div>
         <div class="modal-footer" id="register-footer" style="display: none">
-<button class="btn btn-secondary w-20 p-2" onclick="$.auth()">{{ __('general.auth.login') }}</button>
+<button class="btn btn-secondary w-25 p-2" onclick="$.auth()">{{ __('general.auth.login') }}</button>
 <a class="btn btn-danger p-2" data-mdb-toggle="collapse" href="#collapseExample" role="button" data-mdb-toggle="animation" data-mdb-animation-reset="true" data-mdb-animation="slide-in" aria-expanded="false" aria-controls="collapseExample">Lost Access</a>
 
       </div>

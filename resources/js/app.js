@@ -10,6 +10,7 @@ require('./notifications');
 import bitcoin from 'bitcoin-units';
 import NProgress from 'nprogress';
 import ApexCharts from 'apexcharts';
+import 'owl.carousel';
 
 window.ApexCharts = ApexCharts;
 
