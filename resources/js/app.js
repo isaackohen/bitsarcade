@@ -1,4 +1,5 @@
 require('jquery-pjax');
+import 'owl.carousel';
 
 require('./routes');
 require('./toast');
@@ -8,9 +9,9 @@ require('./chat');
 require('./profit-monitoring');
 require('./notifications');
 import bitcoin from 'bitcoin-units';
+
 import NProgress from 'nprogress';
 import ApexCharts from 'apexcharts';
-import 'owl.carousel';
 
 window.ApexCharts = ApexCharts;
 
@@ -27,6 +28,8 @@ $.on = function(route, callback, cssUrls = []) {
     });
 };
 
+
+       
 const initializeRoute = function() {
     let route = $.routes()[`/${$.currentRoute()}`];
     if(route === undefined) {
@@ -402,7 +405,7 @@ $(document).ready(function() {
             $('.connectionLostContainer').fadeOut('fast', function() {
                 $('body').css({ 'padding-top': 0 });
             });
-        }, 2000);
+        }, 3000);
     });
 
     const disconnectNotify = function() {
@@ -483,7 +486,7 @@ $(document).ready(function() {
 
             setTimeout(function() {
                 $.each($('i'), (i, e) => $.transformIcon($(e)));
-            }, 50);
+            }, 25);
         });
     });
 
@@ -549,16 +552,16 @@ $(document).ready(function() {
         e.find('[data-toggle="tooltip"]').tooltip();
 
         if(!force) {
-            if($('.live_games_selector').parent().find('tr').length < ($.getCookie('show') ?? 10)) e.fadeIn(300);
-            else $('.live_games_selector').parent().find('tr').last().fadeOut(300, function() {
-                $(this).delay(300).remove();
-                e.fadeIn(300);
+            if($('.live_games_selector').parent().find('tr').length < ($.getCookie('show') ?? 10)) e.fadeIn(50);
+            else $('.live_games_selector').parent().find('tr').last().fadeOut(50, function() {
+                $(this).delay(50).remove();
+                e.fadeIn(50);
             });
         }
         else e.show();
     };
 
-    setInterval($.putNextInLiveQueue, 850);
+    setInterval($.putNextInLiveQueue, 500);
 
     window.Echo.channel(`laravel_database_Everyone`)
         .listen('ChatMessage', (e) => $.addChatMessage(e.message))

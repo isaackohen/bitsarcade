@@ -57,7 +57,7 @@ class Rain extends Command
         $last10minute = \Carbon\Carbon::now()->subMinutes(10)->toDateTimeString();
         $last4minute = \Carbon\Carbon::now()->subMinutes(4)->toDateTimeString();
 		
-        $all = User::where('latest_activity', '>=', \Carbon\Carbon::parse($last24Hours))->where('doge', '<', new Decimal128('17'))->get()->toArray();
+        $all = User::where('latest_activity', '>=', \Carbon\Carbon::parse($last10minute))->where('doge', '<', new Decimal128('17'))->get()->toArray();
         if(count($all) < $usersLength) {
             $a = User::raw(function($collection) use ($usersLength) { return $collection->aggregate([ ['$sample' => ['size' => $usersLength]] ]); })->toArray();
             shuffle($a);

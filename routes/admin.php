@@ -225,6 +225,31 @@ Route::prefix('settings')->group(function() {
     });
 });
 
+Route::prefix('slotslist')->group(function() {
+    Route::post('create', function() {
+        \App\Slotslist::create(['id' => request('id'), 'description' => request('description'), 'value' => null]);
+        return success();
+    });
+    Route::post('editfeature', function() {
+        \App\Slotslist::where('_id', request('key'))->first()->update([
+            'f' => request('value') === 'null' ? null : request('value')
+        ]);
+        return success();
+    });
+    Route::post('editdesc', function() {
+        \App\Slotslist::where('_id', request('desc'))->first()->update([
+            'desc' => request('value') === 'null' ? null : request('value')
+        ]);
+        return success();
+    });
+    Route::post('editname', function() {
+        \App\Slotslist::where('_id', request('name'))->first()->update([
+            'n' => request('value') === 'null' ? null : request('value')
+        ]);
+        return success();
+    });
+});
+
 Route::prefix('promocode')->group(function() {
     Route::post('remove', function() {
         \App\Promocode::where('_id', request()->get('id'))->delete();

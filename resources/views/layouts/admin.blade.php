@@ -70,6 +70,12 @@
                         </a>
                     </li>
                     <li>
+                        <a href="/admin/slotslist">
+                            <i data-feather="cpu"></i>
+                            <span> Slots</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="/admin/wallet" target="_blank">
                             <i data-feather="clock"></i>
                             <span class="badge badge-primary float-right">
@@ -100,13 +106,6 @@
                         <a href="/admin/currency">
                             <i data-feather="disc"></i>
                             <span> Currencies</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="/admin/maileclipse" target="blank" class="disable-pjax">
-                            <i data-feather="mail"></i>
-                            <span> Mail</span>
                         </a>
                     </li>
                     <li>

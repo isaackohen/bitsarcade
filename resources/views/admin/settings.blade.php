@@ -19,7 +19,6 @@
                         </div>
                     </div>
                 </div>
-                @if(env('APP_DEBUG'))
                     <div class="card-body border-top">
                         <div class="row align-items-center">
                             <div class="col-sm-auto">
@@ -33,7 +32,6 @@
                             </div>
                         </div>
                     </div>
-                @endif
             </div>
         </div>
     @endforeach

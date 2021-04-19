@@ -1,32 +1,82 @@
-import Glide from '@glidejs/glide';
 
-let destroy = null, init;
 
-$.on('/slots', function(){
-    init = function() {
-        if(window.location.pathname !== '/slots') return;
+    $(document).ready(function(){
 
-        if(destroy != null) destroy();
-
-        const glide = new Glide('#slider', {
-            type: 'slider',
-            perView: 1,
-            focusAt: 'center',
-            gap: 0,
-            autoplay: 10000,
-            keyboard: false
-        });
-        glide.mount();
-        destroy = function() {
-            glide.destroy();
+$('.relevantgames').owlCarousel({
+    loop:true,
+    autoplay:false,
+    margin:10,
+    items:5,
+    responsiveRefreshRate: 250,
+    responsiveBaseElement: ".pageContent",
+    responsiveClass:true,
+    responsive:{
+        0:{
+            items:1,
+            nav:false
+        },
+        450:{
+            items:2,
+            nav:false
+        },
+        925:{
+            items:3,
+            nav:false
+        },
+        1125:{
+            items:4,
+            nav:false
+        },
+        1190:{
+            items:5,
+            nav:false
         }
-    };
-
-    if(destroy == null) {
-        $(document).on('win5x:chatToggle', function() {
-            setTimeout(init, 100);
-        });
     }
+})
 
-    init();
+
+$('.randomgames').owlCarousel({
+    loop:true,
+    autoplay:false,
+    margin:10,
+    items:5,
+    responsiveRefreshRate: 350,
+    responsiveBaseElement: ".pageContent",
+    navContainer: '#customNav1',
+    navText: ["<i class='fa fa-chevron-left'></i>","<i class='fa fa-chevron-right'></i>"],
+    responsiveClass:true,
+    responsive:{
+        0:{
+            items:1,
+            nav:false
+        },
+        450:{
+            items:2,
+            nav:false
+        },
+        925:{
+            items:3,
+            nav:false
+        },
+        1125:{
+            items:4,
+            nav:false
+        },
+        1190:{
+            items:5,
+            nav:false
+        }
+    }
+})
+    });
+
+
+
+$.on('/slots', function() {
+    $('.help .title').on('click', function() {
+        $(this).parent().toggleClass('active');
+    });
+
+
+
 }, ['/css/pages/external-slots.css']);

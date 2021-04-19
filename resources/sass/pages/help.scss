@@ -22,7 +22,7 @@ body {
 
 .contact_us {
     @include themed() {
-        border: 2px solid t('secondary');
+        border: none;
     }
     border-radius: 4px;
     padding: 15px;
@@ -63,8 +63,8 @@ body {
 
     @include themed() {
         .title {
-            background: linear-gradient(#414546, #313131);
-            border: 2px solid rgb(89 97 97);
+            background: linear-gradient(#222633, #222532);
+            border: 2px solid #2f97f4;
             color: #ffffff;
             border-radius: 12px;
             padding: 8px 20px;
@@ -72,11 +72,11 @@ body {
             font-family: Proxima Nova Med;
             cursor: pointer;
             box-shadow: 0 3px 6px rgb(0 0 0 / 25%);
-            transition: all 0.30s ease-in-out;
+            transition: all 0.15s ease-in;
 
             &:hover {
-            color: #0fd560;
-            background: linear-gradient(#272a2b, #1f2122);
+            color: #2f97f4;
+            background: linear-gradient(#222633, #222532);
             }
         }
 
@@ -95,9 +95,10 @@ body {
     @include themed() {
         .title {
             font-family: Proxima Nova Semi Bd;
-            background: linear-gradient(#0fd560, #0f7b3b);
+            background: url(/img/misc/help-contact.svg);
+            background-size: cover;
             color: #ffffff;
-            border: 2px solid rgb(15 185 84);
+            border: 2px solid #124061;
             border-bottom-left-radius: 0;
             border-bottom-right-radius: 0;
         }

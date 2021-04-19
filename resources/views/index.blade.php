@@ -4,37 +4,21 @@
   <div class="games">
     <div class="our-games mb-1" style="background: transparent !important;">
       <div class="row">
-        @foreach(\App\GlobalNotification::get() as $notification)
-        <div class="col-md-12">
-          <div class="d-flex">
-            @if(!auth()->guest() && auth()->user()->isDismissed($notification)) @continue @endif
-            <div class="globalNotification p-2 m-0 mb-2" id="emailNotification" style="background: url(/img/misc/arrows.svg), linear-gradient(#3596f5, #297dd0) !important; box-shadow: 0 10px 20px 0 rgb(0 0 0 / 25%);">
-              <div class="icon"><i class="{{ $notification->icon }}"></i></div>
-              <div class="text">{{ $notification->text }}</div>
-            </div>
-          </div>
-        </div>
-        @endforeach
         <div class="col-md-3 col-sm-12 mt-2 mb-">
-          <div class="card text-center" style="min-height: 275px;">
-            <div class="card-header" style="background: url(/img/misc/arrows.svg), linear-gradient(59deg, #313841, #2c323a) !important;">Profile</div>
-            <div class="card-body" style="background: url(/img/misc/patternbg.png), linear-gradient(59deg, #313841, #2c323a) !important;">
-              <h5 class="card-title">{{ auth()->user()->name }}</h5>
-              <p class="card-text">
-                <img onclick="redirect('/user/{{ auth()->user()->_id }}')" src="{{ auth()->user()->avatar }}" alt>
-              </p>
-              <button onclick="$.wallet()" class="btn btn-secondary p-1 m-1">Wallet</button>
-              <button onclick="$.leaderboard()" class="btn btn-secondary p-1 m-1">Leaderboard</button>
-            <button data-toggle-bonus-sidebar="promo" class="btn btn-danger p-1 m-1">Promocode</a>
+          <div class="card text-center" style="min-height: 170px; background: transparent !important;">
+            <div class="card-body" style="background: url(/img/misc/arrows.svg) !important; box-shadow: -3px -3px 8px 1px #11141fcf, 2px 2px 8px 0px #0d0d0dcf, inset 1px 1px 0px 0px #1f2330 !important;">
+              <img src="/img/misc/vip-icon.png" height="32px">
+              <hr>
+              <a onclick="$.vip()" class="btn btn-primary p-1 m-1">VIP Rewards</a>
+              <a onclick="$.vipBonus()" class="btn btn-primary p-1 m-1">Daily Bonus</a>
+              <a href="/bonus" class="btn btn-danger p-1 m-1">Faucet</a>
+            <button onclick="redirect('/bonus/')" class="btn btn-danger p-1 m-1">Promocode</a></button>
           </div>
-          <div class="card-footer text-muted" style="font-size: 0.79rem; background: url(/img/misc/arrows.svg), linear-gradient(59deg, #313841, #2c323a) !important;">Registered since {{ auth()->user()->created_at }}</div>
         </div>
       </div>
       <div class="col-md-6 col-sm-12 mt-2 mb-3">
-        <div class="card text-center" style="background: url(https://cdn.coingape.com/wp-content/uploads/2019/05/02174558/Dogecoin-DOGE-Price-On-Leap-As-Largest-Exchange-Bid-To-Support-DOGE-on-Official-Wallet-678x381.jpg), linear-gradient(59deg, #2b2d2d, #26282900) !important;background-size: contain !important;min-height: 275px;height: 100% !important;background-position: center;background-repeat: no-repeat; scale: 0.8;">
-          <div class="card-header" style="background: url(/img/misc/arrows.svg), linear-gradient(59deg, #313841, #2c323a) !important;">Featured News</div>
-          <div class="card-body" style="background: linear-gradient( #22272ef7,  #1f2226ed) !important;">
-            <h5 class="card-title">{{ \App\Settings::where('name', 'featured_newsbox_title')->first()->value }}</h5>
+        <div class="card text-center" style="background: url(img/misc/bg-bits-min.jpg); min-height: 170px;">
+          <div class="card-body">
             <p class="card-text" style="text-shadow: 2px 2px black !important;"><h6>
               {{ \App\Settings::where('name', 'featured_newsbox_text')->first()->value }}</h6>
             </p>
@@ -45,127 +29,199 @@
         </div>
       </div>
       <div class="col-md-3 col-sm-12 mt-2 mb-2">
-        <div class="card text-center" style="min-height: 275px;">
-          <div class="card-header" style="background: url(/img/misc/arrows.svg), linear-gradient(59deg, #313841, #2c323a) !important;">Bonus</div>
-          <div class="card-body" style="background: url(/img/misc/patternbg.png), linear-gradient(59deg, #313841, #2c323a) !important;">
-            <h5 class="card-title">Freebies!</h5>
-            <p class="card-text">
-              Check all promotions such as deposit bonus <a href="/bonus">here</a>!
-            </p>
-            <a href="/bonus" class="btn btn-secondary p-2 m-1">Faucet</a>
-            <a onclick="$.vip()" class="btn btn-success p-2 m-1">VIP</a>
-            <a onclick="$.vipBonus()" class="btn btn-pink p-2 m-1">Daily Bonus</a>
-            <a href="/earn" class="btn btn-info p-2 m-1">Earn Wall</a>
+        <div class="card text-center" style="min-height: 170px; background: transparent !important;">
+          <div class="card-body" style="background: url(/img/misc/arrows.svg) !important; box-shadow: -3px -3px 8px 1px #11141fcf, 2px 2px 8px 0px #0d0d0dcf, inset 1px 1px 0px 0px #1f2330 !important;">
+            <img src="/img/logo/logo_bits_small_content.png"><hr>
+            <button onclick="$.wallet()" class="btn btn-success p-1 m-1">Wallet</button>
+            <a href="/earn" class="btn btn-pink p-1 m-1">Referral</a>
+            <button onclick="$.leaderboard()" class="btn btn-pink p-1 m-1">Leaderboard</button>
+            <a href="/earn" class="btn btn-primary p-1 m-1">Earn Wall</a>
           </div>
-          <div class="card-footer text-muted" style="font-size: 0.79rem; background: url(/img/misc/arrows.svg), linear-gradient(59deg, #313841, #2c323a) !important;">VIP Level - {{ __('vip.rank.'.(auth()->user()->vipLevel() == 5 ? 4 : auth()->user()->vipLevel())) }}</div>
         </div>
       </div>
     </div>
   </div>
 </div>
+@foreach(\App\GlobalNotification::get() as $notification)
+<div class="col-md-12">
+  <div class="d-flex">
+    @if(!auth()->guest() && auth()->user()->isDismissed($notification)) @continue @endif
+    <div class="alert alert-info globalNotification p-2 m-0 mb-3" id="emailNotification" style="border-radius: 4px !important; padding: 1rem !important; padding: 1rem;
+    margin-bottom: 1rem; font-weight: 500 !important; color: #22738e !important; background: url(/img/misc/arrows.svg), #d7f2fb !important;">
+      <div class="icon"><i class="{{ $notification->icon }}"></i></div>
+      <div class="text">{{ $notification->text }}</div>
+    </div>
+  </div>
+</div>
+
+
+@endforeach
 </div>
 @endif
-<?php
-$client = new \outcomebet\casino25\api\client\Client(array(
-'url' => 'https://api.c27.games/v1/',
-'sslKeyPath' => env('c27_path'),
-));
-$games = $client->listGames();
-$games = array_slice($games['Games'], 0, 1500);
-$featuredslots = \App\Settings::where('name', 'slots_featured_1')->first()->value;
-?>
 <div class="container">
 @if(!auth()->guest())
 @else
-  <div class="row">
+<div class="row">
+  <div class="col-12 col-sm-12 col-md-6">
+    <div class="bonus-box-small" style="min-height: 335px;">
+      <div class="banner-img banner-welcome-slots"></div>
+      <div class="text">
+        <div class="header"><h5>Our Games</h5></div>
+        <p>In addition to <a href="/fairness">Provably Fair</a> games, we offer all of the world's best iGaming providers.</p>
+        <p>From Netent to Pragmatic Play, here at {{ \App\Settings::where('name', 'platform_name')->first()->value }} you will never get bored with over 23 game providers.</p>
+        <div class="btn btn-secondary m-1 p-2" style="float: right;" onclick="redirect('/gamelist')">Our Games</div>
+      </div></div>
+    </div>
     <div class="col-12 col-sm-12 col-md-6">
-      <div class="bonus-box-small" style="min-height: 325px;">
-        <div class="banner-img banner-welcome-slots"></div>
+      <div class="bonus-box-small" style="min-height: 335px;">
+        <div class="banner-img banner-welcome-socialmedia"></div>
         <div class="text">
-          <div class="header"><h5>Slots</h5></div>
-          <p>In addition to our <a href="/fairness">Provably Fair</a> games, we offer all of the world's greatest providers.</p>
-          <p>From Netent, Quickspin to Pragmatic Play, here at {{ \App\Settings::where('name', 'platform_name')->first()->value }} you will never get bored with over 23 game providers.</p>
-          <div class="btn btn-secondary m-1 p-2" style="float: right;" onclick="redirect('/gamelist')">Our Games</div>
+          <div class="header"><h5>Tons of Rewards!</h5></div>
+          <p>We offer constant bonuses, check out our VIP reward program, daily bonus, welcome offer, partner program and more.</p>
+          <p>Get paid in DOGE instantly without a single deposit by completing offers on our earn section.</p>
+          <div class="btn btn-secondary m-1 p-2" style="float: right;" onclick="$.vipBonus()">Claim Bonus</div>
         </div></div>
       </div>
-      <div class="col-12 col-sm-12 col-md-6">
-        <div class="bonus-box-small" style="min-height: 325px;">
-          <div class="banner-img banner-welcome-socialmedia"></div>
-          <div class="text">
-            <div class="header"><h5>Social Media</h5></div>
-            <p>Join our Social Media channels and get tons of freebies. We automatically publish promocodes on our Discord & Telegram channel.</p>
-            <p>Stay up-to-date and also get in direct contact with other community members.</p>
-            <div class="btn btn-secondary m-1 p-2" style="float: right;" onclick="$.vipBonus()">Claim Bonus</div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-sm-6 col-md-4">
+        <div class="button-bar-small" onclick="redirect('/partner/')">
+          <div class="text" style="background: transparent !important; border-radius: 12px;">
+            <h5 style="margin-bottom: 1px; font-weight: 600;">Partner</h5>
+            <p>Earn money up-to <b>0.15% of all of your referred player's bets</b> and other benefits!</p>
           </div></div>
         </div>
-      </div>
-      <div class="row">
         <div class="col-12 col-sm-6 col-md-4">
-          <div class="button-bar-small" onclick="redirect('/partner/')">
+          <div class="button-bar-small" onclick="redirect('/bonus/')">
             <div class="text" style="background: transparent !important; border-radius: 12px;">
-              <h5 style="margin-bottom: 1px; font-weight: 600;">Partner</h5>
-              <p>Earn money up-to <b>0.15% of all of your referred player's bets</b> and other benefits!</p>
+              <h5 style="margin-bottom: 1px; font-weight: 600;">Daily Bonus</h5>
+              <p>You play, <b>we pay</b>. After reaching Bronze VIP level you are eligible for a daily juicy bonuses.</p>
             </div></div>
           </div>
           <div class="col-12 col-sm-6 col-md-4">
-            <div class="button-bar-small" onclick="redirect('/bonus/')">
+            <div class="button-bar-small" onclick="redirect('/earn/')">
               <div class="text" style="background: transparent !important; border-radius: 12px;">
-                <h5 style="margin-bottom: 1px; font-weight: 600;">Daily Bonus</h5>
-                <p>You play, <b>we pay</b>. After reaching Bronze VIP level you are eligible for a daily juicy bonuses.</p>
+                <h5 style="margin-bottom: 1px; font-weight: 600;">Earn</h5>
+                <p>Get credited <b>straight DOGE</b> to your account doing surveys and other tasks.</p>
               </div></div>
             </div>
-            <div class="col-12 col-sm-6 col-md-4">
-              <div class="button-bar-small" onclick="redirect('/earn/')">
-                <div class="text" style="background: transparent !important; border-radius: 12px;">
-                  <h5 style="margin-bottom: 1px; font-weight: 600;">Earn</h5>
-                  <p>Get credited <b>straight DOGE</b> to your account doing surveys and other tasks.</p>
-                </div></div>
+          </div>
+          @endif
+          @if(!auth()->guest())
+          @php
+          $freespins = \App\Settings::where('name', 'freespin_slot')->first()->value;
+          $slotname = \App\Slotslist::get()->where('id', $freespins)->first();
+          @endphp
+          @if(auth()->user()->freegames > '2')
+          <div class="alert alert-info fade show" role="alert">
+            <strong>Holy guacamole</strong>. You have <strong>{{ auth()->user()->freegames }}</strong> free spins on your account! Get spinning on <a href="/slots/{{ $slotname->id }}" span style="capitalize; font-weight: 600 !important;">{{ $slotname->n }}</a></b>
+          </span>
+        </div>
+        @endif
+        @endif
+        <div class="bonus-box-small" style="z-index: 1;">
+        <div id="customNav4" class="owl-nav"></div>
+        <h5 style="padding-top: 9px; padding-left: 7px; font-weight: 600;">Featured Games </h5>
+        <button onclick="redirect('/gamelist/')" style="padding-top: 5px; font-size: 10px; padding-left: 10px;" class="btn btn-secondary m-2 p-1">More Games</a></button>
+        <div class="container-flex owl-carousel featured" style="z-index: 1;">
+          @foreach(\App\Slotslist::get() as $slots)
+          @if($slots->f == '1')
+          <div class="card gamepostercard" style="cursor: pointer; margin-left: 10px; margin-right: 10px;">
+            @if(!auth()->guest())
+            <div onclick="redirect('/slots/{{ $slots->id }}')" class="game_poster p-2" style="background-image:url(/img/slots/{{ $slots->p }}/{{ $slots->id }}.jpg)">
+              @else
+              <div onclick="$.auth()" class="game_poster p-2" style="background-image:url(/img/slots/{{ $slots->p }}/{{ $slots->id }}.jpg)">
+                @endif
+              </div>
+              <div class="card-footer">
+                <h7 class="card-title">{{ $slots->n }}</h7><br>
+                <small><span style="font-style: italic; font-size: 10px; color: #e5e6e7 !important; font-weight: 500; text-transform: capitalize;">{{ $slots->p }}</span></small></div>
+              </div>
+              @endif
+              @endforeach
+            </div>
+          </div>
+          <div class="bonus-box-small" style="z-index: 1;">
+          <div id="customNav5" class="owl-nav"></div>
+          <h5 style="padding-top: 9px; padding-left: 7px; font-weight: 600;">Provably Fair</h5>
+          <button style="padding-top: 5px; font-size: 10px; padding-left: 10px;" onclick="redirect('/fairness')" class="btn btn-success m-2 p-1">Fairness</a></button>
+          <div class="container-flex owl-carousel provably"  style="z-index: 1;">
+            @foreach(\App\Games\Kernel\Game::list() as $game)
+            @if(!$game->isDisabled() &&  $game->metadata()->id() !== "slotmachine")
+            <div class="card gamepostercard" onclick="redirect('/game/{{ $game->metadata()->id() }}')" style="cursor: pointer; margin-left: 10px; margin-right: 10px;">
+              <div style="background-size: cover;" class="game_poster p-2 card-img-top game-{{ $game->metadata()->id() }}" @if(!$game->isDisabled()) onclick="redirect('/game/{{ $game->metadata()->id() }}')" @endif>
+                <?php
+                $getname = $game->metadata()->name();
+                ?>
+                @if($getname == "Dice")
+                <div class="label-red">
+                  HOT!
+                </div>
+                @endif
+                <div class="label-fair">
+                  FAIR
+                </div>
+              </div>
+              
+              <div class="card-footer">
+                <h6 class="card-title">{{ $game->metadata()->name() }}</h5>
+                <small><span style="font-style: italic; font-size: 10px; color: #e5e6e7 !important; font-weight: 500; text-transform: capitalize;">{{ \App\Settings::where('name', 'platform_name')->first()->value }}</span></small></div>
+              </div>
+              @else
+              @endif
+              @endforeach
+            </div>
+          </div>
+          <div class="container-flex provider-carousel owl-carousel" style="z-index: 1;">
+            @foreach(\App\Providers::all()->random(17) as $providers)
+            <div class="card m-1" style="background: transparent !important; box-shadow: -3px -3px 8px 1px #11141fcf, 2px 2px 8px 0px #0d0d0dcf, inset 1px 1px 0px 0px #1f2330 !important;">
+              <div onclick="redirect('/provider/{{ $providers->name }}')" class="providers m-1" style="background-image:url(/img/providers/{{ $providers->name }}_small.webp)">                  </div>
+            </div>
+            @endforeach
+          </div>
+                              @if(!auth()->guest())
+          <div class="bonus-box-small" style="z-index: 1;">
+            <div id="customNav3" class="owl-nav"></div>
+            <h5 style="padding-top: 9px; padding-left: 7px; font-weight: 600;">Random Slots</h5>
+            <button onclick="redirect('/gamelist/')" style="padding-top: 5px; font-size: 10px; padding-left: 10px;" class="btn btn-secondary m-2 p-1">More Games</a></button>
+            <div class="container-flex owl-carousel random" style="z-index: 2;">
+              @foreach(\App\Slotslist::all()->random(20) as $slots)
+              <div class="card gamepostercard" style="cursor: pointer; margin-left: 10px; margin-right: 10px;">
+                    @if(!auth()->guest())
+                    <div onclick="redirect('/slots/{{ $slots->id }}')" class="game_poster" style="background-image:url(/img/slots_webp/{{ $slots->id }}.webp)">
+                    @else
+                     <div onclick="$.auth()" class="game_poster" style="background-image:url(/img/slots_webp/{{ $slots->id }}.webp)">
+                      @endif
+                  </div>
+              <div class="card-footer">
+                <h7 class="card-title">{{ $slots->n }}</h7><br>
+                <small><span style="font-style: italic; font-size: 10px; color: #e5e6e7 !important; font-weight: 500; text-transform: capitalize;">{{ $slots->p }}</span></small></div>
+              </div>
+                @endforeach
               </div>
             </div>
-          @endif
-
-          <div class="bonus-box-small p-2">
-              <h5 style="padding-top: 5px; padding-bottom: 5px; padding-left: 13px; margin-bottom: 1px; font-weight: 600;">Featured Games</h5>
-
-                <div class="owl-carousel">
-
-                  @foreach($games as $game)
-
-                  @if(in_array($game["Id"], explode(',', $featuredslots)))
-                  
-                  <div class="card gamepostercard" style="cursor: pointer; margin-left: 1.4vh; margin-right: 1.4vh;">
-                    @if(!auth()->guest())
-                    <a href="/slots/{{$game['Id']}}"><div class="game_poster" style="background-image:url(/img/slots/{{$game['SectionId']}}/{{$game['Id']}}.jpg)"></a>
-                    @else
-                    <div class="game_poster" style="background-image:url(/img/slots/{{$game['SectionId']}}/{{$game['Id']}}.jpg)">
-                      @endif
-                      <div class="label">
-                        {{ $game['SectionId'] }}
-                      </div>
-                      <div class="name">
-                        <div class="name-text">
-                          <div class="title">{{ $game['Name'] }}</div>
-                          @if(!auth()->guest())
-                          
-                          <a href="/slots/{{$game['Id']}}"><button class="btn btn-secondary">Play</button></a>
-                          @else
-                          <button class="btn btn-primary" onclick="$.register()">
-                          Login
-                          </button>
-                          @endif
-                        </div>
-                      </div>
-                    </div>
-                    <div class="card-footer p-2">
-                    <h7 class="card-title m-1">{{ $game['Name'] }}</h7></div>
+            <div class="bonus-box-small" style="z-index: 1;">
+            <div id="customNav2" class="owl-nav"></div>
+            <h5 style="padding-top: 9px; padding-left: 7px; font-weight: 600;">New Arrivals</h5>
+            <button onclick="redirect('/gamelist/')" style="padding-top: 5px; font-size: 10px; padding-left: 10px;" class="btn btn-secondary m-2 p-1">More Games</a></button>
+            <div class="container-flex owl-carousel popular"  style="z-index: 1;">
+              @foreach(\App\Slotslist::get() as $slots)
+              @if($slots->f == '2')
+              <div class="card gamepostercard" style="cursor: pointer; margin-left: 10px; margin-right: 10px;">
+                @if(!auth()->guest())
+                <div onclick="redirect('/slots/{{ $slots->id }}')" class="game_poster p-2" style="background-image:url(/img/slots/{{ $slots->p }}/{{ $slots->id }}.jpg)">
+                  @else
+                  <div onclick="$.auth()" class="game_poster p-2" style="background-image:url(/img/slots/{{ $slots->p }}/{{ $slots->id }}.jpg)">
+                    @endif
                   </div>
-                  @endif
-                  @endforeach
-                </div>
-                          <div class="our-games-box" style="justify-content: center !important; background: transparent !important;">
-            <button class="btn btn-primary" onclick="redirect('/gamelist')">Check All 1102 Games</button> 
-          </div>
+              <div class="card-footer">
+                <h7 class="card-title">{{ $slots->n }}</h7><br>
+                <small><span style="font-style: italic; font-size: 10px; color: #e5e6e7 !important; font-weight: 500; text-transform: capitalize;">{{ $slots->p }}</span></small></div>
               </div>
+                @endif
+                @endforeach
+              </div>
+            </div>
 
-          </div>
-
+          @endif
+                    </div>  

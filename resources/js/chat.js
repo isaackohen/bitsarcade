@@ -60,7 +60,7 @@ $.addChatMessage = function(message) {
             <div class="message vip-rain_bot">
                 <div class="content">
                     <div class="rain_users">${users}</div>
-                    <div class="mt-2 rain_desc">${$.lang(`general.${summer ? 'premiumrain' : 'premiumsnow'}`, {
+                    <div class="mt-2 rain_desc"><i class="fas fa-tint"></i>  ${$.lang(`general.${summer ? 'premiumrain' : 'premiumsnow'}`, {
                             sum: bitcoin(message.data.reward, 'btc').to($.unit()).value().toFixed($.unit() === 'satoshi' ? 0 : 8),
                             currency: window.Laravel.currency[message.data.currency].name
                         })}${message.data.from === undefined ? '' : `&nbsp;(<a style="color: #a8a8a8" href="/user/${message.data.from._id}" class="disable-pjax" target="_blank">${$.formatName(message.data.from.name)}</a>)`}</div>

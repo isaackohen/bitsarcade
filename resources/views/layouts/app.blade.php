@@ -31,6 +31,7 @@
         <link rel="stylesheet" href="{{ mix('/css/loader.css') }}">
         <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
         <link rel="manifest" href="/manifest.json">
+
         <script src="{{ mix('/js/bootstrap.js') }}" type="text/javascript" defer></script>
         <script>
         window._locale = '{{ app()->getLocale() }}';
@@ -77,32 +78,36 @@
         {!! NoCaptcha::renderJs() !!}
     </head>
     <body>
-        <div class="pageLoader" style="background: #22272e;">
-        <img src="/img/logo/loader.gif" style="position: absolute;left: 50%;top: 50%;width: unset;height: unset;transform: translate(-50%, -50%);">              </div>
+        <div class="pageLoader" style="background: radial-gradient(circle, rgba(20,26,40,1) 0%, rgba(20,26,40,1) 63%, rgba(6,8,13,1) 100%) !important;">
+            <img style="position: absolute; top: 0; bottom: 0; margin: auto; left: 0; right: 0;" src="/img/logo/logo_bits_small_content.png">
+        </div>
         <div class="error" style="display: none"></div>
     </div>
     
     <div class="wrapper">
         <header>
             <div class="fixed">
-                <a href="/"><div class="logo"></div></a>
                 <div class="menu">
                     <button
                     data-mdb-toggle="sidenav"
                     data-mdb-target="#sidenav-1"
-                    class="btn btn-pink"
+                    class="btn transparent"
                     aria-controls="#sidenav-1"
                     aria-haspopup="true"
-                    style="    color: #0fd560 !important;
-                    background: linear-gradient(-180deg, #292f38 0%, #1a1c1f 98%);
-                    border-radius: 16px;
-                    font-size: 1rem;
-                    box-shadow: 0 3px 6px rgb(0 0 0 / 25%);"
+                    style="    color: #57c7c7 !important;
+                    background: transparent !important;
+                    font-size: 1.3rem;
+                    padding: 1px;
+                    margin-top: 5px;
+                    box-shadow: none !important;"
                     >
-                    <i class="fas fa-bars"></i>
+                    <span class="dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                              <i class="fas fa-bars"></i>
+                            </span>                    
                     </button>
-                    <!--  <button class="btn btn-primary" style="padding: 3px; margin-left: 10px; margin-bottom: 1px;" onclick="redirect('/bonus')">Bonus</button> !-->
                 </div>
+                                <a href="/"><div class="logo"></div></a>
+
                 @if(!auth()->guest())
                 <div class="wallet">
                     <div class="wallet-switcher">
@@ -120,7 +125,7 @@
                             </div>
                         </div>
                         @endforeach
-                        <div class="option select-option mt-1">
+                        <div class="option select-option">
                             <div class="wallet-switcher-icon">
                                 <i class="fas fa-btc-icon"></i>
                             </div>
@@ -139,7 +144,7 @@
                         <i class="fal fa-angle-down"></i>
                     </div>
                     <div class="balance"></div>
-                    <div class="btn btn-primary btn-rounded wallet-open p-2" style="margin-top: 1px; margin-bottom: 1px; text-shadow: 0.9px 0.9px #363d42; border-top-left-radius: 0px; border-bottom-left-radius: 0px;"></div>
+                    <div class="btn btn-primary btn-rounded wallet-open p-2" style="z-index: 5;margin-top: 1px; margin-bottom: 1px; text-shadow: 0.9px 0.9px #363d42; border-top-left-radius: 0px; border-bottom-left-radius: 0px;"></div>
                 </div>
                 @endif
                 <div class="right">
@@ -147,8 +152,10 @@
                     <button class="btn btn-primary m-1" onclick="$.register()">{{ __('general.auth.register') }}</button>
                     <button class="btn btn-secondary m-1" onclick="$.auth()">{{ __('general.auth.login') }}</button>
                     @else
-                    <img onclick="redirect('/user/{{ auth()->user()->_id }}')" src="{{ auth()->user()->avatar }}" alt>
-                    <div class="action" data-notification-view onclick="$.displayNotifications()">
+                    <div class="action" style="margin-right: 5px; font-size: 17px; color: #bff2ff;"  onclick="redirect('/user/{{ auth()->user()->_id }}')">
+                        <i class="fad fa-user-circle"></i>
+                    </div>
+                    <div class="action" style="color: #bff2ff;" data-notification-view onclick="$.displayNotifications()">
                         <i class="fas fa-bell"></i>
                     </div>
                     @endif
@@ -274,35 +281,42 @@
                     <div class="live_table_container"></div>
                 </div>
             </div>
-            <footer>
-                <div class="container-fluid">
-                    <div class="links">
-                        <div class="link">
-                            <img src="/img/logo/logo_temp.png" width="64px" height="64px" style="margin-right: 20px;" alt="{{ \App\Settings::where('name', 'platform_name')->first()->value }} Logo">
-                        </div>
-                        <div class="link">
-                            {{ \App\Settings::where('name', 'platform_link')->first()->value }} - All Right Reserved
-                            <br>{{ \App\Settings::where('name', 'platform_footer')->first()->value }}
-                        </div>
-                    </div>
-                    <div class="links">
-                        <div class="link">
-                            <a href="/terms/terms_and_conditions">{{ __('general.footer.terms_and_conditions') }}</a>
-                        </div>
-                        <div class="link">
-                            <a href="/fairness">{{ __('general.footer.fairness') }}</a>
-                        </div>
-                        <div class="link">
-                            <i class="fab fa-discord"></i>
-                            <a href="{{ \App\Settings::where('name', 'discord_invite_link')->first()->value }}" target="_blank">@discord</a>
-                        </div>
-                        <div class="link">
-                            <i class="fab fa-telegram"></i>
-                            <a href="{{ \App\Settings::where('name', 'telegram_link')->first()->value }}">Telegram</a>
-                        </div>
-                    </div>
-                </div>
-            </footer>
+            <footer class="text-center text-white">
+  <div class="container p-4">
+    <section class="mb-4">
+      <a class="btn btn-outline-light btn-floating m-1" href="{{ \App\Settings::where('name', 'discord_invite_link')->first()->value }}" target="_blank" role="button"
+        ><i class="fab fa-discord"></i
+      ></a>
+      <a class="btn btn-outline-light btn-floating m-1" href="{{ \App\Settings::where('name', 'twitter_link')->first()->value }}" target="_blank" role="button"
+        ><i class="fab fa-twitter"></i
+      ></a>
+
+      <a href="{{ \App\Settings::where('name', 'telegram_link')->first()->value }}" target="_blank" class="btn btn-outline-light btn-floating m-1" role="button"
+        ><i class="fab fa-telegram"></i
+      ></a>
+
+    <section class="">
+      <form action="">
+
+      </form>
+    </section>
+    <section class="mb-1">
+      <p>
+        {{ \App\Settings::where('name', 'platform_footer')->first()->value }}
+        <br>{{ \App\Settings::where('name', 'platform_footer_2')->first()->value }}
+        <br>
+        <a href="/terms/terms_and_conditions">{{ __('general.footer.terms_and_conditions') }}</a>
+      </p>
+    </section>
+  </div>
+
+  <div class="footer-bottom text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    <img src="/img/logo/logo_bits_footer.png" alt="{{ \App\Settings::where('name', 'platform_name')->first()->value }} Logo">
+    <a href="https://secure.ecogra.biz/validator/operator/validate=bitsarcade.com&amp;seal_id=1626f5bc489211b07f8c75b57e41e9f1e78a5a8426e197e0c6437da9ebfaea4c624094439fad0cfdd61f49fc5924bca9&amp;stamp=d4f3109f8d3bce51ca70ded5e25fd3f7/" target="_blank"><img width="65px" height="60px" src="/img/misc/basic-large-validseal.png" alt="eCOGRA License Validation"></a>
+    <a href="https://www.bitsarcade.com/documents/RNG_Certificate_BITSARCADE_UK27February2021.pdf" target="_blank"><img width="45px" height="60px" src="/images/itechlabs.png" alt="RNG Certificate" style=""></a>
+  </div>
+</footer>
+
         </div>
         <div class="chat">
             <div class="fixed">
@@ -326,7 +340,12 @@
                     @endif
                     <div class="d-flex w-100">
                         <div class="column">
-                            @if(!auth()->guest())
+                                                        @if(!auth()->guest())
+                    <div class="column-icon" data-notification-view onclick="$.displayNotifications()">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                                                        @endif
+                            @if(!auth()->guest() && auth()->user()->access == 'admin')
                             <div class="column-icon" id="chatCommandsToggle">
                                 <i class="fal fa-slash fa-rotate-90"></i>
                             </div>
@@ -340,16 +359,16 @@
                                     <div class="content" data-fill-emoji-target></div>
                                     <div class="emoji-footer">
                                         <div class="content">
-                                            <div class="emoji-category" onclick="$.unicodeEmojiInit()">
-                                                <i class="fas fa-smile"></i>
+                                                <div class="emoji-category" onclick="$.unicodeEmojiInit()">
+                                                <i class="fad fa-smile"></i>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 @endif
-                                <i class="fal fa-smile-wink" id="emoji-container-toggle" onclick="$.unicodeEmojiInit(); $('.emoji-container').toggleClass('active')"></i>
+                                <i class="fad fa-smile" id="emoji-container-toggle" onclick="$.unicodeEmojiInit(); $('.emoji-container').toggleClass('active')"></i>
                             </div>
-                            <div class="column-icon" onclick="$.sendChatMessage('.text-message')" id="sendChatMessage"><i class="fal fa-share"></i></div>
+                            <div class="column-icon" onclick="$.sendChatMessage('.text-message')" id="sendChatMessage"><i class="fad fa-external-link-square"></i></div>
                         </div>
                     </div>
                 </div>

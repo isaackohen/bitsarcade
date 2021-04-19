@@ -17,6 +17,7 @@ $.on('/admin/user', function() {
     $('#datatable').DataTable({
         destroy: true,
         "order": [[ 1, "desc" ]],
+        "lengthMenu": [[25, 50, 100, 250, -1], [25, 50, 100, 250, "All"]],
         "language": {
             "paginate": {
                 "previous": "<i class='uil uil-angle-left'>",
@@ -31,6 +32,7 @@ $.on('/admin/user', function() {
     $('#transactions').DataTable({
         destroy: true,
         "order": [[ 0, "desc" ]],
+        "lengthMenu": [[25, 50, 100, 250, -1], [25, 50, 100, 250, "All"]],
         "language": {
             "paginate": {
                 "previous": "<i class='uil uil-angle-left'>",
