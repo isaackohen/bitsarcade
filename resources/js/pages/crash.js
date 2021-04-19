@@ -21,7 +21,7 @@ class Ruler {
         const textSize = 15;
         this.ctx.fillStyle = $.currentTheme() === 'dark' ? 'rgba(255, 255, 255, 0.25)' : 'rgba(0, 0, 0, 0.5)';
         this.ctx.textAlign = align;
-        this.ctx.font = `${textSize}px Open Sans`;
+        this.ctx.font = `${textSize}px Proxima Nova Med`;
         this.ctx.fillText(label, x, y + textSize);
     }
 
@@ -32,7 +32,7 @@ let startTimestamp = 0, currentMultiplier = 1, autoCashout = 2;
 function redrawCanvas() {
     const textSize = 70;
     ctx.fillStyle = $.currentTheme() === 'dark' ? 'white' : 'black';
-    ctx.font = `${textSize}px Open Sans`;
+    ctx.font = `${textSize}px Proxima Nova Med`;
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.fillText(`${crashed ? `${$.lang('general.crash')} @ `: ''}${parseFloat(currentMultiplier).toFixed(2)}x`, width / 2, height / 2);

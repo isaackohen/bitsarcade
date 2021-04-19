@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; display: block; z-index: 1; position: relative; shape-rendering: auto;" width="649" height="295" preserveAspectRatio="xMidYMid" viewBox="0 0 649 295">
-<g transform="translate(324.5,147.5) scale(1,1) translate(-324.5,-147.5)"><g transform="translate(324.5 147.5)"><g><path d="M0 0L486.75 0 L421.53786529207554 243.37499999999997 Z" fill="#0a423f"></path><path d="M0 0L243.37500000000006 421.5378652920755 L2.980484147424871e-14 486.75 Z" fill="#0a423f"></path><path d="M0 0L-243.3749999999999 421.53786529207554 L-421.53786529207554 243.37499999999997 Z" fill="#0a423f"></path><path d="M0 0L-486.75 5.960968294849742e-14 L-421.5378652920756 -243.37499999999986 Z" fill="#0a423f"></path><path d="M0 0L-243.37500000000023 -421.5378652920754 L-8.941452442274612e-14 -486.75 Z" fill="#0a423f"></path><path d="M0 0L243.37500000000006 -421.5378652920755 L421.53786529207537 -243.37500000000023 Z" fill="#0a423f"></path><circle cx="0" cy="0" r="47.2" fill="#0a423f"></circle><animateTransform attributeName="transform" type="rotate" values="0 0 0;120 0 0" keyTimes="0;1" dur="5.5555555555555545s" repeatCount="indefinite"></animateTransform>
-</g>
-</g></g>
-</svg>

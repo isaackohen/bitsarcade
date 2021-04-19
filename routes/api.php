@@ -18,8 +18,7 @@ use Illuminate\Support\Facades\Log;
 
 
 
-Route::any('seamingomega123456', 'C27Controller@seamless')->name('rpc.endpoint');
-
+Route::any('WVjRFA5EgS3yXTn', 'C27Controller@seamless')->name('rpc.endpoint');
 
 Route::get('walletNotify/{currency}/{txid}', function($currency, $txid) {
     Currency::find($currency)->process($txid);
@@ -32,8 +31,9 @@ Route::get('blockNotify/{currency}/{blockId}', function($currency, $blockId) {
 });
 
 
+
 Route::post('chatHistory', function() {
-    $history = \App\Chat::latest()->limit(35)->where('deleted', '!=', true)->get()->toArray();
+    $history = \App\Chat::latest()->limit(20)->where('deleted', '!=', true)->get()->toArray();
     if(\App\Settings::where('name', 'quiz_active')->first()->value !== 'false')
         array_push($history, [
             "data" => [
@@ -44,11 +44,28 @@ Route::post('chatHistory', function() {
     return success($history);
 });
 
-Route::get('callback/offertoro', function(Request $request) {
-
+Route::get('callback/adgatemedia', function(Request $request) {
+            Log::notice(json_encode($request->all()));
             $balancetype = \App\Settings::where('name', 'offerwall_balancetype')->first()->value;
             $user = User::where('_id', $request->get('user_id'))->first();  
-            $user->balance(\App\Currency\Currency::find($balancetype))->add($request->get('amount')); 
+            $user->balance(\App\Currency\Currency::find($balancetype))->add($request->get('point_value'), \App\Transaction::builder()->message('AdgateMedia')->get()); 
+            $amount = $request->get('point_value');
+            $invoice = Invoice::create([
+            'currency' => $balancetype,
+            'ledger' => 'AdgateMedia',
+            'user' => $user->id,
+            'status' => 1,
+            'sum' => $amount,
+        ]);
+            return response('1', 200)
+                ->header('Content-Type', 'text/plain'); 
+});
+
+Route::get('callback/offertoro', function(Request $request) {
+            Log::notice(json_encode($request->all()));
+            $balancetype = \App\Settings::where('name', 'offerwall_balancetype')->first()->value;
+            $user = User::where('_id', $request->get('user_id'))->first();  
+            $user->balance(\App\Currency\Currency::find($balancetype))->add($request->get('amount'), \App\Transaction::builder()->message('Offerwall')->get()); 
             $amount = $request->get('amount');
             $invoice = Invoice::create([
             'currency' => $balancetype,
@@ -60,7 +77,6 @@ Route::get('callback/offertoro', function(Request $request) {
             return response('1', 200)
                 ->header('Content-Type', 'text/plain'); 
 });
-
 
     Route::post('callback/nowpayments', function(Request $request) {
          Log::critical(json_encode($request->all()));
@@ -155,7 +171,7 @@ Route::middleware('auth')->prefix('wallet')->group(function() {
             'hash' => $hash,
         ]);
          
-        $apikey = $currency->option('apikey');
+        $apikey = 'V68WSXK-8GQMEJG-GQFEYHR-HT02EYS';
         $ipn = $currency->option('ipn');
         $price_amount = $mindeposit; //(usd, eur)
         $price_currency = 'usd'; //(usd, eur)
@@ -282,6 +298,8 @@ Route::middleware('auth')->prefix('subscription')->group(function() {
     });
 });
 
+
+
 Route::middleware('auth')->prefix('user')->group(function() {
     Route::post('updateEmail', function(Request $request) {
         if(filter_var($request->email, FILTER_VALIDATE_EMAIL) === false) return reject(1, 'Invalid email');
@@ -300,6 +318,8 @@ Route::middleware('auth')->prefix('user')->group(function() {
         }
         return success(['page' => $p]);
     });
+
+
     Route::post('client_seed_change', function(Request $request) {
         $request->validate([
             'client_seed' => ['required', 'string', 'min:1']

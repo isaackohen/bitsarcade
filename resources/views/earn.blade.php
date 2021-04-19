@@ -7,14 +7,16 @@
                 <div class="earn_header">
                     <h3><b>Start Earning!</b></h3>
                     <p>Complete offers, fill out surveys and get DOGE instantly credited to your account. </p>
+
+                    <div class="alert alert-success mb-4 p-2 text-center" role="alert">Added Adgatemedia provider to earn section. This week, earn 50% more DOGE using Adgatemedia.</div>
                 </div>
             </div>
         </div>
     
     <div class="earnTabs">
-        <div class="earnTab" data-toggle-earn-tab="adgems">Adgems</div>
-        <div class="earnTab active" data-toggle-earn-tab="offertoro">Offertoro</div>
-        <div class="earnTab" data-toggle-earn-tab="more">More..</div>
+        <div class="earnTab" data-toggle-earn-tab="adgems"><b>Adgem</b></div>
+        <div class="earnTab active" data-toggle-earn-tab="offertoro"><b>Offertoro</b></div>
+        <div class="earnTab" data-toggle-earn-tab="more"><b>Adgatemedia</b></div>
     </div>
     <div class="earnTabContent" data-earn-tab="adgems" style="display: none">
         <div class="empty-nomargin-box">
@@ -27,7 +29,7 @@
  height:100%; min-height: 650px; border:none; margin:0; padding:0;  z-index:999999;">Your browser doesn't support iframes</iframe>
 
 @else
-You need to be logged in to see all earning offers.
+You need to be logged in to see Adgem earn offers.
 @endif
                     </div>
                 </div>
@@ -42,9 +44,8 @@ You need to be logged in to see all earning offers.
 @if(!auth()->guest())
 <iframe src="https://www.offertoro.com/ifr/show/27392/{{ auth()->user()->_id }}/11826" style="position:inherit; top:0px; left:0px; bottom:0px; right:0px; width:100%; overflow:hidden;
  height:100%; min-height: 650px; border:none; margin:0; padding:0;  z-index:999999;">Your browser doesn't support iframes</iframe>
-
 @else
-You need to be logged in to see all earning offers.
+You need to be logged in to see Offertoro earn offers.
 @endif
                     </div>
                 </div>
@@ -55,9 +56,14 @@ You need to be logged in to see all earning offers.
         <div class="-box">
             <div class="row">
                 <div class="col-12 col-md-12">
-                    <div class="earn_header">
-                        <h3>More providers coming soon.</h3>
-                        <p>Stay tuned!</p>
+                    <div class="earn_container">
+@if(!auth()->guest())
+<iframe src="https://wall.adgaterewards.com/n6yaqA/{{ auth()->user()->_id }}" style="position:inherit; top:0px; left:0px; bottom:0px; right:0px; width:100%; overflow:hidden;
+ height:100%; min-height: 650px; border:none; margin:0; padding:0;  z-index:999999;">Your browser doesn't support iframes</iframe>
+
+@else
+You need to be logged in to see Adgatemedia earn offers.
+@endif
                     </div>
                 </div>
             </div>

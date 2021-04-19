@@ -60,19 +60,52 @@ class C27Controller extends Controller
      * @param $slug
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
      */
-    public function game($slug)
+    public function provider($slug)
     {
         $user = auth()->user();
+
+        if (strlen($slug) > 50){
+            return redirect('/');
+        }
+
+        $sanitize = preg_replace("/[\/\{\}\)\(\%#\$]/", "sanitize", $slug);
 
         if (!$user) {
             return redirect('/');
         }
 
 
-        if($user->freegames > 1 && $slug == 'starburst_touch') {
+
+        $url = $sanitize;
+        $view = view('provider')->with('url', $url);
+        return view('layouts.app')->with('page', $view);
+    }
+
+
+    /**
+     * @param $slug
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
+     */
+    public function game($slug)
+    {
+        $user = auth()->user();
+        $freespinslot = \App\Settings::where('name', 'freespin_slot')->first()->value;
+
+        if (strlen($slug) > 45){
+            return redirect('/');
+        }
+
+        $slugsanitize = preg_replace("/[\/\{\}\)\(\%#\$]/", "sanitize", $slug);
+
+        if (!$user) {
+            return redirect('/');
+        }
+
+
+        if($user->freegames > 1 && $slugsanitize == $freespinslot) {
 
        if(auth()->user()->access == 'moderator') {
-            $this->client->setPlayer(['Id' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-bitsarcadestreamer' , 'BankGroupId' => 'bits_streamers']);
+            $this->client->setPlayer(['Id' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-teststreamer_KdW7jkzRP' , 'BankGroupId' => 'bits_streamers']);
             $this->client->setBonus([   
                     'Id' => 'shared',   
                     'FsType' => 'original', 
@@ -87,10 +120,10 @@ class C27Controller extends Controller
                 ]);      
              $game = $this->client->createSession(   
                 [   
-                    'GameId' => $slug,  
-                    'BonusId' => 'shared',  
-                    'StaticHost' => 'static.bets.sh',
-                    'PlayerId' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-bitsarcadestreamer',  
+                    'GameId' => $slugsanitize,  
+                    'BonusId' => 'shared',
+                    'StaticHost' => 'static.respin.sh',
+                    'PlayerId' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-teststreamer_KdW7jkzRP',  
                     'AlternativeId' => time() . '_' . $user->id . '_' . auth()->user()->clientCurrency()->id(), 
                     'Params' => [   
                         'freeround_bet' => 1    
@@ -101,15 +134,15 @@ class C27Controller extends Controller
              }
 
         else {
-             $this->client->setPlayer(['Id' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-bitsarcadeplayer' , 'BankGroupId' => 'bits_usd']);
+             $this->client->setPlayer(['Id' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-testplayer_qz4XxJ' , 'BankGroupId' => 'bits_usd']);
         $this->client->setBonus([   
                     'Id' => 'shared',   
                     'FsType' => 'original', 
-                    'StaticHost' => 'static.bets.sh',
+                    'StaticHost' => 'static.respin.sh',
                     'CounterType' => 'shared',  
                     'SharedParams' => [ 
                         'Games' => [    
-                            $slug => [  
+                            $slugsanitize => [  
                                 'FsCount' => auth()->user()->freegames, 
                             ]   
                         ]   
@@ -117,9 +150,9 @@ class C27Controller extends Controller
                 ]);      
          $game = $this->client->createSession(   
                 [   
-                    'GameId' => $slug,  
+                    'GameId' => $slugsanitize,  
                     'BonusId' => 'shared',  
-                    'PlayerId' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-bitsarcadeplayer',  
+                    'PlayerId' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-testplayer_qz4XxJ',  
                     'AlternativeId' => time() . '_' . $user->id . '_' . auth()->user()->clientCurrency()->id(), 
                     'Params' => [   
                         'freeround_bet' => 1    
@@ -132,11 +165,12 @@ class C27Controller extends Controller
         else
         {
        if(auth()->user()->access == 'moderator') {
-            $this->client->setPlayer(['Id' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-bitsarcadestreamer' , 'BankGroupId' => 'bits_streamers']);
+            $this->client->setPlayer(['Id' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-teststreamer_KdW7jkzRP' , 'BankGroupId' => 'bits_streamers']);
             $game = $this->client->createSession(
                 [
-                    'GameId' => $slug,
-                    'PlayerId' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-bitsarcadestreamer',
+                    'GameId' => $slugsanitize,
+                    'StaticHost' => 'static.respin.sh',
+                    'PlayerId' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-teststreamer_KdW7jkzRP',
                     'AlternativeId' => time() . '_' . $user->id . '_' . auth()->user()->clientCurrency()->id(),
                     'RestorePolicy' => 'Last'
                 ]
@@ -144,12 +178,12 @@ class C27Controller extends Controller
              }
 
             else {
-                $this->client->setPlayer(['Id' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-bitsarcadeplayer' , 'BankGroupId' => 'bits_usd']);
+                $this->client->setPlayer(['Id' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-testplayer_qz4XxJ' , 'BankGroupId' => 'bits_usd']);
                 $game = $this->client->createSession(
                 [
-                    'GameId' => $slug,
-                    'StaticHost' => 'static.bets.sh',
-                    'PlayerId' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-bitsarcadeplayer',
+                    'GameId' => $slugsanitize,
+                    'StaticHost' => 'static.respin.sh',
+                    'PlayerId' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-testplayer_qz4XxJ',
                     'AlternativeId' => time() . '_' . $user->id . '_' . auth()->user()->clientCurrency()->id(),
                     'RestorePolicy' => 'Last'
                 ]
@@ -157,9 +191,13 @@ class C27Controller extends Controller
         }
         }
 
-        sleep(0.35);
-
-        $url = 'https://' . $game['SessionId'] . '.spins.sh/?' . $game['SessionId'];
+        sleep(0.65);
+        if($user->freegames > 1 && $slugsanitize == $freespinslot) {
+                    $url = $game['SessionUrl'] . '?' . $slugsanitize;
+        }
+        else {
+        $url = 'https://' . $game['SessionId'] . '.spins.sh/?' . $slugsanitize;
+        }
         $view = view('c27')->with('data', $game)->with('url', $url);
         return view('layouts.app')->with('page', $view);
     }
@@ -393,7 +431,7 @@ class C27Controller extends Controller
 
     public function getBalance(Request $request)
     {
-        sleep(0.04);
+        sleep(0.1);
         try {
             $content = json_decode($request->getContent());
 

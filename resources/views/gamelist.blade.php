@@ -1,18 +1,6 @@
 <div class="container">
     
     <div class="games" style="max-width: 1420px;">
-
-  <?php
-        $client = new \outcomebet\casino25\api\client\Client(array(
-            'url' => 'https://api.c27.games/v1/',
-            'sslKeyPath' => env('c27_path'),
-        ));
-        $games = $client->listGames();
-        $games = array_slice($games['Games'], 0, 1500);
-
-?>
-
-
     <div class="our-games">
             <input type="text" id="gamelist-search" placeholder="Search game or provider..">
                 <div class="empty-nomargin-box p-1 d-none d-md-block">
@@ -82,25 +70,26 @@
             @endif
         @endforeach
 
-        @foreach($games as $game)
+
+           @foreach(\App\Slotslist::get() as $slots)
                     <div class="card gamepostercard m-2">
 
             @if(!auth()->guest())
-            <div class="slots_small_poster" onclick="redirect('/slots/{{$game['Id']}}')"  >
-                    <img class="img-small-slots" data-src="/img/slots_webp/{{$game['Id']}}.webp">
+            <div class="slots_small_poster" onclick="redirect('/slots/{{ $slots->id }}')"  >
+                    <img class="img-small-slots" data-src="/img/slots_webp/{{ $slots->id }}.webp">
              @else
                 <div class="slots_small_poster" onclick="$.register()">
-                    <img class="img-small-slots" data-src="/img/slots_webp/{{$game['Id']}}.webp">
+                    <img class="img-small-slots" data-src="/img/slots_webp/{{ $slots->id }}.webp">
             @endif
                     <div class="label">
-                    {{ $game['SectionId'] }}
+                    {{ $slots->p }}
                 </div>
                     <div class="name">
                         <div class="name-text">
-                            <div class="title">{{ $game['Name'] }}</div>
-                            <div class="desc">{{ $game['Description'] }}</div>
+                            <div class="title">{{ $slots->n }}</div>
+                            <div class="desc">{{ $slots->desc }}</div>
                 @if(!auth()->guest())               
-                            <button class="btn btn-secondary" onclick="redirect('/slots/{{$game['Id']}}')">Play</button>                  
+                            <button class="btn btn-secondary" onclick="redirect('/slots/{{ $slots->id }}')">Play</button>                  
                 @else
                             <button class="btn btn-primary" onclick="$.register()">
                                 Login
@@ -110,8 +99,8 @@
                     </div>
                 </div>
                <div class="card-footer p-2" style="max-width: 190px;">
-                <p class="card-title">{{ $game['Name'] }}</p>
-                <small>by <a href="#">{{ $game['SectionId'] }}</a></small></div>
+                <p class="card-title">{{ $slots->n }}</p>
+                <small>by <a href="#">{{ $slots->p }}</a></small></div>
             </div>
         @endforeach
                 </div>

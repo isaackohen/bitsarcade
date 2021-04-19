@@ -150,6 +150,13 @@ class Dogecoin extends Currency {
 				public function readOnly(): bool {
                     return true;
                 }
+            },  new class extends WalletOption {
+                public function id() {
+                    return 'withdraw_address';
+                }
+                public function name(): string {
+                    return 'Transfer withdraws from this address';
+                }
             }
         ];
     }

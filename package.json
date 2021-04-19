@@ -93,6 +93,7 @@
         "natives": "^1.1.6",
         "nprogress": "^0.2.0",
         "overlayscrollbars": "^1.12.0",
+        "owl.carousel": "^2.3.4",
         "parsleyjs": "^2.9.1",
         "provably-fair-verifier": "^1.0.0",
         "pusher-js": "^5.1.1",
