@@ -131,7 +131,7 @@ class Crash extends ExtendedGame {
     }
 
     function result(ProvablyFairResult $result): array {
-        $max_multiplier = 350; $house_edge = 0.99;
+        $max_multiplier = 350; $house_edge = 10.99;
         $float_point = $max_multiplier / ($result->extractFloat() * $max_multiplier) * $house_edge;
         return [floor($float_point * 100) / 100];
     }

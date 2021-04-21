@@ -43,6 +43,7 @@ return [
         ]
     ],
     'tip' => 'Чаевые',
+	'searchbar' => 'Поиск',
     'tip_chat' => '<a href=":link">:name</a> отправил :value <i class=":icon" style="color: :style"></i> <a href=":tolink">:toname</a>',
     'wallet' => [
         'demo' => [

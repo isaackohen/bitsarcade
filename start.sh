@@ -1,5 +1,5 @@
 #!/bin/bash
-rm laravel-echo-server.lock
+rm -f laravel-echo-server.lock
 echo $$ > /var/www/html/storage/realtime.pid
 php artisan queue:clear
 nohup laravel-echo-server start & disown

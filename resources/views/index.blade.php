@@ -41,7 +41,7 @@
               </div>
               @endforeach
                     <div class="col-md-3 col-sm-12 mt-2 mb-">
-                      <div class="card text-center">
+                        <div class="card text-center" style="min-height: 275px;">
                         <div class="card-header" style="background: url(/img/misc/arrows.svg), linear-gradient(59deg, #313841, #2c323a) !important;">Profile</div>
                         <div class="card-body" style="background: url(/img/misc/patternbg.png), linear-gradient(59deg, #313841, #2c323a) !important;">
                           <h5 class="card-title">{{ auth()->user()->name }}</h5>
@@ -56,7 +56,7 @@
                     </div>
                   </div>
                   <div class="col-md-6 col-sm-12 mt-2 mb-3">
-                    <div class="card text-center" style="background: url(https://cdn.coingape.com/wp-content/uploads/2019/05/02174558/Dogecoin-DOGE-Price-On-Leap-As-Largest-Exchange-Bid-To-Support-DOGE-on-Official-Wallet-678x381.jpg), linear-gradient(59deg, #2b2d2d, #26282900) !important;background-size: contain !important;min-height: 270px;height: 100% !important;background-position: center;background-repeat: no-repeat; scale: 0.8;">
+                    <div class="card text-center" style="background: url(https://cdn.coingape.com/wp-content/uploads/2019/05/02174558/Dogecoin-DOGE-Price-On-Leap-As-Largest-Exchange-Bid-To-Support-DOGE-on-Official-Wallet-678x381.jpg), linear-gradient(59deg, #2b2d2d, #26282900) !important;background-size: contain !important;min-height: 275px;height: 100% !important;background-position: center;background-repeat: no-repeat; scale: 0.8;">
                       <div class="card-header" style="background: url(/img/misc/arrows.svg), linear-gradient(59deg, #313841, #2c323a) !important;">Featured News</div>
                       <div class="card-body" style="background: linear-gradient( #22272ef7,  #1f2226ed) !important;">
                         <h5 class="card-title">{{ \App\Settings::where('name', 'featured_newsbox_title')->first()->value }}</h5>
@@ -70,7 +70,7 @@
                     </div>
                   </div>
                   <div class="col-md-3 col-sm-12 mt-2 mb-2">
-                    <div class="card text-center">
+                        <div class="card text-center" style="min-height: 275px;">
                       <div class="card-header" style="background: url(/img/misc/arrows.svg), linear-gradient(59deg, #313841, #2c323a) !important;">Bonus</div>
                       <div class="card-body" style="background: url(/img/misc/patternbg.png), linear-gradient(59deg, #313841, #2c323a) !important;">
                         <h5 class="card-title">Freebies!</h5>

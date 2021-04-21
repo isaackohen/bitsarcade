@@ -11,12 +11,12 @@
         <meta name="description" content="{{ __('general.head.description') }}">
 
         <meta property="og:description" content="{{ __('general.head.description') }}" />
-        <meta property="og:image" content="{{ asset('/img/logo/logo_temp2.png') }}" />
-        <meta property="og:image:secure_url" content="{{ asset('/img/logo/logo_temp2.png') }}" />
+        <meta property="og:image" content="{{ asset('/img/logo/thumb.png') }}" />
+        <meta property="og:image:secure_url" content="{{ asset('/img/logo/thumb.png') }}" />
         <meta property="og:image:type" content="image/svg+xml" />
         <meta property="og:image:width" content="295" />
         <meta property="og:image:height" content="295" />
-        <meta property="og:site_name" content="bitsarcade.com" />
+        <meta property="og:site_name" content="BitsArcade" />
 
         @if(env('APP_DEBUG'))
             <meta http-equiv="Expires" content="Mon, 26 Jul 1997 05:00:00 GMT">
@@ -79,7 +79,7 @@
                 'trx' => ['dollar' => \App\Http\Controllers\Api\WalletController::rateDollarTron(), 'euro' => \App\Http\Controllers\Api\WalletController::rateDollarTronEur()]
                 ]) !!};
         </script>
-				{!! NoCaptcha::renderJs() !!}
+                {!! NoCaptcha::renderJs() !!}
 
     </head>
     <body>
@@ -159,7 +159,10 @@
                             <button class="btn btn-secondary m-1" onclick="$.auth()">{{ __('general.auth.login') }}</button>
                         @else
                             <img onclick="redirect('/user/{{ auth()->user()->_id }}')" src="{{ auth()->user()->avatar }}" alt>
-                            <div class="action" data-notification-view onclick="$.displayNotifications()">
+                            <div class="action" onclick="$.displaySearchBar()">
+                                <i class="fas fa-search"></i>
+                            </div>
+							<div class="action" data-notification-view onclick="$.displayNotifications()">
                                 <i class="fas fa-bell"></i>
                             </div>
                         @endif
@@ -183,11 +186,11 @@
   <ul class="sidenav-menu"> <li class="sidenav-item mt-2 mb-0"> <a class="sidenav-link" href="/">
         <i class="fad fa-home me-2"></i><span>Home</span></a>
     </li>
-	@if(!auth()->guest() && auth()->user()->access == 'admin')
-	  <ul class="sidenav-menu"> <li class="sidenav-item mt-2 mb-0"> <a class="sidenav-link" onclick="window.location.href='/admin'">
+    @if(!auth()->guest() && auth()->user()->access == 'admin')
+      <ul class="sidenav-menu"> <li class="sidenav-item mt-2 mb-0"> <a class="sidenav-link" onclick="window.location.href='/admin'">
         <i class="fad fa-unlock me-2"></i><span>Admin</span></a>
     </li>
-	@endif
+    @endif
     <li class="sidenav-item mt-2 mb-0"> <a class="sidenav-link"
         ><i style="color: #5cb9ff" class="fad fa-user-circle me-2"></i><span style="font-family: 'Proxima Nova Semi Bd'"> Account</span></a>
       <ul class="sidenav-collapse show">
@@ -251,7 +254,7 @@
 <li class="sidenav-item mt-2 mb-0"> <a  onclick="redirect('/gamelist')" class="sidenav-link">
         <i style="color: #0fd560;" class="fad fa-abacus me-3"></i><span>Slots</span></a>
     </li>
-	<li class="sidenav-item mt-2 mb-0"> <a  onclick="redirect('/earn')" class="sidenav-link">
+    <li class="sidenav-item mt-2 mb-0"> <a  onclick="redirect('/earn')" class="sidenav-link">
         <i style="color: #0fd560;" class="fad fa-money-bill-alt me-3"></i><span>Earn Wall</span></a>
     </li>
 <li class="sidenav-item mt-2 mb-0"> <a  onclick="$.leaderboard()" class="sidenav-link">
@@ -468,6 +471,17 @@
             <div class="notifications-content os-host-flexbox"></div>
         </div>
         <div class="notifications-overlay"></div>
+		
+		        <div class="searchbar">
+            <i class="fal fa-times" data-close-searchbar></i>
+            <div class="title">{{ __('general.searchbar') }}</div>
+            <div class="searchbar-content os-host-flexbox" style="color: white;">
+			<input type="text" id="searchbar" placeholder="Search game or provider..">
+			    <div class="our-games" id="searchbar_result">
+			</div>
+			</div>
+        </div>
+        <div class="searchbar-overlay"></div>
 @if(!auth()->guest())
 <script>
   window.intercomSettings = {

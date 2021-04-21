@@ -3616,7 +3616,7 @@ footer {
     display: block;
 }
 
-.notifications-overlay {
+.notifications-overlay,.searchbar-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -3627,7 +3627,7 @@ footer {
     display: none;
 }
 
-.notifications {
+.notifications,.searchbar {
     z-index: 49001;
     width: 300px;
     height: 100vh;
@@ -3647,8 +3647,16 @@ footer {
         right: 25px;
         cursor: pointer;
     }
+	
+	[data-close-searchbar] {
+        font-size: 1.2em;
+        position: absolute;
+        top: 25px;
+        right: 25px;
+        cursor: pointer;
+    }
 
-    .notifications-content {
+    .notifications-content,.searchbar-content {
         height: calc(100% - 45px);
         color: black;
 
@@ -3696,6 +3704,10 @@ footer {
 }
 
 .notifications.active {
+    right: 0 !important;
+}
+
+.searchbar.active {
     right: 0 !important;
 }
 
@@ -3831,7 +3843,7 @@ footer {
         margin-top: 15px;
     }
 
-    .notifications {
+    .notifications,.searchbar {
         right: -100vw;
         width: 100vw;
     }

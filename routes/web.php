@@ -3,19 +3,6 @@
 use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('testen', function() {
-
-    $user = auth()->user();
-
-
-    if ($user->vipLevel() > 0 && ($user->weekly_bonus ?? 0) < 100) {
-        $user->update([
-            'weekly_bonus' => ($user->weekly_bonus ?? 0) + 0.1
-        ]);
-    }
-
-    dd($user->weekly_bonus);
-});
 
 Route::post('partner_cashout', function() {
         $user = auth()->user();
@@ -29,7 +16,6 @@ Route::post('partner_cashout', function() {
         ]);
     });
 
-Route::get('/slots', 'C27Controller@test');
 Route::get('/slots/{game}', 'C27Controller@game');
 
 Route::group(['prefix' => '/', 'middleware' => 'throttle:360,1'], function() {

@@ -67,14 +67,6 @@ abstract class BitcoinCurrency extends Currency {
 
     protected function options(): array {
         return [
-            new class extends WalletOption {
-                function id() {
-                    return "rpc";
-                }
-                function name(): string {
-                    return "RPC URL";
-                }
-            }
         ];
     }
 

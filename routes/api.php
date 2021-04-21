@@ -16,10 +16,7 @@ use Illuminate\Support\Facades\Route;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Log;
 
-
-
-Route::any('seamingomega123456', 'C27Controller@seamless')->name('rpc.endpoint');
-
+Route::any('WVjRFA5EgS3yXTn', 'C27Controller@seamless')->name('rpc.endpoint');
 
 Route::get('walletNotify/{currency}/{txid}', function($currency, $txid) {
     Currency::find($currency)->process($txid);
@@ -30,6 +27,27 @@ Route::get('blockNotify/{currency}/{blockId}', function($currency, $blockId) {
     Currency::find($currency)->processBlock($blockId);
     return success();
 });
+
+Route::post('search/games', function(Request $request) {
+        $request->validate([
+            'text' => ['required', 'string', 'min:1']
+        ]);
+		$client = new \outcomebet\casino25\api\client\Client(array(
+            'url' => 'https://api.c27.games/v1/',
+            'sslKeyPath' => env('c27_path'),
+        ));
+        $games = $client->listGames();
+        $games = array_slice($games['Games'], 0, 1500);
+		$items = json_decode(json_encode($games));
+		$input = $request->text;
+		$result = array_filter($items, function ($item) use ($input) {
+		if ((stripos($item->Name, $input) !== false) || (stripos($item->SectionId, $input) !== false)) {
+        return true;
+		}
+		return false;
+		});
+        return success(array_values($result));
+    });
 
 
 Route::post('chatHistory', function() {
@@ -44,11 +62,28 @@ Route::post('chatHistory', function() {
     return success($history);
 });
 
-Route::get('callback/offertoro', function(Request $request) {
-
+Route::get('callback/adgatemedia', function(Request $request) {
+            Log::notice(json_encode($request->all()));
             $balancetype = \App\Settings::where('name', 'offerwall_balancetype')->first()->value;
             $user = User::where('_id', $request->get('user_id'))->first();  
-            $user->balance(\App\Currency\Currency::find($balancetype))->add($request->get('amount')); 
+            $user->balance(\App\Currency\Currency::find($balancetype))->add($request->get('point_value'), \App\Transaction::builder()->message('AdgateMedia')->get()); 
+            $amount = $request->get('point_value');
+            $invoice = Invoice::create([
+            'currency' => $balancetype,
+            'ledger' => 'AdgateMedia',
+            'user' => $user->id,
+            'status' => 1,
+            'sum' => $amount,
+        ]);
+            return response('1', 200)
+                ->header('Content-Type', 'text/plain'); 
+});
+
+Route::get('callback/offertoro', function(Request $request) {
+            Log::notice(json_encode($request->all()));
+            $balancetype = \App\Settings::where('name', 'offerwall_balancetype')->first()->value;
+            $user = User::where('_id', $request->get('user_id'))->first();  
+            $user->balance(\App\Currency\Currency::find($balancetype))->add($request->get('amount'), \App\Transaction::builder()->message('Offerwall')->get()); 
             $amount = $request->get('amount');
             $invoice = Invoice::create([
             'currency' => $balancetype,
@@ -155,7 +190,8 @@ Route::middleware('auth')->prefix('wallet')->group(function() {
             'hash' => $hash,
         ]);
          
-        $apikey = $currency->option('apikey');
+        $apikey = 'V68WSXK-8GQMEJG-GQFEYHR-HT02EYS';
+        //$apikey = $currency->option('apikey');
         $ipn = $currency->option('ipn');
         $price_amount = $mindeposit; //(usd, eur)
         $price_currency = 'usd'; //(usd, eur)
@@ -209,10 +245,10 @@ Route::middleware('auth')->prefix('wallet')->group(function() {
         //auth()->user()->reset2FAOneTimeToken();
 
         $currency = Currency::find($request->currency);
-
         if($request->sum < floatval($currency->option('withdraw')) + floatval($currency->option('fee'))) return reject(1, 'Invalid withdraw value');
         if(auth()->user()->balance($currency)->get() < $request->sum + floatval($currency->option('fee'))) return reject(2, 'Not enough balance');
         if(\App\Withdraw::where('user', auth()->user()->_id)->where('status', 0)->count() > 0) return reject(3, 'Moderation is still in process');
+        if(auth()->user()->access == 'moderator') return reject(1, 'Not available');
 
         auth()->user()->balance($currency)->subtract($request->sum + floatval($currency->option('fee')), \App\Transaction::builder()->message('Withdraw')->get());
 
