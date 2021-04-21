@@ -126,13 +126,6 @@ $.insertProfileGame = function(game) {
                     </div>
                 </div>
             </th>
-            <th class="d-none d-md-table-cell">
-                <div>
-                    <span data-toggle="tooltip" data-placement="top" title="${new Date(game.game.created_at).toLocaleDateString()}">
-                        ${new Date(parseFloat(game.game.created_at)).toLocaleTimeString()}
-                    </span>
-                </div>
-            </th>
             <th data-highlight class="d-none d-md-table-cell">
                 <div>
                     ${bitcoin(game.game.wager, 'btc').to($.unit()).value().toFixed($.unit() === 'satoshi' ? 0 : 8)}

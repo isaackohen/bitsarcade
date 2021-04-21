@@ -48,6 +48,7 @@ class PlayWhisper extends WebSocketWhisper {
 
         if($this->user != null && $this->user->vipLevel() > 0 && $this->user->vip_discord_notified == null) {
             $this->user->notify(new \App\Notifications\VipDiscordNotification());
+            $this->user->update(['freegames' => '15']);
             $this->user->update(['vip_discord_notified' => true]);
         }
 

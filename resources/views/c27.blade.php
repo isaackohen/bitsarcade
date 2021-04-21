@@ -49,6 +49,7 @@
               </div>
 
              <div class="bonus-box-small mt-3 mb-3" style="z-index: 1;">
+              @if(!auth()->guest())<div style="cursor: pointer; padding-top: 11px; padding-left: 4px; font-weight: 600;" class="action" onclick="$.displaySearchBar()"><i class="fas fa-search"></i></div>@endif
               <div id="customNav1" class="owl-nav"></div>
               <h5 style="padding-top: 9px; padding-left: 7px; font-weight: 600;">Random Games</h5>
                 <div class="container-flex owl-carousel randomgames"  style="z-index: 1;">

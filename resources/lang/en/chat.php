@@ -3,6 +3,6 @@
 return [
     'error' => [
         'length' => 'Message is too short or long',
-        'muted' => 'Chat is muted'
+        'muted' => 'You played too little games or you have been muted'
     ]
 ];
