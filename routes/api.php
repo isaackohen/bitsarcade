@@ -31,6 +31,28 @@ Route::get('blockNotify/{currency}/{blockId}', function($currency, $blockId) {
 });
 
 
+Route::post('search/games', function(Request $request) {
+        $request->validate([
+            'text' => ['required', 'string', 'min:1']
+        ]);
+        $client = new \outcomebet\casino25\api\client\Client(array(
+            'url' => 'https://api.c27.games/v1/',
+            'sslKeyPath' => env('c27_path'),
+        ));
+        $games = $client->listGames();
+        $games = array_slice($games['Games'], 0, 1500);
+        $items = json_decode(json_encode($games));
+        $input = $request->text;
+        $result = array_filter($items, function ($item) use ($input) {
+        if ((stripos($item->Name, $input) !== false) || (stripos($item->SectionId, $input) !== false)) {
+        return true;
+        }
+        return false;
+        });
+        return success(array_values($result));
+    });
+
+
 
 Route::post('chatHistory', function() {
     $history = \App\Chat::latest()->limit(20)->where('deleted', '!=', true)->get()->toArray();
@@ -463,10 +485,34 @@ Route::middleware('auth')->prefix('chat')->group(function() {
         });
     });
 
+    Route::post('tip', function(Request $request) {
+        if(auth()->user()->access() !== 'admin') return reject(2); 
+        $user = User::where('name', 'like', str_replace('.', '', $request->user).'%')->first();
+        if($user == null || $user->name === auth()->user()->name) return reject(1);
+        if(floatval($request->amount) < floatval(auth()->user()->clientCurrency()->option('quiz')) || auth()->user()->balance(auth()->user()->clientCurrency())->get() < floatval($request->amount)) return reject(2);
+        auth()->user()->balance(auth()->user()->clientCurrency())->subtract(floatval($request->amount), \App\Transaction::builder()->message('Tip to '.$user->_id)->get());
+        $user->balance(auth()->user()->clientCurrency())->add(floatval($request->amount), \App\Transaction::builder()->message('Tip from '.auth()->user()->_id)->get());
+        $user->notify(new \App\Notifications\TipNotification(auth()->user(), auth()->user()->clientCurrency(), number_format(floatval($request->amount), 8, '.', '')));
+        if(filter_var($request->public, FILTER_VALIDATE_BOOLEAN)) {
+            $message = Chat::create([
+                'data' => [
+                    'to' => $user->toArray(),
+                    'from' => auth()->user()->toArray(),
+                    'amount' => number_format(floatval($request->amount), 8, '.', ''),
+                    'currency' => auth()->user()->clientCurrency()->id()
+                ],
+                'type' => 'tip'
+            ]);
+
+            event(new ChatMessage($message));
+        }
+        return success();
+    });
+
     Route::post('rain', function(Request $request) {
+        if(auth()->user()->access() !== 'admin') return reject(2); 
         $usersLength = intval($request->users);
-        if($usersLength < 1 || $usersLength > 25) return reject(1, 'Invalid users length');
-        if(auth()->user()->access = 'user') return reject(2, 'Not available');
+        if($usersLength < 5 || $usersLength > 25) return reject(1, 'Invalid users length');
         if(auth()->user()->balance(auth()->user()->clientCurrency())->get() < floatval($request->amount) || floatval($request->amount) < floatval(auth()->user()->clientCurrency()->option('rain')) / 3) return reject(2);
         auth()->user()->balance(auth()->user()->clientCurrency())->subtract(floatval($request->amount), \App\Transaction::builder()->message('Rain')->get());
 

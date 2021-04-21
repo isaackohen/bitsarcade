@@ -10,9 +10,9 @@
 @import '~mdb-ui-kit/css/mdb.dark.min.css';
 @import 'modals/modal';
 
-$sidebar-width: 205px;
-$header-height: 62px;
-$chat-width: 290px;
+$sidebar-width: 195px;
+$header-height: 55px;
+$chat-width: 295px;
 
 $card: -3px -3px 8px 1px #11141fcf, 2px 2px 8px 0px #0d0d0dcf, inset 1px 1px 0px 0px #1f2330 !important;
 
@@ -3510,7 +3510,17 @@ box-shadow: -3px -3px 8px 1px #11141fcf, 2px 2px 8px 0px #0d0d0dcf, inset 1px 1p
     display: block;
 }
 
-.notificationtos-overlay {
+.cardprovider {
+    font-style: italic; 
+    font-size: 10px;
+    color: #e5e6e7
+    !important;
+    font-weight: 500;
+    text-transform: capitalize;
+
+}
+
+.notificationtos-overlay,.notifications-overlay,.searchbar-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -3521,18 +3531,19 @@ box-shadow: -3px -3px 8px 1px #11141fcf, 2px 2px 8px 0px #0d0d0dcf, inset 1px 1p
     display: none;
 }
 
-.notifications {
+.notifications,.searchbar {
     z-index: 49001;
-    width: 325px;
+    width: 490px;
     height: 100vh;
     position: fixed;
     top: 0;
-    right: -325px;
+    right: -490px;
     transition: right 0.3s ease-in-out;
     padding: 25px;
     @include themed() {
         background: t('sidebar');
     }
+
 
     [data-close-notifications] {
         font-size: 1.2em;
@@ -3541,14 +3552,23 @@ box-shadow: -3px -3px 8px 1px #11141fcf, 2px 2px 8px 0px #0d0d0dcf, inset 1px 1p
         right: 25px;
         cursor: pointer;
     }
+    
+    [data-close-searchbar] {
+        font-size: 1.2em;
+        position: absolute;
+        top: 25px;
+        right: 25px;
+        cursor: pointer;
+    }
 
-    .notifications-content {
+    .notifications-content,.searchbar-content {
         height: calc(100% - 45px);
         color: black;
 
         .toast {
+            width: 100% !important;
             background: #2f3445;
-            max-width: 100% !important;
+            max-width: 490px;
 
             a {
             @include themed() {
@@ -3592,6 +3612,9 @@ box-shadow: -3px -3px 8px 1px #11141fcf, 2px 2px 8px 0px #0d0d0dcf, inset 1px 1p
 }
 
 .notifications.active {
+    right: 0 !important;
+}
+.searchbar.active {
     right: 0 !important;
 }
 
@@ -3727,7 +3750,7 @@ box-shadow: -3px -3px 8px 1px #11141fcf, 2px 2px 8px 0px #0d0d0dcf, inset 1px 1p
         margin-top: 15px;
     }
 
-    .notifications {
+    .notifications,.searchbar {
         right: -100vw;
         width: 100vw;
     }

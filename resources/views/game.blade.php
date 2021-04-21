@@ -23,6 +23,7 @@
             <button class="btn btn-secondary" onclick="redirect('/gamelist')">Games</button> <img src="/img/logo/logo_bits_small.png" height="35" style="margin-left: 10px; margin-right: 10px;">
         </div>
 
+
 @if(!auth()->guest())
     @php $latest_game = \App\Game::latest()->where('game', $data)->where('user', auth()->user()->_id)->where('status', 'in-progress')->first(); @endphp
     @if(!is_null($latest_game))

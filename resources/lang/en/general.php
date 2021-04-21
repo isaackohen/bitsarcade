@@ -164,9 +164,8 @@ return [
         'vip_discord' => [
             'title' => 'VIP',
             'message' => "You have reached <svg style='width: 14px; height: 14px'><use href='#vip-bronze'></use></svg> bronze VIP status!
-                         <br>Contact support to claim your 25 Free Slots Spins!
-                         <br><br>Want exclusive VIP promocodes? Join <a href='".\App\Settings::where('name', 'discord_invite_link')->first()->value."' class='disable-pjax' target='_blank'>our Discord server</a>
-                         and <a onclick='$(\".notifications-overlay\").click();' href='/user/".(auth()->guest() ? '' : auth()->user()->_id)."#settings'>link your Discord account</a> to get VIP role.
+                         <br>We have added 15 free spins to your account!
+                         <br><br>Want exclusive VIP promocodes? Join <a href='".\App\Settings::where('name', 'discord_invite_link')->first()->value."' class='disable-pjax' target='_blank'>our Discord server</a>.
                          <br><br><a href='javascript:void(0)' onclick='$(\".notifications-overlay\").click(); $.vip();' class='disable-pjax'>View all VIP features</a>"
         ],
         'email_reminder' => [
@@ -264,6 +263,7 @@ return [
     'coming_soon' => 'Coming Soon',
     'reload' => 'Cooldown:',
     'spin' => 'Spin',
+    'searchbar' => 'Search Games',
     'wager' => 'Bet amount',
     'chip' => 'Chip Value (:value)',
     'profit' => 'Profit',

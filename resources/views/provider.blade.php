@@ -1,8 +1,5 @@
 @php
-    if(\App\Slotslist::where('p', $url)->count() == null) {
-        header('Location: /');
-        die();
-    }
+
 @endphp
 <div class="container-lg">
                   <div class="card nope p-2" style="max-height: 75px; background: transparent !important;">

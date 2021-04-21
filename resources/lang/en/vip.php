@@ -19,7 +19,7 @@ return [
             '1' => 'Daily Bonus unlocked',
             '2' => 'Access to VIP promocodes',
             '3' => 'VIP role on the Discord server',
-            '4' => 'Get 25 Free Slot Spins'
+            '4' => 'Get 15 Free Slot Spins'
         ],
         'silver' => [
             '1' => 'Code activation limit per day is increased from 2 to 3',
@@ -40,7 +40,7 @@ return [
             '1' => 'Your withdrawals have a higher priority in the queue',
             '2' => 'Code activation limit now resets every 12 hours',
             '3' => 'Increased Daily Bonus',
-            '4' => 'Get 200 Free Slot Spins'
+            '4' => 'Get 150 Free Slot Spins'
         ]
     ],
     'bonus' => [

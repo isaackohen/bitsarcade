@@ -8,6 +8,8 @@ require('./game');
 require('./chat');
 require('./profit-monitoring');
 require('./notifications');
+require('./searchbar');
+
 import bitcoin from 'bitcoin-units';
 
 import NProgress from 'nprogress';

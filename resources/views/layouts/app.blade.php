@@ -3,7 +3,7 @@
     <head>
         <title>{{ \App\Settings::where('name', 'platform_name')->first()->value }}</title>
         <link href="/css/webfonts.css" rel="stylesheet" type="text/css">
-        <link rel="icon" type="image/png" href="/img/logo/bits_icon.png"/>
+        <link rel="icon" type="image/png" href="/img/logo/ico.png"/>
         <meta charset="utf-8">
         <noscript><meta http-equiv="refresh" content="0; /no_js"></noscript>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -152,9 +152,10 @@
                     <button class="btn btn-primary m-1" onclick="$.register()">{{ __('general.auth.register') }}</button>
                     <button class="btn btn-secondary m-1" onclick="$.auth()">{{ __('general.auth.login') }}</button>
                     @else
-                    <div class="action" style="margin-right: 5px; font-size: 17px; color: #bff2ff;"  onclick="redirect('/user/{{ auth()->user()->_id }}')">
+                    <div class="action d-none d-sm-block" style="margin-right: 5px; font-size: 17px; color: #bff2ff;"  onclick="redirect('/user/{{ auth()->user()->_id }}')">
                         <i class="fad fa-user-circle"></i>
                     </div>
+                    <div style="cursor: pointer; margin-right: 5px; color: #bff2ff;" class="action" onclick="$.displaySearchBar()"><i class="fas fa-search"></i></div>
                     <div class="action" style="color: #bff2ff;" data-notification-view onclick="$.displayNotifications()">
                         <i class="fas fa-bell"></i>
                     </div>
@@ -162,10 +163,12 @@
                 </div>
             </div>
         </header>
+        <!--
         <div class="globalNotification connectionLostContainer" style="display: none">
             <div class="icon"><i class="fal fa-times"></i></div>
             <div class="text"><span></span></div>
         </div>
+        !-->
         <div class="pageContent" style="opacity: 0">
             {!! $page !!}
         </div>
@@ -462,12 +465,23 @@
     <div class="modal-wrapper">
         <div class="modal-overlay"></div>
     </div>
-    <div class="notifications">
-        <i class="fal fa-times" data-close-notifications></i>
-        <div class="title">{{ __('general.notifications.title') }}</div>
-        <div class="notifications-content os-host-flexbox"></div>
-    </div>
-    <div class="notifications-overlay"></div>
+        <div class="notifications">
+            <i class="fal fa-times" data-close-notifications></i>
+            <div class="title">{{ __('general.notifications.title') }}</div>
+            <div class="notifications-content os-host-flexbox"></div>
+        </div>
+        <div class="notifications-overlay"></div>
+        <div class="searchbar">
+            <i class="fal fa-times" data-close-searchbar></i>
+            <div class="title">{{ __('general.searchbar') }}</div>
+            <div class="searchbar-content os-host-flexbox" style="color: white;">
+            <input type="text" id="searchbar" placeholder="Search game or provider..">
+                <div class="our-games" style="background: transparent !important;" id="searchbar_result">
+            </div>
+            </div>
+
+        </div>
+        <div class="searchbar-overlay"></div>
     @if(!auth()->guest())
     <script>
     window.intercomSettings = {

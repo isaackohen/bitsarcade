@@ -4,7 +4,7 @@
   <div class="games">
     <div class="our-games mb-1" style="background: transparent !important;">
       <div class="row">
-        <div class="col-md-3 col-sm-12 mt-2 mb-">
+        <div class="col-md-3 col-sm-12 mt-1 mb-">
           <div class="card text-center" style="min-height: 170px; background: transparent !important;">
             <div class="card-body" style="background: url(/img/misc/arrows.svg) !important; box-shadow: -3px -3px 8px 1px #11141fcf, 2px 2px 8px 0px #0d0d0dcf, inset 1px 1px 0px 0px #1f2330 !important;">
               <img src="/img/misc/vip-icon.png" height="32px">
@@ -16,7 +16,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-6 col-sm-12 mt-2 mb-3">
+      <div class="col-md-6 col-sm-12 mt-1 mb-3 d-none d-sm-block">
         <div class="card text-center" style="background: url(img/misc/bg-bits-min.jpg); min-height: 170px;">
           <div class="card-body">
             <p class="card-text" style="text-shadow: 2px 2px black !important;"><h6>
@@ -28,12 +28,12 @@
           </div>
         </div>
       </div>
-      <div class="col-md-3 col-sm-12 mt-2 mb-2">
+      <div class="col-md-3 col-sm-12 mt-1 mb-2">
         <div class="card text-center" style="min-height: 170px; background: transparent !important;">
           <div class="card-body" style="background: url(/img/misc/arrows.svg) !important; box-shadow: -3px -3px 8px 1px #11141fcf, 2px 2px 8px 0px #0d0d0dcf, inset 1px 1px 0px 0px #1f2330 !important;">
             <img src="/img/logo/logo_bits_small_content.png"><hr>
             <button onclick="$.wallet()" class="btn btn-success p-1 m-1">Wallet</button>
-            <a href="/earn" class="btn btn-pink p-1 m-1">Referral</a>
+            <a href="/partner" class="btn btn-pink p-1 m-1">Referral</a>
             <button onclick="$.leaderboard()" class="btn btn-pink p-1 m-1">Leaderboard</button>
             <a href="/earn" class="btn btn-primary p-1 m-1">Earn Wall</a>
           </div>
@@ -53,11 +53,31 @@
     </div>
   </div>
 </div>
-
-
 @endforeach
+          @if(!auth()->guest())
+          @php
+          $freespins = \App\Settings::where('name', 'freespin_slot')->first()->value;
+          $slotname = \App\Slotslist::get()->where('id', $freespins)->first();
+          $notify = auth()->user()->unreadNotifications();
+          @endphp
+          @if(auth()->user()->freegames > '2')
+          <div class="alert alert-info fade show" role="alert">
+            <strong>Holy guacamole</strong>. You have <strong>{{ auth()->user()->freegames }}</strong> free spins on your account! Get spinning on <a href="/slots/{{ $slotname->id }}" span style="capitalize; font-weight: 600 !important;">{{ $slotname->n }}</a></b>
+          </span>
+        </div>
+        @endif
+        <!-- 
+        @if(auth()->user()->unreadNotifications())
+         <div class="alert alert-light fade show d-none d-sm-block" role="alert">
+            You have <a href="#" onclick="$.displayNotifications()"> {{ $notify->count() }} unread notification(s) </a> on your account.
+          </div>
+        @endif
+        !-->
+        @endif
 </div>
 @endif
+
+
 <div class="container">
 @if(!auth()->guest())
 @else
@@ -107,22 +127,11 @@
             </div>
           </div>
           @endif
-          @if(!auth()->guest())
-          @php
-          $freespins = \App\Settings::where('name', 'freespin_slot')->first()->value;
-          $slotname = \App\Slotslist::get()->where('id', $freespins)->first();
-          @endphp
-          @if(auth()->user()->freegames > '2')
-          <div class="alert alert-info fade show" role="alert">
-            <strong>Holy guacamole</strong>. You have <strong>{{ auth()->user()->freegames }}</strong> free spins on your account! Get spinning on <a href="/slots/{{ $slotname->id }}" span style="capitalize; font-weight: 600 !important;">{{ $slotname->n }}</a></b>
-          </span>
-        </div>
-        @endif
-        @endif
+
         <div class="bonus-box-small" style="z-index: 1;">
+        @if(!auth()->guest())<div style="cursor: pointer; padding-top: 11px; padding-left: 4px; font-weight: 600;" class="action" onclick="$.displaySearchBar()"><i class="fas fa-search"></i></div>@endif
         <div id="customNav4" class="owl-nav"></div>
-        <h5 style="padding-top: 9px; padding-left: 7px; font-weight: 600;">Featured Games </h5>
-        <button onclick="redirect('/gamelist/')" style="padding-top: 5px; font-size: 10px; padding-left: 10px;" class="btn btn-secondary m-2 p-1">More Games</a></button>
+        <h5 style="padding-top: 9px; padding-left: 7px; font-weight: 600;">Featured Games</h5>
         <div class="container-flex owl-carousel featured" style="z-index: 1;">
           @foreach(\App\Slotslist::get() as $slots)
           @if($slots->f == '1')
@@ -172,18 +181,12 @@
               @endforeach
             </div>
           </div>
-          <div class="container-flex provider-carousel owl-carousel" style="z-index: 1;">
-            @foreach(\App\Providers::all()->random(17) as $providers)
-            <div class="card m-1" style="background: transparent !important; box-shadow: -3px -3px 8px 1px #11141fcf, 2px 2px 8px 0px #0d0d0dcf, inset 1px 1px 0px 0px #1f2330 !important;">
-              <div onclick="redirect('/provider/{{ $providers->name }}')" class="providers m-1" style="background-image:url(/img/providers/{{ $providers->name }}_small.webp)">                  </div>
-            </div>
-            @endforeach
-          </div>
-                              @if(!auth()->guest())
+          @if(!auth()->guest())
           <div class="bonus-box-small" style="z-index: 1;">
+            @if(!auth()->guest())<div style="cursor: pointer; padding-top: 11px; padding-left: 4px; font-weight: 600;" class="action" onclick="$.displaySearchBar()"><i class="fas fa-search"></i></div>@endif
             <div id="customNav3" class="owl-nav"></div>
             <h5 style="padding-top: 9px; padding-left: 7px; font-weight: 600;">Random Slots</h5>
-            <button onclick="redirect('/gamelist/')" style="padding-top: 5px; font-size: 10px; padding-left: 10px;" class="btn btn-secondary m-2 p-1">More Games</a></button>
+            <button onclick="redirect('/gamelist/')" style="padding-top: 5px; font-size: 10px; padding-left: 10px;" class="btn btn-secondary m-2 p-1">More <i class="fas fa-arrow-right" style="font-size: 8px;"></i></a></button>
             <div class="container-flex owl-carousel random" style="z-index: 2;">
               @foreach(\App\Slotslist::all()->random(20) as $slots)
               <div class="card gamepostercard" style="cursor: pointer; margin-left: 10px; margin-right: 10px;">
@@ -201,9 +204,10 @@
               </div>
             </div>
             <div class="bonus-box-small" style="z-index: 1;">
+            @if(!auth()->guest())<div style="cursor: pointer; padding-top: 11px; padding-left: 4px; font-weight: 600;" class="action" onclick="$.displaySearchBar()"><i class="fas fa-search"></i></div>@endif
             <div id="customNav2" class="owl-nav"></div>
             <h5 style="padding-top: 9px; padding-left: 7px; font-weight: 600;">New Arrivals</h5>
-            <button onclick="redirect('/gamelist/')" style="padding-top: 5px; font-size: 10px; padding-left: 10px;" class="btn btn-secondary m-2 p-1">More Games</a></button>
+            <button onclick="redirect('/gamelist/')" style="padding-top: 5px; font-size: 10px; padding-left: 10px;" class="btn btn-secondary m-2 p-1">More <i class="fas fa-arrow-right" style="font-size: 8px;"></i></a></button>
             <div class="container-flex owl-carousel popular"  style="z-index: 1;">
               @foreach(\App\Slotslist::get() as $slots)
               @if($slots->f == '2')
@@ -222,6 +226,12 @@
                 @endforeach
               </div>
             </div>
-
           @endif
+                    <div class="container-flex provider-carousel owl-carousel" style="z-index: 1;">
+            @foreach(\App\Providers::all()->random(17) as $providers)
+            <div class="card m-1" style="background: transparent !important; box-shadow: -3px -3px 8px 1px #11141fcf, 2px 2px 8px 0px #0d0d0dcf, inset 1px 1px 0px 0px #1f2330 !important;">
+              <div onclick="redirect('/provider/{{ $providers->name }}')" class="providers m-1" style="background-image:url(/img/providers/{{ $providers->name }}_small.webp)">                  </div>
+            </div>
+            @endforeach
+          </div>
                     </div>  

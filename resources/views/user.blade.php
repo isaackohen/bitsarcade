@@ -83,7 +83,7 @@
                                             {{ __('general.profile.wagered') }}
                                         </th>
                                         <th>
-                                            {{ __('general.profile.profit') }}
+                                            {{ __('general.profile.wagered') }} ($)
                                         </th>
                                     </tr>
                                     </thead>
@@ -102,6 +102,8 @@
 												$wins = $statistics->wins_btc;
 												$loss = $statistics->loss_btc;
 												$wagered = $statistics->wagered_btc;
+                                                $wageredusd = number_format((\App\Http\Controllers\Api\WalletController::rateDollarBtc() * $wagered), 3, '.', '');
+
 												$profit = $statistics->profit_btc;
 											}
 											if($currency->name() == 'ETH'){
@@ -109,6 +111,7 @@
 												$wins = $statistics->wins_eth;
 												$loss = $statistics->loss_eth;
 												$wagered = $statistics->wagered_eth;
+                                                $wageredusd = number_format((\App\Http\Controllers\Api\WalletController::rateDollarEth() * $wagered), 3, '.', '');
 												$profit = $statistics->profit_eth;
 											}
 											if($currency->name() == 'LTC'){
@@ -116,6 +119,7 @@
 												$wins = $statistics->wins_ltc;
 												$loss = $statistics->loss_ltc;
 												$wagered = $statistics->wagered_ltc;
+                                                $wageredusd = number_format((\App\Http\Controllers\Api\WalletController::rateDollarLtc() * $wagered), 3, '.', '');
 												$profit = $statistics->profit_ltc;
 											}
 											if($currency->name() == 'DOGE'){
@@ -123,6 +127,7 @@
 												$wins = $statistics->wins_doge;
 												$loss = $statistics->loss_doge;
 												$wagered = $statistics->wagered_doge;
+                                                $wageredusd = number_format((\App\Http\Controllers\Api\WalletController::rateDollarDoge() * $wagered), 3, '.', '');
 												$profit = $statistics->profit_doge;
 											}
 											if($currency->name() == 'BCH'){
@@ -130,6 +135,7 @@
 												$wins = $statistics->wins_bch;
 												$loss = $statistics->loss_bch;
 												$wagered = $statistics->wagered_bch;
+                                                $wageredusd = number_format((\App\Http\Controllers\Api\WalletController::rateDollarBtcCash() * $wagered), 3, '.', '');
 												$profit = $statistics->profit_bch;
 											}
 											if($currency->name() == 'TRX'){
@@ -137,7 +143,8 @@
 												$wins = $statistics->wins_trx;
 												$loss = $statistics->loss_trx;
 												$wagered = $statistics->wagered_trx;
-												$profit = $statistics->profit_trx;
+												$wageredusd = number_format((\App\Http\Controllers\Api\WalletController::rateDollarTron() * $wagered), 3, '.', '');
+                                                $profit = $statistics->profit_trx;
 											}
 										@endphp
                                             <tr>
@@ -171,8 +178,8 @@
                                                 </th>
                                                 <th data-highlight>
                                                     <div>
-                                                        <span>{{ number_format(floatval($profit), 8, '.', '') }}</span>
-														<i class="{{ $currency->icon() }}" style="color: {{ $currency->style() }}"></i>
+                                                        <span>{{ number_format(floatval($wageredusd), 2, '.', '') }}</span>
+														<i class="fas fa-usd-circle" style="color:#02b320"></i>
                                                     </div>
                                                 </th>
                                             </tr>
@@ -187,9 +194,6 @@
                                     <tr>
                                         <th>
                                             {{ __('general.bets.game') }}
-                                        </th>
-                                        <th class="d-none d-md-table-cell">
-                                            {{ __('general.bets.time') }}
                                         </th>
                                         <th class="d-none d-md-table-cell">
                                             {{ __('general.bets.bet') }}
