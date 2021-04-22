@@ -112,7 +112,7 @@ class C27Controller extends Controller
         if($user->freegames > 1 && $slugsanitize == $freespinslot) {
 
        if(auth()->user()->access == 'moderator') {
-            $this->client->setPlayer(['Id' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-teststreamer_KdW7jkzRP' , 'BankGroupId' => 'bits_streamers']);
+            $this->client->setPlayer(['Id' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-streamer_KdW7jkzRP' , 'BankGroupId' => 'bits_streamers']);
             $this->client->setBonus([   
                     'Id' => 'shared',   
                     'FsType' => 'original', 
@@ -130,7 +130,7 @@ class C27Controller extends Controller
                     'GameId' => $slugsanitize,  
                     'BonusId' => 'shared',
                     'StaticHost' => 'static.respin.sh',
-                    'PlayerId' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-teststreamer_KdW7jkzRP',  
+                    'PlayerId' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-streamer_KdW7jkzRP',  
                     'AlternativeId' => time() . '_' . $user->id . '_' . auth()->user()->clientCurrency()->id(), 
                     'Params' => [   
                         'freeround_bet' => 1    
@@ -141,7 +141,7 @@ class C27Controller extends Controller
              }
 
         else {
-             $this->client->setPlayer(['Id' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-testplayer_qz4XxJ' , 'BankGroupId' => 'bits_usd']);
+             $this->client->setPlayer(['Id' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-player_qz4XxJ' , 'BankGroupId' => 'bits_usd']);
         $this->client->setBonus([   
                     'Id' => 'shared',   
                     'FsType' => 'original', 
@@ -159,7 +159,7 @@ class C27Controller extends Controller
                 [   
                     'GameId' => $slugsanitize,  
                     'BonusId' => 'shared',  
-                    'PlayerId' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-testplayer_qz4XxJ',  
+                    'PlayerId' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-player_qz4XxJ',  
                     'AlternativeId' => time() . '_' . $user->id . '_' . auth()->user()->clientCurrency()->id(), 
                     'Params' => [   
                         'freeround_bet' => 1    
@@ -172,12 +172,12 @@ class C27Controller extends Controller
         else
         {
        if(auth()->user()->access == 'moderator') {
-            $this->client->setPlayer(['Id' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-teststreamer_KdW7jkzRP' , 'BankGroupId' => 'bits_streamers']);
+            $this->client->setPlayer(['Id' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-streamer_KdW7jkzRP' , 'BankGroupId' => 'bits_streamers']);
             $game = $this->client->createSession(
                 [
                     'GameId' => $slugsanitize,
                     'StaticHost' => 'static.respin.sh',
-                    'PlayerId' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-teststreamer_KdW7jkzRP',
+                    'PlayerId' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-streamer_KdW7jkzRP',
                     'AlternativeId' => time() . '_' . $user->id . '_' . auth()->user()->clientCurrency()->id(),
                     'RestorePolicy' => 'Last'
                 ]
@@ -185,12 +185,12 @@ class C27Controller extends Controller
              }
 
             else {
-                $this->client->setPlayer(['Id' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-testplayer_qz4XxJ' , 'BankGroupId' => 'bits_usd']);
+                $this->client->setPlayer(['Id' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-player_qz4XxJ' , 'BankGroupId' => 'bits_usd']);
                 $game = $this->client->createSession(
                 [
                     'GameId' => $slugsanitize,
                     'StaticHost' => 'static.respin.sh',
-                    'PlayerId' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-testplayer_qz4XxJ',
+                    'PlayerId' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-player_qz4XxJ',
                     'AlternativeId' => time() . '_' . $user->id . '_' . auth()->user()->clientCurrency()->id(),
                     'RestorePolicy' => 'Last'
                 ]
