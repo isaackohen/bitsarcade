@@ -88,6 +88,7 @@ return [
         'fairness' => 'Provably Fair',
         'game' => [
             'help' => 'Help',
+            'wide' => 'Toggle Widescreen',
             'sound' => 'Sound',
             'quick' => 'Quick mode',
             'client_seed' => 'Change client seed'

@@ -134,7 +134,7 @@
     style="display: block; padding-right: 15px;"
   aria-labelledby="wallet_modal"
   aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content" style="min-height: 500px;">
       <div class="modal-header">
                     <div class="tabs">
@@ -150,7 +150,7 @@
             </div>
         <button
           type="button"
-          class="btn-close"
+          class="btn-close white"
           data-mdb-dismiss="wallet_modal modal"
           aria-label="Close"
         ></button>
@@ -184,7 +184,7 @@
                     <div class="description">{{ __('wallet.deposit.minimumdepo') }} <b><span id="minimumdepo"> </span>$</b>.</div>
                 </div>
                 <div id="currency-label"></div>
-                <div class="input-loader">
+                <div>
                     <input onclick="this.select()" style="cursor: pointer !important;" data-mdb-toggle="tooltip" title="{{ __('wallet.copy') }}" type="text" readonly>
                 </div>
                 <div class="btn btn-primary" onclick="getDepositAddress()" id="generatorbutton" style="margin: 0px; padding: 10px; margin-top:10px;margin-bottom:10px;">Generate deposit address</div>

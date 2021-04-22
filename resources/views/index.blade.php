@@ -1,23 +1,25 @@
 @if(auth()->guest())
 @else
-<div class="container">
+    <div class="container-lg" style="background: transparent !important;">
   <div class="games">
-    <div class="our-games mb-1" style="background: transparent !important;">
-      <div class="row">
-        <div class="col-md-3 col-sm-12 mt-1 mb-">
-          <div class="card text-center" style="min-height: 170px; background: transparent !important;">
+      <div class="row mb-3">
+        <div class="col-md-3 col-sm-12 mt-1 mb-2 d-none d-sm-block">
+          <div class="card text-center" style="min-height: 165px; background: transparent !important;">
             <div class="card-body" style="background: url(/img/misc/arrows.svg) !important; box-shadow: -3px -3px 8px 1px #11141fcf, 2px 2px 8px 0px #0d0d0dcf, inset 1px 1px 0px 0px #1f2330 !important;">
-              <img src="/img/misc/vip-icon.png" height="32px">
+              <img src="/img/misc/vip-icon.png" height="25px">
               <hr>
-              <a onclick="$.vip()" class="btn btn-primary p-1 m-1">VIP Rewards</a>
-              <a onclick="$.vipBonus()" class="btn btn-primary p-1 m-1">Daily Bonus</a>
-              <a href="/bonus" class="btn btn-danger p-1 m-1">Faucet</a>
-            <button onclick="redirect('/bonus/')" class="btn btn-danger p-1 m-1">Promocode</a></button>
+             <p><small>BitsArcade's reward program.</small></p>
+              <a onclick="$.vip()" class="btn btn-primary p-2 m-1">Rewards</a>
+              <a onclick="$.vipBonus()" class="btn btn-primary p-2 m-1">Daily Bonus</a>
           </div>
         </div>
       </div>
-      <div class="col-md-6 col-sm-12 mt-1 mb-3 d-none d-sm-block">
-        <div class="card text-center" style="background: url(img/misc/bg-bits-min.jpg); min-height: 170px;">
+      <div class="col-md-6 col-sm-12 mt-1 mb-2">
+
+        <div id="carouselExampleInterval" class="carousel slide carousel-fade" data-mdb-ride="carousel">
+  <div class="carousel-inner" style="box-shadow: -3px -3px 8px 1px #11141fcf, 2px 2px 8px 0px #0d0d0dcf, inset 1px 1px 0px 0px #1f2330 !important;">
+    <div class="carousel-item active" data-mdb-interval="10000">
+        <div class="card text-center" style="background: url(img/misc/bg-bits-min.jpg); min-height: 165px;">
           <div class="card-body">
             <p class="card-text" style="text-shadow: 2px 2px black !important;"><h6>
               {{ \App\Settings::where('name', 'featured_newsbox_text')->first()->value }}</h6>
@@ -27,20 +29,85 @@
             </p>
           </div>
         </div>
+    </div>
+    <div class="carousel-item" data-mdb-interval="20000">
+        <div class="card" style="background: url(img/misc/races.svg); background-size: cover; background-position: center; min-height: 165px;">
+          <div class="card-body">
+
+        @php
+              $first = (\App\Settings::where('name', 'races_prize_1st')->first()->value);
+              $second = (\App\Settings::where('name', 'races_prize_2nd')->first()->value);
+              $third = (\App\Settings::where('name', 'races_prize_3rd')->first()->value);
+              $fs = (\App\Settings::where('name', 'races_prize_freespins')->first()->value * 7);
+              $prizes = $first + $second + $third;
+        @endphp
+                    <div class="card-text" style="padding: 5px; position: absolute;bottom: 0;text-shadow: 1px 1px black !important;">
+
+                <b>Today's Race</b>
+                <br>
+                <small><i class="fas fa-usd-circle me-1" style="color: #0fd560;"></i> Total Prizepool:  {{ $prizes }}$ and {{ $fs }} Free Spins</small>               
+                <br>
+                <small><i style="color: #0fd560;" class="fas fa-stopwatch me-1"></i> Ending in <?php $timeLeft = 86400 - (time() - strtotime("today")); echo date("H\\h  i\\m", $timeLeft); ?></small></p>
+                    </p></div>
+                    <button style="position: absolute;bottom: 15px;right: 15px;text-shadow: 0px 1px black !important;" onclick="$.races()" class="btn btn-primary">Check Race</button>
+          </div>
+        </div>
+    </div>
+    <div class="carousel-item" data-mdb-interval="20000">
+        <div class="card" style="background: url(img/misc/bonus-box.svg); background-size: cover; background-position: center; min-height: 165px;">
+          <div class="card-body">
+            <p class="card-text" style="text-shadow: 1px 1px black !important;">
+<div style="left: 0px; text-shadow: 1px 1px black !important;" class="carousel-caption d-none d-md-block">
+        <h5>Get tons of freebies!</h5>
+        <p>Check our Bonus Page.</p>
       </div>
-      <div class="col-md-3 col-sm-12 mt-1 mb-2">
-        <div class="card text-center" style="min-height: 170px; background: transparent !important;">
+            </p>
+          </div>
+        </div>
+    </div>
+    <div class="carousel-item" data-mdb-interval="20000">
+        <div class="card" style="background: url(/img/misc/earncrypto.svg); background-size: cover; background-position: center; min-height: 165px;">
+          <div class="card-body">
+
+                    <div class="card-text" style="padding: 5px; position: absolute;bottom: 0;text-shadow: 1px 1px black !important;">
+
+                <br>
+                <small><i class="fad fa-money-bill-alt me-1" style="color: #0fd560;"></i> Earn DOGE instantly completing surveys & offers</small>               
+                    </p></div>
+                    <button style="position: absolute;bottom: 15px;right: 15px;text-shadow: 0px 1px black !important;" onclick="redirect('/earn')" class="btn btn-primary">Earn Wall</button>
+          </div>
+        </div>
+    </div>
+      <div class="carousel-item" data-mdb-interval="20000">
+        <div class="card" style="background: url(/img/misc/promocodes.svg); background-size: cover; background-position: center; min-height: 165px;">
+          <div class="card-body">
+
+                    <div class="card-text" style="padding: 5px; position: absolute;bottom: 0;right:5%;text-shadow: 1px 1px black !important;">
+
+                <br>
+                <small>We automatically share promocodes on our socials</small>               
+                    </p></div>
+                    <button style="position: absolute;bottom: 35%;right: 14%;text-shadow: 0px 1px black !important;" onclick="redirect('/bonus')" class="btn btn-primary">Enter Promocode</button>
+          </div>
+        </div>
+    </div>
+  </div>
+
+</div>
+
+
+      </div>                          
+      <div class="col-md-3 col-sm-12 mt-1 mb-2 d-none d-sm-block">
+        <div class="card text-center" style="min-height: 165px; background: transparent !important;">
           <div class="card-body" style="background: url(/img/misc/arrows.svg) !important; box-shadow: -3px -3px 8px 1px #11141fcf, 2px 2px 8px 0px #0d0d0dcf, inset 1px 1px 0px 0px #1f2330 !important;">
-            <img src="/img/logo/logo_bits_small_content.png"><hr>
-            <button onclick="$.wallet()" class="btn btn-success p-1 m-1">Wallet</button>
-            <a href="/partner" class="btn btn-pink p-1 m-1">Referral</a>
-            <button onclick="$.leaderboard()" class="btn btn-pink p-1 m-1">Leaderboard</button>
-            <a href="/earn" class="btn btn-primary p-1 m-1">Earn Wall</a>
+            <img height="20px" width="auto" src="/img/logo/logo_bits_small_content.png"><hr>
+            <p><small>Join our socials for freebies.</small></p>
+            <a href="{{ \App\Settings::where('name', 'discord_invite_link')->first()->value }}" target="_blank" class="btn btn-primary p-2 m-1"><i class="fab fa-discord"></i> Discord</a>
+            <a href="{{ \App\Settings::where('name', 'twitter_link')->first()->value }}" target="_blank"  class="btn btn-primary p-2 m-1"><i class="fab fa-telegram"></i> Telegram</a>
           </div>
         </div>
       </div>
     </div>
-  </div>
 </div>
 @foreach(\App\GlobalNotification::get() as $notification)
 <div class="col-md-12">
@@ -61,7 +128,7 @@
           $notify = auth()->user()->unreadNotifications();
           @endphp
           @if(auth()->user()->freegames > '2')
-          <div class="alert alert-info fade show" role="alert">
+          <div class="alert alert-info mb-3 mt-3" role="alert">
             <strong>Holy guacamole</strong>. You have <strong>{{ auth()->user()->freegames }}</strong> free spins on your account! Get spinning on <a href="/slots/{{ $slotname->id }}" span style="capitalize; font-weight: 600 !important;">{{ $slotname->n }}</a></b>
           </span>
         </div>
@@ -135,7 +202,7 @@
         <div class="container-flex owl-carousel featured" style="z-index: 1;">
           @foreach(\App\Slotslist::get() as $slots)
           @if($slots->f == '1')
-          <div class="card gamepostercard" style="cursor: pointer; margin-left: 10px; margin-right: 10px;">
+          <div class="card gamepostercard" style="cursor: pointer; margin-left: 15px; margin-right: 15px;">
             @if(!auth()->guest())
             <div onclick="redirect('/slots/{{ $slots->id }}')" class="game_poster p-2" style="background-image:url(/img/slots/{{ $slots->p }}/{{ $slots->id }}.jpg)">
               @else
@@ -157,7 +224,7 @@
           <div class="container-flex owl-carousel provably"  style="z-index: 1;">
             @foreach(\App\Games\Kernel\Game::list() as $game)
             @if(!$game->isDisabled() &&  $game->metadata()->id() !== "slotmachine")
-            <div class="card gamepostercard" onclick="redirect('/game/{{ $game->metadata()->id() }}')" style="cursor: pointer; margin-left: 10px; margin-right: 10px;">
+            <div class="card gamepostercard" onclick="redirect('/game/{{ $game->metadata()->id() }}')" style="cursor: pointer; margin-left: 15px; margin-right: 15px;">
               <div style="background-size: cover;" class="game_poster p-2 card-img-top game-{{ $game->metadata()->id() }}" @if(!$game->isDisabled()) onclick="redirect('/game/{{ $game->metadata()->id() }}')" @endif>
                 <?php
                 $getname = $game->metadata()->name();
@@ -189,7 +256,7 @@
             <button onclick="redirect('/gamelist/')" style="padding-top: 5px; font-size: 10px; padding-left: 10px;" class="btn btn-secondary m-2 p-1">More <i class="fas fa-arrow-right" style="font-size: 8px;"></i></a></button>
             <div class="container-flex owl-carousel random" style="z-index: 2;">
               @foreach(\App\Slotslist::all()->random(20) as $slots)
-              <div class="card gamepostercard" style="cursor: pointer; margin-left: 10px; margin-right: 10px;">
+              <div class="card gamepostercard" style="cursor: pointer; margin-left: 15px; margin-right: 15px;">
                     @if(!auth()->guest())
                     <div onclick="redirect('/slots/{{ $slots->id }}')" class="game_poster" style="background-image:url(/img/slots_webp/{{ $slots->id }}.webp)">
                     @else
@@ -211,7 +278,7 @@
             <div class="container-flex owl-carousel popular"  style="z-index: 1;">
               @foreach(\App\Slotslist::get() as $slots)
               @if($slots->f == '2')
-              <div class="card gamepostercard" style="cursor: pointer; margin-left: 10px; margin-right: 10px;">
+              <div class="card gamepostercard" style="cursor: pointer; margin-left: 15px; margin-right: 15px;">
                 @if(!auth()->guest())
                 <div onclick="redirect('/slots/{{ $slots->id }}')" class="game_poster p-2" style="background-image:url(/img/slots/{{ $slots->p }}/{{ $slots->id }}.jpg)">
                   @else

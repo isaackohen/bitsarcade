@@ -3,13 +3,13 @@
 <head>
     <meta charset="utf-8" />
     <title>Datagamble - Admin Panel</title>
-    <link rel="icon" type="image/png" href="../../img/logo/logo_black.png"/>
+    <link rel="icon" type="image/png" href="../../img/logo/ico.png"/>
     <link href="/css/webfonts_admin.css" rel="stylesheet" type="text/css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <link rel="shortcut icon" href="{{ asset('/img/logo/logo_black.png') }}">
+    <link rel="shortcut icon" href="{{ asset('/img/logo/ico.png') }}">
 
     <link href="{{ mix('css/admin/app.css') }}" rel="stylesheet" type="text/css" />
 
@@ -28,10 +28,10 @@
         <div class="container-fluid">
             <a href="/admin" class="navbar-brand mr-0 mr-md-2 logo">
                 <span class="logo-lg">
-                    <img src="{{ asset('/img/logo/logo_black.png') }}" alt="" height="45" />
+                    <img src="{{ asset('/img/logo/ico.png') }}" alt="" height="45" />
                 </span>
                 <span class="logo-sm">
-                    <img src="{{ asset('/img/logo/logo_black.png') }}" alt="" height="45">
+                    <img src="{{ asset('/img/logo/ico.png') }}" alt="" height="45">
                 </span>
             </a>
             <ul class="navbar-nav bd-navbar-nav flex-row list-unstyled menu-left mb-0">
@@ -55,7 +55,6 @@
         <div class="sidebar-content">
             <div id="sidebar-menu" class="slimscroll-menu">
                 <ul class="metismenu" id="menu-bar">
-                    <!-- Crypto Converter ⚡ Widget --><crypto-converter-widget shadow symbol live background-color="#323742" border-radius="0" fiat="united-states-dollar" crypto="bitcoin" amount="1" font-family="sans-serif" decimal-places="4"><a href="https://cr.today/" target="_blank" rel="noopener">Converter Widget</a></crypto-converter-widget><script async src="https://cdn.jsdelivr.net/gh/dejurin/crypto-converter-widget/dist/latest.min.js"></script><!-- /Crypto Converter ⚡ Widget -->
                     <li class="menu-title">Website</li>
                     <li>
                         <a href="/admin">
@@ -137,10 +136,12 @@
                             <span> Version</span>
                         </a>
                     </li>
+
                 </ul>
             </div>
-            <div class="clearfix"></div>
+            <div class="clearfix"></div>                    <!-- Crypto Converter ⚡ Widget --><crypto-converter-widget shadow symbol live background-color="#323742" border-radius="0" fiat="united-states-dollar" crypto="bitcoin" amount="1" font-family="sans-serif" decimal-places="4"><a href="https://cr.today/" target="_blank" rel="noopener">Converter Widget</a></crypto-converter-widget><script async src="https://cdn.jsdelivr.net/gh/dejurin/crypto-converter-widget/dist/latest.min.js"></script><!-- /Crypto Converter ⚡ Widget -->
         </div>
+        
     </div>
     <div class="content-page">
         <div class="content">

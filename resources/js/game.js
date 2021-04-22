@@ -523,41 +523,12 @@ class SidebarFooterComponent {
     }
 
     help() {
-        this.button('fal fa-question-circle', $.lang('general.footer.game.help'), function() {
-            $.modal('help').then(() => {
-                $('.help .heading').html(currentGameInstance.game.id.capitalize());
-                $('.help .btn').html($.lang('game_help.next'));
-                $('.help').attr('data-page', '1');
-                $('.help .help-content').html('');
+        this.button('far fa-rectangle-wide', $.lang('general.footer.game.wide'), function() {
 
-                let i = 1;
-                while (true) {
-                    const check = `game_help.${currentGameInstance.game.id}.${i}`;
-                    const translation = $.lang(check);
-                    if (check === translation) break;
+  const containerElement = document.getElementById("gamecontainer");
+  const newClass = containerElement.className == "container" ? "container-fluid" : "container";
+  containerElement.className = newClass;
 
-                    $('.help .help-content').append(`<div class="help-game" data-help-page="${i}">${translation}</div>`);
-
-                    i++;
-                }
-
-                $('.help .btn').on('click', function () {
-                    const page = parseInt($('.help').attr('data-page'));
-                    if (page + 2 >= i) $('.help .btn').html($.lang('game_help.close'));
-                    if (page + 2 > i) {
-                        $.modal('help');
-                        return;
-                    }
-
-                    $('[data-help-page]').hide();
-                    $(`[data-help-page="${page + 1}"]`).show();
-
-                    $('.help').attr('data-page', page + 1);
-                });
-
-                $('[data-help-page]').hide();
-                $('[data-help-page="1"]').show();
-            });
         });
         return this;
     }

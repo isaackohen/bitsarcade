@@ -10,8 +10,7 @@
         </div>
     @else
 
-    <div class="bonus-image" style="margin-top: 10px;">
-              <h6 style="text-shadow: 1px 1px black;">Unlocked Bonus</h5>
+    <div class="bonus-image" style="background: url(img/misc/bonus-box.svg); background-size: cover; background-position: center; margin-top: 10px;">
         <div class="progress">
             @php $percent = number_format(auth()->user()->weekly_bonus ?? 0, 2, '.', ''); @endphp
             <div class="progress-bar" role="progressbar" style="width: {{ $percent }}%;">{{ $percent }}%</div>
@@ -45,7 +44,7 @@
   aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
-      <div class="modal-header">Daily Bonus
+      <div class="modal-header"><i style="color: #0fd560;" class="fad fa-gift me-1"></i><span>Daily Bonus</span>
         <button
           type="button"
           class="btn-close"
@@ -53,7 +52,7 @@
           aria-label="Close"
         ></button>
       </div>
-      <div class="modal-body" style="min-height:300px;">
+      <div class="modal-body" style="min-height:350px;">
         <div class="ui-blocker" style="display: none;">
             <div class="loader"><div></div></div>
         </div> 

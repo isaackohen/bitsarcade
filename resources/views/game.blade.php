@@ -6,8 +6,8 @@
     }
 @endphp
 
-<div class="container-fluid">
-    <div class="game-container mt-2">
+<div class="container" id="gamecontainer">
+    <div class="game-container mt-1">
         <div class="row">
             <div class="col {{-- d-none d-md-block --}}">
                 <div class="game-sidebar"></div>
@@ -16,8 +16,10 @@
                 <div class="game-content"></div>
             </div>
         </div>
-    </div>
+ </div>
 </div>
+
+
 
             <div class="our-games mt-4" style="border-radius: 12px; background: url(/img/misc/arrows.svg), linear-gradient(59deg, #313841, #2c323a) !important;">
             <button class="btn btn-secondary" onclick="redirect('/gamelist')">Games</button> <img src="/img/logo/logo_bits_small.png" height="35" style="margin-left: 10px; margin-right: 10px;">
@@ -40,3 +42,12 @@
         </script>
     @endif
 @endif
+
+  <script>
+
+  const containerElement = document.getElementById("gamecontainer");
+  function toggleThing() {
+  const newClass = containerElement.className == "container" ? "container-fluid" : "container";
+  containerElement.className = newClass;
+  }
+    </script>
