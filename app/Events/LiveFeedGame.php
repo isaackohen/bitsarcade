@@ -2,6 +2,7 @@
 
 use App\Game;
 use App\User;
+use App\RecentSlots;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
@@ -46,6 +47,15 @@ class LiveFeedGame implements ShouldBroadcastNow {
                 if ($c27game['Id'] == $this->game->data['params']['gameId']) {
                     $meta['name'] = $c27game['Name'];
                     $meta['id'] = $this->game->data['params']['gameId'];
+
+                       /**
+ if($slotscount = RecentSlots::where('user_id', $this->game->user)->where('s', $this->game->data['params']['gameId'])->first()) {
+                    $slotscount->update([
+                    'b' => $slotscount->b + 1
+                    ]);      
+                    }
+                         */
+
                 }
             }
         }

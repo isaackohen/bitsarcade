@@ -88,10 +88,13 @@ class C27Controller extends Controller
      */
     public function game($slug)
     {
+
+
+
         $user = auth()->user();
         $freespinslot = \App\Settings::where('name', 'freespin_slot')->first()->value;
 
-        if (strlen($slug) > 45){
+        if (strlen($slug) > 50){
             return redirect('/');
         }
 
@@ -100,12 +103,16 @@ class C27Controller extends Controller
         if (!$user) {
             return redirect('/');
         }
-
+        if(\App\RecentSlots::where('user_id', $user->id)->where('s', $slugsanitize)->first() == null) {
+                \App\RecentSlots::create([
+                'user_id' => $user->id, 's' => $slugsanitize, 'b' => 0,
+            ]);
+        }
 
         if($user->freegames > 1 && $slugsanitize == $freespinslot) {
 
        if(auth()->user()->access == 'moderator') {
-            $this->client->setPlayer(['Id' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-streamer_KdW7jkzRP' , 'BankGroupId' => 'bits_streamers']);
+            $this->client->setPlayer(['Id' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-teststreamer_KdW7jkzRP' , 'BankGroupId' => 'bits_streamers']);
             $this->client->setBonus([   
                     'Id' => 'shared',   
                     'FsType' => 'original', 
@@ -123,7 +130,7 @@ class C27Controller extends Controller
                     'GameId' => $slugsanitize,  
                     'BonusId' => 'shared',
                     'StaticHost' => 'static.respin.sh',
-                    'PlayerId' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-streamer_KdW7jkzRP',  
+                    'PlayerId' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-teststreamer_KdW7jkzRP',  
                     'AlternativeId' => time() . '_' . $user->id . '_' . auth()->user()->clientCurrency()->id(), 
                     'Params' => [   
                         'freeround_bet' => 1    
@@ -134,7 +141,7 @@ class C27Controller extends Controller
              }
 
         else {
-             $this->client->setPlayer(['Id' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-player_qz4XxJ' , 'BankGroupId' => 'bits_usd']);
+             $this->client->setPlayer(['Id' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-testplayer_qz4XxJ' , 'BankGroupId' => 'bits_usd']);
         $this->client->setBonus([   
                     'Id' => 'shared',   
                     'FsType' => 'original', 
@@ -152,7 +159,7 @@ class C27Controller extends Controller
                 [   
                     'GameId' => $slugsanitize,  
                     'BonusId' => 'shared',  
-                    'PlayerId' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-player_qz4XxJ',  
+                    'PlayerId' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-testplayer_qz4XxJ',  
                     'AlternativeId' => time() . '_' . $user->id . '_' . auth()->user()->clientCurrency()->id(), 
                     'Params' => [   
                         'freeround_bet' => 1    
@@ -165,12 +172,12 @@ class C27Controller extends Controller
         else
         {
        if(auth()->user()->access == 'moderator') {
-            $this->client->setPlayer(['Id' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-streamer_KdW7jkzRP' , 'BankGroupId' => 'bits_streamers']);
+            $this->client->setPlayer(['Id' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-teststreamer_KdW7jkzRP' , 'BankGroupId' => 'bits_streamers']);
             $game = $this->client->createSession(
                 [
                     'GameId' => $slugsanitize,
                     'StaticHost' => 'static.respin.sh',
-                    'PlayerId' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-streamer_KdW7jkzRP',
+                    'PlayerId' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-teststreamer_KdW7jkzRP',
                     'AlternativeId' => time() . '_' . $user->id . '_' . auth()->user()->clientCurrency()->id(),
                     'RestorePolicy' => 'Last'
                 ]
@@ -178,12 +185,12 @@ class C27Controller extends Controller
              }
 
             else {
-                $this->client->setPlayer(['Id' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-player_qz4XxJ' , 'BankGroupId' => 'bits_usd']);
+                $this->client->setPlayer(['Id' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-testplayer_qz4XxJ' , 'BankGroupId' => 'bits_usd']);
                 $game = $this->client->createSession(
                 [
                     'GameId' => $slugsanitize,
                     'StaticHost' => 'static.respin.sh',
-                    'PlayerId' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-player_qz4XxJ',
+                    'PlayerId' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-testplayer_qz4XxJ',
                     'AlternativeId' => time() . '_' . $user->id . '_' . auth()->user()->clientCurrency()->id(),
                     'RestorePolicy' => 'Last'
                 ]
@@ -191,15 +198,18 @@ class C27Controller extends Controller
         }
         }
 
-        sleep(0.65);
         if($user->freegames > 1 && $slugsanitize == $freespinslot) {
                     $url = $game['SessionUrl'] . '?' . $slugsanitize;
         }
         else {
+
         $url = 'https://' . $game['SessionId'] . '.spins.sh/?' . $slugsanitize;
         }
+        sleep(1.00);
         $view = view('c27')->with('data', $game)->with('url', $url);
         return view('layouts.app')->with('page', $view);
+        
+
     }
 
     /**
@@ -326,6 +336,10 @@ class C27Controller extends Controller
         $profit = (float) $add - $subtract;
 
         if ((Currency::find($currency)->option('weekly_bonus_min_bet') ?? 0) <= $subtract) {
+            if ($user != null && $user->referral != null) {
+            $referrer = \App\User::where('_id', $user->referral)->first();
+            $referrer->balance(Currency::find($currency))->add($subtract * 0.0009, \App\Transaction::builder()->message('referral bonus')->get());
+            }
             if ($user->vipLevel() > 0 && ($user->weekly_bonus ?? 0) < 100) {
                 $user->update([
                     'weekly_bonus' => ($user->weekly_bonus ?? 0) + 0.1
@@ -393,6 +407,8 @@ class C27Controller extends Controller
             ]);
         }
 
+
+
         $game = \App\Game::create([
             'id' => DB::table('games')->count() + 1,
             'user' => $user->id,
@@ -413,10 +429,7 @@ class C27Controller extends Controller
         Leaderboard::insert($game);
         event(new \App\Events\LiveFeedGame($game, 10));
 
-        if ($user != null && $user->referral != null) {
-            $referrer = \App\User::where('_id', $user->referral)->first();
-            $referrer->balance(Currency::find($currency))->add($subtract * 0.0009, \App\Transaction::builder()->message('referral bonus')->get());
-        }
+
 
 
         return response()->json([

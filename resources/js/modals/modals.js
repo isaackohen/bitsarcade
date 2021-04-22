@@ -5,6 +5,7 @@ require('./change-name');
 require('./change-client-seed');
 require('./tfa');
 require('./leaderboard');
+require('./races');
 
 $.modal = function(id, option = null) {
     return new Promise(function(resolve) {

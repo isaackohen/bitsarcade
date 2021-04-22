@@ -11,7 +11,7 @@ header("Refresh:1");
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <link rel="icon" href="{{ asset('/img/logo/logo_temp.png') }}">
+        <link rel="icon" href="{{ asset('/img/logo/ico.png') }}">
         <link rel="stylesheet" href="{{ mix('/css/pages/error.css') }}">
 <style>
 body {
