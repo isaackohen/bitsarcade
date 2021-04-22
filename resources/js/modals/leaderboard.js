@@ -1,4 +1,5 @@
 var currency = 'usd';
+var days = 'all'
 
 function updateLeaderCurrency() {
 	$('.leader-stage').uiBlocker();
@@ -15,18 +16,9 @@ $.leaderboard = function() {
     });
 };
 
-$.todayLeaderboard = function() {
-		$('.leader-stage').uiBlocker();
-        $.get('/modals.leaderboard/today?currency=' + currency, function(response) {
-            $('.leader-stage').html(response);
-			$('.leader-stage').uiBlocker(false);
-			$.updateLeaderSelector();
-        });
-};
-
 $.allLeaderboard = function() {
 		$('.leader-stage').uiBlocker();
-        $.get('/modals.leaderboard/all?currency=' + currency, function(response) {
+        $.get('/modals.leaderboard/stat?currency=' + currency + '&days=' + days, function(response) {
             $('.leader-stage').html(response);
 			$('.leader-stage').uiBlocker(false);
 			$.updateLeaderSelector();
@@ -44,11 +36,25 @@ $.updateLeaderSelector = function() {
         minimumResultsForSearch: -1,
         allowHtml: true
     });
+	
+	$(`#days-selector-leader`).select2({
+        templateSelection: formatIcon,
+        templateResult: formatIcon,
+        minimumResultsForSearch: -1,
+        allowHtml: true
+    });
 
     $('#currency-selector-leader').on('select2:selecting', function(e) {
 		currency = e.params.args.data.id;
         updateLeaderCurrency();
     });
+	
+	$('#days-selector-leader').on('select2:selecting', function(e) {
+		days = e.params.args.data.id;
+        updateLeaderCurrency();
+    });
 
     $(`#currency-selector-leader`).val(currency).trigger('change');
-};
+	
+	$(`#days-selector-leader`).val(days).trigger('change');
+}; 
