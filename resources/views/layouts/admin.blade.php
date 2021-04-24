@@ -61,7 +61,7 @@
                             <span class="badge badge-primary float-right">
                                 {{ \App\Withdraw::where('status', 0)->count() }}
                             </span>
-                            <span> Withdraws</span>
+                            <span> Payments</span>
                         </a>
                     </li>
                     <li>

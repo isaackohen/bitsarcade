@@ -69,7 +69,7 @@ Route::get('callback/adgatemedia', function(Request $request) {
             Log::notice(json_encode($request->all()));
             $balancetype = \App\Settings::where('name', 'offerwall_balancetype')->first()->value;
             $user = User::where('_id', $request->get('user_id'))->first();  
-            $user->balance(\App\Currency\Currency::find($balancetype))->add($request->get('point_value'), \App\Transaction::builder()->message('AdgateMedia')->get()); 
+            $user->balance(\App\Currency\Currency::find($balancetype))->add($request->get('point_value'), \App\Transaction::builder()->message('Offerwall')->get()); 
             $amount = $request->get('point_value');
             $invoice = Invoice::create([
             'currency' => $balancetype,
