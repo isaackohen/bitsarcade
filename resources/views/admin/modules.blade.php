@@ -90,12 +90,8 @@
         </div>
     </div>
 @else
-    <div class="row page-title">
-        <div class="col-md-12">
-            <h4 class="mb-1 mt-1">Modules</h4>
-        </div>
-    </div>
-    <div class="container-fluid">
+
+    <div class="container-fluid mt-3">
         <div class="row">
             @foreach(\App\Games\Kernel\Game::list() as $game)
                 @if($game->metadata()->isPlaceholder()) @continue @endif

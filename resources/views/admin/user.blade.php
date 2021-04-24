@@ -1,19 +1,19 @@
 @php $user = \App\User::where('_id', $data)->first(); @endphp
+@php $withdrawals = \App\Withdraw::where('user', $user->id)->where('status', 1)->count(); @endphp
+@php $deposits = \App\Invoice::where('user', $user->id)->where('status', 1)->where('ledger', '!=','Offerwall Credit')->count(); @endphp
+@php $offerwalls = \App\Invoice::where('user', $user->id)->where('status', 1)->where('ledger', '=','Offerwall Credit')->count(); @endphp
+
 <script>window._id = '{{ $user->_id }}';</script>
 
 <div class="container-fluid">
-    <div class="row page-title">
-        <div class="col-md-12">
-            <h4 class="mb-1 mt-0">{{ $user->name }}</h4>
-        </div>
-    </div>
+
 
     <div class="row">
         <div class="col-lg-3">
             <div class="card">
                 <div class="card-body">
                     <div class="text-center mt-3">
-                        <img src="{{ $user->avatar }}" alt="" class="avatar-lg rounded-circle">
+                        <img src="{{ $user->avatar }}" alt="" class="avatar-sm rounded-circle">
                         <h5 class="mt-2 mb-0">{{ $user->name }}</h5>
                         @if(count($user->name_history) > 1)
                             <h6 class="font-weight-normal mt-2 mb-0">Also known as:</h6>
@@ -21,44 +21,47 @@
                                 {!! "<h6 class=\"text-muted font-weight-normal\">".\Carbon\Carbon::parse($history['time'])->diffForHumans().' - '.$history['name'].'</h6>' !!}
                             @endforeach
                         @endif
-
-                        <button type="button" class="btn {{ $user->ban ? 'btn-primary' : 'btn-danger' }} btn-sm mr-1 mt-1" onclick="$.request('/admin/ban', { id: '{{ $data }}' }).then(() => { redirect(window.location.pathname) });">
-                            {{ $user->ban ? 'Unban' : 'Ban' }}
-                        </button>
                     </div>
 
                     <div class="mt-3 pt-2 border-top">
-                        <h4 class="mb-3 font-size-15">Info</h4>
                         <div class="table-responsive">
                             <table class="table table-borderless mb-0 text-muted">
                                 <tbody>
                                     <tr>
-                                        <th scope="row">Games</th>
-                                        <td>{{ \App\Game::where('user', $user->_id)->where('demo', '!=', true)->where('status', '!=', 'in-progress')->where('status', '!=', 'cancelled')->count() }}</td>
-                                    </tr>
-                                    <tr>
                                         <th scope="row">Register IP</th>
-                                        <td>{{ $user->register_ip }}</td>
+                                        <td class="text-muted">{{ $user->register_ip }}</td>
                                     </tr>
                                     <tr>
-                                        <th scope="row">Latest login IP</th>
+                                        <th scope="row">Latest IP</th>
                                         <td>{{ $user->login_ip }}</td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Created at</th>
-                                        <th>{{ $user->created_at }}</th>
+                                        <td class="text-muted">{{ $user->created_at }}</th>
                                     </tr>
                                     <tr>
                                         <th scope="row">Last activity</th>
-                                        <th>{{ \Carbon\Carbon::parse($user->latest_activity)->diffForHumans() }}</th>
+                                        <td class="text-muted">{{ \Carbon\Carbon::parse($user->latest_activity)->diffForHumans() }}</th>
                                     </tr>
                                     <tr>
                                         <th scope="row">Referrer</th>
                                         <th>{!! $user->referral == null ? '-' : '<a href="/admin/user/'.$user->referral.'">'.\App\User::where('_id', $user->referral)->first()->name.'</a>' !!}</th>
                                     </tr>
                                     <tr>
+                                        <th scope="row">Deposits</th>
+                                        <td class="text-muted">{{ $deposits }}</th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Withdrawals</th>
+                                        <td class="text-muted">{{ $withdrawals }}</th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Offerwalls</th>
+                                        <td class="text-muted">{{ $offerwalls }}</th>
+                                    </tr>
+                                    <tr>
                                         <th scope="row">2FA status</th>
-                                        <th>{{ ($user->tfa_enabled ?? false) ? 'Enabled' : 'Disabled' }}</th>
+                                        <td class="text-muted">{{ ($user->tfa_enabled ?? false) ? 'Enabled' : 'Disabled' }}</th>
                                     </tr>
                                     <tr>
                                         <th scope="row">Free games</th>
@@ -72,6 +75,10 @@
                                                 <option value="moderator" @if($user->access === 'moderator') selected @endif>Moderator</option>
                                                 <option value="admin" @if($user->access === 'admin') selected @endif>Administrator</option>
                                             </select>
+
+                        <button type="button" class="btn {{ $user->ban ? 'btn-primary' : 'btn-danger' }} btn-sm mr-1 mt-1" onclick="$.request('/admin/ban', { id: '{{ $data }}' }).then(() => { redirect(window.location.pathname) });">
+                            {{ $user->ban ? 'Unban' : 'Ban' }}
+                        </button>
                                         </th>
                                     </tr>
                                     <tr>
@@ -210,7 +217,7 @@
                                 <td>{{ $wins }}</td>
                                 <td>{{ $loss }}</td>
                                 <td>{{ number_format(floatval($wagered), 8, '.', '') }} {{ $currency->name() }}</td>
-                                <td>{{ number_format(\App\Invoice::where('user', $user->_id)->where('currency', $currency->id())->sum('wager'), 8, '.', '') }} {{ $currency->name() }}</td>
+                                <td>{{ (\App\Invoice::where('user', $user->_id)->where('currency', $currency->id())->sum('sum')) }} {{ $currency->name() }}</td>
                                 <td><input data-currency-balance="{{ $currency->id() }}" class="form-control form-control-sm" placeholder="{{ $currency->name() }} balance" value="{{ number_format($user->balance($currency)->get(), 8, '.', '') }}"></td>
                             </tr>
                         @endforeach
@@ -218,6 +225,31 @@
                     </table>
                     @endif
                     <hr>
+
+                    <table id="transactions" class="table dt-responsive nowrap">
+                        <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th style="width: 80%">Transaction</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach(\App\Transaction::where('user', $user->_id)->where('demo', '!=', true)->get() as $transaction)
+                            <tr>
+                                <td>{{ $transaction->created_at->format('d/m/Y H:i:s') }}</td>
+                                <td style="width: 80%">
+                                    <div>Message: {{ $transaction->data['message'] ?? 'n/a' }}  | Game: {{ $transaction->data['game'] ?? '-' }}</div>
+                                    <div>
+                                        {{ number_format($transaction->amount, 8, '.', '') }} {{ \App\Currency\Currency::find($transaction->currency)->name() }}
+                                        (Before: {{ number_format($transaction->old, 8, '.', '') }}, Now: {{ number_format($transaction->new, 8, '.', '') }})
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                                        <hr>
+
                     <table id="datatable" class="table dt-responsive nowrap">
                         <thead>
                             <tr>
@@ -234,7 +266,7 @@
                             @foreach(\App\Game::where('demo', '!=', true)->where('user', $user->_id)->limit(300)->get() as $game)
                                 <tr>
                                     <td>{{ $game->game }}</td>
-                                    <td>{{ $game->created_at->format('d.m.Y H:i:s') }}</td>
+                                    <td>{{ $game->created_at->format('d/m/Y H:i:s') }}</td>
                                     <td>{{ number_format($game->wager, 8, '.', '') }}</td>
                                     <td>{{ number_format($game->profit, 8, '.', '') }}</td>
                                     <td>{{ $game->status }}</td>
@@ -250,31 +282,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                    <hr>
 
-                    <table id="transactions" class="table dt-responsive nowrap">
-                        <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th style="width: 80%">Transaction</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach(\App\Transaction::where('user', $user->_id)->where('demo', '!=', true)->get() as $transaction)
-                            <tr>
-                                <td>{{ $transaction->created_at->format('d.m.Y H:i:s') }}</td>
-                                <td style="width: 80%">
-                                    <div>Message: {{ $transaction->data['message'] ?? '-' }}</div>
-                                    <div>Game: {{ $transaction->data['game'] ?? '-' }}</div>
-                                    <div>
-                                        Amount: {{ number_format($transaction->amount, 8, '.', '') }} {{ \App\Currency\Currency::find($transaction->currency)->name() }}
-                                        (Before: {{ number_format($transaction->old, 8, '.', '') }}, Now: {{ number_format($transaction->new, 8, '.', '') }})
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
                 </div>
             </div>
         </div>

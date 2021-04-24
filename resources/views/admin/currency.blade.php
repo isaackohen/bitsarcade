@@ -44,13 +44,7 @@
 
     <div class="container-fluid">
             <div class="row">
-                <div class="col-12">
-                    <div class="card text-white bg-danger mb-3">
-  <div class="card-body">
-    <p class="card-text"><b>Warning:</b> Please contact <a style="color: black;" href="https://datagamble.com" target="_blank">datagamble support</a> to add/remove/modify currency settings below. Only change settings if you know what you are doing.</p>
-  </div>
-</div>
-                </div>
+
                 <div class="col-12">
                     <div class="card text-white bg-info mb-3">
   <div class="card-body">

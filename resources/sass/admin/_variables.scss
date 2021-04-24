@@ -192,8 +192,8 @@ $paragraph-margin-bottom:   1rem;
 
 $grid-breakpoints: (
   xs: 0,
-  sm: 576px,
-  md: 768px,
+  sm: 376px,
+  md: 568px,
   lg: 992px,
   xl: 1200px
 );
@@ -353,8 +353,8 @@ $hr-margin-y:                 $spacer;
 //
 // Customizes the `.table` component with basic values, each used across all table variations.
 
-$table-cell-padding:          .75rem;
-$table-cell-padding-sm:       .3rem;
+$table-cell-padding:          .60rem;
+$table-cell-padding-sm:       .4rem;
 
 $table-color:                 $body-color;
 $table-bg:                    null;
@@ -1143,11 +1143,11 @@ $bg-leftbar-light:            #ffffff;
 $bg-leftbar-dark:             #323742;
 
 // Leftbar width
-$leftbar-width:             250px;
+$leftbar-width:             215px;
 $leftbar-width-collapsed:   70px;
 
 // Small Leftbar Width
-$leftbar-width-sm:    160px;
+$leftbar-width-sm:    150px;
 
 // Boxed layout width
 $boxed-layout-width:  1300px;
@@ -1181,7 +1181,7 @@ $bg-topbar-dark:          #323742;
 $bg-gradient:               linear-gradient(to bottom, #564ab1, #746dad);
 
 // Topbar Height
-$topbar-height: 55px;
+$topbar-height: 0px;
 
 // Dropdown Large
 $dropdown-lg-width:    320px;
