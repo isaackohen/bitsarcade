@@ -130,7 +130,7 @@
                                 <td>{{ $invoice->created_at->format('d/m/Y h:i:s') }}</td>
                                 <td> <a href="/admin/user/{{ $user->_id }}">{{ $user->name }}</a></td>
                                 <td>{{ $invoice->sum }}</td>
-                                <td>{{ \App\Currency\Currency::find($withdraw->currency)->name() }}</td>
+                                <td>{{ $invoice->currency }}</td>
                                 <td>{{ $invoice->ledger }}</td>
                                 @endforeach
                             </tbody>
@@ -158,7 +158,7 @@
                                     <td>{{ $withdraw->created_at->format('d/m/Y h:i:s') }}</td>
                                     <td> <a href="/admin/user/{{ $user->_id }}">{{ $user->name }}</a></td>
                                     <td>{{ number_format($withdraw->sum, 8, '.', ' ') }}</td>
-                                    <td>{{ \App\Currency\Currency::find($withdraw->currency)->name() }}</td>
+                                        <td>{{ $withdraw->currency }}</td>
                                     <td>{{ $withdraw->auto }}</td>
                                     <td>{{ $withdraw->address }}</td>
                                     @endforeach
@@ -186,7 +186,7 @@
                                         <td>{{ $invoice->created_at->format('d/m/Y h:i:s') }}</td>
                                         <td> <a href="/admin/user/{{ $user->_id }}">{{ $user->name }}</a></td>
                                         <td>{{ $invoice->sum }}</td>
-                                        <td>{{ \App\Currency\Currency::find($withdraw->currency)->name() }}</td>
+                                        <td>{{ $invoice->currency }}</td>
                                         <td>{{ $invoice->ledger }}</td>
                                         @endforeach
                                     </tbody>
