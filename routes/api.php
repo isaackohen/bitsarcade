@@ -30,7 +30,6 @@ Route::get('blockNotify/{currency}/{blockId}', function($currency, $blockId) {
     return success();
 });
 
-
 Route::post('search/games', function(Request $request) {
         $request->validate([
             'text' => ['required', 'string', 'min:1']
@@ -116,9 +115,6 @@ Route::get('callback/offertoro', function(Request $request) {
         if($request->payment_status == 'finished') {
         $invoice = Invoice::where('hash', $request->get('order_description'))    
             ->where('status', 0)
-            //->whereHas('currency', function ($query) use ($request) {    
-            //    return $query->where('currency', $request->get('outcome_currency')); 
-            //})  
             ->first();  
 
     $user = \App\User::find($invoice->user);
@@ -129,10 +125,6 @@ Route::get('callback/offertoro', function(Request $request) {
             ->header('Content-Type', 'text/plain'); 
         }
 });
-
-
-
-
 
 Route::middleware('auth')->prefix('investment')->group(function() {
     Route::post('history', function() {
@@ -166,9 +158,6 @@ Route::middleware('auth')->prefix('investment')->group(function() {
         ]);
     });
 });
-
-
-
 
 Route::middleware('auth')->prefix('wallet')->group(function() {
     Route::post('getDepositWallet', function(Request $request) {
@@ -656,7 +645,7 @@ Route::middleware('auth')->prefix('promocode')->group(function() {
         ];
 
         $slice = mt_rand(0, count($slices) - 1);
-        auth()->user()->balance(auth()->user()->clientCurrency())->add($slices[$slice], \App\Transaction::builder()->message('Referral bonus wheel')->get());
+       // auth()->user()->balance(auth()->user()->clientCurrency())->add($slices[$slice], \App\Transaction::builder()->message('Referral bonus wheel')->get());
         auth()->user()->update([
             'referral_bonus_obtained' => (auth()->user()->referral_bonus_obtained ?? 0) + 1
         ]);
@@ -670,48 +659,73 @@ Route::middleware('auth')->prefix('promocode')->group(function() {
 		$validate = Validator::make($request->all(), [
 		'captcha' => 'required|captcha'
 		]); 
-		if($validate->fails()) return reject(4, 'Please verify that you are not a robot');
-        if(auth()->user()->bonus_claim != null && !auth()->user()->bonus_claim->isPast()) return reject(1, 'Reloading');
-        if(auth()->user()->balance(auth()->user()->clientCurrency())->get() > auth()->user()->clientCurrency()->option('min_bet')) return reject(2, 'Balance is greater than zero'); 
+
+        $c1 = Currency::find("btc");
+        $c2 = Currency::find("ltc");
+        $c3 = Currency::find("doge");
+        $c4 = Currency::find("bch");
+        $c5 = Currency::find("eth");
+        $c6 = Currency::find("trx");
+
         $user = auth()->user();
+
+        $same_register_hash = \App\User::where('register_multiaccount_hash', $user->register_multiaccount_hash)->get();
+        $same_login_hash = \App\User::where('login_multiaccount_hash', $user->login_multiaccount_hash)->get();
+        $same_register_ip = \App\User::where('register_ip', $user->register_ip)->get();
+        $same_login_ip = \App\User::where('login_ip', $user->login_ip)->get();
+
+		if($validate->fails()) return reject(4, 'Please verify that you are not a robot');
+        if(auth()->user()->bonus_claim != null && !auth()->user()->bonus_claim->isPast()) return reject(1, 'Please wait before trying again');
+        //if(auth()->user()->clientCurrency()->id() != 'doge') return reject(2, 'Balance is greater than zero'); 
+        if(auth()->user()->balance($c1)->get() > $c1->option('min_bet')) return reject(2, 'Balance is greater than zero'); 
+        if(auth()->user()->balance($c2)->get() > $c2->option('min_bet')) return reject(2, 'Balance is greater than zero'); 
+        if(auth()->user()->balance($c3)->get() > $c3->option('min_bet')) return reject(2, 'Balance is greater than zero'); 
+        if(auth()->user()->balance($c4)->get() > $c4->option('min_bet')) return reject(2, 'Balance is greater than zero'); 
+        if(auth()->user()->balance($c5)->get() > $c5->option('min_bet')) return reject(2, 'Balance is greater than zero'); 
+        if(auth()->user()->balance($c6)->get() > $c6->option('min_bet')) return reject(2, 'Balance is greater than zero'); 
+
+        if(count($same_login_hash) > 8) return reject(2, 'Expired (usages)');
+        if(count($same_register_hash) > 8) return reject(2, 'Expired (usages)');
+        if(count($same_login_ip) > 8) return reject(2, 'Expired (usages)');
+
         //$progresscheck = \App\Game::where('user', $user)->where('status', 'in-progress')->get();
         //if($progresscheck) return reject(3, 'Game in progress');
 
         $v = floatval(auth()->user()->clientCurrency()->option('bonus_wheel'));
         $slices = [
             $v,
+            $v * 1.10,
+            $v * 1.3,
+            $v * 1.20,
+            $v * 1.35,
+            $v,
+            $v * 1.85,
+            $v,
             $v * 1.15,
             $v * 1.3,
             $v * 1.15,
             $v * 1.5,
             $v,
-            $v * 2,
-            $v,
-            $v * 1.15,
-            $v * 1.3,
-            $v * 1.15,
-            $v * 1.5,
-            $v,
-            $v * 2
+            $v * 1.85
         ];
 
         $slice = mt_rand(0, count($slices) - 1);
         auth()->user()->balance(auth()->user()->clientCurrency())->add($slices[$slice], \App\Transaction::builder()->message('Faucet')->get());
         auth()->user()->update([
-            'bonus_claim' => \Carbon\Carbon::now()->addMinutes(3)
+            'bonus_claim' => \Carbon\Carbon::now()->addMinutes(15)
         ]);
 
         return success([
             'slice' => $slice,
-            'next' => \Carbon\Carbon::now()->addMinutes(3)->timestamp
+            'next' => \Carbon\Carbon::now()->addMinutes(15)->timestamp
         ]);
     });
 
     Route::post('vipBonus', function() {
         if(auth()->user()->vipLevel() == 0) return reject(1, 'Invalid VIP level');
-        if(auth()->user()->weekly_bonus < 0.1) return reject(2, 'Weekly bonus is too small');
+        if(auth()->user()->weekly_bonus < 0.1) return reject(2, 'Daily bonus is too small');
         if(auth()->user()->weekly_bonus_obtained) return reject(3, 'Already obtained in this week');
-        auth()->user()->balance(auth()->user()->clientCurrency())->add(((auth()->user()->weekly_bonus ?? 0) / 100) * auth()->user()->vipBonus(), \App\Transaction::builder()->message('Weekly VIP bonus')->get());
+        auth()->user()->balance(auth()->user()->clientCurrency())->add(((auth()->user()->weekly_bonus ?? 0) / 100) * auth()->user()->vipBonus(), \App\Transaction::builder()->message('Daily VIP bonus')->get());
         auth()->user()->update([
             'weekly_bonus_obtained' => true
         ]);

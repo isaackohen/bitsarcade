@@ -51,7 +51,7 @@ abstract class Game {
             new \App\Games\Wheel(),
             new \App\Games\Plinko(),
             new \App\Games\Coinflip(),
-            //new \App\Games\VideoPoker(),
+            new \App\Games\VideoPoker(),
             new \App\Games\Tower(),
             new \App\Games\Keno(),
             new \App\Games\Stairs(),

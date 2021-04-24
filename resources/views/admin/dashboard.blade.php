@@ -18,7 +18,7 @@
                     <i style="display: flex; margin-left: auto; margin-right: auto;" data-feather="clock"></i>
                     <div class="text-center mt-2">Nothing here</div>
                 @else
-                    @foreach(\App\Withdraw::where('status', 0)->latest()->take(30)->get() as $withdraw)
+                    @foreach(\App\Withdraw::where('status', 0)->latest()->take(4)->get() as $withdraw)
                         @php $user = \App\User::where('_id', $withdraw->user)->first(); @endphp
                         <div class="media border-top pt-3 mb-0">
                             <img src="{{ $user->avatar }}" class="avatar rounded mr-3" alt="shreyu">
@@ -31,7 +31,7 @@
                             </div>
                         </div>
                     @endforeach
-                    @foreach(\App\Withdraw::where('status', 1)->latest()->take(30)->get() as $withdraw)
+                    @foreach(\App\Withdraw::where('status', 1)->latest()->take(4)->get() as $withdraw)
                         @php $user = \App\User::where('_id', $withdraw->user)->first(); @endphp
                         <div class="media border-top pt-3 mb-0">
                             <img src="{{ $user->avatar }}" class="avatar rounded mr-3" alt="shreyu">

@@ -16,6 +16,7 @@ $.on('/admin/user', function() {
 
     $('#datatable').DataTable({
         destroy: true,
+        "type": "date-euro",
         "order": [[ 1, "desc" ]],
         "lengthMenu": [[25, 50, 100, 250, -1], [25, 50, 100, 250, "All"]],
         "language": {
@@ -31,6 +32,7 @@ $.on('/admin/user', function() {
 
     $('#transactions').DataTable({
         destroy: true,
+        "type": "date-euro",
         "order": [[ 0, "desc" ]],
         "lengthMenu": [[25, 50, 100, 250, -1], [25, 50, 100, 250, "All"]],
         "language": {

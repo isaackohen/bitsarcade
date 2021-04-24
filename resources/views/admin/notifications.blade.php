@@ -1,25 +1,12 @@
 <div class="row page-title">
     <div class="col-md-12">
-        <div class="float-right">
+        <div class="float-left">
             <button class="btn btn-primary" data-toggle="modal" data-target="#create_standalone">Send notification</button>
-            <button class="btn btn-danger" data-toggle="modal" data-target="#create">Send push notification</button>
         </div>
-        <h4 class="mb-1 mt-0">Notifications</h4>
     </div>
 </div>
 <div class="row">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-body p-0">
-                <div class="media p-3">
-                    <div class="media-body">
-                        <span class="text-muted text-uppercase font-size-12 font-weight-bold">Subscribers</span>
-                        <h2 class="mb-0">{{ \App\User::where('notification_bonus', true)->count() }}</h2>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
 </div>
 <div class="row">
     <div class="col-12">

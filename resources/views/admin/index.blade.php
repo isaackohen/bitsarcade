@@ -1,9 +1,5 @@
-<div class="container-fluid">
-    <div class="row page-title align-items-center">
-        <div class="col-sm-4 col-xl-6">
-            <h4 class="mb-1 mt-0">Stats</h4>
-        </div>
-    </div>
+<div class="container-fluid mt-3">
+
     <div class="row">
         <div class="col-md-2">
             <div class="card text-white bg-gradient-primary">
@@ -51,8 +47,8 @@
                     <div class="media p-3">
                         <div class="media-body">
                             <span class="text-muted text-uppercase font-size-12 font-weight-bold">Maintenance Mode</span>
-                            <button class="btn btn-danger ml-1 m-0 p-2" onclick="$.request('/admin/artisan-down');">Mode On</button>
-                            <button class="btn btn-success m-0 p-2" onclick="$.request('/admin/artisan-up');">Mode Off</button>
+                            <button class="btn btn-success ml-1 m-0 p-2" onclick="$.request('/admin/artisan-down');">On</button>
+                            <button class="btn btn-danger m-0 p-2" onclick="$.request('/admin/artisan-up');">Off</button>
                         </div>
                     </div>
                 </div>

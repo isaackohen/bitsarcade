@@ -18,7 +18,7 @@
 
         <div id="carouselExampleInterval" class="carousel slide carousel-fade" data-mdb-ride="carousel">
   <div class="carousel-inner" style="box-shadow: -3px -3px 8px 1px #11141fcf, 2px 2px 8px 0px #0d0d0dcf, inset 1px 1px 0px 0px #1f2330 !important;">
-    <div class="carousel-item active" data-mdb-interval="10000">
+    <div class="carousel-item" data-mdb-interval="7000">
         <div class="card text-center" style="background: url(img/misc/bg-bits-min.jpg); min-height: 165px;">
           <div class="card-body">
             <p class="card-text" style="text-shadow: 2px 2px black !important;"><h6>
@@ -30,7 +30,7 @@
           </div>
         </div>
     </div>
-    <div class="carousel-item" data-mdb-interval="20000">
+    <div class="carousel-item active" data-mdb-interval="7000">
         <div class="card" style="background: url(img/misc/races.svg); background-size: cover; background-position: center; min-height: 165px;">
           <div class="card-body">
 
@@ -53,19 +53,18 @@
           </div>
         </div>
     </div>
-    <div class="carousel-item" data-mdb-interval="20000">
+    <div class="carousel-item" data-mdb-interval="7000">
         <div class="card" style="background: url(img/misc/bonus-box.svg); background-size: cover; background-position: center; min-height: 165px;">
           <div class="card-body">
             <p class="card-text" style="text-shadow: 1px 1px black !important;">
 <div style="left: 0px; text-shadow: 1px 1px black !important;" class="carousel-caption d-none d-md-block">
-        <h5>Get tons of freebies!</h5>
-        <p>Check our Bonus Page.</p>
+                    <button style="position: absolute;bottom: 30%;left: 5%;text-shadow: 0px 1px black !important;" onclick="redirect('/bonus')" class="btn btn-danger">Bonus & Freebies</button>
       </div>
             </p>
           </div>
         </div>
     </div>
-    <div class="carousel-item" data-mdb-interval="20000">
+    <div class="carousel-item" data-mdb-interval="7000">
         <div class="card" style="background: url(/img/misc/earncrypto.svg); background-size: cover; background-position: center; min-height: 165px;">
           <div class="card-body">
 
@@ -78,14 +77,14 @@
           </div>
         </div>
     </div>
-      <div class="carousel-item" data-mdb-interval="20000">
+      <div class="carousel-item" data-mdb-interval="7000">
         <div class="card" style="background: url(/img/misc/promocodes.svg); background-size: cover; background-position: center; min-height: 165px;">
           <div class="card-body">
 
                     <div class="card-text" style="padding: 5px; position: absolute;bottom: 0;right:5%;text-shadow: 1px 1px black !important;">
 
                 <br>
-                <small>We automatically share promocodes on our socials</small>               
+                <small>We automatically share promocodes on our socials!</small>               
                     </p></div>
                     <button style="position: absolute;bottom: 35%;right: 14%;text-shadow: 0px 1px black !important;" onclick="redirect('/bonus')" class="btn btn-primary">Enter Promocode</button>
           </div>

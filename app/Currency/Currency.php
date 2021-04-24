@@ -32,7 +32,7 @@ abstract class Currency {
                     return 'isrpc';
                 }
                 public function name(): string {
-                    return 'Payment aggregator works with Rpc';
+                    return 'RPC Crypto Currency';
                 }
             },
             new class extends WalletOption {
@@ -64,9 +64,26 @@ abstract class Currency {
                     return 'withdraw_manual_trigger';
                 }
                 public function name(): string {
-                    return 'Verify withdrawal manually if account balance including total withdrawal amount is higher than';
+                    return 'Withdrawal manually if balance including total withdrawal amount is higher than';
                 }
             },
+            new class extends WalletOption {
+                function id() {
+                    return "withdraw";
+                }
+                function name(): string {
+                    return "Minimal withdraw amount";
+                }
+            },
+            new class extends WalletOption {
+                function id() {
+                    return "fee";
+                }
+                function name(): string {
+                    return "Transaction fee";
+                }
+            },
+
             new class extends WalletOption {
                 function id() {
                     return "demo";
@@ -75,12 +92,20 @@ abstract class Currency {
                     return "Demo value";
                 }
             },
-            new class extends WalletOption {
+          /**  new class extends WalletOption {
                 public function id() {
                     return 'min_invest';
                 }
                 public function name(): string {
                     return 'Min. investment amount';
+                }
+             },**/
+            new class extends WalletOption {
+                public function id() {
+                    return 'invest_commission';
+                }
+                public function name(): string {
+                    return 'Investment net profit commission %';
                 }
             },
 			new class extends WalletOption {
@@ -88,7 +113,7 @@ abstract class Currency {
                     return 'min_bet';
                 }
                 public function name(): string {
-                    return 'Min. Bet amount';
+                    return 'Min. bet';
                 }
             },
 			new class extends WalletOption {
@@ -96,15 +121,7 @@ abstract class Currency {
                     return 'max_bet';
                 }
                 public function name(): string {
-                    return 'Max. Bet amount';
-                }
-            },
-            new class extends WalletOption {
-                public function id() {
-                    return 'invest_commission';
-                }
-                public function name(): string {
-                    return 'Investment net profit commission %';
+                    return 'Max. bet';
                 }
             },
             new class extends WalletOption {
@@ -123,6 +140,7 @@ abstract class Currency {
                     return 'Quiz reward';
                 }
             },
+            /**
             new class extends WalletOption {
                 public function id() {
                     return 'discord';
@@ -131,22 +149,7 @@ abstract class Currency {
                     return 'Discord reward';
                 }
             },
-            new class extends WalletOption {
-                public function id() {
-                    return 'weekly_bonus';
-                }
-                public function name(): string {
-                    return 'Bronze VIP Weekly Bonus (Multiplied by user VIP level)';
-                }
-            },
-            new class extends WalletOption {
-                public function id() {
-                    return 'weekly_bonus_min_bet';
-                }
-                public function name(): string {
-                    return 'Bronze VIP Weekly Bonus Minimum Bet';
-                }
-            },
+            **/
             new class extends WalletOption {
                 public function id() {
                     return 'rain';
@@ -165,22 +168,6 @@ abstract class Currency {
             },
             new class extends WalletOption {
                 public function id() {
-                    return 'bonus_wheel';
-                }
-                public function name(): string {
-                    return 'Bonus wheel minimal reward';
-                }
-            },
-            new class extends WalletOption {
-                public function id() {
-                    return 'referral_bonus_wheel';
-                }
-                public function name(): string {
-                    return '10 active referrals bonus wheel minimal reward';
-                }
-            },
-            new class extends WalletOption {
-                public function id() {
                     return 'referral_bonus';
                 }
                 public function name(): string {
@@ -188,19 +175,43 @@ abstract class Currency {
                 }
             },
             new class extends WalletOption {
-                function id() {
-                    return "fee";
+                public function id() {
+                    return "ref_normal";
                 }
-                function name(): string {
-                    return "Transaction fee";
+                public function name(): string {
+                    return "Ref calc normal (e; 0.00009)";
                 }
             },
             new class extends WalletOption {
-                function id() {
-                    return "withdraw";
+                public function id() {
+                    return "ref_mod";
                 }
-                function name(): string {
-                    return "Minimal withdraw amount";
+                public function name(): string {
+                    return "Ref calc moderator (e; 0.00009)";
+                }
+            },
+            new class extends WalletOption {
+                public function id() {
+                    return 'bonus_wheel';
+                }
+                public function name(): string {
+                    return 'Faucet minimal reward';
+                }
+            },
+            new class extends WalletOption {
+                public function id() {
+                    return 'weekly_bonus_min_bet';
+                }
+                public function name(): string {
+                    return 'Bronze VIP Weekly Bonus Minimum Bet';
+                }
+            },
+            new class extends WalletOption {
+                public function id() {
+                    return 'weekly_bonus';
+                }
+                public function name(): string {
+                    return 'Bronze VIP Weekly Bonus (Multiplied by user VIP level)';
                 }
             },
             new class extends WalletOption {
@@ -241,22 +252,6 @@ abstract class Currency {
                 }
                 public function name(): string {
                     return "Diamond VIP wager requirement";
-                }
-            },
-            new class extends WalletOption {
-                public function id() {
-                    return "ref_normal";
-                }
-                public function name(): string {
-                    return "Ref calc normal (e; 0.00009)";
-                }
-            },
-            new class extends WalletOption {
-                public function id() {
-                    return "ref_mod";
-                }
-                public function name(): string {
-                    return "Ref calc moderator (e; 0.00009)";
                 }
             }
         ]);

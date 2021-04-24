@@ -139,7 +139,6 @@ min-height: 300px;
 			<tr><th></th> <th>{{ __('general.bets.player') }}</th> <th>{{ __('general.profile.bets') }}</th> <th>{{ __('general.profile.wager') }}</th> <th>Prize</th></tr></thead>
 			<tbody class="live_games">
 				@if($days == 'today')
-
 				@php
 							$first = (\App\Settings::where('name', 'races_prize_1st')->first()->value);
 							$second = (\App\Settings::where('name', 'races_prize_2nd')->first()->value);
@@ -147,13 +146,11 @@ min-height: 300px;
 							$fs = (\App\Settings::where('name', 'races_prize_freespins')->first()->value * 7);
 							$prizes = $first + $second + $third;
 				@endphp
-				
-                <p><b>Today's Race</b>
+                <b>Today's Race</b>
                 <br>
                 <small><i class="fas fa-usd-circle me-1" style="color:#02b320"></i> Total Prizepool:  {{ $prizes }}$ and {{ $fs }} Free Spins</small>
                	<br>
-               	<small><i style="color: #0fd560;" class="fas fa-stopwatch me-1"></i> Ending in <?php $timeLeft = 86400 - (time() - strtotime("today")); echo date("H\\h  i\\m", $timeLeft); ?></small></p>
-				
+               	<small><i style="color: #0fd560;" class="fas fa-stopwatch me-1"></i> Ending in <?php $timeLeft = 86400 - (time() - strtotime("today")); echo date("H\\h  i\\m", $timeLeft); ?></small>
 				@endif
 				@foreach (\App\Leaderboard::where('type', $type)->where('currency', $currencystated)->where('time', $time)->orderBy($orderby, 'desc')->take(10)->get() as $entry)
 

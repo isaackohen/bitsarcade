@@ -14,8 +14,7 @@
     <link href="{{ mix('css/admin/app.css') }}" rel="stylesheet" type="text/css" />
 
     <script type="text/javascript" src="{{ mix('js/admin/app.js') }}"></script>
-    <link href="https://coderthemes.com/shreyu/preview/assets/css/bootstrap-dark.min.css" rel="stylesheet" type="text/css" /> 
-    <link href="https://coderthemes.com/shreyu/preview/assets/css/app-dark.min.css" rel="stylesheet" type="text/css">
+
     <script type="text/javascript">
         window.Laravel = {
             userId: "{{ auth()->user()->_id }}"
@@ -24,38 +23,20 @@
 </head>
 <body>
 <div id="wrapper">
-    <div class="navbar navbar-expand flex-column flex-md-row navbar-custom">
-        <div class="container-fluid">
-            <a href="/admin" class="navbar-brand mr-0 mr-md-2 logo">
-                <span class="logo-lg">
-                    <img src="{{ asset('/img/logo/ico.png') }}" alt="" height="45" />
-                </span>
-                <span class="logo-sm">
-                    <img src="{{ asset('/img/logo/ico.png') }}" alt="" height="45">
-                </span>
-            </a>
-            <ul class="navbar-nav bd-navbar-nav flex-row list-unstyled menu-left mb-0">
-                <li class="">
-                    <button class="button-menu-mobile open-left disable-btn">
-                        <i data-feather="menu" class="menu-icon"></i>
-                        <i data-feather="x" class="close-icon"></i>
-                    </button>
-                </li>
-            </ul>
-            <ul class="navbar-nav flex-row ml-auto d-flex list-unstyled topnav-menu float-right mb-0" onclick="$.toggleRightBar()">
+
+    <div class="left-side-menu">
+
+        <div class="sidebar-content">
+            <div id="sidebar-menu" class="slimscroll-menu">
+                
+                <ul class="metismenu" id="menu-bar">
+                                       <ul class="navbar-nav d-flex list-unstyled topnav-menu float-left m-1 pl-2" onclick="$.toggleRightBar()">
                 <li class="dropdown notification-list" data-toggle="tooltip" data-placement="left" title="Settings">
-                    <a href="javascript:void(0);" class="nav-link">
+                    <a href="javascript:void(0);" class="nav-link p-1">
                         <i data-feather="settings"></i>
                     </a>
                 </li>
-            </ul>
-        </div>
-    </div>
-    <div class="left-side-menu">
-        <div class="sidebar-content">
-            <div id="sidebar-menu" class="slimscroll-menu">
-                <ul class="metismenu" id="menu-bar">
-                    <li class="menu-title">Website</li>
+            </ul> <li onclick="$.toggleRightBar()" class="menu-title">{{ \App\Settings::where('name', 'platform_name')->first()->value }}</li>
                     <li>
                         <a href="/admin">
                             <i data-feather="activity"></i>
@@ -139,7 +120,7 @@
 
                 </ul>
             </div>
-            <div class="clearfix"></div>                    <!-- Crypto Converter ⚡ Widget --><crypto-converter-widget shadow symbol live background-color="#323742" border-radius="0" fiat="united-states-dollar" crypto="bitcoin" amount="1" font-family="sans-serif" decimal-places="4"><a href="https://cr.today/" target="_blank" rel="noopener">Converter Widget</a></crypto-converter-widget><script async src="https://cdn.jsdelivr.net/gh/dejurin/crypto-converter-widget/dist/latest.min.js"></script><!-- /Crypto Converter ⚡ Widget -->
+            <div class="clearfix"></div>                 <div class="p-1 pb-0"><!-- Crypto Converter ⚡ Widget --><crypto-converter-widget symbol background-color="#fff" border-radius="0.00rem" fiat="united-states-dollar" crypto="bitcoin" amount="1" font-family="inherit" decimal-places="5"><a href="https://cr.today/" target="_blank" rel="noopener">Converter Widget</a></crypto-converter-widget><script async src="https://cdn.jsdelivr.net/gh/dejurin/crypto-converter-widget/dist/latest.min.js"></script><!-- /Crypto Converter ⚡ Widget --></div>
         </div>
         
     </div>
