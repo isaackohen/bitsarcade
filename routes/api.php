@@ -712,12 +712,12 @@ Route::middleware('auth')->prefix('promocode')->group(function() {
         $slice = mt_rand(0, count($slices) - 1);
         auth()->user()->balance(auth()->user()->clientCurrency())->add($slices[$slice], \App\Transaction::builder()->message('Faucet')->get());
         auth()->user()->update([
-            'bonus_claim' => \Carbon\Carbon::now()->addMinutes(15)
+            'bonus_claim' => \Carbon\Carbon::now()->addMinutes(60)
         ]);
 
         return success([
             'slice' => $slice,
-            'next' => \Carbon\Carbon::now()->addMinutes(15)->timestamp
+            'next' => \Carbon\Carbon::now()->addMinutes(60)->timestamp
         ]);
     });
 
