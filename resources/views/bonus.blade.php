@@ -42,7 +42,7 @@
                                 </div></div>
                                 <div class="text">
                                     <div class="header"><h5>Faucet</h5></div>
-                                    <p>Spin the wheel faucet every 3 minutes. No strings attached or any restricting wager requirements.</p> <div class="btn btn-success m-1 p-2" data-toggle-bonus-sidebar="wheel">Spin Wheel</div>
+                                    <p>Spin the wheel faucet every 60 minutes. No strings attached or any restricting wager requirements.</p> <div class="btn btn-success m-1 p-2" data-toggle-bonus-sidebar="wheel">Spin Wheel</div>
 
                                 </div></div>
                             </div>
