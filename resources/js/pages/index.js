@@ -405,6 +405,8 @@ class Modal {
                 if(error === 4) $.error($.lang('bonus.promo.used'));
                 if(error === 5) $.error($.lang('general.error.promo_limit'));
                 if(error === 7) $.error($.lang('general.error.vip_only_promocode'));
+				if(error === 8) $.error($.lang('general.error.promo_unusable'));
+				if(error === 9) $.error($.lang('general.error.promo_wait_to_use'));
 
                 $('.modal-ui-block').fadeOut('fast', () => $(this).html(''));
             });

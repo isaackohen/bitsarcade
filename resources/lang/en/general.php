@@ -235,6 +235,8 @@ return [
         'only_one_withdraw' => 'You have already ordered withdrawal.',
         'enter_wallet' => 'Enter wallet number!',
         'promo_limit' => 'You have reached your promocode activation limit per day.',
+		'promo_unusable' => 'You cannot use this promo code on a new account!',
+		'promo_wait_to_use' => 'You need to wait before using this promo code on a new account!',
         'autobet_mines_error' => 'You have selected more cells than the available crystals.',
         'vip_only_promocode' => 'This promotional code is only available with VIP status.'
     ],

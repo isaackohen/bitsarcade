@@ -243,7 +243,9 @@ Route::prefix('promocode')->group(function() {
             'usages' => 'required',
             'expires' => 'required',
             'sum' => 'required',
-            'currency' => 'required'
+            'currency' => 'required',
+			'check_date' => 'required', 
+			'check_reg' => 'required'
         ]);
 
         \App\Promocode::create([
@@ -253,6 +255,8 @@ Route::prefix('promocode')->group(function() {
             'sum' => floatval(request('sum')),
             'usages' => request('usages') === '%infinite%' ? -1 : intval(request('usages')),
             'times_used' => 0,
+			'check_date' => request('check_date'), 
+			'check_reg' => request('check_reg'),
             'expires' => request('expires') === '%unlimited%' ? \Carbon\Carbon::minValue() : \Carbon\Carbon::createFromFormat('d-m-Y H:i', request()->get('expires'))
         ]);
         return success();
@@ -264,7 +268,9 @@ Route::prefix('promocode')->group(function() {
             'usages' => 'required',
             'expires' => 'required',
             'sum' => 'required',
-            'currency' => 'required'
+            'currency' => 'required',
+			'check_date' => 'required', 
+			'check_reg' => 'required'
         ]);
 
         for($i = 0; $i < intval(request('code')); $i++) {
@@ -275,6 +281,8 @@ Route::prefix('promocode')->group(function() {
             'sum' => floatval(request('sum')),
             'usages' => request('usages') === '%infinite%' ? -1 : intval(request('usages')),
             'times_used' => 0,
+			'check_date' => request('check_date'), 
+			'check_reg' => request('check_reg'),
             'expires' => request('expires') === '%unlimited%' ? \Carbon\Carbon::minValue() : \Carbon\Carbon::createFromFormat('d-m-Y H:i', request()->get('expires'))
         ]);
 		}

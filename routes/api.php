@@ -171,8 +171,8 @@ Route::middleware('auth')->prefix('wallet')->group(function() {
     Route::post('getDepositWallet', function(Request $request) {
         $currency = Currency::find($request->currency);
         $mindeposit = floatval(auth()->user()->clientCurrency()->option('mindeposit'));
-        if($request->currency == 'doge'){
-        $wallet = auth()->user()->depositWallet($currency);
+        if($request->currency == 'doge' || $request->currency == 'ltc' || $request->currency == 'bch') {
+	    $wallet = auth()->user()->depositWallet($currency);
         if($currency == null || !$currency->isRunning() || $wallet === 'Error') return reject(1);
         return success([
             'currency' => $request->currency,
@@ -553,14 +553,20 @@ Route::middleware('auth')->prefix('promocode')->group(function() {
         $same_login_hash = \App\User::where('login_multiaccount_hash', $user->login_multiaccount_hash)->get();
         $same_register_ip = \App\User::where('register_ip', $user->register_ip)->get();
         $same_login_ip = \App\User::where('login_ip', $user->login_ip)->get();
-
         if($promocode == null) return reject(1, 'Invalid promocode');
         if(count($same_login_hash) > 6) return reject(3, 'Expired (usages)');
         if(count($same_register_hash) > 6) return reject(3, 'Expired (usages)');
         if($user->register_multiaccount_hash == null || $user->login_multiaccount_hash == null) return reject(3, 'Expired (usages)');
-        
         if($promocode->expires->timestamp != \Carbon\Carbon::minValue()->timestamp && $promocode->expires->isPast()) return reject(2, 'Expired (time)');
         if($promocode->usages != -1 && $promocode->times_used >= $promocode->usages) return reject(3, 'Expired (usages)');
+		$created_user = \Carbon\Carbon::parse($user->created_at);
+		$created_promo = \Carbon\Carbon::parse($promocode->created_at);
+		if($promocode->check_date == 1) {
+			if($created_promo->lt($created_user)) return reject(8, 'You cannot use this promo code');
+		}
+		if($promocode->check_reg > 0) {
+			if((\Carbon\Carbon::now()->subMinutes($promocode->check_reg))->lt($created_user)) return reject(9, 'Wait before using this promo');
+		}
         if(($promocode->vip ?? false) && auth()->user()->vipLevel() == 0) return reject(7, 'VIP only');
         if(in_array(auth()->user()->_id, $promocode->used)) return reject(4, 'Already activated');
 

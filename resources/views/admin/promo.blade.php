@@ -113,6 +113,24 @@
                                     @endforeach
                                 </select>
                             </div>
+							<div class="form-group">
+                                <label class="control-label">Prohibition of use on new accs</label>
+                                <select class="form-control" id="check_date">
+                                        <option value="0">No</option>
+										<option value="1">Yes</option>
+                                </select>
+                            </div>
+							<div class="form-group">
+                                <label class="control-label">Restriction on use on new accs</label>
+                                <select class="form-control" id="check_reg">
+                                        <option value="0">No</option>
+										<option value="5">5 minutes</option>
+										<option value="15">15 minutes</option>
+										<option value="30">30 minutes</option>
+										<option value="60">1 hour</option>
+										<option value="180">3 hours</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <div class="row mt-2">
@@ -155,7 +173,25 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Amount Free Spins</label>
-                                <input class="form-control flatpickr-input" placeholder="Amount" value="0" type="text" id="amount">
+                                <input class="form-control flatpickr-input" placeholder="Amount" value="3" type="text" id="amount">
+                            </div>
+							<div class="form-group">
+                                <label class="control-label">Prohibition of use on new accs</label>
+                                <select class="form-control" id="check_date-freespin">
+                                        <option value="0">No</option>
+										<option value="1">Yes</option>
+                                </select>
+                            </div>
+							<div class="form-group">
+                                <label class="control-label">Restriction on use on new accs</label>
+                                <select class="form-control" id="check_reg-freespin">
+                                        <option value="0">No</option>
+										<option value="5">5 minutes</option>
+										<option value="15">15 minutes</option>
+										<option value="30">30 minutes</option>
+										<option value="60">1 hour</option>
+										<option value="180">3 hours</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -206,6 +242,24 @@
                                     @foreach(\App\Currency\Currency::all() as $currency)
                                         <option value="{{ $currency->id() }}">{{ $currency->name() }}</option>
                                     @endforeach
+                                </select>
+                            </div>
+							<div class="form-group">
+                                <label class="control-label">Prohibition of use on new accs</label>
+                                <select class="form-control" id="check_date-more">
+                                        <option value="0">No</option>
+										<option value="1">Yes</option>
+                                </select>
+                            </div>
+							<div class="form-group">
+                                <label class="control-label">Restriction on use on new accs</label>
+                                <select class="form-control" id="check_reg-more">
+                                        <option value="0">No</option>
+										<option value="5">5 minutes</option>
+										<option value="15">15 minutes</option>
+										<option value="30">30 minutes</option>
+										<option value="60">1 hour</option>
+										<option value="180">3 hours</option>
                                 </select>
                             </div>
                         </div>
