@@ -21,7 +21,8 @@
         <meta http-equiv="Pragma" content="no-cache">
         @endif
         <link rel="preload" href="{{ mix('/js/app.js') }}" as="script">
-
+        <link rel="preload" href="{{ mix('/css/app.css') }}" as="style">
+        <link rel="preload" href="{{ mix('/css/loader.css') }}" as="style">
         <link rel="preload" href="{{ $hash('/fonts/fa-duotone-900.woff2') }}" as="font" type="font/woff2" crossorigin="anonymous">
         <link rel="preload" href="{{ $hash('/fonts/fa-solid-900.woff2') }}" as="font" type="font/woff2" crossorigin="anonymous">
         <link rel="preload" href="{{ $hash('/fonts/fa-regular-400.woff2') }}" as="font" type="font/woff2" crossorigin="anonymous">
