@@ -1,6 +1,7 @@
 <?php namespace App\Games\Kernel;
 
 use App\DisabledGame;
+use App\DisabledGamesReff;
 
 /**
  * @package App\Games
@@ -33,6 +34,10 @@ abstract class Game {
 
     public function isDisabled(): bool {
         return $this->metadata()->isPlaceholder() || DisabledGame::where('name', $this->metadata()->id())->first() != null;
+    }
+
+    public function isDisabledReff(): bool {
+        return DisabledGamesReff::where('name', $this->metadata()->id())->first() != null;
     }
 
     public function ignoresMultipleClientTabs() {

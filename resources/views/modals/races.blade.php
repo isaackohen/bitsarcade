@@ -230,7 +230,7 @@ min-height: 300px;
 </div>
 @endif
 <hr>
-	<div class="modal-footer">				<p><small>Compete in Daily Races by wagering and win DOGE and Free Spins.</small></p>
+	<div class="modal-footer">				<p><small>Compete in Daily Races by wagering and win ETH and Free Spins.</small></p>
  <button data-mdb-ripple-radius="5" class="btn btn-transparent w-25">
 	    <div style="width: 100px !important; font-size: 10px;display: flex;justify-content: center;margin-left: auto; margin-right: auto;">
 			<select id="days-selector-races" style=" font-size: 10px; min-width: 200px;">
@@ -240,20 +240,6 @@ min-height: 300px;
 				<option value="yesterday" data-style="#02b320">
 					Yesterday
 				</option>
-				<!--
-				<option value="subday2" data-style="#02b320">
-					2 Days Ago
-				</option>
-				<option value="subday3" data-style="#02b320">
-					3 Days Ago
-				</option>
-				<option value="subday4" data-style="#02b320">
-					4 Days Ago
-				</option>
-				<option value="subday5" data-style="#02b320">
-					5 Days Ago
-				</option>
-				!-->
 			</select>
 		</div>
 	</button>

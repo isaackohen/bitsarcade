@@ -15,9 +15,7 @@ return [
                       <strong class='mt-2'>Referral link</strong>
                       <input readonly class='mt-2' style='cursor: pointer !important;' id='link' data-toggle='tooltip' data-placement='top' title='Copy link' value='https://bitsarcade.com/?c=:id'>
                       <p class='mt-4'><strong>Rewards</strong><ul>
-                      <li>Your referral will receive a small bonus (between 0.10$ and 0.20$ in balance) after registration.</li>
                       <li>You will also receive a small bonus once your referral is deemed active. You can track this through the \"Referrals\" tab.</li>
-                      <li>If you have invited 10 active referrals - visit the \"Bonus\" page, click on the \"Affiliate Program\" and get an increased reward!</li>
                       <li>You will get between 0.09% and 0.15% of each of your referral's bet, depending on your referral's VIP level.</li></ul></p>"
     ],
     'list' => [

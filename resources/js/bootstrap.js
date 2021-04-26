@@ -21,7 +21,6 @@ require('jquery-lazy');
 require('./icons');
 
 require('./modals/modals');
-import * as mdb from 'mdb-ui-kit'; // lib
 
 
 $.ajaxPrefilter(function(options) {

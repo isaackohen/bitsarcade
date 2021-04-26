@@ -19,7 +19,7 @@ return [
             'title' => 'BitsArcade.com',
             'how_to_play' => [
                 'title' => 'How to use my free spins?',
-                'description' => 'You can use your Free Spins bonus on most NETENT slotmachines, just search for Free Spins on our game list to see which slots are supported.'
+                'description' => 'We cycle free spins between most .'
             ],
             'fairness' => [
                 'title' => 'Provably Fair',
@@ -35,7 +35,7 @@ return [
             ],
             'p' => [
                 'title' => 'Streamer Partnerships',
-                'description' => 'We are always interested in partnering with Twitch streamers. Contact us on Telegram: <a href="mailto:support@datagamble.com">support@datagamble.com</a>'
+                'description' => 'We are always interested in partnering with Twitch streamers above 100 avg. viewers. Contact us on E-mail: <a href="mailto:support@datagamble.com">support@datagamble.com</a>'
             ]
         ],
         'payments' => [
@@ -50,7 +50,7 @@ return [
             ],
             'time' => [
                 'title' => 'How long does it take before deposits are credited?',
-                'description' => 'All deposits are automatically credited once it is received on our main wallets. All deposits are automatically forwarded towards our main cash wallets.<br><br>Once it is received on main wallets, we credit the deposit. We have to secure all deposits in this way because of new Curacao gambling legislation.
+                'description' => 'All deposits in BCH, LTC & DOGE are instantly credited on 0 confirmations, all others require 1 confirmation to be credited.
 
                 <br>In case of any issues, contact our support team on Telegram or Discord and provide detailed info about your transaction.'
             ]

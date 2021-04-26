@@ -1,6 +1,7 @@
 require('jquery-pjax');
 import 'owl.carousel';
 
+import * as mdb from 'mdb-ui-kit'; // lib
 require('./routes');
 require('./toast');
 require('./game');
@@ -9,6 +10,7 @@ require('./chat');
 require('./profit-monitoring');
 require('./notifications');
 require('./searchbar');
+
 
 import bitcoin from 'bitcoin-units';
 
@@ -398,7 +400,7 @@ $(document).ready(function() {
     $.setCurrency($.currency());
     $.setUnit($.unit());
     $(document).trigger('pjax:start');
-
+/**
     window.Echo.connector.socket.on('connect', function() {
         $('.connectionLostContainer').addClass('recovered');
         $('.connectionLostContainer span').html($.lang('general.error.connection_recovered'));
@@ -417,9 +419,9 @@ $(document).ready(function() {
         $('.connectionLostContainer').fadeIn('fast');
         $('body').css({ 'padding-top': '53px' });
     };
-
     window.Echo.connector.socket.on('disconnect', disconnectNotify);
     if(!window.Echo.connector.socket.connected) disconnectNotify();
+**/
 
     $(`[data-chat-toggle]`).on('click', function() {
         $('.chat').toggleClass('hidden');

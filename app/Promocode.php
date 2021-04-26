@@ -15,7 +15,7 @@ class Promocode extends Model {
      * @var array
      */
     protected $fillable = [
-        'code', 'used', 'currency', 'sum', 'usages', 'times_used', 'expires', 'vip'
+        'code', 'used', 'currency', 'sum', 'usages', 'times_used', 'expires', 'vip', 'check_date', 'check_reg'
     ];
 
     /**

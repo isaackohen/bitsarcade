@@ -31,7 +31,7 @@ function createUser($login, $password, $avatar = null, $additionalData = []) {
         $referrer = User::where('_id', $_COOKIE['c'])->first();
         if($referrer != null) {
             $user->update(['referral' => $referrer->_id]);
-            $user->balance(\App\Currency\Currency::find('doge'))->add(floatval(\App\Currency\Currency::find('doge')->option('referral_bonus')));
+            $user->balance(\App\Currency\Currency::find('eth'))->add(floatval(\App\Currency\Currency::find('eth')->option('referral_bonus')));
         }
     }
 

@@ -22,10 +22,10 @@
                         <h6><b>Your current referral rake profit:</b></h6>
                         <input id="balance" value="$ {{ auth()->user()->referral_balance_usd ?? 0 }}" disabled type="text">
                         <br>
-                        <p>You get paid between 0.09% and 0.15% of each of your referral's wagers. Above 3$ you can payout your referral rake on this page. All payouts are credited instantly to your account in DOGE.</p>
+                        <p>You get paid between 0.09% and 0.15% of each of your referral's wagers. Above 3$ you can payout your referral rake on this page. All payouts are credited instantly to your account in ETH.</p>
 
                         @if(auth()->user()->referral_balance_usd >= '3.00')
-                            <button class="btn btn-success m-0 p-2" onclick="$.request('/partner_cashout');">Perform Payout in DOGE</button>
+                            <button class="btn btn-success m-0 p-2" onclick="$.request('/partner_cashout');">Perform Payout in ETH</button>
                         @else
                         @endif
                         

@@ -155,8 +155,7 @@
                                                         </div>
                                                         <div class="name">
                                                             <div data-highlight>{{ $currency->name() }}</div>
-                                                        <span>{{ $bets == null ? 0 : $bets }}</span>
-
+                                                        <small>{{ $bets == null ? 0 : $bets }}</small>
                                                         </div>
                                                     </div>
                                                 </th>
@@ -178,7 +177,7 @@
                                                 </th>
                                                 <th data-highlight>
                                                     <div>
-                                                        <span>{{ number_format(floatval($wageredusd), 2, '.', '') }}</span>
+                                                        <span>{{ number_format(floatval($wageredusd), 0, '.', '') }}</span>
 														<i class="fas fa-usd-circle" style="color:#02b320"></i>
                                                     </div>
                                                 </th>

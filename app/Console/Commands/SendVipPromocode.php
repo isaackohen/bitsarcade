@@ -41,7 +41,8 @@ class SendVipPromocode extends Command {
      * @return mixed
      */
     public function handle() {
-        $sum = floatval(Settings::where('name', 'vip_promo_sum')->first()->value);
+        $dollaramount = floatval(Settings::where('name', 'vip_promo_dollar')->first()->value);
+        $sum = number_format(($dollaramount / \App\Http\Controllers\Api\WalletController::rateDollarEth()), 7, '.', '');
         $usages = intval(Settings::where('name', 'vip_promo_usages')->first()->value);
 
         $promocode = \App\Promocode::create([
@@ -49,7 +50,7 @@ class SendVipPromocode extends Command {
             'used' => [],
             'sum' => $sum,
             'usages' => $usages,
-            'currency' => 'doge',
+            'currency' => 'eth',
             'times_used' => 0,
             'expires' => \Carbon\Carbon::now()->addHours(1),
             'vip' => true

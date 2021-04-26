@@ -3,6 +3,7 @@
 use App\Currency\Option\WalletOption;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\Api\WalletController;
 use Nbobtc\Command\Command;
 use Nbobtc\Http\Client;
 use App\User;
@@ -36,6 +37,34 @@ class Dogecoin extends Currency {
         } catch (\Exception $e) {
             return false;
         }
+    }
+    public function dailyminslots(): float {
+        $dailyslotsbet = \App\Settings::where('name', 'dailybonus_minbet_slots')->first()->value;
+        return number_format(($dailyslotsbet / \App\Http\Controllers\Api\WalletController::rateDollarDoge()), 7, '.', '');
+    }
+    public function dailyminbet(): float {
+        $dailyminbet = \App\Settings::where('name', 'dailybonus_minbet')->first()->value;
+        return number_format(($dailyminbet / \App\Http\Controllers\Api\WalletController::rateDollarDoge()), 7, '.', '');
+    }
+    public function emeraldvip(): float {
+        $emeraldvip = \App\Settings::where('name', 'emeraldvip')->first()->value;
+        return number_format(($emeraldvip / \App\Http\Controllers\Api\WalletController::rateDollarDoge()), 7, '.', '');
+    }
+    public function rubyvip(): float {
+        $rubyvip = \App\Settings::where('name', 'rubyvip')->first()->value;
+        return number_format(($rubyvip / \App\Http\Controllers\Api\WalletController::rateDollarDoge()), 7, '.', '');
+    }
+    public function goldvip(): float {
+        $goldvip = \App\Settings::where('name', 'goldvip')->first()->value;
+        return number_format(($goldvip / \App\Http\Controllers\Api\WalletController::rateDollarDoge()), 7, '.', '');
+    }
+    public function platinumvip(): float {
+        $platinumvip = \App\Settings::where('name', 'platinumvip')->first()->value;
+        return number_format(($platinumvip / \App\Http\Controllers\Api\WalletController::rateDollarDoge()), 7, '.', '');
+    }
+    public function diamondvip(): float {
+        $diamondvip = \App\Settings::where('name', 'diamondvip')->first()->value;
+        return number_format(($diamondvip / \App\Http\Controllers\Api\WalletController::rateDollarDoge()), 7, '.', '');
     }
 
     public function setupWallet(): ?string {

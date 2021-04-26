@@ -21,8 +21,7 @@
         <meta http-equiv="Pragma" content="no-cache">
         @endif
         <link rel="preload" href="{{ mix('/js/app.js') }}" as="script">
-        <link rel="preload" href="{{ mix('/css/app.css') }}" as="style">
-        <link rel="preload" href="{{ mix('/css/loader.css') }}" as="style">
+
         <link rel="preload" href="{{ $hash('/fonts/fa-duotone-900.woff2') }}" as="font" type="font/woff2" crossorigin="anonymous">
         <link rel="preload" href="{{ $hash('/fonts/fa-solid-900.woff2') }}" as="font" type="font/woff2" crossorigin="anonymous">
         <link rel="preload" href="{{ $hash('/fonts/fa-regular-400.woff2') }}" as="font" type="font/woff2" crossorigin="anonymous">
@@ -30,6 +29,7 @@
         <link rel="preload" href="{{ $hash('/fonts/fa-brands-400.woff2') }}" as="font" type="font/woff2" crossorigin="anonymous">
         <link rel="stylesheet" href="{{ mix('/css/loader.css') }}">
         <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
+
         <link rel="manifest" href="/manifest.json">
         <script src="{{ mix('/js/bootstrap.js') }}" type="text/javascript" defer></script>
         <script>
@@ -77,6 +77,7 @@
         {!! NoCaptcha::renderJs() !!}
     </head>
     <body>
+
         <div class="pageLoader" style="background: radial-gradient(circle, rgba(20,26,40,1) 0%, rgba(20,26,40,1) 63%, rgba(6,8,13,1) 100%) !important;">
             <img style="position: absolute; top: 0; bottom: 0; margin: auto; left: 0; right: 0;" src="/img/logo/logo_bits_small_content.png">
         </div>
@@ -107,7 +108,7 @@
                     </button>
                 </div>
                 <a href="/"><div class="smalllogo"></div></a>
-                <a href="/"><div class="logo"></div></a>
+                <a onclick="redirect('/')"><div class="logo"></div></a>
                 @if(!auth()->guest())
                 <div class="wallet">
                     <div class="wallet-switcher">
@@ -163,13 +164,8 @@
                 </div>
             </div>
         </header>
-        <!--
-        <div class="globalNotification connectionLostContainer" style="display: none">
-            <div class="icon"><i class="fal fa-times"></i></div>
-            <div class="text"><span></span></div>
-        </div>
-        !-->
-        <div class="pageContent" style="opacity: 0">
+
+        <div class="pageContent" style="opacity: 0;">
             {!! $page !!}
         </div>
         
@@ -230,26 +226,10 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li class="sidenav-item mt-2 mb-0"> <a class="sidenav-link"
-                                ><i style="color: #5cb9ff" class="fad fa-gift me-3"></i><span style="font-family: 'Proxima Nova Semi Bd'">Bonus & Freebies</span></a>
-                                <ul class="sidenav-collapse">
-                                    <li class="sidenav-item">
-                                        <a onclick="redirect('/bonus')" class="sidenav-link">New Player Bonus</a>
-                                    </li>
-                                    <li class="sidenav-item">
-                                        <a onclick="redirect('/bonus')" class="sidenav-link">Faucet</a>
-                                    </li>
-                                    <li class="sidenav-item">
-                                        <a onclick="redirect('/bonus')" class="sidenav-link">Promocode</a>
-                                    </li>
-                                    <li class="sidenav-item">
-                                        <a onclick="redirect('/partner')" class="sidenav-link">Affiliate Program</a>
-                                    </li>
-                                    <li class="sidenav-item">
-                                        <a onclick="redirect('/bonus')" class="sidenav-link">More promotions..</a>
-                                    </li>
-                                </ul>
-                            </li>
+
+                             <li class="sidenav-item mt-2 mb-0"> <a  onclick="redirect('/bonus/')" class="sidenav-link">
+                                        <i style="color: #0fd560;" class="fad fa-gift me-3"></i><span>Bonus & Freebies</span></a>
+                             </li>              
                             <li class="sidenav-item mt-2 mb-0"> <a  onclick="redirect('/earn')" class="sidenav-link">
                                 <i style="color: #0fd560;" class="fad fa-money-bill-alt me-3"></i><span>Earn Wall</span></a>
                             </li>

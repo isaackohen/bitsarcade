@@ -124,7 +124,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach(\App\Invoice::where('status', 1)->where('ledger', '!=','Offerwall Credit')->get() as $invoice)
+                            @foreach(\App\Invoice::where('status', 1)->where('ledger', '!=','Offerwall Credit')->where('ledger', '!=', null)->get() as $invoice)
                             @php $user = \App\User::where('_id', $invoice->user)->first(); @endphp
                             <tr>
                                 <td>{{ $invoice->created_at->format('d/m/Y h:i:s') }}</td>
@@ -180,7 +180,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach(\App\Invoice::where('status', 1)->where('ledger', '=','Offerwall Credit')->get() as $invoice)
+                                    @foreach(\App\Invoice::where('status', 1)->where('ledger', '=','Offerwall Credit')->where('ledger', '!=', null)->get() as $invoice)
                                     @php $user = \App\User::where('_id', $invoice->user)->first(); @endphp
                                     <tr>
                                         <td>{{ $invoice->created_at->format('d/m/Y h:i:s') }}</td>

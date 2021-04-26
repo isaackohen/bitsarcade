@@ -138,7 +138,7 @@ $.on('/bonus', function() {
 class Modal {
 
     wheel() {
-        const v = window.Laravel.currency[$.currency()].bonusWheel, rewards = [
+        const v = window.Laravel.currency['eth'].bonusWheel, rewards = [
             {
                 value: bitcoin(v, 'btc').to($.unit()).value().toFixed($.unit() === 'satoshi' ? 0 : 8),
                 color: '#f46e42'
@@ -199,7 +199,7 @@ class Modal {
         let slides = [];
         _.forEach(rewards, function(reward) {
             slides.push({
-                text: `${reward.value} <i class="${window.Laravel.currency[$.currency()].icon}" style="color: ${reward.color}"></i>`,
+                text: `${reward.value} <i class="${window.Laravel.currency['eth'].icon}" style="color: ${reward.color}"></i>`,
                 value: slides.length,
                 border: {
                     radius: 3.25,

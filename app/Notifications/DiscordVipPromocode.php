@@ -27,8 +27,8 @@ class DiscordVipPromocode extends Notification {
 
     public function toDiscord($notifiable) {
         return (new DiscordMessage())->embed([
-            'title' => 'New VIP promocode',
-            'description' => "**{$this->code}** - ".number_format($this->sum, 2, '.', '')." DOGE. {$this->usages} max uses.\nEnter promocode at: https://bitsarcade.com/bonus/",
+            'title' => 'New Loyalty Promocode',
+            'description' => "**{$this->code}** - ".number_format($this->sum, 2, '.', '')." ETH. {$this->usages} max uses.\nLoyalty Club Members can use promocode at: https://bitsarcade.com/bonus/",
             'color' => '15158332'
         ]);
     }

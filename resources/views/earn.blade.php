@@ -6,9 +6,9 @@
             <div class="col-12 col-md-12">
                 <div class="earn_header">
                     <h3><b>Start Earning!</b></h3>
-                    <p>Complete offers, fill out surveys and get DOGE instantly credited to your account. </p>
+                    <p>Complete offers, fill out surveys and get ETH instantly credited to your account. </p>
 
-                    <div class="alert alert-success mb-4 p-2 text-center" role="alert">Added Adgatemedia provider to earn section. This week, earn 50% more DOGE using Adgatemedia.</div>
+                    <div class="alert alert-success mb-4 p-2 text-center" role="alert">All completed offers & surveys are instantly credited to your BitsArcade.com account.</div>
                 </div>
             </div>
         </div>

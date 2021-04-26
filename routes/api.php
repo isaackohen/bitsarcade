@@ -68,16 +68,20 @@ Route::post('chatHistory', function() {
 Route::get('callback/adgatemedia', function(Request $request) {
             Log::notice(json_encode($request->all()));
             $balancetype = \App\Settings::where('name', 'offerwall_balancetype')->first()->value;
-            $user = User::where('_id', $request->get('user_id'))->first();  
-            $user->balance(\App\Currency\Currency::find($balancetype))->add($request->get('point_value'), \App\Transaction::builder()->message('Offerwall')->get()); 
             $amount = $request->get('point_value');
+            $ethpoints = number_format(($amount / \App\Http\Controllers\Api\WalletController::rateDollarEth()), 7, '.', '');
+            $ethfloat = floatval($ethpoints);
+            $user = User::where('_id', $request->get('user_id'))->first();  
+            $user->balance(\App\Currency\Currency::find('eth'))->add($ethfloat, \App\Transaction::builder()->message('Offerwall')->get()); 
             $invoice = Invoice::create([
-            'currency' => $balancetype,
-            'ledger' => 'AdgateMedia',
+            'currency' => 'eth',
+            'ledger' => 'Offerwall',
             'user' => $user->id,
             'status' => 1,
-            'sum' => $amount,
+            'sum' => $ethfloat,
         ]);
+
+
             return response('1', 200)
                 ->header('Content-Type', 'text/plain'); 
 });
@@ -85,15 +89,17 @@ Route::get('callback/adgatemedia', function(Request $request) {
 Route::get('callback/offertoro', function(Request $request) {
             Log::notice(json_encode($request->all()));
             $balancetype = \App\Settings::where('name', 'offerwall_balancetype')->first()->value;
-            $user = User::where('_id', $request->get('user_id'))->first();  
-            $user->balance(\App\Currency\Currency::find($balancetype))->add($request->get('amount'), \App\Transaction::builder()->message('Offerwall')->get()); 
             $amount = $request->get('amount');
+            $ethpoints = number_format(($amount / \App\Http\Controllers\Api\WalletController::rateDollarEth()), 7, '.', '');
+            $ethfloat = floatval($ethpoints);
+            $user = User::where('_id', $request->get('user_id'))->first();  
+            $user->balance(\App\Currency\Currency::find('eth'))->add($ethfloat, \App\Transaction::builder()->message('Offerwall')->get()); 
             $invoice = Invoice::create([
-            'currency' => $balancetype,
-            'ledger' => 'Offerwall Credit',
+            'currency' => 'eth',
+            'ledger' => 'Offerwall',
             'user' => $user->id,
             'status' => 1,
-            'sum' => $amount,
+            'sum' => $ethfloat,
         ]);
             return response('1', 200)
                 ->header('Content-Type', 'text/plain'); 
@@ -163,7 +169,7 @@ Route::middleware('auth')->prefix('wallet')->group(function() {
     Route::post('getDepositWallet', function(Request $request) {
         $currency = Currency::find($request->currency);
         $mindeposit = floatval(auth()->user()->clientCurrency()->option('mindeposit'));
-        if($request->currency == 'doge'){
+        if($request->currency == 'doge' || $request->currency == 'ltc' || $request->currency == 'bch') {
         $wallet = auth()->user()->depositWallet($currency);
         if($currency == null || !$currency->isRunning() || $wallet === 'Error') return reject(1);
         return success([
@@ -181,7 +187,8 @@ Route::middleware('auth')->prefix('wallet')->group(function() {
             'status' => 0,
             'hash' => $hash,
         ]);
-         
+        
+        //$apikey = $currency->option('apikey');
         $apikey = 'V68WSXK-8GQMEJG-GQFEYHR-HT02EYS';
         $ipn = $currency->option('ipn');
         $price_amount = $mindeposit; //(usd, eur)
@@ -240,6 +247,7 @@ Route::middleware('auth')->prefix('wallet')->group(function() {
         if($request->sum < floatval($currency->option('withdraw')) + floatval($currency->option('fee'))) return reject(1, 'Invalid withdraw value');
         if(auth()->user()->balance($currency)->get() < $request->sum + floatval($currency->option('fee'))) return reject(2, 'Not enough balance');
         if(\App\Withdraw::where('user', auth()->user()->_id)->where('status', 0)->count() > 0) return reject(3, 'Moderation is still in process');
+        if(auth()->user()->access == 'moderator') return reject(1, 'Not available');
 
         auth()->user()->balance($currency)->subtract($request->sum + floatval($currency->option('fee')), \App\Transaction::builder()->message('Withdraw')->get());
 
@@ -499,9 +507,9 @@ Route::middleware('auth')->prefix('chat')->group(function() {
     });
 
     Route::post('rain', function(Request $request) {
-        if(auth()->user()->access() !== 'admin') return reject(2); 
         $usersLength = intval($request->users);
-        if($usersLength < 5 || $usersLength > 25) return reject(1, 'Invalid users length');
+        if($usersLength < 1 || $usersLength > 25) return reject(1, 'Invalid users length');
+        if(auth()->user()->access = 'user') return reject(2, 'Not available');
         if(auth()->user()->balance(auth()->user()->clientCurrency())->get() < floatval($request->amount) || floatval($request->amount) < floatval(auth()->user()->clientCurrency()->option('rain')) / 3) return reject(2);
         auth()->user()->balance(auth()->user()->clientCurrency())->subtract(floatval($request->amount), \App\Transaction::builder()->message('Rain')->get());
 
@@ -580,7 +588,15 @@ Route::middleware('auth')->prefix('promocode')->group(function() {
         
         if($promocode->expires->timestamp != \Carbon\Carbon::minValue()->timestamp && $promocode->expires->isPast()) return reject(2, 'Expired (time)');
         if($promocode->usages != -1 && $promocode->times_used >= $promocode->usages) return reject(3, 'Expired (usages)');
-        if(($promocode->vip ?? false) && auth()->user()->vipLevel() == 0) return reject(7, 'VIP only');
+        $created_user = \Carbon\Carbon::parse($user->created_at);
+        $created_promo = \Carbon\Carbon::parse($promocode->created_at);
+        if($promocode->check_date == 1) {
+            if($created_promo->lt($created_user)) return reject(8, 'You cannot use this promo code');
+        }
+        if($promocode->check_reg > 0) {
+            if((\Carbon\Carbon::now()->subMinutes($promocode->check_reg))->lt($created_user)) return reject(9, 'Wait before using this promo');
+        }
+        if(($promocode->vip ?? false) && auth()->user()->vipLevel() == 0) return reject(7, 'Loyalty Club only');
         if(in_array(auth()->user()->_id, $promocode->used)) return reject(4, 'Already activated');
 
         if(auth()->user()->vipLevel() < 3 || ($promocode->vip ?? false) == false) {
@@ -591,7 +607,7 @@ Route::middleware('auth')->prefix('promocode')->group(function() {
                 ]);
             }
 
-            if (auth()->user()->promocode_limit != null && auth()->user()->promocode_limit >= (auth()->user()->vipLevel() >= 2 ? 3 : 2)) return reject(5, 'Promocode timeout');
+            if (auth()->user()->promocode_limit != null && auth()->user()->promocode_limit >= (auth()->user()->vipLevel() >= 8 ? 16 : 8)) return reject(5, 'Promocode timeout');
         }
 
         if(auth()->user()->vipLevel() < 3 || ($promocode->vip ?? false) == false) {
@@ -608,7 +624,23 @@ Route::middleware('auth')->prefix('promocode')->group(function() {
             'used' => $used
         ]);
         if($promocode->currency != 'freespin'){
-        auth()->user()->balance(Currency::find($promocode->currency))->add($promocode->sum, \App\Transaction::builder()->message('Promocode crypto')->get());
+        $base = $promocode->sum;
+        $vipbronze = floatval($base * 1.25);
+        $vipabove = floatval($base * 1.5);
+
+        if(auth()->user()->vipLevel() == 0) {
+        auth()->user()->balance(Currency::find($promocode->currency))->add($base, \App\Transaction::builder()->message('Promocode crypto (base)')->get());
+        }
+        if(auth()->user()->vipLevel() == 1) {
+        auth()->user()->balance(Currency::find($promocode->currency))->add($base, \App\Transaction::builder()->message('Promocode crypto (emerald)')->get());
+        }
+        if(auth()->user()->vipLevel() == 2) {
+        auth()->user()->balance(Currency::find($promocode->currency))->add($vipbronze, \App\Transaction::builder()->message('Promocode crypto (ruby)')->get());
+        }
+        if(auth()->user()->vipLevel() > 2) {
+        auth()->user()->balance(Currency::find($promocode->currency))->add($vipabove, \App\Transaction::builder()->message('Promocode crypto (gold and above')->get());
+        }
+
         }
         if($promocode->currency == 'freespin'){
         auth()->user()->freegames = auth()->user()->freegames + $promocode->sum;
@@ -660,12 +692,21 @@ Route::middleware('auth')->prefix('promocode')->group(function() {
 		'captcha' => 'required|captcha'
 		]); 
 
-        $c1 = Currency::find("btc");
-        $c2 = Currency::find("ltc");
-        $c3 = Currency::find("doge");
-        $c4 = Currency::find("bch");
-        $c5 = Currency::find("eth");
-        $c6 = Currency::find("trx");
+        $currency = Currency::find("eth");
+        $faucetdollar = \App\Settings::where('name', 'faucet_dollar')->first()->value;
+        $faucetamount = number_format(($faucetdollar / \App\Http\Controllers\Api\WalletController::rateDollarEth()), 7, '.', '');
+        $faucetvipemerald = \App\Settings::where('name', 'faucet_vipemerald')->first()->value;
+        $faucetamountemerald = number_format(($faucetvipemerald / \App\Http\Controllers\Api\WalletController::rateDollarEth()), 7, '.', '');
+
+        $faucetvipruby = \App\Settings::where('name', 'faucet_vipruby')->first()->value;
+        $faucetviprubyamount = number_format(($faucetvipruby / \App\Http\Controllers\Api\WalletController::rateDollarEth()), 7, '.', '');
+
+        $faucetvipgoldplus = \App\Settings::where('name', 'faucet_vipgoldandabove')->first()->value;
+        $faucetvipgoldplusamount = number_format(($faucetvipgoldplus / \App\Http\Controllers\Api\WalletController::rateDollarEth()), 7, '.', '');
+
+
+        $faucetmaxmultiplier = \App\Settings::where('name', 'faucetmaxmultiplier')->first()->value;
+        $faucetmaxbalance = number_format(($faucetmaxmultiplier * $faucetviprubyamount), 7, '.', '');
 
         $user = auth()->user();
 
@@ -677,21 +718,18 @@ Route::middleware('auth')->prefix('promocode')->group(function() {
 		if($validate->fails()) return reject(4, 'Please verify that you are not a robot');
         if(auth()->user()->bonus_claim != null && !auth()->user()->bonus_claim->isPast()) return reject(1, 'Please wait before trying again');
         //if(auth()->user()->clientCurrency()->id() != 'doge') return reject(2, 'Balance is greater than zero'); 
-        if(auth()->user()->balance($c1)->get() > $c1->option('min_bet')) return reject(2, 'Balance is greater than zero'); 
-        if(auth()->user()->balance($c2)->get() > $c2->option('min_bet')) return reject(2, 'Balance is greater than zero'); 
-        if(auth()->user()->balance($c3)->get() > $c3->option('min_bet')) return reject(2, 'Balance is greater than zero'); 
-        if(auth()->user()->balance($c4)->get() > $c4->option('min_bet')) return reject(2, 'Balance is greater than zero'); 
-        if(auth()->user()->balance($c5)->get() > $c5->option('min_bet')) return reject(2, 'Balance is greater than zero'); 
-        if(auth()->user()->balance($c6)->get() > $c6->option('min_bet')) return reject(2, 'Balance is greater than zero'); 
+        if(auth()->user()->balance($currency)->get() > floatval($faucetmaxbalance)) return reject(2, 'Your ETH balance is too big'); 
 
-        if(count($same_login_hash) > 8) return reject(2, 'Expired (usages)');
-        if(count($same_register_hash) > 8) return reject(2, 'Expired (usages)');
-        if(count($same_login_ip) > 8) return reject(2, 'Expired (usages)');
+        if(count($same_login_hash) > 35) return reject(3, 'Expired (usages)');
+        if(count($same_register_hash) > 35) return reject(3, 'Expired (usages)');
+        if(count($same_login_ip) > 35) return reject(3, 'Expired (usages)');
 
         //$progresscheck = \App\Game::where('user', $user)->where('status', 'in-progress')->get();
         //if($progresscheck) return reject(3, 'Game in progress');
 
-        $v = floatval(auth()->user()->clientCurrency()->option('bonus_wheel'));
+        if(auth()->user()->vipLevel() == 0) {
+
+        $v = floatval($faucetamount);
         $slices = [
             $v,
             $v * 1.10,
@@ -708,24 +746,88 @@ Route::middleware('auth')->prefix('promocode')->group(function() {
             $v,
             $v * 1.85
         ];
+        }
+
+        if(auth()->user()->vipLevel() == 1) {
+        $v = floatval($faucetamountemerald);
+        $slices = [
+            $v,
+            $v * 1.10,
+            $v * 1.3,
+            $v * 1.20,
+            $v * 1.35,
+            $v,
+            $v * 1.85,
+            $v,
+            $v * 1.15,
+            $v * 1.3,
+            $v * 1.15,
+            $v * 1.5,
+            $v,
+            $v * 1.85
+        ];
+        }
+
+        if(auth()->user()->vipLevel() == 2) {
+        $v = floatval($faucetviprubyamount);
+        $slices = [
+            $v,
+            $v * 1.35,
+            $v * 1.15,
+            $v * 1.25,
+            $v * 1.35,
+            $v,
+            $v * 2.00,
+            $v,
+            $v * 1.25,
+            $v * 1.30,
+            $v * 1.25,
+            $v * 1.50,
+            $v,
+            $v * 1.85
+        ];
+        }
+
+        if(auth()->user()->vipLevel() > 2) {
+        $v = floatval($faucetvipgoldplusamount);
+        $slices = [
+            $v,
+            $v * 1.20,
+            $v * 1.40,
+            $v * 1.20,
+            $v * 1.15,
+            $v,
+            $v * 2.50,
+            $v,
+            $v * 1.25,
+            $v * 1.5,
+            $v * 1.25,
+            $v * 1.7,
+            $v,
+            $v * 2.50
+        ];
+
+        }
 
         $slice = mt_rand(0, count($slices) - 1);
-        auth()->user()->balance(auth()->user()->clientCurrency())->add($slices[$slice], \App\Transaction::builder()->message('Faucet')->get());
+        auth()->user()->balance($currency)->add($slices[$slice], \App\Transaction::builder()->message('Faucet')->get());
         auth()->user()->update([
-            'bonus_claim' => \Carbon\Carbon::now()->addMinutes(60)
+            'bonus_claim' => \Carbon\Carbon::now()->addMinutes(720)
         ]);
 
         return success([
             'slice' => $slice,
-            'next' => \Carbon\Carbon::now()->addMinutes(60)->timestamp
+            'next' => \Carbon\Carbon::now()->addMinutes(720)->timestamp
         ]);
     });
 
     Route::post('vipBonus', function() {
+                $currency = Currency::find("eth");
+
         if(auth()->user()->vipLevel() == 0) return reject(1, 'Invalid VIP level');
         if(auth()->user()->weekly_bonus < 0.1) return reject(2, 'Daily bonus is too small');
         if(auth()->user()->weekly_bonus_obtained) return reject(3, 'Already obtained in this week');
-        auth()->user()->balance(auth()->user()->clientCurrency())->add(((auth()->user()->weekly_bonus ?? 0) / 100) * auth()->user()->vipBonus(), \App\Transaction::builder()->message('Daily VIP bonus')->get());
+        auth()->user()->balance($currency)->add(((auth()->user()->weekly_bonus ?? 0) / 100) * auth()->user()->vipBonus(), \App\Transaction::builder()->message('Daily VIP bonus')->get());
         auth()->user()->update([
             'weekly_bonus_obtained' => true
         ]);

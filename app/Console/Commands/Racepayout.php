@@ -57,30 +57,30 @@ class Racepayout extends Command
                         $user = \App\User::where('_id', $entry->user)->first();
                         $balancetype = \App\Settings::where('name', 'races_prize_currency')->first()->value;
                         $firstprize = \App\Settings::where('name', 'races_prize_1st')->first()->value;
-                        $dogebalance = number_format(($firstprize / \App\Http\Controllers\Api\WalletController::rateDollarDoge()), 3, '.', '');
+                        $addbalance = number_format(($firstprize / \App\Http\Controllers\Api\WalletController::rateDollarEth()), 7, '.', '');
 
                         if($user->access == 'user') {
-                            $user->balance(\App\Currency\Currency::find($balancetype))->add($dogebalance, \App\Transaction::builder()->message('Races')->get()); 
+                            $user->balance(\App\Currency\Currency::find($balancetype))->add($addbalance, \App\Transaction::builder()->message('Races')->get()); 
                         }
             }
                     elseif($i == 1) {
                         $user = \App\User::where('_id', $entry->user)->first();
                         $balancetype = \App\Settings::where('name', 'races_prize_currency')->first()->value;
                         $secondprize= \App\Settings::where('name', 'races_prize_2nd')->first()->value;
-                        $dogebalance = number_format(($secondprize / \App\Http\Controllers\Api\WalletController::rateDollarDoge()), 3, '.', '');
+                        $addbalance = number_format(($secondprize / \App\Http\Controllers\Api\WalletController::rateDollarEth()), 7, '.', '');
                         
                     if($user->access == 'user') {
-                        $user->balance(\App\Currency\Currency::find($balancetype))->add($dogebalance, \App\Transaction::builder()->message('Races')->get()); 
+                        $user->balance(\App\Currency\Currency::find($balancetype))->add($addbalance, \App\Transaction::builder()->message('Races')->get()); 
                     }
             }
             elseif($i == 2) {
             $user = \App\User::where('_id', $entry->user)->first();
                         $balancetype = \App\Settings::where('name', 'races_prize_currency')->first()->value;
                         $thirdprize = \App\Settings::where('name', 'races_prize_3rd')->first()->value;
-            $dogebalance = number_format(($thirdprize / \App\Http\Controllers\Api\WalletController::rateDollarDoge()), 3, '.', '');
+            $addbalance = number_format(($thirdprize / \App\Http\Controllers\Api\WalletController::rateDollarEth()), 7, '.', '');
 
                     if($user->access == 'user') {
-                        $user->balance(\App\Currency\Currency::find($balancetype))->add($dogebalance, \App\Transaction::builder()->message('Races')->get()); 
+                        $user->balance(\App\Currency\Currency::find($balancetype))->add($addbalance, \App\Transaction::builder()->message('Races')->get()); 
                     }
 
             }
