@@ -156,7 +156,7 @@ class User extends \Jenssegers\Mongodb\Auth\User implements JWTSubject {
         $currency = Currency::all()[0];
         $vipLevel = 0;
         foreach(Currency::all() as $c) {
-            $w = DB::table('games')->where('user', $this->_id)->where('currency', $c->id())->where('demo', '!=', true)->where('multiplier', '!=', 1)->where('status', '!=', 'in-progress')->where('status', '!=', 'cancelled')->sum('wager');
+            $w = DB::table('games')->where('user', $this->_id)->where('currency', $c->id())->where('demo', '!=', true)->where('game', '!=', 'plinko')->where('status', '!=', 'in-progress')->where('status', '!=', 'cancelled')->sum('wager');
             $level = 0;
 
 

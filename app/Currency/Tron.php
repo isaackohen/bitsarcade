@@ -30,6 +30,37 @@ class Tron extends Currency {
         return "#eb0a29";
     }
 
+    public function dailyminslots(): float {
+        $dailyslotsbet = \App\Settings::where('name', 'dailybonus_minbet_slots')->first()->value;
+        return floatval(number_format(($dailyslotsbet / \App\Http\Controllers\Api\WalletController::rateDollarTron()), 7, '.', ''));
+    }
+
+    public function dailyminbet(): float {
+        $dailyminbet = \App\Settings::where('name', 'dailybonus_minbet')->first()->value;
+        return floatval(number_format(($dailyminbet / \App\Http\Controllers\Api\WalletController::rateDollarTron()), 7, '.', ''));
+    }
+
+    public function emeraldvip(): float {
+        $emeraldvip = \App\Settings::where('name', 'emeraldvip')->first()->value;
+        return floatval(number_format(($emeraldvip / \App\Http\Controllers\Api\WalletController::rateDollarTron()), 7, '.', ''));
+    }
+    public function rubyvip(): float {
+        $rubyvip = \App\Settings::where('name', 'rubyvip')->first()->value;
+        return floatval(number_format(($rubyvip / \App\Http\Controllers\Api\WalletController::rateDollarTron()), 7, '.', ''));
+    }
+    public function goldvip(): float {
+        $goldvip = \App\Settings::where('name', 'goldvip')->first()->value;
+        return floatval(number_format(($goldvip / \App\Http\Controllers\Api\WalletController::rateDollarTron()), 7, '.', ''));
+    }
+    public function platinumvip(): float {
+        $platinumvip = \App\Settings::where('name', 'platinumvip')->first()->value;
+        return floatval(number_format(($platinumvip / \App\Http\Controllers\Api\WalletController::rateDollarTron()), 7, '.', ''));
+    }
+    public function diamondvip(): float {
+        $diamondvip = \App\Settings::where('name', 'diamondvip')->first()->value;
+        return floatval(number_format(($diamondvip / \App\Http\Controllers\Api\WalletController::rateDollarTron()), 7, '.', ''));
+    }
+
     public function isRunning(): bool {
         try {
             $this->coldWalletBalance();
@@ -96,35 +127,6 @@ class Tron extends Currency {
         $client = $this->client();
         $client->setAddress($this->option('withdraw_address'));
         return $client->getBalance($this->option('withdraw_address'), true);
-    }
-
-    public function dailyminslots(): float {
-        $dailyslotsbet = \App\Settings::where('name', 'dailybonus_minbet_slots')->first()->value;
-        return number_format(($dailyslotsbet / \App\Http\Controllers\Api\WalletController::rateDollarTron()), 7, '.', '');
-    }
-    public function dailyminbet(): float {
-        $dailyminbet = \App\Settings::where('name', 'dailybonus_minbet')->first()->value;
-        return number_format(($dailyminbet / \App\Http\Controllers\Api\WalletController::rateDollarTron()), 7, '.', '');
-    }
-    public function emeraldvip(): float {
-        $emeraldvip = \App\Settings::where('name', 'emeraldvip')->first()->value;
-        return number_format(($emeraldvip / \App\Http\Controllers\Api\WalletController::rateDollarTron()), 7, '.', '');
-    }
-    public function rubyvip(): float {
-        $rubyvip = \App\Settings::where('name', 'rubyvip')->first()->value;
-        return number_format(($rubyvip / \App\Http\Controllers\Api\WalletController::rateDollarTron()), 7, '.', '');
-    }
-    public function goldvip(): float {
-        $goldvip = \App\Settings::where('name', 'goldvip')->first()->value;
-        return number_format(($goldvip / \App\Http\Controllers\Api\WalletController::rateDollarTron()), 7, '.', '');
-    }
-    public function platinumvip(): float {
-        $platinumvip = \App\Settings::where('name', 'platinumvip')->first()->value;
-        return number_format(($platinumvip / \App\Http\Controllers\Api\WalletController::rateDollarTron()), 7, '.', '');
-    }
-    public function diamondvip(): float {
-        $diamondvip = \App\Settings::where('name', 'diamondvip')->first()->value;
-        return number_format(($diamondvip / \App\Http\Controllers\Api\WalletController::rateDollarTron()), 7, '.', '');
     }
 
 

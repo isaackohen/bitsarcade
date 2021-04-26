@@ -38,9 +38,10 @@ abstract class QuickGame extends Game {
             }
 
 
-            if (!$data->demo() && $data->user()->vipLevel() > 0 && ($data->user()->weekly_bonus ?? 0) < 100 && (Currency::find($data->currency())->dailyminbet() ?? 0) <= $data->bet()) {
+            if (!$data->demo() && $data->user()->vipLevel() > 0 && ($data->user()->weekly_bonus ?? 0) < 100 && (Currency::find($data->currency())->dailyminbet() ?? 1) <= $data->bet()) {
                 $multipliercheck = $result->multiplier();
-                if ($multipliercheck < 0.95 || $multipliercheck > 1.30) {
+                $floatmultipliercheck = floatval(number_format(($multipliercheck), 2, '.', ''));
+                if ($floatmultipliercheck < 0.95 || $multipliercheck > 1.34) {
                 $data->user()->update([
                     'weekly_bonus' => ($data->user()->weekly_bonus ?? 0) + 0.1
                 ]);

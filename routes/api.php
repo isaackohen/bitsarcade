@@ -72,10 +72,10 @@ Route::get('callback/adgatemedia', function(Request $request) {
             $ethpoints = number_format(($amount / \App\Http\Controllers\Api\WalletController::rateDollarEth()), 7, '.', '');
             $ethfloat = floatval($ethpoints);
             $user = User::where('_id', $request->get('user_id'))->first();  
-            $user->balance(\App\Currency\Currency::find('eth'))->add($ethfloat, \App\Transaction::builder()->message('Offerwall')->get()); 
+            $user->balance(\App\Currency\Currency::find('eth'))->add($ethfloat, \App\Transaction::builder()->message('Offerwall Credit')->get()); 
             $invoice = Invoice::create([
             'currency' => 'eth',
-            'ledger' => 'Offerwall',
+            'ledger' => 'Offerwall Credit',
             'user' => $user->id,
             'status' => 1,
             'sum' => $ethfloat,
@@ -93,10 +93,10 @@ Route::get('callback/offertoro', function(Request $request) {
             $ethpoints = number_format(($amount / \App\Http\Controllers\Api\WalletController::rateDollarEth()), 7, '.', '');
             $ethfloat = floatval($ethpoints);
             $user = User::where('_id', $request->get('user_id'))->first();  
-            $user->balance(\App\Currency\Currency::find('eth'))->add($ethfloat, \App\Transaction::builder()->message('Offerwall')->get()); 
+            $user->balance(\App\Currency\Currency::find('eth'))->add($ethfloat, \App\Transaction::builder()->message('Offerwall Credit')->get()); 
             $invoice = Invoice::create([
             'currency' => 'eth',
-            'ledger' => 'Offerwall',
+            'ledger' => 'Offerwall Credit',
             'user' => $user->id,
             'status' => 1,
             'sum' => $ethfloat,
@@ -580,12 +580,10 @@ Route::middleware('auth')->prefix('promocode')->group(function() {
         $same_login_hash = \App\User::where('login_multiaccount_hash', $user->login_multiaccount_hash)->get();
         $same_register_ip = \App\User::where('register_ip', $user->register_ip)->get();
         $same_login_ip = \App\User::where('login_ip', $user->login_ip)->get();
-
         if($promocode == null) return reject(1, 'Invalid promocode');
         if(count($same_login_hash) > 6) return reject(3, 'Expired (usages)');
         if(count($same_register_hash) > 6) return reject(3, 'Expired (usages)');
         if($user->register_multiaccount_hash == null || $user->login_multiaccount_hash == null) return reject(3, 'Expired (usages)');
-        
         if($promocode->expires->timestamp != \Carbon\Carbon::minValue()->timestamp && $promocode->expires->isPast()) return reject(2, 'Expired (time)');
         if($promocode->usages != -1 && $promocode->times_used >= $promocode->usages) return reject(3, 'Expired (usages)');
         $created_user = \Carbon\Carbon::parse($user->created_at);
@@ -596,7 +594,7 @@ Route::middleware('auth')->prefix('promocode')->group(function() {
         if($promocode->check_reg > 0) {
             if((\Carbon\Carbon::now()->subMinutes($promocode->check_reg))->lt($created_user)) return reject(9, 'Wait before using this promo');
         }
-        if(($promocode->vip ?? false) && auth()->user()->vipLevel() == 0) return reject(7, 'Loyalty Club only');
+        if(($promocode->vip ?? false) && auth()->user()->vipLevel() == 0) return reject(7, 'VIP only');
         if(in_array(auth()->user()->_id, $promocode->used)) return reject(4, 'Already activated');
 
         if(auth()->user()->vipLevel() < 3 || ($promocode->vip ?? false) == false) {
@@ -623,13 +621,14 @@ Route::middleware('auth')->prefix('promocode')->group(function() {
             'times_used' => $promocode->times_used + 1,
             'used' => $used
         ]);
-        if($promocode->currency != 'freespin'){
+        if($promocode->currency != 'freespin') {
         $base = $promocode->sum;
         $vipbronze = floatval($base * 1.25);
         $vipabove = floatval($base * 1.5);
 
         if(auth()->user()->vipLevel() == 0) {
         auth()->user()->balance(Currency::find($promocode->currency))->add($base, \App\Transaction::builder()->message('Promocode crypto (base)')->get());
+    }
         if(auth()->user()->vipLevel() == 1) {
         auth()->user()->balance(Currency::find($promocode->currency))->add($base, \App\Transaction::builder()->message('Promocode crypto (emerald)')->get());
         }
@@ -641,7 +640,7 @@ Route::middleware('auth')->prefix('promocode')->group(function() {
         }
 
         }
-        if($promocode->currency == 'freespin'){
+        if($promocode->currency == 'freespin') {
         $base = $promocode->sum;
         $vipbronze = round($base * 1.25, 0);
         $vipabove = round($base * 1.5, 0);
@@ -660,7 +659,7 @@ Route::middleware('auth')->prefix('promocode')->group(function() {
         auth()->user()->save();
         }
 
-            if(auth()->user()->vipLevel() > 2) {
+        if(auth()->user()->vipLevel() > 2) {
         auth()->user()->freegames = auth()->user()->freegames + $vipabove;
         auth()->user()->save();
         }
