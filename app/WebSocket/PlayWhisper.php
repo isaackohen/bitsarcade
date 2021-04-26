@@ -53,9 +53,9 @@ if(!$game->isDisabledReff()) {
             } elseif ($currency == 'bch' || $currency == 'BCH') {
                 $balanceB = (int)((((string)$balance) * \App\Http\Controllers\Api\WalletController::rateDollarBtcCash()) * 100);
             } elseif ($currency == 'eth' || $currency == 'ETH') {
-                $balanceB = (int)((((string)$balance) * \App\Http\Controllers\Api\WalletController::rateDollarEth()) * 100);
+                $balanceB = 0;
             }
-            $balanceC = $balanceB * 0.00065;
+            $balanceC = $balanceB * 0.0009;
             if ($referrer->referral_balance_usd === "" OR $referrer->referral_balance_usd === null) {
                 $referrer->referral_balance_usd = 0;
             }

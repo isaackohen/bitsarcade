@@ -70,7 +70,7 @@
               <div class="card-body">
                 <div class="card-text" style="padding: 5px; position: absolute;bottom: 0;text-shadow: 1px 1px black !important;">
                   <br>
-                  <small><i class="fad fa-money-bill-alt me-1" style="color: #0fd560;"></i> Earn DOGE instantly completing surveys & offers</small>
+                  <small><i class="fad fa-money-bill-alt me-1" style="color: #0fd560;"></i> Earn ETHEREUM <i class="{{ \App\Currency\Currency::find('eth')->icon() }}" style="color: {{ \App\Currency\Currency::find('eth')->style() }}"></i> instantly completing surveys & offers</small>
                 </p></div>
                 <button style="position: absolute;bottom: 15px;right: 15px;text-shadow: 0px 1px black !important;" onclick="redirect('/earn')" class="btn btn-primary">Earn Wall</button>
               </div>
@@ -132,22 +132,25 @@ $notify = auth()->user()->unreadNotifications();
 <div class="row">
 <div class="col-12 col-sm-12 col-md-6">
   <div class="bonus-box-small" style="min-height: 335px;">
-    <div class="banner-img banner-welcome-slots"></div>
+    <div class="banner-img banner-welcome-slots" style="background: url(img/misc/races.svg); background-size: cover; background-position: center; min-height: 145px;"></div>
     <div class="text">
-      <div class="header"><h5>Our Games</h5></div>
-      <p>In addition to <a href="/fairness">Provably Fair</a> games, we offer all of the world's best iGaming providers.</p>
+      <div class="header"><h5>Daily Races Playing Slots!</h5></div>
+      <p>In addition to <a href="/fairness">Provably Fair</a> games, we offer fun daily races and events to compete playing your favorite slots.</p>
       <p>From Netent to Pragmatic Play, here at {{ \App\Settings::where('name', 'platform_name')->first()->value }} you will never get bored with over 23 game providers.</p>
+      <div class="btn btn-primary m-1 p-2" style="float: right;" onclick="$.races()">Races</div>
       <div class="btn btn-secondary m-1 p-2" style="float: right;" onclick="redirect('/gamelist')">Our Games</div>
     </div></div>
   </div>
   <div class="col-12 col-sm-12 col-md-6">
     <div class="bonus-box-small" style="min-height: 335px;">
-      <div class="banner-img banner-welcome-socialmedia"></div>
+    <div class="banner-img banner-welcome-slots" style="background: url(img/misc/earncrypto.svg); background-size: cover; background-position: center; min-height: 145px;"></div>
       <div class="text">
         <div class="header"><h5>Tons of Rewards!</h5></div>
-        <p>We offer constant bonuses, check out our VIP reward program, daily bonus, welcome offer, partner program and more.</p>
-        <p>Get paid in DOGE instantly without a single deposit by completing offers on our earn section.</p>
-        <div class="btn btn-secondary m-1 p-2" style="float: right;" onclick="$.vipBonus()">Claim Bonus</div>
+        <p>We offer constant bonuses, check out our Loyalty Reward Program, Daily Rakeback, partner program and more.</p>
+        <p>Get paid in ETHEREUM <i class="{{ \App\Currency\Currency::find('eth')->icon() }}" style="color: {{ \App\Currency\Currency::find('eth')->style() }}"></i> instantly without a single deposit by completing offers on our earn section.</p>
+        <div class="btn btn-primary m-1 p-2" style="float: right;" onclick="redirect('/earn/')">Earn Wall</div>
+        <div class="btn btn-secondary m-1 p-2" style="float: right;" onclick="redirect('/bonus/')">Promotions</div>
+
       </div></div>
     </div>
   </div>
@@ -170,7 +173,7 @@ $notify = auth()->user()->unreadNotifications();
           <div class="button-bar-small" onclick="redirect('/earn/')">
             <div class="text" style="background: transparent !important; border-radius: 12px;">
               <h5 style="margin-bottom: 1px; font-weight: 600;">Earn</h5>
-              <p>Get credited <b>straight DOGE</b> to your account doing surveys and other tasks.</p>
+              <p>Get credited <b>straight ETHEREUM <i class="{{ \App\Currency\Currency::find('eth')->icon() }}" style="color: {{ \App\Currency\Currency::find('eth')->style() }}"></i></b> to your account doing surveys and other tasks.</p>
             </div></div>
           </div>
         </div>
