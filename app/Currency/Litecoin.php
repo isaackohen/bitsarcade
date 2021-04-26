@@ -28,7 +28,7 @@ class Litecoin extends V16RPCBitcoin {
     }
 
     public function style(): string {
-        return "#bfbbbb";
+        return "#bfbbbb"; 
     }
     public function dailyminslots(): float {
         $dailyslotsbet = \App\Settings::where('name', 'dailybonus_minbet_slots')->first()->value;
@@ -36,7 +36,7 @@ class Litecoin extends V16RPCBitcoin {
     }
     public function dailyminbet(): float {
         $dailyminbet = \App\Settings::where('name', 'dailybonus_minbet')->first()->value;
-        return number_format(($ethdaily / \App\Http\Controllers\Api\WalletController::rateDollarLtc()), 7, '.', '');
+        return number_format(($dailyminbet / \App\Http\Controllers\Api\WalletController::rateDollarLtc()), 7, '.', '');
     }
     public function emeraldvip(): float {
         $emeraldvip = \App\Settings::where('name', 'emeraldvip')->first()->value;

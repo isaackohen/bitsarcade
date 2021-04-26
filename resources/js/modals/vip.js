@@ -55,8 +55,8 @@ $.vipBonus = function() {
 
 $.vipIcon = function(level) {
     switch (level) {
-        case 1: return `<svg><use href="#vip-bronze"></use></svg>`;
-        case 2: return `<svg><use href="#vip-silver"></use></svg>`;
+        case 1: return `<svg><use href="#vip-emerald"></use></svg>`;
+        case 2: return `<svg><use href="#vip-ruby"></use></svg>`;
         case 3: return `<svg><use href="#vip-gold"></use></svg>`;
         case 4: return `<svg><use href="#vip-platinum"></use></svg>`;
         case 5: return `<svg><use href="#vip-diamond"></use></svg>`;
