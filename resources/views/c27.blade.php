@@ -1,24 +1,40 @@
 @php
-@endphp
+@endphp    
+<?php
+    $user = auth()->user();
+    $explode = explode('?', $url);
+    $name = $explode[1];
+    $provider = \App\Slotslist::where('_id', $name)->first()->p;
+    $freespinslot = \App\Settings::where('name', 'freespin_slot')->first()->value;
+    $slotname = \App\Slotslist::get()->where('id', $freespinslot)->first()->n;
+
+    ?>
+    @if($name != $freespinslot && $user->freegames > 0)
+  <div class="container-lg" style="z-index: 1;">
+
+<div class="alert alert-danger" role="alert">
+  You still have {{ $user->freegames }} free spins on {{ $slotname }}. Please complete your free spins on {{ $slotname }} before playing other slots.
+</div>
+<button onclick="redirect('/slots/{{ $freespinslot }}')" class="btn btn-primary p-1 m-1">Start Free Spins</button> <button onclick="redirect('/help/')" class="btn btn-secondary p-1 m-1">Help</button>
+</div>
+<hr>
+      @else
 <div id="slotcontainer" class="container">
   <div class="card p-1" style="background: #1a1d29;">
     <div id=parent>
+
+
       <iframe src="<?php echo $url; ?>" border="0"></iframe>
-    </div>
-    <?php
-    $user = auth()->user();
-    $url = explode('?', $url);
-    $name = $url[1];
-    $provider = \App\Slotslist::where('_id', $name)->first()->p;
-    ?>
     <div class="container">
       <button onclick="redirect('/')" title="Return to Home" class="btn btn-info p-1 m-1 ripple-surface" style="min-width: 45px; font-size: 12px;"><i class="fas fa-home"></i></button>
       <button id="fullscreeniframe" title="Play Full Screen" class="btn btn-secondary p-1 m-1 ripple-surface" style="min-width: 45px; font-size: 12px;"><i class="fas fa-expand"></i></button>
       <button onclick="toggleClass()" title="Toggle Width" class="btn btn-secondary p-1 m-1 ripple-surface" style="min-width: 45px; font-size: 12px;"><i class="far fa-rectangle-wide"></i></button>
       <button onclick="$.leaderboard()" title="Leaderboard" class="btn btn-secondary p-1 m-1 ripple-surface" style="min-width: 45px; font-size: 12px;"><i class="fad fa-trophy"></i></button>
     </div>
+    </div>
   </div>
 </div>
+
 <div class="container-lg">
   <div class="bonus-box-small mt-3 mb-3" style="z-index: 1;">
   <button onclick="redirect('/provider/{{ $provider }}')" style="padding-top: 5px; font-size: 10px; padding-left: 10px;" class="btn btn-success m-2 p-1">More {{ $provider }}</a></button>
@@ -64,6 +80,8 @@
       </div>
     </div>
   </div>
+        @endif
+
   <script>
   const containerElement = document.getElementById("slotcontainer");
   function toggleClass() {

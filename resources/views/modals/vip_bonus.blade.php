@@ -10,18 +10,18 @@
         </div>
     @else
 
-    <div class="bonus-image" style="background: url(img/misc/bonus-box.svg); background-size: cover; background-position: center; margin-top: 10px;">
+    <div class="bonus-image" style="background: url(img/misc/bonus-box.svg); background-size: cover; background-position: center; margin-top: 1px;">
         <div class="progress">
             @php $percent = number_format(auth()->user()->weekly_bonus ?? 0, 2, '.', ''); @endphp
             <div class="progress-bar" role="progressbar" style="width: {{ $percent }}%;">{{ $percent }}%</div>
         </div>
-        <div class="btn btn-primary mt-2 @if((auth()->user()->weekly_bonus ?? 0) < 0.1) disabled @endif">{!! __('general.take', ['value' => number_format(((auth()->user()->weekly_bonus ?? 0) / 100) * auth()->user()->vipBonus(), 8, '.', ''), 'icon' => auth()->user()->clientCurrency()->icon()]) !!}</div>
+        <div class="btn btn-primary mt-2 @if((auth()->user()->weekly_bonus ?? 0) < 0.1) disabled @endif">{!! __('general.take', ['value' => number_format(((auth()->user()->weekly_bonus ?? 0) / 100) * auth()->user()->vipBonus(), 8, '.', ''), 'icon' => "fab fa-eth"]) !!}</div>
     </div>
 
     @switch(auth()->user()->vipLevel())
         @case(0) @php $vip = "none"; @endphp @break
-        @case(1) @php $vip = "bronze"; @endphp @break
-        @case(2) @php $vip = "silver"; @endphp @break
+        @case(1) @php $vip = "emerald"; @endphp @break
+        @case(2) @php $vip = "ruby"; @endphp @break
         @case(3) @php $vip = "gold"; @endphp @break
         @case(4) @php $vip = "platinum"; @endphp @break
         @case(5) @php $vip = "diamond"; @endphp @break
@@ -44,7 +44,7 @@
   aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
-      <div class="modal-header"><i style="color: #0fd560;" class="fad fa-gift me-1"></i><span>Daily Bonus</span>
+      <div class="modal-header"><i style="color: #0fd560;" class="fad fa-gift me-1"></i><span>Daily Royalty</span>
         <button
           type="button"
           class="btn-close"

@@ -34,12 +34,13 @@ class Kernel extends ConsoleKernel {
      * @return void
      */
     protected function schedule(Schedule $schedule) {
-        #$schedule->command(SendVkPromocode::class)->everyThirtyMinutes();
-        #$schedule->command(SendVipPromocode::class)->everyThirtyMinutes();
-        //$schedule->command(Quiz::class)->everyTenMinutes();
-        $schedule->command(ResetWeeklyBonus::class)->daily();
-        $schedule->command(Racepayout::class)->dailyAt('0:05');
-        $schedule->command(PremiumRain::class)->everyTenMinutes();
+        //$schedule->command(SendVkPromocode::class)->everyThirtyMinutes();
+        //$schedule->command(SendVipPromocode::class)->everyThirtyMinutes();
+        //$schedule->command(Quiz::class)->hourlyAt(17);
+        //$schedule->command(Quiz::class)->hourlyAt(52);
+        //$schedule->command(ResetWeeklyBonus::class)->daily();
+        //$schedule->command(Racepayout::class)->dailyAt('0:05');
+        //$schedule->command(PremiumRain::class)->twiceDaily(1, 13);
         //$schedule->command(Rain::class)->everyFifteenMinutes();
         //$schedule->command(ProcessTRXPayments::class)->everyMinute();
 

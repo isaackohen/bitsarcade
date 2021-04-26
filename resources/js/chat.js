@@ -138,14 +138,11 @@ $.addChatMessage = function(message) {
         } else $(`.chat .messages .os-content`).append(`
             <div id="${message._id}" class="message from-${message.user.access}" data-message-type="message" data-message-user-id="${message.user._id}">
                 <div class="user">
-                    <div class="avatar" onclick="redirect('/user/${message.user._id}')">
-                        <img src="${message.user.avatar}" alt>
-                    </div>
-                    <div class="name">
-                        <span onclick="redirect('/user/${message.user._id}')">${$.formatName(message.user.name)}</span>
-                        ${message.vipLevel > 0 ? `<div class="vipRank" onclick="$.vip()" data-toggle="tooltip" data-placement="left" title="${$.lang(`vip.rank.level`, { level: $.lang(`vip.rank.${message.vipLevel}`) })}">
+                        ${message.vipLevel > 0 ? `<div class="avatar" onclick="$.vip()" data-toggle="tooltip" data-placement="left" title="${$.lang(`vip.rank.level`, { level: $.lang(`vip.rank.${message.vipLevel}`) })}">
                             ${$.vipIcon(message.vipLevel)}
                         </div>` : ''}
+                    <div class="name">
+                        <span onclick="redirect('/user/${message.user._id}')">${$.formatName(message.user.name)}</span>
                     </div>
                 </div>
                 <div class="content">
@@ -159,14 +156,11 @@ $.addChatMessage = function(message) {
         $(`.chat .messages .os-content`).append(`
             <div id="${message._id}" class="message from-${message.user.access}" data-message-type="game_link" data-message-user-id="${message.user._id}">
                 <div class="user">
-                    <div class="avatar" onclick="redirect('/user/${message.user._id}')">
-                        <img src="${message.user.avatar}" alt>
-                    </div>
-                    <div class="name">
-                        <span onclick="redirect('/user/${message.user._id}')">${$.formatName(message.user.name)}</span>
-                        ${message.vipLevel > 0 ? `<div class="vipRank" onclick="$.vip()" data-toggle="tooltip" data-placement="left" title="${$.lang(`vip.rank.level`, { level: $.lang(`vip.rank.${message.vipLevel}`) })}">
+                        ${message.vipLevel > 0 ? `<div class="avatar" onclick="$.vip()" data-toggle="tooltip" data-placement="left" title="${$.lang(`vip.rank.level`, { level: $.lang(`vip.rank.${message.vipLevel}`) })}">
                             ${$.vipIcon(message.vipLevel)}
                         </div>` : ''}
+                    <div class="name">
+                        <span onclick="redirect('/user/${message.user._id}')">${$.formatName(message.user.name)}</span>
                     </div>
                 </div>
                 <div class="content">

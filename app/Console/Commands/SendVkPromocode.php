@@ -46,15 +46,16 @@ class SendVkPromocode extends Command
      * @return mixed
      */
     public function handle() {
-        $sum = floatval(Settings::where('name', 'vk_promo_sum')->first()->value);
-        $usages = intval(Settings::where('name', 'vk_promo_usages')->first()->value);
+        $dollaramount = floatval(Settings::where('name', 'promo_dollar')->first()->value);
+        $sum = number_format(($dollaramount / \App\Http\Controllers\Api\WalletController::rateDollarEth()), 7, '.', '');
+        $usages = intval(Settings::where('name', 'promo_usages')->first()->value);
 
         $promocode = \App\Promocode::create([
             'code' => \App\Promocode::generate(),
             'used' => [],
             'sum' => $sum,
             'usages' => $usages,
-            'currency' => 'doge',
+            'currency' => 'eth',
             'times_used' => 0,
             'expires' => \Carbon\Carbon::now()->addHours(1)
         ]);

@@ -37,10 +37,14 @@ abstract class QuickGame extends Game {
                 else event(new BalanceModification($data->user(), Currency::find($data->currency()), 'add', $data->demo(), $result->profit() - $data->bet(), $result->delay));
             }
 
-            if (!$data->demo() && $data->user()->vipLevel() > 0 && ($data->user()->weekly_bonus ?? 0) < 100 && (Currency::find($data->currency())->option('weekly_bonus_min_bet') ?? 0) <= $data->bet()) {
+
+            if (!$data->demo() && $data->user()->vipLevel() > 0 && ($data->user()->weekly_bonus ?? 0) < 100 && (Currency::find($data->currency())->dailyminbet() ?? 0) <= $data->bet()) {
+                $multipliercheck = $result->multiplier();
+                if ($multipliercheck < 0.95 || $multipliercheck > 1.30) {
                 $data->user()->update([
                     'weekly_bonus' => ($data->user()->weekly_bonus ?? 0) + 0.1
                 ]);
+            }
             }
         } else return $result_data;
         $currency = $data->currency();
@@ -124,6 +128,11 @@ abstract class QuickGame extends Game {
                 'type' => 'quick',
                 'currency' => $currency
             ]);
+
+
+
+
+
 
             event(new \App\Events\LiveFeedGame($game, $result->delay));
 			

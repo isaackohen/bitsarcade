@@ -83,7 +83,6 @@ abstract class Currency {
                     return "Transaction fee";
                 }
             },
-
             new class extends WalletOption {
                 function id() {
                     return "demo";
@@ -152,106 +151,10 @@ abstract class Currency {
             **/
             new class extends WalletOption {
                 public function id() {
-                    return 'rain';
-                }
-                public function name(): string {
-                    return 'Rain reward';
-                }
-            },
-            new class extends WalletOption {
-                public function id() {
-                    return 'premiumrain';
-                }
-                public function name(): string {
-                    return 'Premium rain reward for depositors';
-                }
-            },
-            new class extends WalletOption {
-                public function id() {
                     return 'referral_bonus';
                 }
                 public function name(): string {
                     return 'Active referral bonus';
-                }
-            },
-            new class extends WalletOption {
-                public function id() {
-                    return "ref_normal";
-                }
-                public function name(): string {
-                    return "Ref calc normal (e; 0.00009)";
-                }
-            },
-            new class extends WalletOption {
-                public function id() {
-                    return "ref_mod";
-                }
-                public function name(): string {
-                    return "Ref calc moderator (e; 0.00009)";
-                }
-            },
-            new class extends WalletOption {
-                public function id() {
-                    return 'bonus_wheel';
-                }
-                public function name(): string {
-                    return 'Faucet minimal reward';
-                }
-            },
-            new class extends WalletOption {
-                public function id() {
-                    return 'weekly_bonus_min_bet';
-                }
-                public function name(): string {
-                    return 'Bronze VIP Weekly Bonus Minimum Bet';
-                }
-            },
-            new class extends WalletOption {
-                public function id() {
-                    return 'weekly_bonus';
-                }
-                public function name(): string {
-                    return 'Bronze VIP Weekly Bonus (Multiplied by user VIP level)';
-                }
-            },
-            new class extends WalletOption {
-                public function id() {
-                    return "vip_bronze";
-                }
-                public function name(): string {
-                    return "Bronze VIP wager requirement";
-                }
-            },
-            new class extends WalletOption {
-                public function id() {
-                    return "vip_silver";
-                }
-                public function name(): string {
-                    return "Silver VIP wager requirement";
-                }
-            },
-            new class extends WalletOption {
-                public function id() {
-                    return "vip_gold";
-                }
-                public function name(): string {
-                    return "Gold VIP wager requirement";
-                }
-            },
-            new class extends WalletOption {
-                public function id() {
-                    return "vip_platinum";
-                }
-                public function name(): string {
-                    return "Platinum VIP wager requirement";
-                }
-            },
-            new class extends WalletOption {
-                public function id() {
-                    return "vip_diamond";
-                }
-                public function name(): string {
-                    return "Diamond VIP wager requirement";
                 }
             }
         ]);

@@ -6,11 +6,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('partner_cashout', function() {
         $user = auth()->user();
-        $currency = 'doge';
+        $currency = 'eth';
         $balanceusd = number_format(floatval("$user->referral_balance_usd"), 2);
-        $dogevalue = $balanceusd / \App\Http\Controllers\Api\WalletController::rateDollarDoge();
+        $ethvalue = $balanceusd / \App\Http\Controllers\Api\WalletController::rateDollarEth();
         if($balanceusd < 3) return reject(1, 'Minimum 3 dollar before you can cashout');
-        $user->balance(\App\Currency\Currency::find($currency))->add($dogevalue, \App\Transaction::builder()->message('Referral Payout')->get()); 
+        $user->balance(\App\Currency\Currency::find($currency))->add($ethvalue, \App\Transaction::builder()->message('Referral Payout')->get()); 
         $user->update([
             'referral_balance_usd' => 0
         ]);

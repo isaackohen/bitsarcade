@@ -872,9 +872,8 @@ margin: 0 auto;
         }
         .banner-img {
         width: 100%;
-        border-top-right-radius: 8px;
-        border-top-left-radius: 8px;
-        height: 150px;
+        border-radius: 8px;
+        height: 140px;
         margin-bottom: 1px;
         }
 
@@ -1115,7 +1114,7 @@ input {
 
 .pageContent {
     flex: 1 0 auto;
-    padding-top: 8px;
+    padding-top: 14px;
 }
 
 a {
@@ -1152,7 +1151,6 @@ header {
 
     $padding: 10px;
     .fixed {
-        height: $header-height;
         position: fixed;
         left: 0;
         top: 0;
@@ -1869,13 +1867,13 @@ padding: 0.5rem 0.8rem;
 
                         .avatar {
                             display: inline-flex;
-                            width: 17px;
-                            height: 17px;
-                            margin-right: 7px;
+                            width: 14px;
+                            height: 14px;
+                            margin-right: 5px;
                             border-radius: 3px;
                             img {
-                                width: 17px;
-                                height: 17px;
+                            width: 14px;
+                            height: 14px;
                                 border-radius: 3px;
                             }
                         }
@@ -3420,7 +3418,7 @@ $side-menu-width: 800px;
     width: $side-menu-width;
     z-index: 99999;
     @include themed() {
-        background: url("/img/misc/anim-model.svg") repeat, linear-gradient(#313841, #2a3340);
+        background: url("/img/misc/anim-model.svg") repeat,  linear-gradient(#1a1d29, #181b26);
         border-left: 1px solid rgba(t('text'), 0.25);
     }
     transition: right 0.3s ease;

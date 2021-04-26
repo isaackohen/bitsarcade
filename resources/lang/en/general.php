@@ -61,7 +61,7 @@ return [
         'register' => 'Sign up'
     ],
     'chat' => [
-        'enter_message' => 'Type your message...'
+        'enter_message' => 'Message input..'
     ],
     'auth' => [
         'login' => 'Login',
@@ -117,7 +117,7 @@ return [
         'avatar' => 'Avatar',
         'stats' => 'Statistics',
         'latest_games' => 'Latest games',
-        'vip' => 'VIP',
+        'vip' => 'Loyalty',
         'partner' => 'Partner Program',
         'change_name' => 'Change name',
         'new_name' => 'New name',
@@ -129,8 +129,8 @@ return [
         'link' => 'Link',
         'linked' => 'Linked',
         'somebody_already_linked' => 'This social network account has already been linked to another account',
-        'link_discord' => 'To access VIP promo codes and roles on the Discord server, you need to link your account.',
-        'discord_vip' => 'Join <a href="'.\App\Settings::where('name', 'discord_invite_link')->first()->value.'" target="_blank" class="disable-pjax">our Discord server</a> and get VIP promocodes!',
+        'link_discord' => 'To access Loyalty promo-codes and roles on the Discord server, you need to link your account.',
+        'discord_vip' => 'Join <a href="'.\App\Settings::where('name', 'discord_invite_link')->first()->value.'" target="_blank" class="disable-pjax">our Discord server</a> and get access to exclusive Loyalty promocodes!',
         'discord_vip_ok' => 'Update server role',
         'vip_discord_updated' => 'Discord server role has been updated.',
         'bets' => 'Bets',
@@ -163,11 +163,11 @@ return [
             'message' => 'Your payment request created :diff (:sum :currency) was declined. Reason: :reason'
         ],
         'vip_discord' => [
-            'title' => 'VIP',
-            'message' => "You have reached <svg style='width: 14px; height: 14px'><use href='#vip-bronze'></use></svg> bronze VIP status!
+            'title' => 'First Loyalty Level',
+            'message' => "You have reached <svg style='width: 14px; height: 14px'><use href='#vip-emerald'></use></svg> Emerald Loyalty status!
                          <br>We have added 15 free spins to your account!
-                         <br><br>Want exclusive VIP promocodes? Join <a href='".\App\Settings::where('name', 'discord_invite_link')->first()->value."' class='disable-pjax' target='_blank'>our Discord server</a>.
-                         <br><br><a href='javascript:void(0)' onclick='$(\".notifications-overlay\").click(); $.vip();' class='disable-pjax'>View all VIP features</a>"
+                         <br><br>Want exclusive Loyalty promocodes? Join <a href='".\App\Settings::where('name', 'discord_invite_link')->first()->value."' class='disable-pjax' target='_blank'>our Discord server</a>.
+                         <br><br><a href='javascript:void(0)' onclick='$(\".notifications-overlay\").click(); $.vip();' class='disable-pjax'>View all Loyalty Rewards & Bonuses</a>"
         ],
         'email_reminder' => [
             'title' => 'BitsArcade',
@@ -221,7 +221,7 @@ return [
         'unknown_error' => 'An error has occurred (Error :code)',
         'empty' => 'Select cells!',
         'gameinprogressbonus' => 'You currently have a game in-progress.',
-        'should_have_empty_balance' => 'To receive a bonus, your balance must be zero',
+        'should_have_empty_balance' => 'Your ETH balance is too big',
         'captcha' => 'Please verify that you are not a robot',
         'autobet_pick_something' => 'Select cells for automatic bid mode.',
         'disabled_notifications' => 'You have refused to accept notifications. This can be changed in your browser settings.',
@@ -235,7 +235,7 @@ return [
         'enter_wallet' => 'Enter wallet number!',
         'promo_limit' => 'You have reached your promocode activation limit per day.',
         'autobet_mines_error' => 'You have selected more cells than the available crystals.',
-        'vip_only_promocode' => 'This promotional code is only available with VIP status.'
+        'vip_only_promocode' => 'This promotional code is only available with Emerald Loyalty and above.'
     ],
     'profit_monitoring' => [
         'title' => 'Statistics',
@@ -252,8 +252,8 @@ return [
     'snow' => 'It\'s raining!<br>:sum :currency',
     'quiz' => 'Quiz Bot',
     'lines' => 'Lines',
-    'currency_usd' => 'Aprox. &dollar;',
-    'currency_euro' => 'Aprox. &euro;',
+    'currency_usd' => '~ &dollar;',
+    'currency_euro' => '~ &euro;',
     'quiz_answer' => 'Correct answer:',
     'quiz_user' => 'User:',
     'chart' => 'Chart',
@@ -278,6 +278,7 @@ return [
     'odd' => 'odd',
     'to' => ':1 - :2',
     'take' => 'Take :value <i class=":icon"></i>',
+    'takeindex' => ':value <i class=":icon"></i>',
     'start' => 'Start',
     'stop' => 'Stop',
     'overview' => 'View',

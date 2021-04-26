@@ -1,6 +1,8 @@
 <?php namespace App\Currency;
 
 use App\Currency\Option\WalletOption;
+use App\Http\Controllers\Api\WalletController;
+
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Nbobtc\Command\Command;
@@ -28,6 +30,8 @@ abstract class BitcoinCurrency extends Currency {
         $response = json_decode($client->sendCommand(new Command('listtransactions'))->getBody()->getContents(), true)['result'];
         foreach($response as $tx) $this->process($tx['txid']);
     }
+
+
 
     function newWalletAddress($accountName = null): string {
         try {

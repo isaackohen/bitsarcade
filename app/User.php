@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Currency\Currency;
+use App\Http\Controllers\Api\WalletController;
 use App\Events\BalanceModification;
 use App\Notifications\DatabaseNotification;
 use Illuminate\Notifications\Notifiable;
@@ -155,20 +156,23 @@ class User extends \Jenssegers\Mongodb\Auth\User implements JWTSubject {
         $currency = Currency::all()[0];
         $vipLevel = 0;
         foreach(Currency::all() as $c) {
-            $w = DB::table('games')->where('user', $this->_id)->where('currency', $c->id())->where('demo', '!=', true)->where('status', '!=', 'in-progress')->where('status', '!=', 'cancelled')->sum('wager');
+            $w = DB::table('games')->where('user', $this->_id)->where('currency', $c->id())->where('demo', '!=', true)->where('multiplier', '!=', 1)->where('status', '!=', 'in-progress')->where('status', '!=', 'cancelled')->sum('wager');
             $level = 0;
 
-            if($w >= floatval($c->option('vip_diamond'))) $level = 5;
-            else if($w >= floatval($c->option('vip_platinum'))) $level = 4;
-            else if($w >= floatval($c->option('vip_gold'))) $level = 3;
-            else if($w >= floatval($c->option('vip_silver'))) $level = 2;
-            else if($w >= floatval($c->option('vip_bronze'))) $level = 1;
+
+
+            if($w >= floatval($c->diamondvip())) $level = 5;
+            else if($w >= floatval($c->platinumvip())) $level = 4;
+            else if($w >= floatval($c->goldvip())) $level = 3;
+            else if($w >= floatval($c->rubyvip())) $level = 2;
+            else if($w >= floatval($c->emeraldvip())) $level = 1;
 
             if($level > $vipLevel) {
                 $vipLevel = $level;
                 $currency = $c;
             }
         }
+
 
         Cache::put('vip:'.$this->_id.':level', $vipLevel, now()->addMinutes(1));
         Cache::put('vip:'.$this->_id.':currency', $currency->id(), now()->addMinutes(1));
@@ -180,7 +184,8 @@ class User extends \Jenssegers\Mongodb\Auth\User implements JWTSubject {
     }
 
     public function vipBonus(): float {
-        return floatval($this->clientCurrency()->option('weekly_bonus')) * $this->vipLevel();
+         $currency = Currency::find("eth");
+        return floatval($currency->dailybonus()) * $this->vipLevel();
     }
 
     public function tfa(): TwoFactorAuth {

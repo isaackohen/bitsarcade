@@ -1,3 +1,4 @@
+import 'owl.carousel';
 
 
     $(document).ready(function(){

@@ -49,15 +49,20 @@ class Rain extends Command
 
     public function handle() {
 		
-        $usersLength = mt_rand(2, 9);
-		$currency = Currency::find("doge");
-		
+        $usersLength = mt_rand(2, 6);
+		$currency = Currency::find("eth");
+        $raindollar = \App\Settings::where('name', 'rain_amountindollar')->first()->value;
+        $rainamount = number_format(($raindollar / \App\Http\Controllers\Api\WalletController::rateDollarEth()), 7, '.', '');
+        $rainmaxmultiplier = \App\Settings::where('name', 'rain_maxmultiplier')->first()->value;
+        $rainmaxbalance = number_format(($rainmaxmultiplier * $rainamount), 7, '.', '');
+
         $last1Hours = \Carbon\Carbon::now()->subHours(1)->toDateTimeString();
         $last24Hours = \Carbon\Carbon::now()->subHours(24)->toDateTimeString();
         $last10minute = \Carbon\Carbon::now()->subMinutes(10)->toDateTimeString();
+        $last20minute = \Carbon\Carbon::now()->subMinutes(20)->toDateTimeString();
         $last4minute = \Carbon\Carbon::now()->subMinutes(4)->toDateTimeString();
 		
-        $all = User::where('latest_activity', '>=', \Carbon\Carbon::parse($last10minute))->where('doge', '<', new Decimal128('17'))->get()->toArray();
+        $all = User::where('latest_activity', '>=', \Carbon\Carbon::parse($last20minute))->where('eth', '<', new Decimal128($rainmaxbalance))->get()->toArray();
         if(count($all) < $usersLength) {
             $a = User::raw(function($collection) use ($usersLength) { return $collection->aggregate([ ['$sample' => ['size' => $usersLength]] ]); })->toArray();
             shuffle($a);
@@ -79,14 +84,14 @@ class Rain extends Command
         
 
         foreach ($users as $user) {
-            $user->balance($currency)->add(floatval($currency->option('rain')), Transaction::builder()->message('Rain (Global)')->get());
+            $user->balance($currency)->add(floatval($rainamount), Transaction::builder()->message('Rain (Global)')->get());
             array_push($result, $user->toArray());
         }
 
         $message = Chat::create([
             'data' => [
                 'users' => $result,
-                'reward' => floatval($currency->option('rain')),
+                'reward' => floatval($rainamount),
                 'currency' => $currency->id()
             ],
             'type' => 'rain'
