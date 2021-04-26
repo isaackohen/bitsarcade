@@ -47,59 +47,6 @@ class PremiumRain extends Command
      */
 
 
-    public function handle() {
-
-        $raindollar = \App\Settings::where('name', 'premiumrain_amountindollar')->first()->value;
-        $rainamount = number_format(($raindollar / \App\Http\Controllers\Api\WalletController::rateDollarEth()), 7, '.', '');
-        $rainmaxmultiplier = \App\Settings::where('name', 'premiumrain_maxmultiplier')->first()->value;
-        $rainmaxbalance = number_format(($rainmaxmultiplier * $rainamount), 7, '.', '');
-
-        $last24Hours = \Carbon\Carbon::now()->subHours(24);
-        $usersLength = mt_rand(1, 2);
-        $all = Invoice::where('status', 1)->where('updated_at', '>', $last24Hours)->where('ledger', '!=', "Offerwall")->get()->toArray();
-        if(count($all) < $usersLength) {
-            $a = Invoice::where('status', 1)->where('updated_at', '>', $last24Hours)->where('ledger', '!=', "Offerwall")->get()->toArray();
-            shuffle($a);
-            $all += $a;
-        }
-
-        if(count($all) < $usersLength) return;
-
-        shuffle($all);
-
-        $dub = []; $users = [];
-        foreach ($all as $invoice) {
-            $user = User::where('_id', $invoice['user'])->first();
-            if($user == null || in_array($invoice['user'], $dub)) continue;
-            array_push($dub, $invoice['user']);
-            array_push($users, $user);
-        }
-
-        $users = array_slice($users, 0, $usersLength);
-        $result = [];
-
-        $currency = Currency::find("doge");
-
-        foreach ($users as $user) {
-            $user->balance($currency)->add(floatval($rainamount), Transaction::builder()->message('Rain (Premium)')->get());
-            array_push($result, $user->toArray());
-        }
-
-        $message = Chat::create([
-            'data' => [
-                'users' => $result,
-                'reward' => floatval($rainamount),
-                'currency' => $currency->id()
-            ],
-            'type' => 'premiumrain'
-        ]);
-
-        event(new ChatMessage($message));
-        $this->info('Success');
-    }
-
-
-/**
 
     public function handle() {
         
@@ -153,6 +100,5 @@ class PremiumRain extends Command
 
         event(new ChatMessage($message));
     }
-    **/
 
 }

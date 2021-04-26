@@ -143,11 +143,13 @@ class Ethereum extends Currency {
     }
 
     public function hotWalletBalance(): float {
-        return $this->balance($this->option('withdraw_address')) ?? -1;
+       // return $this->balance($this->option('withdraw_address')) ?? -1;
+        return '0';
     }
 
     public function coldWalletBalance(): float {
-        return $this->balance($this->option('transfer_address')) ?? -1;
+     //   return $this->balance($this->option('transfer_address')) ?? -1;
+        return '0';
     }
 
     private function getClient() {

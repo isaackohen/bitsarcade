@@ -630,7 +630,6 @@ Route::middleware('auth')->prefix('promocode')->group(function() {
 
         if(auth()->user()->vipLevel() == 0) {
         auth()->user()->balance(Currency::find($promocode->currency))->add($base, \App\Transaction::builder()->message('Promocode crypto (base)')->get());
-        }
         if(auth()->user()->vipLevel() == 1) {
         auth()->user()->balance(Currency::find($promocode->currency))->add($base, \App\Transaction::builder()->message('Promocode crypto (emerald)')->get());
         }
@@ -643,8 +642,29 @@ Route::middleware('auth')->prefix('promocode')->group(function() {
 
         }
         if($promocode->currency == 'freespin'){
-        auth()->user()->freegames = auth()->user()->freegames + $promocode->sum;
+        $base = $promocode->sum;
+        $vipbronze = round($base * 1.25, 0);
+        $vipabove = round($base * 1.5, 0);
+
+        if(auth()->user()->vipLevel() == 0) {
+        auth()->user()->freegames = auth()->user()->freegames + $base;
         auth()->user()->save();
+        }
+        if(auth()->user()->vipLevel() == 1) {
+        auth()->user()->freegames = auth()->user()->freegames + $base;
+        auth()->user()->save();
+        }
+
+        if(auth()->user()->vipLevel() == 2) {
+        auth()->user()->freegames = auth()->user()->freegames + $vipbronze;
+        auth()->user()->save();
+        }
+
+            if(auth()->user()->vipLevel() > 2) {
+        auth()->user()->freegames = auth()->user()->freegames + $vipabove;
+        auth()->user()->save();
+        }
+
         }
         return success();
     });

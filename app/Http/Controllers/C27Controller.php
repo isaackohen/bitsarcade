@@ -110,6 +110,7 @@ class C27Controller extends Controller
 
        if(auth()->user()->access == 'moderator') {
             $this->client->setPlayer(['Id' => $user->id . '-' . 'eth' . '-streamer_KdW7jkzRP' , 'BankGroupId' => 'bits_streamers']);
+                                    sleep(0.10);
             $this->client->setBonus([   
                     'Id' => 'shared',   
                     'FsType' => 'original', 
@@ -138,7 +139,8 @@ class C27Controller extends Controller
              }
 
         else {
-             $this->client->setPlayer(['Id' => $user->id . '-' . 'eth' . '-testplayer_qz4XxJ' , 'BankGroupId' => 'bits_usd']);
+             $this->client->setPlayer(['Id' => $user->id . '-' . 'eth' . '-player_qz4XxJ' , 'BankGroupId' => 'bits_usd']);
+                                     sleep(0.10);
         $this->client->setBonus([   
                     'Id' => 'shared',   
                     'FsType' => 'original', 
@@ -156,7 +158,7 @@ class C27Controller extends Controller
                 [   
                     'GameId' => $slugsanitize,  
                     'BonusId' => 'shared',  
-                    'PlayerId' => $user->id . '-' . 'eth' . '-testplayer_qz4XxJ',  
+                    'PlayerId' => $user->id . '-' . 'eth' . '-player_qz4XxJ',  
                     'AlternativeId' => time() . '_' . $user->id . '_' . 'eth', 
                     'Params' => [   
                         'freeround_bet' => 1    
@@ -170,6 +172,7 @@ class C27Controller extends Controller
         {
        if(auth()->user()->access == 'moderator') {
             $this->client->setPlayer(['Id' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-streamer_KdW7jkzRP' , 'BankGroupId' => 'bits_streamers']);
+                                    sleep(0.10);
             $game = $this->client->createSession(
                 [
                     'GameId' => $slugsanitize,
@@ -182,12 +185,13 @@ class C27Controller extends Controller
              }
 
             else {
-                $this->client->setPlayer(['Id' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-testplayer_qz4XxJ' , 'BankGroupId' => 'bits_usd']);
+                $this->client->setPlayer(['Id' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-player_qz4XxJ' , 'BankGroupId' => 'bits_usd']);
+                        sleep(0.10);
                 $game = $this->client->createSession(
                 [
                     'GameId' => $slugsanitize,
                     'StaticHost' => 'static.respin.sh',
-                    'PlayerId' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-testplayer_qz4XxJ',
+                    'PlayerId' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-player_qz4XxJ',
                     'AlternativeId' => time() . '_' . $user->id . '_' . auth()->user()->clientCurrency()->id(),
                     'RestorePolicy' => 'Last'
                 ]
@@ -202,8 +206,8 @@ class C27Controller extends Controller
 
         $url = 'https://' . $game['SessionId'] . '.spins.sh/?' . $slugsanitize;
         }
-        sleep(1.00);
         $view = view('c27')->with('data', $game)->with('url', $url);
+        sleep(0.95);
         return view('layouts.app')->with('page', $view);
         
 
@@ -216,14 +220,11 @@ class C27Controller extends Controller
     public function withdrawAndDeposit(Request $request)
     {
         $content = json_decode($request->getContent());
-
         $sessionAlternativeId = $content->params->sessionAlternativeId;
         $currency = explode('_', $sessionAlternativeId);
         $currency = $currency[2];
         $playerName = explode('-', $content->params->playerName);
-
         $user = $this->getUser($playerName[0]);
-
         if(\App\Statistics::where('_id', $user->id)->first() == null) {
             $a = \App\Statistics::create([
                 '_id' => $user->id, 'bets_btc' => 0, 'wins_btc' => 0, 'loss_btc' => 0, 'wagered_btc' => 0, 'profit_btc' => 0, 'bets_eth' => 0, 'wins_eth' => 0, 'loss_eth' => 0, 'wagered_eth' => 0, 'profit_eth' => 0, 'bets_ltc' => 0, 'wins_ltc' => 0, 'loss_ltc' => 0, 'wagered_ltc' => 0, 'profit_ltc' => 0, 'bets_doge' => 0, 'wins_doge' => 0, 'loss_doge' => 0, 'wagered_doge' => 0, 'profit_doge' => 0, 'bets_bch' => 0, 'wins_bch' => 0, 'loss_bch' => 0, 'wagered_bch' => 0, 'profit_bch' => 0, 'bets_trx' => 0, 'wins_trx' => 0, 'loss_trx' => 0, 'wagered_trx' => 0, 'profit_trx' => 0
@@ -231,10 +232,7 @@ class C27Controller extends Controller
         }
 
         $stats = \App\Statistics::where('_id', $user->id)->first();
-
-        $balance = $user->balance(Currency::find($currency))->get();
-
-    
+        $balance = $user->balance(Currency::find($currency))->get();    
         if ($user->freegames > 0) {   
             if (($user->freegames - $content->params->chargeFreerounds) > 0) {  
                 $user->freegames = $user->freegames - $content->params->chargeFreerounds;   
@@ -260,7 +258,6 @@ class C27Controller extends Controller
             $user->freegames_balance = 0;   
             $user->save();  
         }
-
 
         if ($currency == 'BTC' || $currency == 'btc') {
             $balanceB = (int) ((((string) $balance) * \App\Http\Controllers\Api\WalletController::rateDollarBtc()) * 100);
@@ -297,7 +294,6 @@ class C27Controller extends Controller
             $add = bcdiv($content->params->deposit, \App\Http\Controllers\Api\WalletController::rateDollarEth() * 100, 8);
         }
 
-
         if($user->freegames < 1) {
             $user->balance(Currency::find($currency))->subtract($subtract, json_decode($request->getContent(), true));
         }
@@ -331,7 +327,6 @@ class C27Controller extends Controller
         }
 
         $profit = (float) $add - $subtract;
-
 
         if ((Currency::find($currency)->dailyminslots() ?? 0) <= $subtract) {
             if ($user->vipLevel() > 0 && ($user->weekly_bonus ?? 0) < 100) {
@@ -400,9 +395,6 @@ class C27Controller extends Controller
                 'profit_trx' => $stats->profit_trx + ($profit > 0 ? ($multi < 1 ? -($subtract) : ($profit)) : -($subtract))
             ]);
         }
-
-
-
         $game = \App\Game::create([
             'id' => DB::table('games')->count() + 1,
             'user' => $user->id,
@@ -438,7 +430,7 @@ class C27Controller extends Controller
 
     public function getBalance(Request $request)
     {
-        sleep(0.1);
+        sleep(0.12);
         try {
             $content = json_decode($request->getContent());
 
@@ -470,15 +462,11 @@ class C27Controller extends Controller
         } catch (\Error $e) {
             $balance = 0;
         }
-
-
         $freegames = 0;
-
         if ($user->freegames > 0 ) {
             $freegames = $user->freegames;
             $balance = (int) $user->freegames_balance;
         }
-
         return response()->json([
             'result' => ([
                 'balance' => $balance,
@@ -488,7 +476,6 @@ class C27Controller extends Controller
             'jsonrpc' => '2.0'
         ]);
     }
-
     public function getUser($playerName): User
     {
         return User::findOrFail($playerName);
