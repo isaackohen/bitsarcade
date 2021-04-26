@@ -1,6 +1,7 @@
 /node_modules
 /public
 /ssl
+/app/Console/Kernel.php
 /tests
 /vendor
 /storage

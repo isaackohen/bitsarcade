@@ -36,16 +36,18 @@ class PlayWhisper extends WebSocketWhisper {
             'data' => (array) $data->data
         ]);
 
+/**
 if(!$game->isDisabledReff()) {
 
         if ($this->user != null && $this->user->vipLevel() > 0 && $this->user->referral != null) {
             $referrer = \App\User::where('_id', $this->user->referral)->first();
             $currency = $data->currency;
             $balance = $data->bet();
+
             if ($currency == 'BTC' || $currency == 'btc') {
                 $balanceB = (int) ((((string) $balance) * \App\Http\Controllers\Api\WalletController::rateDollarBtc()) * 100);
             } elseif ($currency == 'doge' || $currency == "DOGE") {
-                $balanceB = (int)((((string)$balance) * \App\Http\Controllers\Api\WalletController::rateDollarDoge()) * 100);
+                $balanceB = (int)((((string)$balance) * \App\Http\Controllers\Api\WalletController::rateDollarDoge()) * 0);
             } elseif ($currency == 'trx' || $currency == 'TRX') {
                 $balanceB = (int)((((string)$balance) * \App\Http\Controllers\Api\WalletController::rateDollarTron()) * 100);
             } elseif ($currency == 'ltc' || $currency == 'LTC') {
@@ -53,16 +55,19 @@ if(!$game->isDisabledReff()) {
             } elseif ($currency == 'bch' || $currency == 'BCH') {
                 $balanceB = (int)((((string)$balance) * \App\Http\Controllers\Api\WalletController::rateDollarBtcCash()) * 100);
             } elseif ($currency == 'eth' || $currency == 'ETH') {
-                $balanceB = 0;
+                $balanceB = (int)((((string)$balance) * \App\Http\Controllers\Api\WalletController::rateDollarEth()) * 0);
             }
+            $if($balanceB > floatval(Currency::find($data->currency)->dailyminbet()) {
             $balanceC = $balanceB * 0.0009;
             if ($referrer->referral_balance_usd === "" OR $referrer->referral_balance_usd === null) {
                 $referrer->referral_balance_usd = 0;
             }
             $referrer->referral_balance_usd = $referrer->referral_balance_usd + $balanceC;
             $referrer->save();
+
         }
 }
+*/
         if($this->user != null && $this->user->referral != null && $this->user->vipLevel() > 0 && floatval($data->bet) > Currency::find($data->currency)->dailyminbet() && $this->user->games() >= floatval(\App\Settings::where('name', 'referrer_activity_requirement')->first()->value)) {
             $referrer = \App\User::where('_id', $this->user->referral)->first();
             $referrals = $referrer->referral_wager_obtained ?? [];
