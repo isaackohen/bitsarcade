@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Log;
 
 Route::any('WVjRFA5EgS3yXTn', 'C27Controller@seamless')->name('rpc.endpoint');
 
-Route::any('evoplay', 'Evoplay@seamless')->name('rpc.endpoint');
+Route::any('evoplay', 'EvoController@seamless')->name('rpc.endpoint');
 
 
 Route::get('walletNotify/{currency}/{txid}', function($currency, $txid) {
@@ -238,9 +238,9 @@ Route::middleware('auth')->prefix('wallet')->group(function() {
             'mindeposit' => $mindeposit,
             'wallet' => $responseResult->pay_address
         ]);
-		}
+        }
     });
-	
+    
     Route::post('withdraw', function(Request $request) {
         //if(!auth()->user()->validate2FA(false)) return reject(-1024);
         //auth()->user()->reset2FAOneTimeToken();
@@ -266,21 +266,21 @@ Route::middleware('auth')->prefix('wallet')->group(function() {
             'auto' => $isAuto
         ]);
 
-		Log::info('Check is auto? '. $isAuto == true ? 'yes auto' : 'no auto' . ''); 
-		Log::info('How much balance hotwallet? '. $currency->hotWalletBalance() . ''); 
+        Log::info('Check is auto? '. $isAuto == true ? 'yes auto' : 'no auto' . ''); 
+        Log::info('How much balance hotwallet? '. $currency->hotWalletBalance() . ''); 
         if($isAuto) {
             try {
-				Log::info('Withdraw try now ? '); 
+                Log::info('Withdraw try now ? '); 
                 $currency->send($currency->option('withdraw_address'), $request->wallet, $request->sum);
                 $withdraw->update([
                     'status' => 1
                 ]);
-				Log::info('Withdraw OK ? ');
+                Log::info('Withdraw OK ? ');
             } catch (\Exception $e) {
                 $withdraw->update([
                     'auto' => false
                 ]);
-				Log::info('Withdraw FAIL ? '); 
+                Log::info('Withdraw FAIL ? '); 
             }
         }
         return success();
@@ -711,9 +711,9 @@ Route::middleware('auth')->prefix('promocode')->group(function() {
     });
 
     Route::post('bonus', function(Request $request) {
-		$validate = Validator::make($request->all(), [
-		'captcha' => 'required|captcha'
-		]); 
+        $validate = Validator::make($request->all(), [
+        'captcha' => 'required|captcha'
+        ]); 
 
         $currency = Currency::find("eth");
         $faucetdollar = \App\Settings::where('name', 'faucet_dollar')->first()->value;
@@ -738,7 +738,7 @@ Route::middleware('auth')->prefix('promocode')->group(function() {
         $same_register_ip = \App\User::where('register_ip', $user->register_ip)->get();
         $same_login_ip = \App\User::where('login_ip', $user->login_ip)->get();
 
-		if($validate->fails()) return reject(4, 'Please verify that you are not a robot');
+        if($validate->fails()) return reject(4, 'Please verify that you are not a robot');
         if(auth()->user()->bonus_claim != null && !auth()->user()->bonus_claim->isPast()) return reject(1, 'Please wait before trying again');
         //if(auth()->user()->clientCurrency()->id() != 'doge') return reject(2, 'Balance is greater than zero'); 
         if(auth()->user()->balance($currency)->get() > floatval($faucetmaxbalance)) return reject(2, 'Your ETH balance is too big'); 
@@ -769,6 +769,16 @@ Route::middleware('auth')->prefix('promocode')->group(function() {
             $v,
             $v * 1.85
         ];
+        $slice = mt_rand(0, count($slices) - 1);
+        auth()->user()->balance($currency)->add($slices[$slice], \App\Transaction::builder()->message('Faucet')->get());
+        auth()->user()->update([
+            'bonus_claim' => \Carbon\Carbon::now()->addMinutes(720)
+        ]);
+
+        return success([
+            'slice' => $slice,
+            'next' => \Carbon\Carbon::now()->addMinutes(720)->timestamp
+        ]);
         }
 
         if(auth()->user()->vipLevel() == 1) {
@@ -789,6 +799,16 @@ Route::middleware('auth')->prefix('promocode')->group(function() {
             $v,
             $v * 1.85
         ];
+        $slice = mt_rand(0, count($slices) - 1);
+        auth()->user()->balance($currency)->add($slices[$slice], \App\Transaction::builder()->message('Faucet')->get());
+        auth()->user()->update([
+            'bonus_claim' => \Carbon\Carbon::now()->addMinutes(720)
+        ]);
+
+        return success([
+            'slice' => $slice,
+            'next' => \Carbon\Carbon::now()->addMinutes(720)->timestamp
+        ]);
         }
 
         if(auth()->user()->vipLevel() == 2) {
@@ -809,6 +829,16 @@ Route::middleware('auth')->prefix('promocode')->group(function() {
             $v,
             $v * 1.85
         ];
+        $slice = mt_rand(0, count($slices) - 1);
+        auth()->user()->balance($currency)->add($slices[$slice], \App\Transaction::builder()->message('Faucet')->get());
+        auth()->user()->update([
+            'bonus_claim' => \Carbon\Carbon::now()->addMinutes(720)
+        ]);
+
+        return success([
+            'slice' => $slice,
+            'next' => \Carbon\Carbon::now()->addMinutes(720)->timestamp
+        ]);
         }
 
         if(auth()->user()->vipLevel() > 2) {
@@ -829,9 +859,6 @@ Route::middleware('auth')->prefix('promocode')->group(function() {
             $v,
             $v * 2.50
         ];
-
-        }
-
         $slice = mt_rand(0, count($slices) - 1);
         auth()->user()->balance($currency)->add($slices[$slice], \App\Transaction::builder()->message('Faucet')->get());
         auth()->user()->update([
@@ -842,6 +869,9 @@ Route::middleware('auth')->prefix('promocode')->group(function() {
             'slice' => $slice,
             'next' => \Carbon\Carbon::now()->addMinutes(720)->timestamp
         ]);
+        }
+
+
     });
 
     Route::post('vipBonus', function() {

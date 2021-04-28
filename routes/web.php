@@ -18,6 +18,8 @@ Route::post('partner_cashout', function() {
 
 Route::get('/slots/{game}', 'C27Controller@game');
 Route::get('/provider/{provider}', 'C27Controller@provider');
+Route::get('/slots-evo/{game}', 'EvoController@game');
+Route::get('/evoplayapi/list', 'EvoController@list');
 
 Route::group(['prefix' => '/', 'middleware' => 'throttle:360,1'], function() {
 

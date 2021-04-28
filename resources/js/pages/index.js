@@ -169,6 +169,42 @@ $('.topcarousel').owlCarousel({
     }
 })
 
+$('.evoplay').owlCarousel({
+    loop:false,
+    autoplay:false,
+    margin:5,
+    autoplaySpeed: 250,
+    items:5,
+    autoplayTimeout:12500,
+    responsiveRefreshRate: 900,
+    responsiveBaseElement: ".pageContent",
+    navContainer: '#customNav55',
+    navText: ["<i class='fa fa-chevron-left'></i>","<i class='fa fa-chevron-right'></i>"],
+    responsiveClass:true,
+    responsive:{
+        0:{
+            items:1,
+            nav:false
+        },
+        375:{
+            items:2,
+            nav:false
+        },
+        760:{
+            items:3,
+            nav:false
+        },
+        950:{
+            items:4,
+            nav:false
+        },
+        1190:{
+            items:5,
+            nav:false
+        }
+    }
+})
+
 $('.featured').owlCarousel({
     loop:true,
     autoplay:true,
