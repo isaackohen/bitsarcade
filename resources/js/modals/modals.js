@@ -49,6 +49,11 @@ $.modal = function(id, option = null) {
     });
 }
 
+
+ $('.modal').click(function (e) {
+    $('.modal').modal('toggle');
+ });
+ 
 $(document).ready(function() {
     $(document).on('click', '.btn-close', function() {
         const modal = $(this).parent().parent().parent().parent().parent().parent().parent().remove();

@@ -33,7 +33,7 @@
 .modal.show {
     pointer-events: all;
     visibility: visible;
-    transition: all 0.25s ease-in !important;
+    transition: all 0.10s ease-in;
     opacity: 1;
 
     .content {
@@ -81,14 +81,14 @@
     @include themed() {
         .content {
             color: t('text');
-            background: url('/img/misc/patternbg.png') repeat, t('body');
+            background: url('/img/misc/carbon.png') repeat, t('body');
             border: 1px solid rgba(t('sidebar'), 0.04);
             padding: 20px;
             width: 100%;
             transform: scale(0.7);
             opacity: 0;
             height: fit-content;
-            min-height: 200px;
+            min-height: 300px;
         }
 
         .ui-blocker {

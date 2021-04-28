@@ -11,10 +11,9 @@
         <h5 class="modal-title" id="exampleModalLabel">Overview</h5>
         <button
           type="button"
-          class="btn-close"
           data-mdb-dismiss="overview modal"
-          aria-label="Close"
-        ></button>
+                class="btn-secondary btn-close"
+                ><i class="fas fa-close-symbol"></i></button>
       </div>
       <div class="modal-body">
         <div class="ui-blocker" style="display: none;">

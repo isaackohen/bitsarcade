@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-lg">
     <div class="row">
         <div class="col vertical-tabs-column">
             <div class="vertical-tabs">

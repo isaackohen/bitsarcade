@@ -5,6 +5,7 @@
         <link href="/css/webfonts.css" rel="stylesheet" type="text/css">
         <link rel="icon" type="image/png" href="/img/logo/ico.png"/>
         <meta charset="utf-8">
+        
         <noscript><meta http-equiv="refresh" content="0; /no_js"></noscript>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -80,10 +81,13 @@
     <body>
 
         <div class="pageLoader" style="background: radial-gradient(circle, rgba(20,26,40,1) 0%, rgba(20,26,40,1) 63%, rgba(6,8,13,1) 100%) !important;">
-            <img style="position: absolute; top: 0; bottom: 0; margin: auto; left: 0; right: 0;" src="/img/logo/logo_bits_small_content.png">
+
+            <div class="loader">
+                <div></div>
+            </div>
+            <div class="error" style="display: none"></div>
         </div>
-        <div class="error" style="display: none"></div>
-    </div>
+
     
     <div class="wrapper">
         <header>
@@ -170,13 +174,11 @@
             {!! $page !!}
         </div>
         
-        <div class="container-fluid">
+        <div class="container-lg">
             <div class="collapse-sidebar">
                 <nav id="sidenav-1" class="sidenav" data-mdb-hidden="true" data-mdb-mode="over" data-mdb-content="#content">
-                    <ul class="sidenav-menu"> <li class="sidenav-item mt-0 mb-0"> <a class="sidenav-link" href="/">
-                        <span></span></a>
-                    </li>
-                    <li class="sidenav-item mt-0 mb-0"> <a class="sidenav-link"
+                    <ul class="sidenav-menu"> 
+                    <li class="sidenav-item mt-4 mb-0"> <a class="sidenav-link"
                         ><i style="color: #5cb9ff" class="fad fa-user-circle me-3"></i><span style="font-family: 'Proxima Nova Semi Bd'">@if(auth()->guest())Account @else {{ auth()->user()->name }} @endif</span></a>
                         <ul class="sidenav-collapse">
                             @if(auth()->guest())
@@ -194,7 +196,7 @@
                                 <a onclick="$.wallet()" class="sidenav-link">Withdraw</a>
                             </li>
                             <li class="sidenav-item">
-                                <a onclick="$.vip()" class="sidenav-link">Your VIP Progress</a>
+                                <a onclick="$.vip()" class="sidenav-link">Your Loyalty Progress</a>
                             </li>
                             <li class="sidenav-item">
                                 <a href='/user/{{ auth()->user()->_id }}' class="sidenav-link">Settings</a>

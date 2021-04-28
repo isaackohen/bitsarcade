@@ -1,4 +1,4 @@
-<div class="container-fluid" style="background: url('/img/misc/patternbg.png') repeat;">
+<div class="container-lg" style="background: url('/img/misc/patternbg.png') repeat;">
 
         <div class="heading">{{ __('help.contact_us') }}</div>
     <div class="row">

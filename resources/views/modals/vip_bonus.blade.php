@@ -47,10 +47,10 @@
       <div class="modal-header"><i style="color: #0fd560;" class="fad fa-gift me-1"></i><span>Daily Royalty</span>
         <button
           type="button"
-          class="btn-close"
           data-mdb-dismiss="vip_bonus modal"
-          aria-label="Close"
-        ></button>
+                aria-label="Close"
+                class="btn-secondary btn-close"
+                ><i class="fas fa-close-symbol"></i></button>
       </div>
       <div class="modal-body" style="min-height:350px;">
         <div class="ui-blocker" style="display: none;">

@@ -1,7 +1,9 @@
 require('jquery-pjax');
 import 'owl.carousel';
 
-import * as mdb from 'mdb-ui-kit'; // lib
+import { modal } from 'mdb-ui-kit'; // module
+import { sidenav } from 'mdb-ui-kit'; // module
+
 require('./routes');
 require('./toast');
 require('./game');
@@ -25,6 +27,8 @@ const clipboard = require('clipboard-polyfill');
 const container = '.pageContent';
 let cachedResources = [];
 let loadedContents = null;
+
+
 
 $.on = function(route, callback, cssUrls = []) {
     $(document).on(`page:${route.substr(1)}`, function() {

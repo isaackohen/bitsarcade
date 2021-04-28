@@ -54,10 +54,9 @@ min-height: 300px;
 			<div class="modal-header"><i style="color: #0fd560;" class="fas fa-trophy-alt me-3"></i><span>Leaderboard</span>
 				<button
 				type="button"
-				class="btn-close"
 				data-mdb-dismiss="leaderboard modal"
-				aria-label="Close"
-				></button>
+                class="btn-secondary btn-close"
+                ><i class="fas fa-close-symbol"></i></button>
 			</div>
 			<div class="modal-body leader-stage">
 				<div class="ui-blocker" style="display: none;">
