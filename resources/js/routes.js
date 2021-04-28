@@ -12,6 +12,7 @@ $.routes = function() {
         '/invest': ['js/pages/invest.js'],
         '/gamelist': ['js/pages/gamelist.js'],
         '/slots': ['/js/pages/external-slots.js'],
+        '/slots-evo': ['/js/pages/evoplay.js'],
         '/provider': ['/js/pages/provider.js'],
         '/game': [`/js/pages/${window.location.pathname.substr(window.location.pathname.lastIndexOf('/') + 1)}.js`],
         '/admin': ['/js/admin/pages/dashboard.js'],

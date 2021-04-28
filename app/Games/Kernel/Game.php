@@ -68,6 +68,7 @@ abstract class Game {
             new \App\Games\Limbo(),
 			new \App\Games\Slots(),
 			new \App\Games\Triple(),
+            new \App\Games\EvoPlay(),
             new \App\Games\SlotMachine()
         ];
     }

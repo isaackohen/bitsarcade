@@ -11,6 +11,7 @@
                     <button class="btn btn-primary m-1 p-1" value="free" onclick="$.moveNumbers(this.value )">free spins</button>
                     <button class="btn btn-primary m-1 p-1" value="respin" onclick="$.moveNumbers(this.value )">respin</button>
                     <button class="btn btn-secondary m-1 p-1" value="bitsarcade" onclick="$.moveNumbers(this.value )">bitsarcade</button>
+                    <button class="btn btn-secondary m-1 p-1" value="evoplay" onclick="$.moveNumbers(this.value )">evoplay</button>
                     <button class="btn btn-secondary m-1 p-1" value="netent" onclick="$.moveNumbers(this.value )">netent</button>
                     <button class="btn btn-secondary m-1 p-1" value="playtech" onclick="$.moveNumbers(this.value )">playtech</button>
                     <button class="btn btn-secondary m-1 p-1" value="novoline" onclick="$.moveNumbers(this.value )">novoline</button>
@@ -29,11 +30,12 @@
                 <div class="our-games-box">
 
 @foreach(\App\Games\Kernel\Game::list() as $game)
-        @if(!$game->isDisabled() &&  $game->metadata()->id() !== "slotmachine")
+@if(!$game->isDisabled() &&  $game->metadata()->id() !== "slotmachine" && $game->metadata()->id() !== "evoplay")
             <div class="card gamepostercard m-1" onclick="redirect('/game/{{ $game->metadata()->id() }}')"  style="margin-right: 17px !important; margin-left: 17px !important; margin-bottom: 15px !important;">
 
             <div style="background-size: cover;" class="slots_small_poster card-img-top game-{{ $game->metadata()->id() }}" @if(!$game->isDisabled()) onclick="redirect('/game/{{ $game->metadata()->id() }}')" @endif>
-        <?php
+        <?php              
+
         $getname = $game->metadata()->name();
          ?>
         @if($getname == "Dice") 
@@ -73,7 +75,11 @@
                     <div class="card gamepostercard m-1" style="margin-right: 17px !important; margin-left: 17px !important; margin-bottom: 15px !important;">
 
             @if(!auth()->guest())
+             @if($slots->p == 'evoplay') 
+            <div class="slots_small_poster" onclick="redirect('/slots-evo/{{ $slots->id }}')"  >
+              @else
             <div class="slots_small_poster" onclick="redirect('/slots/{{ $slots->id }}')"  >
+              @endif
                     <img class="img-small-slots" data-src="/img/slots/webp/{{ $slots->id }}.webp">
              @else
                 <div class="slots_small_poster" onclick="$.register()">
@@ -86,8 +92,12 @@
                         <div class="name-text">
                             <div class="title">{{ $slots->n }}</div>
                             <div class="desc">{{ $slots->desc }}</div>
-                @if(!auth()->guest())               
+                @if(!auth()->guest())          
+                             @if($slots->p == 'evoplay')      
+                            <button class="btn btn-primary" onclick="redirect('/slots-evo/{{ $slots->id }}')">Play</button>                  
+                            @else
                             <button class="btn btn-primary" onclick="redirect('/slots/{{ $slots->id }}')">Play</button>                  
+                            @endif
                 @else
                             <button class="btn btn-primary" onclick="$.register()">
                                 Login

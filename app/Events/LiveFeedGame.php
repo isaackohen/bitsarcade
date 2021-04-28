@@ -48,18 +48,16 @@ class LiveFeedGame implements ShouldBroadcastNow {
                     $meta['name'] = $c27game['Name'];
                     $meta['id'] = $this->game->data['params']['gameId'];
 
-                       /**
- if($slotscount = RecentSlots::where('user_id', $this->game->user)->where('s', $this->game->data['params']['gameId'])->first()) {
-                    $slotscount->update([
-                    'b' => $slotscount->b + 1
-                    ]);      
-                    }
-                         */
-
                 }
             }
         }
-        
+ 
+        if ($this->game->game == "evoplay") {
+            $evoplayuid = $this->game->data;
+                    $getevoname = (\App\Slotslist::where('_id', $evoplayuid)->first()->n);
+                    $meta['name'] = $getevoname;
+                }
+  
         return [
             'game' => $this->game->toArray(),
             'user' => User::where('_id', $this->game->user)->first()->toArray(),
