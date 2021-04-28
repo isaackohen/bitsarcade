@@ -96,7 +96,7 @@ $profile-sidebar-padding: 30px;
             min-height: 300px;
 
             .cat {
-                background: rgba(t('text'), 0.015);
+                background: url('/img/misc/carbon.png') repeat, rgba(t('text'), 0.015);
                 margin-left: -$profile-sidebar-padding;
                 width: calc(100% + #{$profile-sidebar-padding} * 2);
                 margin-bottom: 15px;

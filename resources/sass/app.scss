@@ -897,6 +897,7 @@ margin: 0 auto;
         border-radius: 10px;
         margin-bottom: 20px;
         display: flex;
+        background: url(/img/misc/carbon.png) repeat;
         flex-wrap: wrap;
         box-shadow: -3px -3px 8px 1px #11141fcf, 2px 2px 8px 0px #0d0d0dcf, inset 1px 1px 0px 0px #1f2330 !important;
 
@@ -2035,7 +2036,9 @@ padding: 0.5rem 0.8rem;
                 height: $send-height;
                 padding: 10px;
                 display: flex;
-                background: url(/img/misc/arrows.svg), linear-gradient(#191c27, #1a1d29) !important;
+                $sidebarone: t('sidebar');
+                $sidebartwo: t('sidebartwo');
+                background: url(/img/misc/carbon.png) repeat, linear-gradient($sidebarone, $sidebartwo);
                 margin-top: 3px;
                 position: relative;
 
@@ -3412,7 +3415,7 @@ footer {
 .btn {
    font-size: 14px;
     font-family: "Geogrotesque Wide Semi", sans-serif;
-    line-height: 1.5;
+    line-height: 1.2;
 }
 
 .btn-primary {
