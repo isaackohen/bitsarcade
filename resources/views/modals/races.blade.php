@@ -57,10 +57,9 @@ min-height: 300px;
 			<div class="modal-header"><i style="color: #0fd560;" class="fas fa-comet me-3"></i><span>Races</span>
 				<button
 				type="button"
-				class="btn-close"
 				data-mdb-dismiss="races modal"
-				aria-label="Close"
-				></button>
+                class="btn-secondary btn-close"
+                ><i class="fas fa-close-symbol"></i></button>
 			</div>
 			<div class="modal-body races-stage">
 				<div class="ui-blocker" style="display: none;">

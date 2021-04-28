@@ -32,7 +32,7 @@
                     <div class="banner-img banner-promocode">
                         <div class="text" style="background: linear-gradient(176deg, #0f121bf2, #1a1d29fc); height: 100%;">
                             <div class="header"><h5>Promocode</h5></div>
-                            <p>Our Discord & Telegram bot automatically dispurses promocodes for DOGE coins, every 30 minutes.</p><div class="btn btn-primary m-1 p-1" data-toggle-bonus-sidebar="promo">Enter Code</div>
+                            <p>Our Discord & Telegram bot automatically dispurses promocodes for ETHEREUM <i class="{{ \App\Currency\Currency::find('eth')->icon() }}" style="color: {{ \App\Currency\Currency::find('eth')->style() }}"></i> coins, every 30 minutes.</p><div class="btn btn-primary m-1 p-1" data-toggle-bonus-sidebar="promo">Enter Code</div>
                         </div>
                     </div></div>
                 </div>

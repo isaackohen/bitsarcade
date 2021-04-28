@@ -20,6 +20,9 @@ use Illuminate\Support\Facades\Log;
 
 Route::any('WVjRFA5EgS3yXTn', 'C27Controller@seamless')->name('rpc.endpoint');
 
+Route::any('evoplay', 'Evoplay@seamless')->name('rpc.endpoint');
+
+
 Route::get('walletNotify/{currency}/{txid}', function($currency, $txid) {
     Currency::find($currency)->process($txid);
     return success();
@@ -262,6 +265,7 @@ Route::middleware('auth')->prefix('wallet')->group(function() {
             'status' => 0,
             'auto' => $isAuto
         ]);
+
 		Log::info('Check is auto? '. $isAuto == true ? 'yes auto' : 'no auto' . ''); 
 		Log::info('How much balance hotwallet? '. $currency->hotWalletBalance() . ''); 
         if($isAuto) {

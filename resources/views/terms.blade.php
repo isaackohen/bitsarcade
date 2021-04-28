@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-lg">
     @if($data === 'gaming_policy')
 
     @elseif($data === 'privacy_notice')

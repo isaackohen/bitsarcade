@@ -5,21 +5,10 @@
 }
 
 
-.card {
-    background: linear-gradient(#2b3038, #272d34) !important;
-}
-
-.card-footer {
-    background: url(/img/misc/arrows.svg), linear-gradient(#2b3038, #272d34) !important;
-}
-
-
 .img-small-slots {
     display: block;
-    width: 165px;
-    height: 165px;
+    width: 170px !important;
     z-index: 3;
-    border: 2px solid #393939;
     transition: all 0.2s ease-in;
     -webkit-box-shadow: 0 8px 12px rgb(0 0 0 / 16%), inset 0 -2px 0 rgb(0 0 0 / 30%);
     box-shadow: 0 8px 12px rgb(0 0 0 / 16%), inset 0 -2px 0 rgb(0 0 0 / 30%);

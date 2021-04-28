@@ -109,7 +109,7 @@ $(window).on('load', function() {
 const unloadLoader = setInterval(function() {
     if(assetsLoaded && successfullyGrantedToken) {
         $(document).trigger('bootstrap:load');
-        $('.pageLoader').delay(125).fadeOut('fast');
+        $('.pageLoader').delay(200).fadeOut('normal');
         clearInterval(unloadLoader);
     }
-}, 50);
+}, 10);

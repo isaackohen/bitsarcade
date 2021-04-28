@@ -1,4 +1,5 @@
-<div class="container-fluid">
+<div class="container-lg">
+
     <div class="row">
         <div class="col vertical-tabs-column">
             <div class="vertical-tabs">
@@ -167,4 +168,44 @@ const card = CARDS[Math.floor(float * 52)];</code></pre>
             </div>
         </div>
     </div>
-</div>
+                <div class="our-games-box mt-5">
+
+@foreach(\App\Games\Kernel\Game::list() as $game)
+        @if(!$game->isDisabled() &&  $game->metadata()->id() !== "slotmachine")
+            <div class="card gamepostercard" onclick="redirect('/game/{{ $game->metadata()->id() }}')"  style="margin-right: 17px !important; margin-left: 17px !important; margin-bottom: 15px !important;">
+
+            <div style="background-size: cover;" class="slots_small_poster card-img-top game-{{ $game->metadata()->id() }}" @if(!$game->isDisabled()) onclick="redirect('/game/{{ $game->metadata()->id() }}')" @endif>
+        <?php
+        $getname = $game->metadata()->name();
+         ?>
+        @if($getname == "Dice") 
+                <div class="label-red">
+                    HOT!
+                </div>
+            @elseif($getname == "Triple") 
+                <div
+
+                 class="label-red">
+                    NEW GAME!
+                </div>
+                    @endif
+                <div class="label-fair">
+                    FAIR
+                </div>
+                <div class="name">
+                    <div class="name-text">
+                            <div class="title">
+                    {{ $game->metadata()->name() }}
+                            </div>
+                    <button class="btn btn-primary"  onclick="redirect('/game/{{ $game->metadata()->id() }}')">Play</button>                  
+                 </div>
+                </div>
+            </div>
+                    <div class="card-footer" style="max-width: 170px;">
+                      <span class="game-card-name-small">{{ $game->metadata()->name() }}</span></div>
+                    </div>
+            @else
+            @endif
+        @endforeach
+
+      </div></div>

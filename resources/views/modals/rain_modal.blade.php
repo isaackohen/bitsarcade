@@ -10,10 +10,9 @@
       <div class="modal-header">Rain
         <button
           type="button"
-          class="btn-close"
           data-mdb-dismiss="rain_modal modal"
-          aria-label="Close"
-        ></button>
+                class="btn-secondary btn-close"
+                ><i class="fas fa-close-symbol"></i></button>
       </div>
       <div class="modal-body">
         <div class="ui-blocker" style="display: none;">

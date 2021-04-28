@@ -3,6 +3,7 @@ $.on('/gamelist', function() {
     $('.img-small-slots').lazy({
         visibleOnly: true
         });
+
     
   $('#gamelist-search').keydown(function(){
  
@@ -17,12 +18,16 @@ $.on('/gamelist', function() {
         });
 
    // Search 
+
+       setTimeout(function() {
+
    $('.card').each(function(){
  
     if($(this).text().toLowerCase().indexOf(""+text+"") != -1 ){
      $(this).closest('.card').show();
     }
   });
+ }, 200);
  });
 
 

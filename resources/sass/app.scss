@@ -1,4 +1,5 @@
  @import 'variables';
+ @import '~mdb-ui-kit/css/mdb.dark.min.css';
 @import '~owl.carousel/dist/assets/owl.carousel.css';
 @import '~izitoast/dist/css/iziToast.min.css';
 @import '~overlayscrollbars/css/OverlayScrollbars.min.css';
@@ -7,12 +8,11 @@
 @import 'fontawesome.min.css';
 @import 'superwheel.css';
 @import '~highlight.js/styles/vs.css';
-@import '~mdb-ui-kit/css/mdb.dark.min.css';
 @import 'modals/modal';
 
 $sidebar-width: 195px;
-$header-height: 55px;
-$chat-width: 285px;
+$header-height: 50px;
+$chat-width: 275px;
 
 $card: -3px -3px 8px 1px #11141fcf, 2px 2px 8px 0px #0d0d0dcf, inset 1px 1px 0px 0px #1f2330 !important;
 
@@ -85,8 +85,8 @@ $card: -3px -3px 8px 1px #11141fcf, 2px 2px 8px 0px #0d0d0dcf, inset 1px 1px 0px
 .s-buttons a span{
     max-width:0;
     opacity:0;
-    -webkit-transition:opacity .35s ease-in-out,max-width .35s ease-in-out,padding-left .35s ease-in-out;
-    transition:opacity .35s ease-in-out,max-width .35s ease-in-out,padding-left .35s ease-in-out
+    -webkit-transition:opacity .35s ease-in,max-width .35s ease-in,padding-left .35s ease-in;
+    transition:opacity .35s ease-in,max-width .35s ease-in,padding-left .35s ease-in
 }
 .s-buttons a.is-twitter{
     background:-webkit-gradient(linear,left top,left bottom,from(#1da1f2),to(#265d82));
@@ -204,7 +204,7 @@ $card: -3px -3px 8px 1px #11141fcf, 2px 2px 8px 0px #0d0d0dcf, inset 1px 1px 0px
 
 .our-games {
         background: linear-gradient(#313841, #2c323a) !important;
-        padding: 5px;
+        padding: 2px;
         border-radius: 5px;
         width: 100%;
         margin-bottom: 40px;
@@ -387,7 +387,7 @@ $card: -3px -3px 8px 1px #11141fcf, 2px 2px 8px 0px #0d0d0dcf, inset 1px 1px 0px
 
     &:hover {
     opacity: 1;  
-    transition: all 0.3s ease-in;
+    transition: all 0.15s ease-in;
     }
 
     .unavailable {
@@ -421,24 +421,47 @@ width: 96%;
 margin: 0 auto;
 }
 
+
+.game-card-name-small {
+        font-size: 11px;
+        font-weight: 500; 
+        text-transform: capitalize;
+}
+
+.game-card-name {
+        font-size: 12px;
+        font-weight: 600; 
+        text-transform: capitalize;
+}
+
+.game-card-provider {
+        font-style: italic;
+        font-size: 9px;
+        color: #e5e6e7 !important;
+        font-weight: 500;
+        text-transform: capitalize;
+}
+
 .game_poster {
-    height: 200px;
+    height: 165px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    margin: 0px;
     cursor: pointer;
 
     .label {
     position: absolute;
-    right: 1px;
-    top: 6px;
-    background: linear-gradient(#212729e0, #111618e0);
-    -webkit-box-shadow: 0 8px 12px rgb(0 0 0 / 16%), inset 0 -2px 0 rgb(0 0 0 / 30%);
-    box-shadow: 0 8px 12px rgb(0 0 0 / 16%), inset 0 -2px 0 rgb(0 0 0 / 30%);
-    font-size: 10px;
+    right: 0px;
+    top: 9px;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+    background: url("/img/misc/carbon.png") repeat, linear-gradient(#1d212d, #1a1d28);
+    font-size: 9px;
     color: #fff;
     font-weight: 500;
-    background-color: #1e44af;
     padding: 4px 10px;
     text-transform: uppercase;
     }
@@ -506,21 +529,27 @@ margin: 0 auto;
 
     .img-small-slots {
         display: block;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
         width: 100% !important;
         height: 100% !important;
         z-index: 3;
-        border-radius: 0px;
-    }
+        border: 0 !important;
+        }
+
+
 
 
 .slots_small_poster {
     display: inline-flex;
-    width: 190px;
-    height: 170px;
+    width: 170px;
+    height: 155px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-size: cover;
     background-position: center;
     z-index: 1;
     top: 0;
-    border-radius: 0px;
     transition: all 0.15s ease-in;
     position: relative;
     cursor: pointer;
@@ -539,6 +568,9 @@ margin: 0 auto;
         left: 0;
         top: 0;
         width: 100%;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+
         height: 100%;
         background-repeat: no-repeat;
         background-position-x: center;
@@ -555,6 +587,9 @@ margin: 0 auto;
         text-align: center;
         width: 100%;
         height: 100%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+
         padding: 5px 10px;
         background: linear-gradient(#212729e0, #111618e0); 
         color: white;
@@ -599,18 +634,15 @@ margin: 0 auto;
 
     .label {
     position: absolute;
-    z-index: 5;
-    right: 10px;
-    border-radius: 10px;
-    opacity: 1.0;
-    top: 10px;
-    background: #151822;
-    -webkit-box-shadow: 0 8px 12px rgb(0 0 0 / 16%), inset 0 -2px 0 rgb(0 0 0 / 30%);
-    box-shadow: 0 8px 12px rgb(0 0 0 / 16%), inset 0 -2px 0 rgb(0 0 0 / 30%);
-    font-size: 10px;
+    right: 0px;
+    top: 9px;
+    z-index: 9;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+    background: url("/img/misc/carbon.png") repeat, linear-gradient(#1d212d, #1a1d28);
+    font-size: 9px;
     color: #fff;
-    font-weight: 600;
-    background-color: #1e44af;
+    font-weight: 500;
     padding: 4px 10px;
     text-transform: uppercase;
     }
@@ -688,7 +720,7 @@ margin: 0 auto;
     background-repeat: no-repeat;
     background-position: center;
     z-index: 1;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.15s ease-in;
     top: 0;
     position: relative;
     cursor: pointer;
@@ -698,7 +730,7 @@ margin: 0 auto;
 
     &:hover .name {
     opacity: 1;  
-    transition: all 0.3s ease-in-out;
+    transition: all 0.15s ease-in;
 
     }
 
@@ -861,15 +893,13 @@ margin: 0 auto;
 }
 
 .bonus-box-small {
-        padding: 5px;
+        padding: 4px;
         border-radius: 10px;
         margin-bottom: 20px;
         display: flex;
         flex-wrap: wrap;
         box-shadow: -3px -3px 8px 1px #11141fcf, 2px 2px 8px 0px #0d0d0dcf, inset 1px 1px 0px 0px #1f2330 !important;
-        &:hover {
-            background: linear-gradient(0deg, rgb(0 0 0 / 5%) 0%, rgb(0 0 0 / 20%) 100%) !important;
-        }
+
         .banner-img {
         width: 100%;
         border-radius: 8px;
@@ -941,6 +971,49 @@ margin: 0 auto;
                     margin-bottom: -2px;
                 }
 
+}
+
+
+
+.games-box {
+        padding: 4px;
+        border-radius: 14px;
+        margin-bottom: 10px;
+        display: flex;
+        flex-wrap: wrap;
+
+
+        .banner-img {
+        width: 100%;
+        border-radius: 8px;
+        height: 140px;
+        margin-bottom: 1px;
+        }
+
+        .text {
+        padding: 7px;
+        }
+
+        .header, .description {
+                    text-shadow: 2px 2px 7px rgba(black, 0.7);
+
+                }
+
+                .header {
+                    font-family: 'Geogrotesque Wide Semi';
+                    font-weight: 600;
+                    font-size: 2em;
+                    margin-bottom: -2px;
+                }
+
+}
+
+
+
+.carousel-container {
+        border-radius: 6px;
+        display: flex;
+        flex-wrap: wrap;
 }
 
 
@@ -1025,7 +1098,7 @@ html, body {
     line-height: 1.2;
     font-family: 'Geogrotesque Wide Med', sans-serif;
     font-size: 0.93rem;
-    transition: all ease-in-out;
+    transition: background 0.15s ease-in;
 }
 
 * {
@@ -1040,11 +1113,11 @@ body {
     width: 100%;
     font-family: 'Geogrotesque Wide Med', sans-serif;
     font-size: 0.93rem;
-    transition: all ease-in-out;
+    transition: background 0.15s ease-in;
 
     @include themed() {
         color: t('text');
-        background: t('body');
+        background: t('backgroundbody');
     }
 }
 
@@ -1114,7 +1187,7 @@ input {
 
 .pageContent {
     flex: 1 0 auto;
-    padding-top: 14px;
+    padding-top: 20px;
 }
 
 a {
@@ -1161,7 +1234,7 @@ header {
         z-index: 10001;
 
     @include themed() {
-        background: t('header');
+        background: url('/img/misc/carbon.png') repeat, radial-gradient(circle, #121723 0%, #121825 6%, rgb(13 17 26) 100%);
     }
 
         .logo {
@@ -1229,14 +1302,14 @@ header {
                     border-bottom-right-radius: 3px;
                     padding-top: 5px;
                     opacity: 0;
-                    transition: opacity 0.2s ease-in-out;
+                    transition: opacity 0.1s ease-in;
                     font-size: 1em;
 
                     .option {
                         display: flex;
                         align-items: center;
                         background: #1f2330;
-                        transition: background 0.2s ease-in;
+                        transition: background 0.1s ease-in;
 
                         &:hover {
                             background: t('input');
@@ -1304,7 +1377,7 @@ header {
                     color: #0fd560;
                     border-radius: 0px;
                     border: none !important;
-                    transition: color 0.2s ease-in, background 0.2s ease-in-out;
+                    transition: color 0.15s ease-in, background 0.15s ease-in;
                     min-width: 43px;
 
                     i:first-of-type {
@@ -1326,7 +1399,7 @@ header {
                     font-family: 'Geogrotesque Wide Semi';
                     min-width: 130px;
                     padding-left: 10px;
-                    transition: background 0.2s ease-in;
+                    transition: background 0.15s ease-in;
                     font-size: 14px;
                     font-weight: 600;
                     padding-right: 5px;
@@ -1380,7 +1453,7 @@ header {
                     font-size: 1.25em;
                     margin: 10px;
                     opacity: 0.65;
-                    transition: opacity 0.2s ease-in-out;
+                    transition: opacity 0.15s ease-in;
 
                     &:hover {
                         opacity: 1;
@@ -1396,7 +1469,7 @@ header {
 
         @include themed() {
             box-shadow: 0 4px 6px 3px rgb(0 0 0 / 20%), 0 2px 4px 2px rgb(0 0 0 / 25%);
-            transition: border-bottom 0.15s ease-in-out;
+            transition: border-bottom 0.15s ease-in;
         }
     }
 }
@@ -1468,6 +1541,7 @@ padding: 0.5rem 0.8rem;
     .sidenav {
         top: $header-height;
         box-shadow: $card;
+        transition: all 0.2s ease 0s;
         @include themed() {
         background: t('header');
         }
@@ -1507,7 +1581,7 @@ padding: 0.5rem 0.8rem;
     flex-shrink: 0;
     z-index: 38000;
     position: relative;
-    transition: width 0.3s ease;
+    transition: width 0.2s ease;
 
     @include themed() {
         .emoji-container {
@@ -1570,7 +1644,7 @@ padding: 0.5rem 0.8rem;
                     font-size: 0.8em;
 
                     opacity: 0.8;
-                    transition: opacity 0.3s ease;
+                    transition: opacity 0.15s ease-in;
 
                     margin-right: 1px;
 
@@ -1656,7 +1730,7 @@ padding: 0.5rem 0.8rem;
                     width: 100%;
                     padding: 10px;
                     background: darken(t('sidebar'), 1.5%);
-                    transition: background 0.3s ease;
+                    transition: background 0.15s ease-in;
 
                     &:hover {
                         cursor: pointer;
@@ -1671,7 +1745,7 @@ padding: 0.5rem 0.8rem;
                     .hint-tag-name {
                         background: darken(t('sidebar'), 1.5%);
                         opacity: 0.75;
-                        transition: background 0.3s ease, opacity 0.3s ease;
+                        transition: background 0.15s ease-in, opacity 0.15s ease-in;
                         cursor: pointer;
 
                         &:hover {
@@ -1975,7 +2049,7 @@ padding: 0.5rem 0.8rem;
                     z-index: 10;
                     padding: 35px;
                     opacity: 0;
-                    transition: opacity 0.3s ease;
+                    transition: opacity 0.15s ease-in;
                     &:hover {
                         opacity: 1;
                     }
@@ -1989,7 +2063,7 @@ padding: 0.5rem 0.8rem;
                         padding: 6px;
                         color: t('text');
                         font-size: 0.85em;
-                        transition: color 0.3s ease;
+                        transition: color 0.15s ease-in;
                     }
 
                     $second-column-width: 35px;
@@ -2002,7 +2076,7 @@ padding: 0.5rem 0.8rem;
                             top: 5px;
                             right: 0;
                             color: t('link');
-                            transition: color 0.3s ease;
+                            transition: color 0.15s ease-in;
                             z-index: 10;
                             cursor: pointer;
                             position: absolute;
@@ -2037,7 +2111,7 @@ padding: 0.5rem 0.8rem;
                             justify-content: center;
                             font-size: 1.35em;
                             margin-bottom: 11px;
-                            transition: color 0.2s ease-in;
+                            transition: color 0.15s ease-in;
                             color: t('link');
                             cursor: pointer;
                             margin-left: 5px;
@@ -2181,7 +2255,7 @@ footer {
     animation-name: connectionLostBackground;
     animation-duration: 2s;
     animation-iteration-count: infinite;
-    transition: background 0.3s ease-in-out;
+    transition: background 0.15s ease-in;
     z-index: 9999;
     top: $header-height;
     position: fixed;
@@ -2222,7 +2296,7 @@ footer {
             padding: 0 10px 5px;
             border-bottom: 2px solid rgba(t('link'), 0.25);
             color: t('link');
-            transition: border-color 0.3s ease, color 0.3s ease-in-out;
+            transition: border-color 0.15s ease-in, color 0.15s ease-in;
         }
         .tab:hover, .tab.active {
             color: t('text');
@@ -2298,7 +2372,7 @@ footer {
     line-height: 1.2;
     font-family: 'Geogrotesque Wide Med', sans-serif;
     font-size: 0.87rem;
-    transition: all ease-in-out;
+    transition: all ease-in;
 }
 
 .tooltip {
@@ -2457,7 +2531,7 @@ footer {
             &:after {
                 content: '';
                 background: rgba(t('link'), 0.25);
-                transition: background 0.2s ease-in-out;
+                transition: background 0.15s ease-in;
                 position: absolute;
                 width: 100%;
                 left: 0;
@@ -2482,8 +2556,8 @@ footer {
 
 .live {
     @include themed() {
-        margin-top: 15px;
-        box-shadow: $card;
+        margin-top: 30px;
+        box-shadow: 1px 1px 9px #11141fcf, 2px 2px 5px 0px #0d0d0dcf !important;
         background: t('sidebar');
         padding: 20px;
         border-radius: 12px;
@@ -2621,7 +2695,7 @@ footer {
                 color: t('text');
                 border-color: t('text');
                 opacity: 1;
-                transition: opacity 0.2s ease-in, border-color 0.2s ease-in, color 0.2s ease-in;
+                transition: opacity 0.15s ease-in, border-color 0.15s ease-in, color 0.15s ease-in;
             }
 
             .history.highlight {
@@ -2655,7 +2729,7 @@ footer {
             justify-content: center;
             padding: 10px 25px;
             text-align: center;
-            transition: border-color 0.3s ease, padding-top 0.3s ease-in-out;
+            transition: border-color 0.15s ease-in, padding-top 0.15s ease-in;
 
             .demoHeader {
                 border-bottom-left-radius: 3px;
@@ -2674,7 +2748,7 @@ footer {
             }
 
             * {
-                transition: color 0.3s ease-in-out;
+                transition: color 0.15s ease-in;
             }
 
             .multiplier {
@@ -2769,7 +2843,7 @@ footer {
                 align-items: center;
                 justify-content: center;
                 padding: .5rem;
-                transition: background 0.3s ease-in-out;
+                transition: background 0.15s ease-in;
 
                 &:first-child {
                     border-top-left-radius: 3px;
@@ -2853,7 +2927,7 @@ footer {
                 justify-content: center;
                 font-weight: 600;
                 cursor: pointer;
-                transition: background 0.3s ease-in-out;
+                transition: background 0.15s ease-in;
 
                 &:hover {
                     background: darken(t('sidebar'), 1%);
@@ -2898,7 +2972,7 @@ footer {
                 justify-content: center;
                 color: #b1b6c6;
 
-                transition: box-shadow 0.3s ease, color 0.3s ease-in-out;
+                transition: box-shadow 0.15s ease-in, color 0.15s ease-in;
 
                 &:hover {
                     color: white;
@@ -2945,7 +3019,7 @@ footer {
                 font-size: 0.85em;
                 cursor: pointer;
                 box-shadow: 0 0 1px 4px transparent;
-                transition: box-shadow 0.3s ease-in-out;
+                transition: box-shadow 0.15s ease-in;
             }
 
             .chip:nth-child(2) {
@@ -3013,7 +3087,7 @@ footer {
                 color: t('text');
                 width: 100%;
                 cursor: text;
-                transition: background 0.3s ease-in-out;
+                transition: background 0.15s ease-in;
 
                 &:hover, &:active {
                     background: darken(t('input'), 0.5%);
@@ -3051,7 +3125,7 @@ footer {
                     font-size: 0.70em;
                     font-weight: 400;
                     opacity: 0.55;
-                    transition: color 0.3s ease-in-out, background 0.3s ease-in-out;
+                    transition: color 0.15s ease-in, background 0.15s ease-in;
                     color: t('link');
                     cursor: pointer;
                     margin-right: auto;
@@ -3097,7 +3171,7 @@ footer {
                     font-size: 0.70em;
                     font-weight: 400;
                     opacity: 0.55;
-                    transition: color 0.3s ease-in-out, background 0.3s ease-in-out;
+                    transition: color 0.15s ease-in, background 0.15s ease-in;
                     color: t('link');
                     cursor: pointer;
                     margin-right: auto;
@@ -3122,7 +3196,7 @@ footer {
                 .control {
                     display: inline-flex;
                     opacity: 0.5;
-                    transition: opacity 0.3s ease-in-out;
+                    transition: opacity 0.15s ease-in;
                     border-radius: 3px;
                     padding: 5px;
                     font-size: 0.6em;
@@ -3190,7 +3264,7 @@ footer {
     }
     align-items: center;
     justify-content: center;
-    transition: opacity 0.3s ease-in-out;
+    transition: opacity 0.15s ease-in;
 }
 
 .mobile-menu-games {
@@ -3249,7 +3323,7 @@ footer {
     }
 
     .fa-angle-down {
-        transition: all 0.3s ease-in-out;
+        transition: all 0.15s ease-in;
     }
 }
 
@@ -3262,7 +3336,7 @@ footer {
         text-align: center;
         cursor: pointer;
         opacity: 0.8;
-        transition: opacity 0.3s ease-in-out;
+        transition: opacity 0.15s ease-in;
         padding: 25px;
 
         &:hover {
@@ -3295,15 +3369,17 @@ footer {
         content: "";
         height: 1px;
         @include themed() {
-            background: rgba(t('text'), 0.2);
+            background: rgba(t('body'), 0.2);
         }
 
         &:first-of-type {
             margin-right: 10px;
+            margin-right: 35px;
         }
 
         &:last-of-type {
             margin-left: 10px;
+            margin-left: 35px;
         }
     }
 }
@@ -3361,9 +3437,6 @@ footer {
         }
 }
 
-.btn-close {
-    color: white !important;
-}
 
 
 $side-menu-width: 800px;
@@ -3421,7 +3494,7 @@ $side-menu-width: 800px;
         background: url("/img/misc/anim-model.svg") repeat,  linear-gradient(#1a1d29, #181b26);
         border-left: 1px solid rgba(t('text'), 0.25);
     }
-    transition: right 0.3s ease;
+    transition: right 0.15s ease-in;
 
     .bonus-scrollable {
         height: auto;
@@ -3480,7 +3553,7 @@ $side-menu-width: 800px;
     height: 100vh;
     background: rgba(black, 0.65);
     z-index: 99998;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.15s ease-in;
 }
 
 .bonus-wheel-reload {
@@ -3631,23 +3704,38 @@ $side-menu-width: 800px;
     }
 }
 
-.card-header {
-    border-bottom-color: #2f8be6 !important;
+.card-footer:last-child {
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
 }
 
 .card-footer {
-    border-top-color: #22272e !important;
-    background: url(/img/misc/arrows.svg), linear-gradient(#2c303f, #252a3f) !important;
+    background: url("/img/misc/carbon.png") repeat, linear-gradient(#1d212d, #1a1d28);
+    padding-left: 15px;
+    border-top: none;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
     font-family: 'Geogrotesque Wide Semi';
-
 }
 
 .card-title {
-    margin-bottom: 0.2rem;
+    margin-bottom: 0.08rem;
 }
 
 .card {
-box-shadow: -3px -3px 8px 1px #11141fcf, 2px 2px 8px 0px #0d0d0dcf, inset 1px 1px 0px 0px #1f2330 !important;
+margin-top: 1px;
+margin-bottom: 1px;
+    border-radius: 12px;
+
+background: url("/img/misc/carbon.png") repeat, linear-gradient(#1d212d, #1a1d28);
+box-shadow: -3px -3px 5px 1px #11141fcf, 2px 2px 5px 0px #0d0d0dcf, inset 1px 1px 0px 0px #1f2330 !important;
+
+        .js-tilt-glare {
+        border-radius: 12px;
+        }
+        .js-tilt-glare-inner {
+        background-image: linear-gradient(0deg, rgb(0 0 0 / 5%) 0%, rgb(0 0 0 / 20%) 100%) !important;
+        }
 }
 
 
@@ -3665,13 +3753,13 @@ box-shadow: -3px -3px 8px 1px #11141fcf, 2px 2px 8px 0px #0d0d0dcf, inset 1px 1p
     bottom: 20px;
     right: $chat-width + 20px;
     z-index: 7000;
-    transition: right 0.3s ease-in-out;
+    transition: right 0.15s ease-in;
 
     @include themed() {
         .floatingButton {
             border-radius: 50%;
             background: lighten(t('sidebar'), 2.5%);
-            transition: background 0.3s ease-in-out;
+            transition: background 0.15s ease-in;
             width: $width;
             height: $height;
             box-shadow: rgba(0, 0, 0, 0.2) 0 1px 3px 0, rgba(0, 0, 0, 0.12) 0 1px 2px 0;
@@ -3688,7 +3776,7 @@ box-shadow: -3px -3px 8px 1px #11141fcf, 2px 2px 8px 0px #0d0d0dcf, inset 1px 1p
                 width: $width / 2;
                 height: $height / 2;
                 opacity: 0.5;
-                transition: opacity 0.3s ease-in-out;
+                transition: opacity 0.15s ease-in;
                 fill: t('text');
                 cursor: pointer;
                 position: relative;
@@ -3788,10 +3876,10 @@ box-shadow: -3px -3px 8px 1px #11141fcf, 2px 2px 8px 0px #0d0d0dcf, inset 1px 1p
     position: fixed;
     top: 0;
     right: -490px;
-    transition: right 0.3s ease-in-out;
+    transition: right 0.15s ease-in;
     padding: 25px;
     @include themed() {
-        background: t('sidebar');
+        background: t('header');
     }
 
 
@@ -4060,6 +4148,9 @@ box-shadow: -3px -3px 8px 1px #11141fcf, 2px 2px 8px 0px #0d0d0dcf, inset 1px 1p
         display: none !important;
     }
 }
+
+
+
 
 @media(max-width: 1350px) {
     .chat, .chat .fixed {

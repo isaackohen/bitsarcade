@@ -67,7 +67,6 @@ if(!$game->isDisabledReff()) {
 
         }
 }
-*/
         if($this->user != null && $this->user->referral != null && $this->user->vipLevel() > 0 && floatval($data->bet) > Currency::find($data->currency)->dailyminbet() && $this->user->games() >= floatval(\App\Settings::where('name', 'referrer_activity_requirement')->first()->value)) {
             $referrer = \App\User::where('_id', $this->user->referral)->first();
             $referrals = $referrer->referral_wager_obtained ?? [];
@@ -76,6 +75,7 @@ if(!$game->isDisabledReff()) {
                 $referrer->update(['referral_wager_obtained' => $referrals]);
             }
         }
+*/
 
         if($this->user != null && $this->user->vipLevel() > 0 && $this->user->vip_discord_notified == null) {
             $this->user->notify(new \App\Notifications\VipDiscordNotification());

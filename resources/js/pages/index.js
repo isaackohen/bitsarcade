@@ -10,8 +10,8 @@ $('.gamepostercard').tilt({
 
 
 $('.provider-carousel').owlCarousel({
-    autoplaySpeed: 300,
-    margin:10,
+    autoplaySpeed: 250,
+    margin:5,
     autoplayTimeout:20000,
     responsiveClass:true,
     responsive:{
@@ -41,10 +41,10 @@ $('.provider-carousel').owlCarousel({
 $('.random').owlCarousel({
     loop:true,
     autoplay:false,
-    margin:10,
-    autoplaySpeed: 300,
+    margin:5,
+    autoplaySpeed: 250,
     items:5,
-    responsiveRefreshRate: 450,
+    responsiveRefreshRate: 500,
     responsiveBaseElement: ".pageContent",
     navContainer: '#customNav3',
     navText: ["<i class='fa fa-chevron-left'></i>","<i class='fa fa-chevron-right'></i>"],
@@ -76,11 +76,10 @@ $('.random').owlCarousel({
 $('.popular').owlCarousel({
     loop:true,
     autoplay:false,
-    margin:10,
-    autoplaySpeed: 300,
+    margin:5,
+    autoplaySpeed: 250,
     items:5,
-    autoplayTimeout:10000,
-    responsiveRefreshRate: 450,
+    responsiveRefreshRate: 600,
     responsiveBaseElement: ".pageContent",
     navContainer: '#customNav2',
     navText: ["<i class='fa fa-chevron-left'></i>","<i class='fa fa-chevron-right'></i>"],
@@ -98,7 +97,7 @@ $('.popular').owlCarousel({
             items:3,
             nav:false
         },
-        1125:{
+        950:{
             items:4,
             nav:false
         },
@@ -113,9 +112,9 @@ $('.popular').owlCarousel({
 $('.provably').owlCarousel({
     loop:true,
     autoplay:true,
-    autoplaySpeed: 300,
-    margin:10,
-    responsiveRefreshRate: 450,
+    autoplaySpeed: 250,
+    margin:5,
+    responsiveRefreshRate: 700,
     responsiveBaseElement: ".pageContent",
     navContainer: '#customNav5',
     navText: ["<i class='fa fa-chevron-left'></i>","<i class='fa fa-chevron-right'></i>"],
@@ -134,7 +133,7 @@ $('.provably').owlCarousel({
             items:3,
             nav:false
         },
-        1125:{
+        950:{
             items:4,
             nav:false
         },
@@ -145,14 +144,39 @@ $('.provably').owlCarousel({
     }
 })
 
+
+
+$('.topcarousel').owlCarousel({
+    animateIn: 'fadeIn',
+    animateOut: 'fadeOut',
+    loop:true,
+    autoplay:true,
+    margin:5,
+    items:1,
+    autoplayTimeout:7500,
+    responsiveRefreshRate: 300,
+    responsiveBaseElement: ".pageContent",
+    responsiveClass:true,
+    responsive:{
+        0:{
+            items:1,
+            nav:false
+        },
+        1500:{
+            items:1,
+            nav:false
+        }
+    }
+})
+
 $('.featured').owlCarousel({
     loop:true,
     autoplay:true,
-    margin:10,
-    autoplaySpeed: 300,
+    margin:5,
+    autoplaySpeed: 250,
     items:5,
-    autoplayTimeout:10000,
-    responsiveRefreshRate: 450,
+    autoplayTimeout:12500,
+    responsiveRefreshRate: 900,
     responsiveBaseElement: ".pageContent",
     navContainer: '#customNav4',
     navText: ["<i class='fa fa-chevron-left'></i>","<i class='fa fa-chevron-right'></i>"],
@@ -170,7 +194,7 @@ $('.featured').owlCarousel({
             items:3,
             nav:false
         },
-        1125:{
+        950:{
             items:4,
             nav:false
         },

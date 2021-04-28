@@ -10,12 +10,12 @@
             <div class="modal-header"><img src="/img/logo/ico.png" style="max-height: 19px; margin-right: 5px;"><span>Loyalty Club</span>
         <button
           type="button"
-          class="btn-close"
           data-mdb-dismiss="vip modal"
-          aria-label="Close"
-        ></button>
+                aria-label="Close"
+                class="btn-secondary btn-close"
+                ><i class="fas fa-close-symbol"></i></button>
       </div>
-      <div class="modal-body" style="padding-right: 2vh !important; padding-left: 2vh !important;">
+      <div class="modal-body" style="padding-top: 0 !important; padding-right: 1.5vh !important; margin-bottom: 1.5vh; padding-left: 1.5vh !important;">
         <div class="ui-blocker" style="display: none;">
             <div class="loader"><div></div></div>
         </div>

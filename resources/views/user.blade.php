@@ -8,7 +8,7 @@
     $isOwner = !auth()->guest() && $user->_id == auth()->user()->id;
 @endphp
 
-<div class="container-fluid" data-user-profile-id="{{ $user->_id }}">
+<div class="container-lg" data-user-profile-id="{{ $user->_id }}">
     <div class="profile-container h-100">
         <div class="row profile_row">
             <div class="profile_column col">
