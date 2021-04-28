@@ -53,7 +53,10 @@
     @include themed() {
         color: t('text');
         box-shadow: 2px 2px 5px 0 rgb(0 0 0 / 61%);
-        background: linear-gradient(#1e222f, #191d27);
+        $sidebarone: t('sidebar');
+        $sidebartwo: t('sidebartwo');
+        background: url(/img/misc/carbon.png) repeat, linear-gradient($sidebarone, $sidebartwo);
+
     }
 }
 

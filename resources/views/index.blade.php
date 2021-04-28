@@ -137,6 +137,29 @@ $notify = auth()->user()->unreadNotifications();
     </div>
   </div>
 
+  <div class="row">
+    <div class="col-12 col-sm-6 col-md-4">
+      <div class="button-bar-small" onclick="redirect('/partner/')">
+        <div class="text" style="background: transparent !important; border-radius: 12px;">
+          <h5 style="margin-bottom: 1px; font-weight: 600;">Partner</h5>
+          <p>Earn money up-to <b>0.15% of all of your referred player's bets</b> and other benefits!</p>
+        </div></div>
+      </div>
+      <div class="col-12 col-sm-6 col-md-4">
+        <div class="button-bar-small" onclick="redirect('/bonus/')">
+          <div class="text" style="background: transparent !important; border-radius: 12px;">
+            <h5 style="margin-bottom: 1px; font-weight: 600;">Daily Bonus</h5>
+            <p>You play, <b>we pay</b>. After reaching Emerald Loyalty Level, you are eligible for a daily bonuses.</p>
+          </div></div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4">
+          <div class="button-bar-small" onclick="redirect('/earn/')">
+            <div class="text" style="background: transparent !important; border-radius: 12px;">
+              <h5 style="margin-bottom: 1px; font-weight: 600;">Earn</h5>
+              <p>Get credited <b>straight ETHEREUM <i class="{{ \App\Currency\Currency::find('eth')->icon() }}" style="color: {{ \App\Currency\Currency::find('eth')->style() }}"></i></b> to your account doing surveys and other tasks.</p>
+            </div></div>
+          </div>
+        </div>
           @endif
 
         <div class="games-box" style="z-index: 1;">
