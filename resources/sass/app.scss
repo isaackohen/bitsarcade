@@ -443,7 +443,9 @@ margin: 0 auto;
 }
 
 .game_poster {
-    height: 180px;
+    height: 160px;
+    border: 2px solid #1a2133;
+    filter: brightness(0.99);
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     background-size: cover;
@@ -534,7 +536,7 @@ margin: 0 auto;
         width: 100% !important;
         height: 100% !important;
         z-index: 3;
-        border: 0 !important;
+        border: 2px solid #1b1e2a;
         }
 
 
@@ -543,7 +545,7 @@ margin: 0 auto;
 .slots_small_poster {
     display: inline-flex;
     width: 170px;
-    height: 155px;
+    height: 145px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     background-size: cover;

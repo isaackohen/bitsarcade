@@ -1,5 +1,7 @@
 $.on('/gamelist', function() {
 
+
+
     $('.img-small-slots').lazy({
         visibleOnly: true
         });

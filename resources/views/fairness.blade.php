@@ -171,7 +171,7 @@ const card = CARDS[Math.floor(float * 52)];</code></pre>
                 <div class="our-games-box mt-5">
 
 @foreach(\App\Games\Kernel\Game::list() as $game)
-        @if(!$game->isDisabled() &&  $game->metadata()->id() !== "slotmachine")
+        @if(!$game->isDisabled() &&  $game->metadata()->id() !== "slotmachine" &&  $game->metadata()->id() !== "evoplay")
             <div class="card gamepostercard" onclick="redirect('/game/{{ $game->metadata()->id() }}')"  style="margin-right: 17px !important; margin-left: 17px !important; margin-bottom: 15px !important;">
 
             <div style="background-size: cover;" class="slots_small_poster card-img-top game-{{ $game->metadata()->id() }}" @if(!$game->isDisabled()) onclick="redirect('/game/{{ $game->metadata()->id() }}')" @endif>

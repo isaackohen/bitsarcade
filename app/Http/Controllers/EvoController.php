@@ -347,8 +347,8 @@ class EvoController extends Controller
                     $game, 
                     [
                         $user->_id, 
-                        'https://c2c2.datagamble.nl', //exit_url 
-                        'https://c2c2.datagamble.nl' //cash_url
+                        'https://bitsarcade.com', //exit_url 
+                        'https://bitsarcade.com' //cash_url
                     ], 
                     '1', //denomination
                     $this->currency, //currency
@@ -358,7 +358,7 @@ class EvoController extends Controller
                 
         $signature = self::getSignature($this->system_id, $this->version, $args, $this->secret_key);
         
-        $response = json_decode(file_get_contents('http://api.production.games/Game/getURL?project='.$this->system_id.'&version=1&signature='.$signature.'&token='.$token.'&game='.$game.'&settings[user_id]='.$user->_id.'&settings[exit_url]=https://c2c2.datagamble.nl&settings[cash_url]=https://c2c2.datagamble.nl&denomination=1&currency=USD&return_url_info=1&callback_version=2'), true);
+        $response = json_decode(file_get_contents('http://api.production.games/Game/getURL?project='.$this->system_id.'&version=1&signature='.$signature.'&token='.$token.'&game='.$game.'&settings[user_id]='.$user->_id.'&settings[exit_url]=https://bitsarcade.com&settings[cash_url]=https://bitsarcade.com&denomination=1&currency=USD&return_url_info=1&callback_version=2'), true);
         $url = $response['data']['link'];
         $view = view('evoplay')->with('url', $url);
         return view('layouts.app')->with('page', $view);

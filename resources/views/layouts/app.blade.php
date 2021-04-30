@@ -215,6 +215,7 @@
                                             @foreach(\App\Games\Kernel\Game::list() as $game)
                                             @if($game->isDisabled()) @continue @endif
                                             @if($game->metadata()->id() == "slotmachine") @continue @endif
+                                            @if($game->metadata()->id() == "evoplay") @continue @endif
                                             <li class="sidenav-item">
                                                 <a onclick="redirect('/game/{{ $game->metadata()->id() }}')" class="sidenav-link"><i class="{{ $game->metadata()->icon() }} me-3"></i> {{ $game->metadata()->name() }}</a>
                                             </li>
@@ -224,6 +225,7 @@
                                     <li class="sidenav-item mt-2 mb-0"> <a  style="padding-left: 1.5rem !important;" onclick="redirect('/gamelist')" class="sidenav-link">
                                         <i style="color: #0fd560;" class="fad fa-abacus me-3"></i><span>Slots</span></a>
                                     </li>
+
                                     <li class="sidenav-item mt-2 mb-0"> <a style="padding-left: 1.5rem !important;"onclick="$.displaySearchBar()" class="sidenav-link">
                                         <i style="color: #0fd560;" class="fas fa-search me-3"></i><span>Search</span></a>
                                     </li>

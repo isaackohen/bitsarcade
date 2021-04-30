@@ -6,7 +6,7 @@
 
                   <div onclick="redirect('/provider/{{ $url }}')" class="providers m-1 p-2" style=" box-shadow: -3px -3px 8px 1px #11141fcf, 2px 2px 8px 0px #0d0d0dcf, inset 1px 1px 0px 0px #1f2330 !important; background-image:url(/img/providers/{{ $url }}_small.webp)">                  </div>
               </div>
-<div class="our-games-box" style="border-radius: 0px !important; background: #181b26 !important;">
+<div class="our-games-box" style="border-radius: 0px !important;">
 
             <input type="text" id="gamelist-search" class="input m-2 mb-4 p-2" placeholder="Search {{ $url }} games..">
 
