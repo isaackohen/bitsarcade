@@ -5,14 +5,16 @@ $.on('/', function(){
 
 $('.gamepostercard').tilt({
     glare: false,
-    scale: 1.01
+    scale: 1.02
 })
 
 
 $('.provider-carousel').owlCarousel({
-    autoplaySpeed: 250,
+    loop:true,
+    autoplay:true,
     margin:5,
-    autoplayTimeout:20000,
+    autoplaySpeed: 250,
+    autoplayTimeout:7000,
     responsiveClass:true,
     responsive:{
         0:{
@@ -33,6 +35,42 @@ $('.provider-carousel').owlCarousel({
         },
         1190:{
             items:6,
+            nav:false
+        }
+    }
+})
+
+$('.casinogames').owlCarousel({
+    loop:true,
+    autoplay:true,
+    margin:5,
+    autoplaySpeed: 250,
+    items:5,
+    autoplayTimeout:12500,
+    responsiveRefreshRate: 900,
+    responsiveBaseElement: ".pageContent",
+    navContainer: '#customNav25',
+    navText: ["<i class='fa fa-chevron-left'></i>","<i class='fa fa-chevron-right'></i>"],
+    responsiveClass:true,
+    responsive:{
+        0:{
+            items:1,
+            nav:false
+        },
+        375:{
+            items:2,
+            nav:false
+        },
+        760:{
+            items:3,
+            nav:false
+        },
+        950:{
+            items:4,
+            nav:false
+        },
+        1190:{
+            items:5,
             nav:false
         }
     }

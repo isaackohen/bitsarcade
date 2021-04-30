@@ -167,57 +167,57 @@ $notify = auth()->user()->unreadNotifications();
           <div id="customNav4" class="owl-nav"></div>
           <h5 style="padding-top: 9px; padding-left: 7px; font-weight: 600;">Featured Games</h5>
           <div class="container-flex owl-carousel featured" style="z-index: 1;">
-            @foreach(\App\Slotslist::get() as $slots)
+            @foreach(\App\Slotslist::get()->shuffle() as $slots)
             @if($slots->f == '1')
             <div class="card gamepostercard" style="cursor: pointer; margin-left: 7px; margin-right: 7px;">
               @if(!auth()->guest())
               @if($slots->p == 'evoplay') 
-              <div onclick="redirect('/slots-evo/{{ $slots->id }}')" class="game_poster" style="background-image:url(/img/slots/webp/{{ $slots->id }}.webp)">
+              <div onclick="redirect('/slots-evo/{{ $slots->id }}')" class="game_poster" style="background-image:url(/img/slots-wide/{{ $slots->p }}/{{ $slots->id }}.webp)">
               @else
-              <div onclick="redirect('/slots/{{ $slots->id }}')" class="game_poster" style="background-image:url(/img/slots/webp/{{ $slots->id }}.webp)">
+              <div onclick="redirect('/slots/{{ $slots->id }}')" class="game_poster" style="background-image:url(/img/slots-wide/{{ $slots->p }}/{{ $slots->id }}.webp)">
               @endif
                 @else
-                <div onclick="$.auth()" class="game_poster" style="background-image:url(/img/slots/webp/{{ $slots->id }}.webp)">
+                <div onclick="$.auth()" class="game_poster" style="background-image:url(/img/slots-wide/{{ $slots->p }}/{{ $slots->id }}.webp)">
                   @endif
-                                      <div class="label">
-                    {{ $slots->p }}
+   
                 </div>
-                </div>
-                <div class="card-footer">
-                      <span class="game-card-name">{{ $slots->n }}</span></div>
-                </div>
+                    <div class="card-footer">
+                      <span class="game-card-name">{{ $slots->n }}</span><br>
+                      <small><span class="game-card-provider">{{ $slots->p }}</span></small></div>
+                    </div>
                 @endif
                 @endforeach
               </div>
             </div>
 
-@if(!auth()->guest())
+@if(!auth()->guest() || auth()->guest())
         <div class="games-box" style="z-index: 1;">
+                          @if(!auth()->guest())<div style="cursor: pointer; padding-top: 11px; padding-left: 15px; font-weight: 600;" class="action" onclick="$.displaySearchBar()"><i class="fas fa-search"></i></div>@endif
+
           <div id="customNav55" class="owl-nav"></div>
           <h5 style="padding-top: 9px; padding-left: 7px; font-weight: 600;">Evoplay Games </h5>
             <button style="padding-top: 5px; font-size: 10px; padding-left: 10px;" onclick="redirect('/provider/evoplay')" class="btn btn-light m-2 p-1">NEW PROVIDER</a> </button>
             <button onclick="redirect('/provider/evoplay/')" style="padding-top: 5px; font-size: 10px; padding-left: 10px;" class="btn btn-primary m-2 p-1">More Evoplay<i class="fas fa-arrow-right" style="font-size: 8px;"></i></a></button>
 
           <div class="container-flex owl-carousel evoplay" style="z-index: 1;">
-            @foreach(\App\Slotslist::get() as $slots)
+            @foreach(\App\Slotslist::get()->shuffle() as $slots)
             @if($slots->f == '5')
             <div class="card gamepostercard" style="cursor: pointer; margin-left: 7px; margin-right: 7px;">
               @if(!auth()->guest())
               @if($slots->p == 'evoplay') 
-              <div onclick="redirect('/slots-evo/{{ $slots->id }}')" class="game_poster" style="background-image:url(/img/slots/webp/{{ $slots->id }}.webp)">
+              <div onclick="redirect('/slots-evo/{{ $slots->id }}')" class="game_poster" style="background-image:url(/img/slots-wide/{{ $slots->p }}/{{ $slots->id }}.webp)">
               @else
-              <div onclick="redirect('/slots/{{ $slots->id }}')" class="game_poster" style="background-image:url(/img/slots/webp/{{ $slots->id }}.webp)">
+              <div onclick="redirect('/slots/{{ $slots->id }}')" class="game_poster" style="background-image:url(/img/slots-wide/{{ $slots->p }}/{{ $slots->id }}.webp)">
               @endif
                 @else
-                <div onclick="$.auth()" class="game_poster" style="background-image:url(/img/slots/webp/{{ $slots->id }}.webp)">
+                <div onclick="$.auth()" class="game_poster" style="background-image:url(/img/slots-wide/{{ $slots->p }}/{{ $slots->id }}.webp)">
                   @endif
-                                      <div class="label">
-                    {{ $slots->p }}
+
                 </div>
-                </div>
-                <div class="card-footer">
-                      <span class="game-card-name">{{ $slots->n }}</span></div>
-                </div>
+                    <div class="card-footer">
+                      <span class="game-card-name">{{ $slots->n }}</span><br>
+                      <small><span class="game-card-provider">{{ $slots->p }}</span></small></div>
+                    </div>
                 @endif
                 @endforeach
               </div>
@@ -255,43 +255,20 @@ $notify = auth()->user()->unreadNotifications();
               </div>
             </div>
             @if(!auth()->guest())
-            <div class="games-box" style="z-index: 1;">
-              @if(!auth()->guest())<div style="cursor: pointer; padding-top: 11px; padding-left: 15px; font-weight: 600;" class="action" onclick="$.displaySearchBar()"><i class="fas fa-search"></i></div>@endif
-              <div id="customNav3" class="owl-nav"></div>
-              <h5 style="padding-top: 9px; padding-left: 7px; font-weight: 600;">Random Slots</h5>
-            <button onclick="redirect('/gamelist/')" style="padding-top: 5px; font-size: 10px; padding-left: 10px;" class="btn btn-secondary m-2 p-1">More <i class="fas fa-arrow-right" style="font-size: 8px;"></i></a></button>
-            <div class="container-flex owl-carousel random" style="z-index: 2;">
-              @foreach(\App\Slotslist::all()->random(20) as $slots)
-              <div class="card gamepostercard" style="cursor: pointer; margin-left: 7px; margin-right: 7px;">
-                @if(!auth()->guest())
-              @if($slots->p == 'evoplay') 
-              <div onclick="redirect('/slots-evo/{{ $slots->id }}')" class="game_poster" style="background-image:url(/img/slots/webp/{{ $slots->id }}.webp)">
-              @else
-              <div onclick="redirect('/slots/{{ $slots->id }}')" class="game_poster" style="background-image:url(/img/slots/webp/{{ $slots->id }}.webp)">
-              @endif
-                    @endif
-                  </div>
-                  <div class="card-footer">
-                      <span class="game-card-name">{{ $slots->n }}</span><br>
-                      <small><span class="game-card-provider">{{ $slots->p }}</span></small></div>
-                  </div>
-                  @endforeach
-                </div>
-              </div>
               <div class="games-box" style="z-index: 1;">
                 @if(!auth()->guest())<div style="cursor: pointer; padding-top: 11px; padding-left: 15px; font-weight: 600;" class="action" onclick="$.displaySearchBar()"><i class="fas fa-search"></i></div>@endif
-                <div id="customNav2" class="owl-nav"></div>
-                <h5 style="padding-top: 9px; padding-left: 7px; font-weight: 600;">New Arrivals</h5>
+                <div id="customNav25" class="owl-nav"></div>
+                <h5 style="padding-top: 9px; padding-left: 7px; font-weight: 600;">Casino Games</h5>
               <button onclick="redirect('/gamelist/')" style="padding-top: 5px; font-size: 10px; padding-left: 10px;" class="btn btn-secondary m-2 p-1">More <i class="fas fa-arrow-right" style="font-size: 8px;"></i></a></button>
-              <div class="container-flex owl-carousel popular"  style="z-index: 1;">
-                @foreach(\App\Slotslist::get() as $slots)
-                @if($slots->f == '2')
-                <div class="card gamepostercard" style="cursor: pointer; margin-left: 7px; margin-right: 7px;">
+              <div class="container-flex owl-carousel casinogames"  style="z-index: 1;">
+                @foreach(\App\Slotslist::get()->shuffle() as $slots)
+                @if($slots->f == '3')
+                <div class="card gamepostercard" style="margin-left: 7px; margin-right: 7px;">
                   @if(!auth()->guest())
               @if($slots->p == 'evoplay') 
-              <div onclick="redirect('/slots-evo/{{ $slots->id }}')" class="game_poster" style="background-image:url(/img/slots/webp/{{ $slots->id }}.webp)">
+              <div onclick="redirect('/slots-evo/{{ $slots->id }}')" class="game_poster" style="cursor: pointer; background-image:url(/img/slots/webp/{{ $slots->id }}.webp)">
               @else
-              <div onclick="redirect('/slots/{{ $slots->id }}')" class="game_poster" style="background-image:url(/img/slots/webp/{{ $slots->id }}.webp)">
+              <div onclick="redirect('/slots/{{ $slots->id }}')" class="game_poster" style="cursor: pointer; background-image:url(/img/slots/webp/{{ $slots->id }}.webp)">
               @endif
                       @endif
                     </div>
@@ -303,13 +280,72 @@ $notify = auth()->user()->unreadNotifications();
                     @endforeach
                   </div>
                 </div>
+
+              <div class="games-box" style="z-index: 1;">
+                @if(!auth()->guest())<div style="cursor: pointer; padding-top: 11px; padding-left: 15px; font-weight: 600;" class="action" onclick="$.displaySearchBar()"><i class="fas fa-search"></i></div>@endif
+                <div id="customNav2" class="owl-nav"></div>
+                <h5 style="padding-top: 9px; padding-left: 7px; font-weight: 600;">New Arrivals</h5>
+              <button onclick="redirect('/gamelist/')" style="padding-top: 5px; font-size: 10px; padding-left: 10px;" class="btn btn-secondary m-2 p-1">More <i class="fas fa-arrow-right" style="font-size: 8px;"></i></a></button>
+              <div class="container-flex owl-carousel popular"  style="z-index: 1;">
+                @foreach(\App\Slotslist::get()->shuffle() as $slots)
+                @if($slots->f == '2')
+                <div class="card gamepostercard" style="cursor: pointer; margin-left: 7px; margin-right: 7px;">
+                  @if(!auth()->guest())
+              @if($slots->p == 'evoplay') 
+              <div onclick="redirect('/slots-evo/{{ $slots->id }}')" class="game_poster" style="background-image:url(/img/slots-wide/{{ $slots->p }}/{{ $slots->id }}.webp)">
+              @else
+              <div onclick="redirect('/slots/{{ $slots->id }}')" class="game_poster" style="background-image:url(/img/slots-wide/{{ $slots->p }}/{{ $slots->id }}.webp)">
+              @endif
+                      @endif
+                    </div>
+                    <div class="card-footer">
+                      <span class="game-card-name">{{ $slots->n }}</span><br>
+                      <small><span class="game-card-provider">{{ $slots->p }}</span></small></div>
+                    </div>
+                    @endif
+                    @endforeach
+                  </div>
+                </div>
+            <div class="games-box" style="z-index: 1;">
+              @if(!auth()->guest())<div style="cursor: pointer; padding-top: 11px; padding-left: 15px; font-weight: 600;" class="action" onclick="$.displaySearchBar()"><i class="fas fa-search"></i></div>@endif
+              <div id="customNav3" class="owl-nav"></div>
+              <h5 style="padding-top: 9px; padding-left: 7px; font-weight: 600;">Random Slots</h5>
+            <button onclick="redirect('/gamelist/')" style="padding-top: 5px; font-size: 10px; padding-left: 10px;" class="btn btn-secondary m-2 p-1">More <i class="fas fa-arrow-right" style="font-size: 8px;"></i></a></button>
+            <div class="container-flex owl-carousel random" style="z-index: 2;">
+              @foreach(\App\Slotslist::all()->shuffle()->random(20) as $slots)
+              @if($slots->p !== "amatic" && $slots->p !== "igrosoft" && $slots->p !== "egt" && $slots->p !== "greentube" && $slots->p !== "konami" && $slots->p !== "apollo")
+              <div class="card gamepostercard" style="cursor: pointer; margin-left: 7px; margin-right: 7px; filter: brightness(0.86);">
+                @if(!auth()->guest()) 
+              @if($slots->p == 'evoplay') 
+              <div onclick="redirect('/slots-evo/{{ $slots->id }}')" class="game_poster" style="background-image:url(/img/slots-wide/{{ $slots->p }}/{{ $slots->id }}.webp)">
+              @else
+              <div onclick="redirect('/slots/{{ $slots->id }}')" class="game_poster" style="background-image:url(/img/slots-wide/{{ $slots->p }}/{{ $slots->id }}.webp)">
+              @endif
+                    @endif
+                  </div>
+                  <div class="card-footer">
+                      <span class="game-card-name">{{ $slots->n }}</span><br>
+                      <small><span class="game-card-provider">{{ $slots->p }}</span></small></div>
+                  </div>
+                  @endif
+                  @endforeach
+                </div>
+              </div>
                 @endif
+                                      
                 <div class="container-flex provider-carousel owl-carousel" style="z-index: 1;">
-                  @foreach(\App\Providers::all()->random(18) as $providers)
+                  @foreach(\App\Providers::all()->shuffle()->random(18) as $providers)
                   <div class="card m-1" style="background: transparent !important; box-shadow: -3px -3px 8px 1px #11141fcf, 2px 2px 8px 0px #0d0d0dcf, inset 1px 1px 0px 0px #1f2330 !important;">
                     <div onclick="redirect('/provider/{{ $providers->name }}')" class="providers m-1" style="background-image:url(/img/providers/{{ $providers->name }}_small.webp)">                  </div>
                   </div>
                   @endforeach
                 </div>
+                  <div class="divider">
+            <div class="line"></div>
+                        <div class="btn btn-primary p-2 m-2" style="min-width: 150px" onclick="redirect('/gamelist/')">View All Games</div>
+            <div class="line"></div>
                 @endif
               </div>
+
+
+        </div>
