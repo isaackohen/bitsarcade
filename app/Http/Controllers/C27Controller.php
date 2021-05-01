@@ -70,11 +70,6 @@ class C27Controller extends Controller
 
         $sanitize = preg_replace("/[\/\{\}\)\(\%#\$]/", "sanitize", $slug);
 
-        if (!$user) {
-            return redirect('/');
-        }
-
-
 
         $url = $sanitize;
         $view = view('provider')->with('url', $url);
@@ -140,7 +135,7 @@ class C27Controller extends Controller
 
         else {
              $this->client->setPlayer(['Id' => $user->id . '-' . 'eth' . '-player_qz4XxJ' , 'BankGroupId' => 'bits_usd']);
-                                     sleep(0.10);
+             sleep(0.10);
         $this->client->setBonus([   
                     'Id' => 'shared',   
                     'FsType' => 'original', 

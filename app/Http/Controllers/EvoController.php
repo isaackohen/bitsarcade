@@ -12,9 +12,8 @@ use Illuminate\Support\Facades\Log;
 class EvoController extends Controller
 
 {
-    
-    private $system_id = '1104';
-    private $secret_key = 'd815e784f1d9f6fb55c987b4fe274e05';
+    private $system_id = '1103';
+    private $secret_key = '6b3ea85bbb479c768d7ee94b6524ecf3';
     private $version = '1';
     private $currency = 'USD';
     
@@ -77,6 +76,8 @@ class EvoController extends Controller
             $amount = $reqdata['amount'];
             $roundid = $reqdata['round_id'];
             $user = \App\User::where('_id', $playerId)->first();
+            $details = $reqdata['details'];
+            $decodeddetails = json_decode($details);
 
        if ($currency == 'btc') {
             $cryptoamount = floatval(number_format(($amount / \App\Http\Controllers\Api\WalletController::rateDollarBtc()), 8, '.', ''));
@@ -91,8 +92,8 @@ class EvoController extends Controller
         } elseif ($currency == 'eth' || $currency == 'ETH') {
             $cryptoamount = floatval(number_format(($amount / \App\Http\Controllers\Api\WalletController::rateDollarEth()), 8, '.', ''));
         }
-      if($user->balance(Currency::find($currency))->get() > floatval($cryptoamount)) {
-        
+      
+      if($user->balance(Currency::find($currency))->get() > floatval($cryptoamount) OR $decodeddetails->game_mode_code == '2') {
         $user->balance(Currency::find($currency))->subtract($cryptoamount);
         $balance = $user->balance(Currency::find($currency))->get();
 
@@ -110,6 +111,8 @@ class EvoController extends Controller
                 $balanceA = floatval(number_format(($balance * \App\Http\Controllers\Api\WalletController::rateDollarEth()), 2, '.', ''));
         }
 
+      if($decodeddetails->game_mode_code != '2') {
+
         $game = \App\Game::create([
             'id' => DB::table('games')->count() + 1,
             'user' => $user->id,
@@ -123,7 +126,7 @@ class EvoController extends Controller
             'type' => 'quick',
             'currency' => strtolower($currency)
         ]);
-
+}
         sleep(0.08);
 
         return response()->json([
@@ -158,6 +161,9 @@ class EvoController extends Controller
             $reqdata = $request['data'];
             $amount = $reqdata['amount'];
             $roundid = $reqdata['round_id'];
+            $details = $reqdata['details'];
+            $decodeddetails = json_decode($details);
+
             $finalaction = $reqdata['final_action'];
             $user = \App\User::where('_id', $playerId)->first();
         if ($currency == 'btc') {
@@ -174,6 +180,9 @@ class EvoController extends Controller
             $cryptoamount = floatval(number_format(($amount / \App\Http\Controllers\Api\WalletController::rateDollarEth()), 8, '.', ''));
         }
 
+
+
+        if ($decodeddetails->game_mode_code == '0') {
         $getwager = (\App\Game::where('user', $user->id)->where('server_seed', $roundid)->first()->wager);
         if($amount != 0) {
             $status = 'win';
@@ -196,8 +205,8 @@ class EvoController extends Controller
                     }
 
             }
+        }
 
-        
         $user->balance(Currency::find($currency))->add($cryptoamount);
         $balance = $user->balance(Currency::find($currency))->get();
         if ($currency == 'BTC' || $currency == 'btc') {
@@ -223,7 +232,6 @@ class EvoController extends Controller
         ]);
     
     }
-
 
     public function refund(Request $request)
     {
@@ -258,7 +266,7 @@ class EvoController extends Controller
                     'client_seed' => '1'
                     ]);      
 
-                    $user->balance(Currency::find($currency))->add($cryptoamount);
+                   // $user->balance(Currency::find($currency))->add($cryptoamount);
        }
         
         $balance = $user->balance(Currency::find($currency))->get();
@@ -335,9 +343,6 @@ class EvoController extends Controller
         {
             return redirect('/');
         }
-    
-
-
         $getevouid = (\App\Slotslist::where('_id', $slug)->first()->u_id);
 
         $token = $unique . '-' . $user->_id . '-' . $currency . '-' . $slug;
@@ -348,17 +353,49 @@ class EvoController extends Controller
                     [
                         $user->_id, 
                         'https://bitsarcade.com', //exit_url 
-                        'https://bitsarcade.com' //cash_url
+                        'https://bitsarcade.com', //cash_url
+                        '1' //https
                     ], 
                     '1', //denomination
                     $this->currency, //currency
                     '1', //return_url_info
                     '2' //callback_version
                 ]; 
-                
+
+        $evofreespinslot = \App\Settings::where('name', 'evoplay_freespin_slot')->first()->value;
+        $evofreespinusd = \App\Settings::where('name', 'evoplay_freespin_usd')->first()->value;
+        $bonustoken = $unique . '-' . $user->_id . '-' . 'eth' . '-' . $slug;
+        $bonusarg = [ 
+                    $bonustoken, 
+                    $game, 
+                    [
+                        $user->freegames,
+                        $evofreespinusd,
+                        $user->_id, 
+                        'https://bitsarcade.com', //exit_url 
+                        'https://bitsarcade.com', //cash_url
+                        '1' ////https
+                    ], 
+                    '1', //denomination
+                    $this->currency, //currency
+                    '1', //return_url_info
+                    '2' //callback_version
+                ]; 
+
         $signature = self::getSignature($this->system_id, $this->version, $args, $this->secret_key);
-        
-        $response = json_decode(file_get_contents('http://api.production.games/Game/getURL?project='.$this->system_id.'&version=1&signature='.$signature.'&token='.$token.'&game='.$game.'&settings[user_id]='.$user->_id.'&settings[exit_url]=https://bitsarcade.com&settings[cash_url]=https://bitsarcade.com&denomination=1&currency=USD&return_url_info=1&callback_version=2'), true);
+        $bonussignature = self::getSignature($this->system_id, $this->version, $bonusarg, $this->secret_key);
+
+        if($user->freegames > 0 && $game == $evofreespinslot) {
+        $response = json_decode(file_get_contents('http://api.production.games/Game/getURL?project='.$this->system_id.'&version=1&signature='.$bonussignature.'&token='.$bonustoken.'&game='.$evofreespinslot.'&settings[extra_bonuses][bonus_spins][spins_count]='.$user->freegames.'&settings[extra_bonuses][bonus_spins][bet_in_money]='.$evofreespinusd.'&settings[user_id]='.$user->_id.'&settings[exit_url]=https://bitsarcade.com&settings[cash_url]=https://bitsarcade.com&settings[https]=1&denomination=1&currency=USD&return_url_info=1&callback_version=2'), true);
+        $user->update([
+            'freegames' => 0
+        ]);
+    }   
+    else {
+        $response = json_decode(file_get_contents('http://api.production.games/Game/getURL?project='.$this->system_id.'&version=1&signature='.$signature.'&token='.$token.'&game='.$game.'&settings[user_id]='.$user->_id.'&settings[exit_url]=https://bitsarcade.com&settings[cash_url]=https://bitsarcade.com&settings[https]=1&denomination=1&currency=USD&return_url_info=1&callback_version=2'), true);
+
+    }
+
         $url = $response['data']['link'];
         $view = view('evoplay')->with('url', $url);
         return view('layouts.app')->with('page', $view);

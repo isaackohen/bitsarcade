@@ -98,11 +98,15 @@
 @php
 $freespins = \App\Settings::where('name', 'freespin_slot')->first()->value;
 $slotname = \App\Slotslist::get()->where('id', $freespins)->first();
+$freespinevo = \App\Settings::where('name', 'evoplay_freespin_slot')->first()->value;
+$evoslotname = \App\Slotslist::get()->where('u_id', $freespinevo)->first()->n;
+$evoslotabsolute = \App\Slotslist::get()->where('u_id', $freespinevo)->first()->id;
+
 $notify = auth()->user()->unreadNotifications();
 @endphp
 @if(auth()->user()->freegames > '1')
 <div class="alert alert-info mb-3 mt-3" role="alert">
-  <strong>Holy guacamole</strong>. You have <strong>{{ auth()->user()->freegames }}</strong> free spins on your account! Get spinning on <a href="/slots/{{ $slotname->id }}" span style="capitalize; font-weight: 600 !important;">{{ $slotname->n }}</a></b>
+  You have <strong>{{ auth()->user()->freegames }} free <i class="{{ \App\Currency\Currency::find('eth')->icon() }}" style="color: {{ \App\Currency\Currency::find('eth')->style() }}"></i> spins</strong> on your account! Get spinning on Netent's <a href="/slots/{{ $slotname->id }}" span style="capitalize; font-weight: 600 !important;">{{ $slotname->n }}</a> or on EvoPlay's <a href="/slots-evo/{{ $evoslotabsolute }}" span style="capitalize; font-weight: 600 !important;">{{ $evoslotname }}</a>.</b>
 </span>
 </div>
 @endif

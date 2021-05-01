@@ -155,23 +155,23 @@ return [
     'notifications' => [
         'title' => 'Notifications',
         'withdraw_accepted' => [
-            'title' => 'BitsArcade',
+            'title' => 'bitsarcade',
             'message' => 'Your payment request created :diff (:sum :currency) was accepted.'
         ],
         'withdraw_declined' => [
-            'title' => 'BitsArcade',
+            'title' => 'bitsarcade',
             'message' => 'Your payment request created :diff (:sum :currency) was declined. Reason: :reason'
         ],
         'vip_discord' => [
-            'title' => 'First Loyalty Level',
+            'title' => 'loyalty',
             'message' => "You have reached <svg style='width: 14px; height: 14px'><use href='#vip-emerald'></use></svg> Emerald Loyalty status!
                          <br>We have added 15 free spins to your account!
                          <br><br>Want exclusive Loyalty promocodes? Join <a href='".\App\Settings::where('name', 'discord_invite_link')->first()->value."' class='disable-pjax' target='_blank'>our Discord server</a>.
-                         <br><br><a href='javascript:void(0)' onclick='$(\".notifications-overlay\").click(); $.vip();' class='disable-pjax'>View all Loyalty Rewards & Bonuses</a>"
+                         <br><br><a href='javascript:void(0)' onclick='$(\".notifications-overlay\").click(); $.vip();' class='disable-pjax'>Loyalty Rewards and Bonuses</a>"
         ],
         'email_reminder' => [
-            'title' => 'BitsArcade',
-            'message' => 'Don\'t forget to add email address, otherwise you could lose access to your account! <a href="/user/'.(auth()->guest() ? '' : auth()->user()->_id).'#security">Add email address</a>'
+            'title' => 'bitsarcade',
+            'message' => 'Do not forget to add email address, otherwise you could lose access to your account! <a href="/user/'.(auth()->guest() ? '' : auth()->user()->_id).'#security">Add email address</a>'
         ],
         'deposit' => 'New deposit: :sum :currency'
     ],
