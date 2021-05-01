@@ -627,8 +627,8 @@ Route::middleware('auth')->prefix('promocode')->group(function() {
         ]);
         if($promocode->currency != 'freespin') {
         $base = $promocode->sum;
-        $vipbronze = floatval($base * 1.25);
-        $vipabove = floatval($base * 1.5);
+        $vipbronze = round($base * 1.25,0);
+        $vipabove = round($base * 1.5,0);
 
         if(auth()->user()->vipLevel() == 0) {
         auth()->user()->balance(Currency::find($promocode->currency))->add($base, \App\Transaction::builder()->message('Promocode crypto (base)')->get());

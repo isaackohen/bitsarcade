@@ -10,7 +10,7 @@
     $slotname = \App\Slotslist::get()->where('id', $freespinslot)->first()->n;
 
     ?>
-    @if($name != $freespinslot && $user->freegames > 0)
+    @if($name != $freespinslot && $user->freegames > 2222)
   <div class="container-lg" style="z-index: 1;">
 
 <div class="alert alert-danger" role="alert">
