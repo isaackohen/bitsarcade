@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Currency\Currency;
 use App\User;
 use App\Leaderboard;
+use App\Http\Controllers\Api\WalletController;
+use App\Races;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -12,8 +14,8 @@ use Illuminate\Support\Facades\Log;
 class EvoController extends Controller
 
 {
-    private $system_id = '1103';
-    private $secret_key = '6b3ea85bbb479c768d7ee94b6524ecf3';
+    private $system_id = '1104';
+    private $secret_key = '3d23026575bcd1de78b8f5a0fb1305b7';
     private $version = '1';
     private $currency = 'USD';
     
@@ -121,7 +123,7 @@ class EvoController extends Controller
             'status' => 'in-progress',
             'server_seed' => $roundid,
             'client_seed' => 0,
-            'nonce' => '',
+            'nonce' => $amount,
             'data' => $gamedata,
             'type' => 'quick',
             'currency' => strtolower($currency)
@@ -184,6 +186,8 @@ class EvoController extends Controller
 
         if ($decodeddetails->game_mode_code == '0') {
         $getwager = (\App\Game::where('user', $user->id)->where('server_seed', $roundid)->first()->wager);
+        $getwagerdollar = (\App\Game::where('user', $user->id)->where('server_seed', $roundid)->first()->nonce);
+
         if($amount != 0) {
             $status = 'win';
             $multi = (float) number_format(($cryptoamount / $getwager), 2);
@@ -202,8 +206,20 @@ class EvoController extends Controller
                     if($finalaction == 1) {
                     event(new \App\Events\LiveFeedGame($game, 10));
                     Leaderboard::insert($game);
-                    }
 
+                if($multi < 0.95 || $multi > 1.25 && $getwagerdollar > 0.05) {
+                Races::insert($game);
+
+
+            if ((Currency::find($currency)->dailyminslots() ?? 0) <= $getwagerdollar) {
+             if ($user->vipLevel() > 0 && ($user->weekly_bonus ?? 0) < 100) {
+                $user->update([
+                    'weekly_bonus' => ($user->weekly_bonus ?? 0) + 0.1
+                ]);
+               }
+             }
+            }
+            }
             }
         }
 

@@ -40,7 +40,7 @@ class Keno extends QuickGame implements MultiplierCanBeLimited {
             if($mul < 1) $result->lose();
             else $result->win($user, $data, $mul);
 
-            $result->delay(1000);
+            $result->delay(1200);
 
             return [
                 'hits' => $hits,

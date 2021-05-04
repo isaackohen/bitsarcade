@@ -5,6 +5,7 @@ namespace App\Console;
 use App\Console\Commands\ProcessTRXPayments;
 use App\Console\Commands\Quiz;
 use App\Console\Commands\Rain;
+use App\Console\Commands\VIPLevel;
 use App\Console\Commands\Racepayout;
 use App\Console\Commands\PremiumRain;
 use App\Console\Commands\ResetWeeklyBonus;

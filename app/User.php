@@ -32,7 +32,7 @@ class User extends \Jenssegers\Mongodb\Auth\User implements JWTSubject {
         'discord_bonus', 'notification_bonus', 'ban', 'mute', 'weekly_bonus', 'weekly_bonus_obtained', 'jwt',
         'tfa', 'tfa_enabled', 'tfa_persistent_key', 'tfa_onetime_key', 'email_notified', 'dismissed_global_notifications',
         'vk', 'fb', 'google', 'discord', 'register_ip', 'login_ip', 'register_multiaccount_hash', 'login_multiaccount_hash',
-        'referral', 'referral_wager_obtained', 'referral_bonus_obtained', 'promocode_limit_reset', 'promocode_limit',
+        'referral', 'referral_wager_obtained', 'referral_bonus_obtained', 'promocode_limit_reset', 'promocode_limit', 
 
         'btc', 'ltc', 'eth', 'doge', 'bch', 'trx',
         'demo_btc', 'demo_ltc', 'demo_eth', 'demo_doge', 'demo_bch', 'demo_trx',
