@@ -30,7 +30,7 @@
                     4 => floatval($currency->platinumvip()),
                     5 => floatval($currency->diamondvip())
                 ];
-                $percent = number_format(auth()->user()->vipLevel() == 5 ? 100 : (\Illuminate\Support\Facades\DB::table('games')->where('user', auth()->user()->_id)->where('currency', $currency->id())->where('demo', '!=', true)->where('status', '!=', 'in-progress')->where('multiplier', '!=', 1)->where('status', '!=', 'cancelled')->sum('wager') / $breakpoints[auth()->user()->vipLevel() + 1]) * 100, 2, '.', '');
+                $percent = number_format(auth()->user()->vipLevel() == 5 ? 100 : (\Illuminate\Support\Facades\DB::table('games')->where('user', auth()->user()->_id)->where('currency', $currency->id())->where('demo', '!=', true)->where('status', '!=', 'in-progress')->where('multiplier', '!=', 1)->where('game', '!=', 'plinko')->where('status', '!=', 'cancelled')->sum('wager') / $breakpoints[auth()->user()->vipLevel() + 1]) * 100, 2, '.', '');
             @endphp
 
             <div class="vipDesc mb-4 mt-4">{{ __('vip.description', ['currency' => auth()->user()->closestVipCurrency()->name()]) }}</div>

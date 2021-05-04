@@ -151,7 +151,7 @@ min-height: 300px;
                	<br>
                	<small><i style="color: #0fd560;" class="fas fa-stopwatch me-1"></i> Ending in <?php $timeLeft = 86400 - (time() - strtotime("today")); echo date("H\\h  i\\m", $timeLeft); ?></small>
 				@endif
-				@foreach (\App\Leaderboard::where('type', $type)->where('currency', $currencystated)->where('time', $time)->orderBy($orderby, 'desc')->take(10)->get() as $entry)
+				@foreach (\App\Races::where('type', $type)->where('currency', $currencystated)->where('time', $time)->orderBy($orderby, 'desc')->take(10)->get() as $entry)
 
 				@if($loop->first)
 				<tr class="first"><th>

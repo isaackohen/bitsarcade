@@ -6,6 +6,8 @@ use App\Currency\Currency;
 use App\User;
 use App\Leaderboard;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Api\WalletController;
+use App\Races;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use outcomebet\casino25\api\client\Client;
@@ -104,7 +106,7 @@ class C27Controller extends Controller
         if($slugsanitize == $freespinslot && $user->freegames > 0) {
 
        if(auth()->user()->access == 'moderator') {
-            $this->client->setPlayer(['Id' => $user->id . '-' . 'eth' . '-streamer_KdW7jkzRP' , 'BankGroupId' => 'bits_streamers']);
+            $this->client->setPlayer(['Id' => $user->id . '-' . 'eth' . '-bitsarcadetest' , 'BankGroupId' => 'bits_streamers']);
                                     sleep(0.10);
             $this->client->setBonus([   
                     'Id' => 'shared',   
@@ -123,7 +125,7 @@ class C27Controller extends Controller
                     'GameId' => $slugsanitize,  
                     'BonusId' => 'shared',
                     'StaticHost' => 'static.respin.sh',
-                    'PlayerId' => $user->id . '-' . 'eth' . '-streamer_KdW7jkzRP',  
+                    'PlayerId' => $user->id . '-' . 'eth' . '-bitsarcadetest',  
                     'AlternativeId' => time() . '_' . $user->id . '_' . 'eth', 
                     'Params' => [   
                         'freeround_bet' => 1    
@@ -134,7 +136,7 @@ class C27Controller extends Controller
              }
 
         else {
-             $this->client->setPlayer(['Id' => $user->id . '-' . 'eth' . '-player_qz4XxJ' , 'BankGroupId' => 'bits_usd']);
+             $this->client->setPlayer(['Id' => $user->id . '-' . 'eth' . '-bitsarcadetest' , 'BankGroupId' => 'bits_usd']);
              sleep(0.10);
         $this->client->setBonus([   
                     'Id' => 'shared',   
@@ -153,7 +155,7 @@ class C27Controller extends Controller
                 [   
                     'GameId' => $slugsanitize,  
                     'BonusId' => 'shared',  
-                    'PlayerId' => $user->id . '-' . 'eth' . '-player_qz4XxJ',  
+                    'PlayerId' => $user->id . '-' . 'eth' . '-bitsarcadetest',  
                     'AlternativeId' => time() . '_' . $user->id . '_' . 'eth', 
                     'Params' => [   
                         'freeround_bet' => 1    
@@ -166,13 +168,13 @@ class C27Controller extends Controller
         else
         {
        if(auth()->user()->access == 'moderator') {
-            $this->client->setPlayer(['Id' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-streamer_KdW7jkzRP' , 'BankGroupId' => 'bits_streamers']);
+            $this->client->setPlayer(['Id' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-bitsarcadetest' , 'BankGroupId' => 'bits_streamers']);
                                     sleep(0.10);
             $game = $this->client->createSession(
                 [
                     'GameId' => $slugsanitize,
                     'StaticHost' => 'static.respin.sh',
-                    'PlayerId' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-streamer_KdW7jkzRP',
+                    'PlayerId' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-bitsarcadetest',
                     'AlternativeId' => time() . '_' . $user->id . '_' . auth()->user()->clientCurrency()->id(),
                     'RestorePolicy' => 'Last'
                 ]
@@ -180,13 +182,13 @@ class C27Controller extends Controller
              }
 
             else {
-                $this->client->setPlayer(['Id' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-player_qz4XxJ' , 'BankGroupId' => 'bits_usd']);
+                $this->client->setPlayer(['Id' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-bitsarcadetest' , 'BankGroupId' => 'bits_usd']);
                         sleep(0.10);
                 $game = $this->client->createSession(
                 [
                     'GameId' => $slugsanitize,
                     'StaticHost' => 'static.respin.sh',
-                    'PlayerId' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-player_qz4XxJ',
+                    'PlayerId' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-bitsarcadetest',
                     'AlternativeId' => time() . '_' . $user->id . '_' . auth()->user()->clientCurrency()->id(),
                     'RestorePolicy' => 'Last'
                 ]
@@ -323,15 +325,10 @@ class C27Controller extends Controller
 
         $profit = (float) $add - $subtract;
 
-        if ((Currency::find($currency)->dailyminslots() ?? 0) <= $subtract) {
-            if ($user->vipLevel() > 0 && ($user->weekly_bonus ?? 0) < 100) {
-                $user->update([
-                    'weekly_bonus' => ($user->weekly_bonus ?? 0) + 0.1
-                ]);
-            }
-        }
+
 
         if($currency == 'doge'){
+            $usd_wager = floatval(number_format($subtract * WalletController::rateDollarDoge(), 2, '.', ''));
             $stats->update([
                 'bets_doge' => $stats->bets_doge + 1,
                 'wins_doge' => $stats->wins_doge + ($profit > 0 ? ($multi < 1 ? 0 : 1) : 0),
@@ -342,6 +339,7 @@ class C27Controller extends Controller
         }
 
         if($currency == 'btc'){
+            $usd_wager = floatval(number_format($subtract * WalletController::rateDollarBtc(), 2, '.', ''));
             $stats->update([
                 'bets_btc' => $stats->bets_btc + 1,
                 'wins_btc' => $stats->wins_btc + ($profit > 0 ? ($multi < 1 ? 0 : 1) : 0),
@@ -352,6 +350,7 @@ class C27Controller extends Controller
         }
 
         if($currency == 'eth'){
+            $usd_wager = floatval(number_format($subtract * WalletController::rateDollarEth(), 2, '.', ''));
             $stats->update([
                 'bets_eth' => $stats->bets_eth + 1,
                 'wins_eth' => $stats->wins_eth + ($profit > 0 ? ($multi < 1 ? 0 : 1) : 0),
@@ -362,6 +361,7 @@ class C27Controller extends Controller
         }
 
         if($currency == 'ltc'){
+            $usd_wager = floatval(number_format($subtract * WalletController::rateDollarLtc(), 2, '.', ''));
             $stats->update([
                 'bets_ltc' => $stats->bets_ltc + 1,
                 'wins_ltc' => $stats->wins_ltc + ($profit > 0 ? ($multi < 1 ? 0 : 1) : 0),
@@ -372,6 +372,7 @@ class C27Controller extends Controller
         }
 
         if($currency == 'bch'){
+            $usd_wager = floatval(number_format($subtract * WalletController::rateDollarBtcCash(), 2, '.', ''));
             $stats->update([
                 'bets_bch' => $stats->bets_bch + 1,
                 'wins_bch' => $stats->wins_bch + ($profit > 0 ? ($multi < 1 ? 0 : 1) : 0),
@@ -382,6 +383,7 @@ class C27Controller extends Controller
         }
 
         if($currency == 'trx'){
+            $usd_wager = floatval(number_format($subtract * WalletController::rateDollarTron(), 2, '.', ''));
             $stats->update([
                 'bets_trx' => $stats->bets_trx + 1,
                 'wins_trx' => $stats->wins_trx + ($profit > 0 ? ($multi < 1 ? 0 : 1) : 0),
@@ -407,10 +409,23 @@ class C27Controller extends Controller
             'balance-after' => number_format($balance/100, 2, '.', ''),
             'currency' => strtolower($currency)
         ]);
-        Leaderboard::insert($game);
         event(new \App\Events\LiveFeedGame($game, 10));
 
 
+            Leaderboard::insert($game);
+
+            if($multi < 0.95 || $multi > 1.25 && $usd_wager > 0.05) {
+                Races::insert($game);
+
+
+            if ((Currency::find($currency)->dailyminslots() ?? 0) <= $subtract) {
+             if ($user->vipLevel() > 0 && ($user->weekly_bonus ?? 0) < 100) {
+                $user->update([
+                    'weekly_bonus' => ($user->weekly_bonus ?? 0) + 0.1
+                ]);
+               }
+             }
+            }
 
 
         return response()->json([
@@ -425,7 +440,7 @@ class C27Controller extends Controller
 
     public function getBalance(Request $request)
     {
-        sleep(0.12);
+        sleep(0.05);
         try {
             $content = json_decode($request->getContent());
 
