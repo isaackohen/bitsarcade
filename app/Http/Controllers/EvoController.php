@@ -15,7 +15,7 @@ class EvoController extends Controller
 
 {
     private $system_id = '1103';
-    private $secret_key = '6b3ea85bbb479c768d7ee94b6524ecf3';
+    private $secret_key = '097d8eafb3d81c7d54a44b565c27a44b';
     private $version = '1';
     private $currency = 'USD';
     
@@ -207,7 +207,7 @@ class EvoController extends Controller
                     event(new \App\Events\LiveFeedGame($game, 10));
                     Leaderboard::insert($game);
 
-                if($multi < 0.95 || $multi > 1.15 && $getwagerdollar > 0.05) {
+                if($multi < 0.95 || $multi > 1.25 && $getwagerdollar > 0.05) {
                 Races::insert($game);
 
 

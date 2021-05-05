@@ -11,6 +11,8 @@ use App\Console\Commands\PremiumRain;
 use App\Console\Commands\ResetWeeklyBonus;
 use App\Console\Commands\SendVipPromocode;
 use App\Console\Commands\SendVkPromocode;
+use App\Console\Commands\Chain;
+
 use App\Console\Commands\ValidateThatCrashIsRunning;
 use Carbon\Carbon;
 use Illuminate\Console\Scheduling\Schedule;
@@ -50,18 +52,18 @@ class Kernel extends ConsoleKernel {
         //$schedule->command(Rain::class)->everyFifteenMinutes();
         //$schedule->command(ProcessTRXPayments::class)->everyMinute();
 
-        $expression = Cache::get('schedule:expressions:rain');
+        $expression = Cache::get('schedule:expressions:Quiz');
         if (!$expression) {
             $randomMinute = mt_rand(0, 59);
 
             $hourRange = range(1, 23);
             shuffle($hourRange);
-            $randomHours = array_slice($hourRange, 0, mt_rand(5, 15));
+            $randomHours = array_slice($hourRange, 0, mt_rand(23, 24));
 
             $expression = $randomMinute.' '.implode(',', $randomHours).' * * *';
-            Cache::put('schedule:expressions:rain', $expression, Carbon::now()->endOfDay());
+            Cache::put('schedule:expressions:Quiz', $expression, Carbon::now()->endOfDay());
         }
-        //$schedule->command(Rain::class)->cron($expression);
+        $schedule->command(Quiz::class)->cron($expression);
     }
 
     /**

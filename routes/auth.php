@@ -158,7 +158,7 @@ Route::middleware('auth')->post('discord_bonus', function() {
     auth()->user()->update([
         'discord_bonus' => true
     ]);
-    auth()->user()->balance(auth()->user()->clientCurrency())->add(floatval(auth()->user()->clientCurrency()->option('discord')));
+    //auth()->user()->balance(auth()->user()->clientCurrency())->add(floatval(auth()->user()->clientCurrency()->option('discord')));
     return success();
 });
 

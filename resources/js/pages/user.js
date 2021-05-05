@@ -45,7 +45,7 @@ $.on('/user', function() {
             var metadata = {
             email: $('#emailUpdate').val()
             };
-            Intercom('trackEvent', 'emailset', metadata);
+            $crisp.push(["set", "session:event", [[["email-updated"]]]])
             $('#emailNotification').slideUp('fast', function() { $(this).remove(); });
         }, function() {
             $('[data-update-email]').removeClass('disabled');

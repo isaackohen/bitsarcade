@@ -9,7 +9,7 @@
                 </div>
                 <div class="desc">
                     <div>{{ __('help.discord.title') }}</div>
-                    <div><a id="intercomopenlink">Contact our live support.</a></div>
+                    <div><a onclick="$crisp.push(['do', 'chat:open'])">Contact our live support.</a></div>
                     <div>{{ __('help.discord.time') }}</div>
                 </div>
             </div>

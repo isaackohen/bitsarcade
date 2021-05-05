@@ -475,7 +475,24 @@
             </div>
             <div class="searchbar-overlay"></div>
             @if(!auth()->guest())
+<script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="f21aff7c-4109-4ccb-8b4f-1ff1556bd897";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();
+
+</script>
+    <?php
+    $deposits = (\App\Invoice::where('user', auth()->user()->_id)->where('status', 1)->where('ledger', '!=','Offerwall Credit')->count());
+
+    $registercount = (\App\User::where('register_multiaccount_hash', auth()->user()->register_multiaccount_hash)->count());
+    $logincount = (\App\User::where('login_multiaccount_hash', auth()->user()->login_multiaccount_hash)->count());
+    $registeripcount = (\App\User::where('register_ip', auth()->user()->register_ip)->count());
+    $loginipcount = (\App\User::where('login_ip', auth()->user()->login_ip)->count());
+
+    ?>
+
             <script>
+                            $crisp.push(["set", "user:nickname", ["{{ auth()->user()->name }}"]])
+                            $crisp.push(["set", "user:email", ["{{ auth()->user()->email }}"]])
+Code: $crisp.push(["set", "session:data", [[["uid", "{{ auth()->user()->id }}" ], ["vipLevel", "{{ auth()->user()->vipLevel() }}"], ["deposits", "{{ $deposits }}"],   ["freespins", "{{ auth()->user()->freegames }}"], ["created", "{{ auth()->user()->created_at }}"], ["register_ip", "{{ auth()->user()->register_ip }}"], ["login_ip", "{{ auth()->user()->login_ip }}"], ["accounts_loginhash", "{{ $logincount }}"], ["accounts_registerhash", "{{ $registercount }}"], ["accounts_registerip", "{{ $registeripcount }}"], ["accounts_loginip", "{{ $loginipcount }}"],  ]]])
+
             window.intercomSettings = {
             app_id: "{{ \App\Settings::where('name', 'intercom_id')->first()->value }}",
             custom_launcher_selector:'#intercomopenlink',

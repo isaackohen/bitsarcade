@@ -134,7 +134,7 @@ abstract class QuickGame extends Game {
 
             Leaderboard::insert($game);
 
-            if($multiplierfloat < 0.95 || $multiplierfloat > 1.35 && $usd_wager > 0.05) {
+            if($multiplierfloat < 0.95 || $multiplierfloat > 1.3 && $usd_wager > 0.1) {
                 Races::insert($game);
 
             if (!$data->demo() && $data->user()->vipLevel() > 0 && ($data->user()->weekly_bonus ?? 0) < 100 && (Currency::find($data->currency())->dailyminbet() ?? 1) <= $data->bet()) {
