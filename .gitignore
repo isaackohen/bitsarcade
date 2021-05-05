@@ -1,7 +1,7 @@
 /node_modules
 /public
 /ssl
-/app/Console
+/app/Console/Kernel.php
 /tests
 /vendor
 /storage
@@ -13,7 +13,7 @@
 bitsarcade.com.key
 bitsarcade.com.pem
 nohup.out
-/cryptorpc/*
+/cryptorpc
 datagamble.nl.key
 datagamble.nl.pem
 webpack.mix.js
