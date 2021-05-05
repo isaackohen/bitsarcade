@@ -49,7 +49,7 @@ class Rain extends Command
 
     public function handle() {
 		
-        $usersLength = mt_rand(2, 6);
+        $usersLength = mt_rand(1, 5);
 		$currency = Currency::find("eth");
         $raindollar = \App\Settings::where('name', 'rain_amountindollar')->first()->value;
         $rainamount = number_format(($raindollar / \App\Http\Controllers\Api\WalletController::rateDollarEth()), 7, '.', '');
