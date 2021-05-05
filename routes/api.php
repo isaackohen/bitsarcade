@@ -57,7 +57,7 @@ Route::post('search/games', function(Request $request) {
 
 
 Route::post('chatHistory', function() {
-    $history = \App\Chat::latest()->limit(20)->where('deleted', '!=', true)->get()->toArray();
+    $history = \App\Chat::latest()->limit(25)->where('deleted', '!=', true)->get()->toArray();
     if(\App\Settings::where('name', 'quiz_active')->first()->value !== 'false')
         array_push($history, [
             "data" => [

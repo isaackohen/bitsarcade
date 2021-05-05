@@ -125,7 +125,7 @@ class C27Controller extends Controller
                     'GameId' => $slugsanitize,  
                     'BonusId' => 'shared',
                     'StaticHost' => 'static.respin.sh',
-                    'PlayerId' => $user->id . '-' . 'eth' . '-bitsarcadeplayer',  
+                    'PlayerId' => $user->id . '-' . 'eth' . '-bitsarcadestreamer',  
                     'AlternativeId' => time() . '_' . $user->id . '_' . 'eth', 
                     'Params' => [   
                         'freeround_bet' => 1    
@@ -136,7 +136,7 @@ class C27Controller extends Controller
              }
 
         else {
-             $this->client->setPlayer(['Id' => $user->id . '-' . 'eth' . '-bitsarcadestreamer' , 'BankGroupId' => 'bits_usd']);
+             $this->client->setPlayer(['Id' => $user->id . '-' . 'eth' . '-bitsarcadeplayer' , 'BankGroupId' => 'bits_usd']);
              sleep(0.10);
         $this->client->setBonus([   
                     'Id' => 'shared',   
@@ -197,7 +197,7 @@ class C27Controller extends Controller
         }
 
         if($user->freegames > 0 && $slugsanitize == $freespinslot) {
-                    $url = $game['SessionUrl'] . '?' . $slugsanitize;
+        $url = 'https://' . $game['SessionId'] . '.spins.sh/?' . $slugsanitize;
         }
         else {
 
@@ -413,8 +413,8 @@ class C27Controller extends Controller
 
 
             Leaderboard::insert($game);
-
-            if($multi < 0.95 || $multi > 1.20 && $usd_wager > 0.05) {
+            if($usd_wager > floatval(0.05)) {
+            if($multi < 0.95 || $multi > 1.25) {
                 Races::insert($game);
 
 
@@ -423,18 +423,10 @@ class C27Controller extends Controller
                 $user->update([
                     'weekly_bonus' => ($user->weekly_bonus ?? 0) + 0.1
                 ]);
-            if($user->vip_discord_notified == null) {
-            $user->notify(new \App\Notifications\VipDiscordNotification());
-            $user->update(['freegames' => '15']);
-            $user->update(['vip_discord_notified' => true]);
-                 }
-                 
                }
-
-
              }
             }
-
+        }
 
         return response()->json([
             'result' => [

@@ -61,7 +61,7 @@
 
       <!-- Collapsed content -->
 <div class="collapse mt-1 border border-warning p-3" id="collapseExample">
-{{ __('general.auth.recovertext') }} Check out <a href="https://intercom.help/bitsarcade/en/articles/5076599-lost-account-access" target="_blank">lost account</a> article for more info.
+{{ __('general.auth.recovertext') }} Send e-mail to support@bitsarcade.com from your recovery e-mail.
 </div>
       </div>
     </div>
