@@ -89,6 +89,8 @@ Route::get('callback/adgatemedia', function(Request $request) {
                 ->header('Content-Type', 'text/plain'); 
 });
 
+
+
 Route::get('callback/KcxVGsn', function(Request $request) {
             Log::notice(json_encode($request->all()));
             $balancetype = \App\Settings::where('name', 'offerwall_balancetype')->first()->value;

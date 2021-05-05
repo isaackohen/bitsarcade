@@ -61,5 +61,6 @@ class SendVkPromocode extends Command
         ]);
 
         Notification::route('discord', Settings::where('name', 'discord_promocode_channel')->first()->value)->notify(new DiscordPromocode($promocode->code, $usages, $sum));
+        event(new \App\Events\PromoNotification());
     }
 }

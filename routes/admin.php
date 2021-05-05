@@ -11,6 +11,11 @@ use Symfony\Component\Process\Process;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use MongoDB\BSON\Decimal128;
 
+    Route::post('/sendtoastmessage', function() {
+    event(new \App\Events\UserNotification());
+        return success();
+    });
+    
 Route::prefix('wallet')->group(function() {
     Route::post('accept', function() {
         $withdraw = \App\Withdraw::where('_id', request('id'))->first();
@@ -34,6 +39,8 @@ Route::prefix('wallet')->group(function() {
         \App\User::where('_id', $withdraw->user)->first()->balance(\App\Currency\Currency::find($withdraw->currency))->add($withdraw->sum);
         return success();
     });
+
+
     Route::post('ignore', function() {
         $withdraw = \App\Withdraw::where('_id', request('id'))->first();
         if($withdraw == null || $withdraw->status != 0) return reject(1, 'Invalid state');
@@ -176,11 +183,11 @@ Route::post('start-premiumrain', function () {
     return success();
 });
 Route::post('discord-promocode', function () {
-    \Artisan::call('datagamble:sendvkpromocode');
+    \Artisan::call('datagamble:send-social-promocode');
     return success();
 });
 Route::post('discord-vipcode', function () {
-    \Artisan::call('datagamble:sendvippromocode');
+    \Artisan::call('datagamble:sendVipPromocode');
     return success();
 });
 Route::post('start-quiz', function () {

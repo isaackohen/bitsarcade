@@ -34,7 +34,7 @@ $('#searchbar').keyup(function(){
 }); 
 
 function doneTyping () {
-                var text = $('#searchbar').val();
+            var text = $('#searchbar').val();
             $.request('search/games', { text: text }).then(function(response) {
                 $('#searchbar_result').html('');
                 var data = response;

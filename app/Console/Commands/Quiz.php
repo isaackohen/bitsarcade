@@ -51,7 +51,10 @@ class Quiz extends Command {
         Settings::where('name', 'quiz_answer')->update(['value' => $json->correct_answer]);
         Settings::where('name', 'quiz_active')->update(['value' => 'true']);
 
+        event(new \App\Events\QuizNotification());
+
         event(new NewQuiz($json->question));
+
     }
 
 }

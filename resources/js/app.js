@@ -571,8 +571,21 @@ $(document).ready(function() {
 
     setInterval($.putNextInLiveQueue, 500);
 
+         
     window.Echo.channel(`laravel_database_Everyone`)
         .listen('ChatMessage', (e) => $.addChatMessage(e.message))
+            .listen('UserNotification', function(e) {
+                $.playSound('/sounds/open.mp3');
+                $.darktoast(e.message);
+            })
+            .listen('PromoNotification', function(e) {
+                $.playSound('/sounds/open.mp3');
+                $.discordmsg(e.message);
+            })
+            .listen('QuizNotification', function(e) {
+                $.playSound('/sounds/open.mp3');
+                $.triviamsg(e.message);
+            })
         .listen('NewQuiz', function(e) {
             $.addChatMessage({
                 data: {
@@ -621,7 +634,8 @@ $(document).ready(function() {
             .listen('Deposit', function(e) {
                 $.success($.lang('general.notifications.deposit', { sum: bitcoin(e.amount, 'btc').to($.unit()).value().toFixed(8), currency: e.currency }));
                 $.playSound('/sounds/ball4.mp3');
-            }).listen('BalanceModification', function(e) {
+            })
+            .listen('BalanceModification', function(e) {
             const display = function() {
                 $(`[data-currency-value="${e.currency}"]`).html(bitcoin(e.balance, 'btc').to($.unit()).value().toFixed(8));
                 $(`[data-demo-currency-value="${e.currency}"]`).html(bitcoin(e.demo_balance, 'btc').to($.unit()).value().toFixed(8));

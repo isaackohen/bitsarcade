@@ -16,7 +16,7 @@ const notifications = {
 
 const addNotification = function(id, title, message, icon) {
     $('.notifications-content .os-content').prepend(`
-        <div role="alert" style="opacity: 1;" class="toast fade show" data-autohide="false" data-toast-id="${id}">
+        <div role="alert" style="opacity: 1;" class="toast" data-autohide="false" data-toast-id="${id}">
             <div class="toast-header">
                 <i class="${icon}" style="margin-right: 5px"></i>
                 <span class="mr-auto">${title}</span>
@@ -32,12 +32,11 @@ const addNotification = function(id, title, message, icon) {
         $.request('notifications/mark', { id: id });
         $(`[data-toast-id="${id}"]`).remove();
 
-        if($('.notifications-content .toast.show').length <= 1) $('[data-notification-attention]').fadeOut('fast', function() {
+        if($('.notifications-content .toast').length <= 1) $('[data-notification-attention]').fadeOut('fast', function() {
             $(this).remove();
         });
     });
 
-    $('.toast').toast('show');
 
     if($('[data-notification-attention]').length === 0) {
         $('[data-notification-view]').prepend(`<span class="notification pulsating-circle" data-notification-attention></span>`);

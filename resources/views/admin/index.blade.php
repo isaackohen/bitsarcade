@@ -33,6 +33,7 @@
                             <span class="text-muted text-uppercase font-size-12 font-weight-bold">Control Events</span>
                             <h2 class="mb-0"><button class="btn btn-warning p-2" onclick="$.request('/admin/start-quiz');">Start Quiz</button>
                             <button class="btn btn-danger m-0 p-2" onclick="$.request('/admin/start-rain');">Start Rain</button>
+                            <button class="btn btn-danger m-0 p-2" onclick="$.request('/admin/sendtoastmessage');">Send Toast Message</button>
                             <button class="btn btn-success m-0 p-2" onclick="$.request('/admin/start-premiumrain');">Super Drop</button>
                             <button class="btn btn-info m-0 p-2" onclick="$.request('/admin/discord-promocode');">Discord-code</button>
                             <button class="btn btn-info m-0 p-2" onclick="$.request('/admin/discord-vipcode');">Discord VIP-code</button>

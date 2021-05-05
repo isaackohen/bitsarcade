@@ -57,6 +57,7 @@ class SendVipPromocode extends Command {
         ]);
 
         Notification::route('discord', Settings::where('name', 'discord_vip_promocode_channel')->first()->value)->notify(new DiscordVipPromocode($promocode->code, $usages, $sum));
+        event(new \App\Events\PromoNotification());
     }
 
 }

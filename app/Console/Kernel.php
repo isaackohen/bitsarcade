@@ -62,9 +62,14 @@ class Kernel extends ConsoleKernel {
 
             $expression = $randomMinute.' '.implode(',', $randomHours).' * * *';
             Cache::put('schedule:expressions:Quiz', $expression, Carbon::now()->endOfDay());
+            Cache::put('schedule:expressions:Quiz', $expression, Carbon::now()->endOfDay());
+            Cache::put('schedule:expressions:Quiz', $expression, Carbon::now()->endOfDay());
         }
+
         $schedule->command(Quiz::class)->cron($expression);
     }
+
+
 
     /**
      * Register the commands for the application.
