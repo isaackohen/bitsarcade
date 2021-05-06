@@ -22,7 +22,7 @@ return [
         'used' => 'You have already used this code.'
     ],
     'partner' => [
-        'description' => '<strong>Affiliate program</strong><br>Invite your friends to Bitsarcade.com and get a bonus!'
+        'description' => '<strong>Affiliate program</strong><br>Invite your friends to bets.sh and get a bonus!'
     ],
     'rain' => [
         'description' => '<strong>Rain</strong><br>Every few hours, an event occurs in the chat that distributes the bonus to random people.',
@@ -45,6 +45,6 @@ return [
         ]
     ],
     'notifications' => [
-        'description' => '<strong>Notifications</strong><br>Turn on notifications and know about Bitsarcade.com updates among the first!'
+        'description' => '<strong>Notifications</strong><br>Turn on notifications and know about bets.sh updates among the first!'
     ]
 ];

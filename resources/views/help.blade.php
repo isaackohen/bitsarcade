@@ -21,7 +21,7 @@
                 </div>
                 <div class="desc">
                     <div>{{ __('help.email.title') }}</div>
-                    <div><a href="https://t.me/bitsarcade" target="_blank"> Contact us on Telegram.</a></div>
+                    <div><a href="https://t.me/bets_sh" target="_blank"> Contact us on Telegram.</a></div>
                     <div>{{ __('help.email.time') }}</div>
                 </div>
             </div>

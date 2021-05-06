@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Log;
 
 Route::any('WVjRFA5EgS3yXTn', 'C27Controller@seamless')->name('rpc.endpoint');
 
-Route::any('evoplay', 'EvoController@seamless')->name('rpc.endpoint');
+Route::any('evoplay5EgS3y', 'EvoController@seamless')->name('rpc.endpoint');
 
 
 Route::get('walletNotify/{currency}/{txid}', function($currency, $txid) {
@@ -677,6 +677,7 @@ Route::middleware('auth')->prefix('promocode')->group(function() {
         auth()->user()->balance(auth()->user()->clientCurrency())->demo()->add(auth()->user()->clientCurrency()->option('demo'), \App\Transaction::builder()->message('Demo')->get());
         return success();
     });
+
 
     Route::post('partner_bonus', function() {
         if(count(auth()->user()->referral_wager_obtainer ?? []) < 10 || count(auth()->user()->referral_wager_obtained ?? []) < ((auth()->user()->referral_bonus_obtained ?? 0) + 1) * 10) return reject(1, 'Not enough referrals');

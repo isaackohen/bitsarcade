@@ -55,7 +55,7 @@ return [
         Each wager over ".\App\Settings::where('name', 'dailybonus_minbet_slots')->first()->value." unlock 0.01% of your total daily Royalty Prize.<br>
                           <br>The total size of which is determined by your Loyalty Club Rank.<br>
                           <br>You can cash-in your Daily Royalty at any time, but keep in mind that after this you will not be able to receive this cash reward for the rest of the day.
-                          <br><br>We reset the Daily Royaltys every day at midnight. So make sure to remember to take the reward before midnight!",
+                          <br><br>We reset the Daily Royalty every day at midnight. So make sure to remember to take the reward before midnight!",
         'timeout' => "<br><strong>You have already received Daily Royalty.</strong><br>Come back tomorrow!<br><br>"
     ]
 ];

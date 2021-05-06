@@ -36,8 +36,7 @@ class Kernel extends ConsoleKernel {
     protected function schedule(Schedule $schedule) {
         //$schedule->command(SendVkPromocode::class)->hourlyAt(41);
         //$schedule->command(SendVipPromocode::class)->hourlyAt(6);
-        //$schedule->command(Quiz::class)->hourlyAt(22);
-        //$schedule->command(Quiz::class)->hourlyAt(54);
+        $schedule->command(ResetWeeklyBonus::class)->hourlyAt(02);
         //$schedule->command(ResetWeeklyBonus::class)->daily();
         //$schedule->command(Racepayout::class)->daily();
         //$schedule->command(PremiumRain::class)->twiceDaily(1, 13);

@@ -13,9 +13,6 @@
         <div class="row profile_row">
             <div class="profile_column col">
                 <div class="profile-sidebar">
-                    <div class="avatar">
-                        <img alt src="{{ $user->avatar }}">
-                    </div>
                     @if(!auth()->guest() && auth()->user()->access !== 'user')
                         @php
                             $name_change_history = '';
@@ -234,10 +231,10 @@
                                     </div>
                                     <div>{{ __('general.profile.2fa_code') }}</div>
                                     <input type="text" id="2faucode" class="mt-1">
-                                    <button id="enable2fa" class="btn btn-primary">{{ __('general.profile.2fa_enable') }}</button>
+                                    <button class="btn btn-primary">{{ __('general.profile.2fa_enable') }}</button>
                                 @else
                                     <div class="text-center">{!! __('general.profile.2fa_enabled') !!}</div>
-                                    <button id="2fadisable" class="btn btn-primary mt-2 btn-block">{{ __('general.profile.disable_2fa') }}</button>
+                                    <button class="btn btn-primary mt-2 btn-block">{{ __('general.profile.disable_2fa') }}</button>
                                 @endif
                             </div>
                         </div>

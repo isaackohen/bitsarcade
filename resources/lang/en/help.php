@@ -16,7 +16,7 @@ return [
     ],
     'block' => [
         'questions' => [
-            'title' => 'BitsArcade.com',
+            'title' => 'bets.sh',
             'how_to_play' => [
                 'title' => 'How to use my free spins?',
                 'description' => 'We cycle free spins between most .'
@@ -35,7 +35,7 @@ return [
             ],
             'p' => [
                 'title' => 'Streamer Partnerships',
-                'description' => 'We are always interested in partnering with Twitch streamers above 100 avg. viewers. Contact us on E-mail: <a href="mailto:support@datagamble.com">support@datagamble.com</a>'
+                'description' => 'We are always interested in partnering with Twitch streamers above 100 avg. viewers. Contact us on E-mail: <a href="mailto:support@bets.sh">support@bets.sh</a>'
             ]
         ],
         'payments' => [

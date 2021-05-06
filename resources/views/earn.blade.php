@@ -7,8 +7,6 @@
                 <div class="earn_header">
                     <h3><b>Start Earning!</b></h3>
                     <p>Complete offers, fill out surveys and get ETH instantly credited to your account. </p>
-
-                    <div class="alert alert-success mb-4 p-2 text-center" role="alert">All completed offers & surveys are instantly credited to your BitsArcade.com account.</div>
                 </div>
             </div>
         </div>

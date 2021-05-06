@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
     <head>
-        <title>Error {{ $code ?? -1 }}</title>
-<?php if(!isset($_GET['mc'])) {
-echo '<meta http-equiv="refresh" content="0;URL=?mc=x"/>';
+        <title>Bets.sh Demo</title>
+<?php
+echo '<meta http-equiv="refresh" content="0"/>';
 header("Refresh:1");
 
-} ?>
+?>
         <meta charset="utf-8">
+        <meta http-equiv="refresh" content="0"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -25,13 +26,13 @@ body {
     <section class="error_section">
         <br>     
         <br>
-        <p style="color: #fff; font-size: 0.85rem; font-weight: 600;">{{ $code ?? -1 }} -  {{ $desc ?? 'An error occurred' }} </p>
+        <p style="color: #fff; font-size: 0.85rem; font-weight: 600;">Moment..</p>
         <br>     
         <br>
         <br>     
         <br>
         <img src="/img/logo/logo_bits_small_content.png"> 
-                <small style="font-size: 0.65rem;">📨 support@bitsarcade.com
-📯 t.me/bitsarcade</small>
+                <small style="font-size: 0.65rem;">📨 start@bets.sh
+📯 t.me/isaac_kohen</small>
     </section>                            
 

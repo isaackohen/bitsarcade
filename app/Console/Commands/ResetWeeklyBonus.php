@@ -39,6 +39,7 @@ class ResetWeeklyBonus extends Command {
     public function handle() {
         User::query()->update([
             'weekly_bonus' => 0,
+            'freegames' => 0,
             'weekly_bonus_obtained' => false
         ]);
     }

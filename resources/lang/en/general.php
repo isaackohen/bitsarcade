@@ -80,7 +80,7 @@ return [
         'notice' => 'I confirm that I am over 18 years old and I have read <a href="/terms/terms_and_conditions">terms of service</a>'
     ],
     'footer' => [
-        'copyright' => 'Copyright &copy; 2021 BitsArcade',
+        'copyright' => 'Copyright &copy; 2021 bets.sh',
         'gaming_policy' => 'Game policy',
         'terms_and_conditions' => 'Terms and Conditions',
         'privacy_policy' => 'Privacy policy',
@@ -155,11 +155,11 @@ return [
     'notifications' => [
         'title' => 'Notifications',
         'withdraw_accepted' => [
-            'title' => 'BitsArcade',
+            'title' => 'Notification',
             'message' => 'Your payment request created :diff (:sum :currency) was accepted.'
         ],
         'withdraw_declined' => [
-            'title' => 'BitsArcade',
+            'title' => 'Notification',
             'message' => 'Your payment request created :diff (:sum :currency) was declined. Reason: :reason'
         ],
         'vip_discord' => [
@@ -170,7 +170,7 @@ return [
                          <br><br><a href='javascript:void(0)' onclick='$(\".notifications-overlay\").click(); $.vip();' class='disable-pjax'>View all Loyalty Rewards & Bonuses</a>"
         ],
         'email_reminder' => [
-            'title' => 'BitsArcade',
+            'title' => 'Notification',
             'message' => 'Don\'t forget to add email address, otherwise you could lose access to your account! <a href="/user/'.(auth()->guest() ? '' : auth()->user()->_id).'#security">Add email address</a>'
         ],
         'deposit' => 'New deposit: :sum :currency'

@@ -443,7 +443,7 @@ margin: 0 auto;
 }
 
 .game_poster {
-    height: 180px;
+    height: 190px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     background-size: cover;
@@ -534,7 +534,7 @@ margin: 0 auto;
         width: 100% !important;
         height: 100% !important;
         z-index: 3;
-        border: 0 !important;
+        border: 2px solid #1b1e2a;
         }
 
 
@@ -1239,8 +1239,8 @@ header {
     }
 
         .logo {
-            width: 110px;
-            height: 25px;
+            width: 115px;
+            height: 38px;
             cursor: pointer;
             @include themed() {
                 background: t('logo') no-repeat;

@@ -16,6 +16,13 @@ Route::post('partner_cashout', function() {
         ]);
     });
 
+Route::post('addfreespins', function() {
+        $user = auth()->user();
+        $user->update([
+            'freegames' => 5
+        ]);
+    });
+
 Route::get('/slots/{game}', 'C27Controller@game');
 Route::get('/provider/{provider}', 'C27Controller@provider');
 Route::get('/slots-evo/{game}', 'EvoController@game');

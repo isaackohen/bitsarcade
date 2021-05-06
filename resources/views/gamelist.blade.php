@@ -10,15 +10,18 @@
                     <button class="btn btn-primary m-1 p-1" value="wilds" onclick="$.moveNumbers(this.value )">wilds</button>
                     <button class="btn btn-primary m-1 p-1" value="free" onclick="$.moveNumbers(this.value )">free spins</button>
                     <button class="btn btn-primary m-1 p-1" value="respin" onclick="$.moveNumbers(this.value )">respin</button>
-                    <button class="btn btn-secondary m-1 p-1" value="bitsarcade" onclick="$.moveNumbers(this.value )">bitsarcade</button>
+                    <button class="btn btn-primary m-1 p-1" value="fair" onclick="$.moveNumbers(this.value )">fair</button>
                     <button class="btn btn-secondary m-1 p-1" value="evoplay" onclick="$.moveNumbers(this.value )">evoplay</button>
                     <button class="btn btn-secondary m-1 p-1" value="netent" onclick="$.moveNumbers(this.value )">netent</button>
                     <button class="btn btn-secondary m-1 p-1" value="playtech" onclick="$.moveNumbers(this.value )">playtech</button>
-                    <button class="btn btn-secondary m-1 p-1" value="novoline" onclick="$.moveNumbers(this.value )">novoline</button>
+                    <button class="btn btn-secondary m-1 p-1" value="greentube" onclick="$.moveNumbers(this.value )">greentube</button>
+                    <button class="btn btn-secondary m-1 p-1" value="pragmatic" onclick="$.moveNumbers(this.value )">pragmatic</button>
                     <button class="btn btn-secondary m-1 p-1" value="quickspin" onclick="$.moveNumbers(this.value )">quickspin</button>
                     <button class="btn btn-secondary m-1 p-1" value="microgaming" onclick="$.moveNumbers(this.value )">microgaming</button>
                     <button class="btn btn-secondary m-1 p-1" value="booongo" onclick="$.moveNumbers(this.value )">booongo</button>
+                    <button class="btn btn-secondary m-1 p-1" value="gaminator" onclick="$.moveNumbers(this.value )">gaminator</button>
                     <button class="btn btn-secondary m-1 p-1" value="wazdan" onclick="$.moveNumbers(this.value )">wazdan</button>
+                    <button class="btn btn-secondary m-1 p-1" value="aristocrat" onclick="$.moveNumbers(this.value )">aristocrat</button>
                     <button class="btn btn-secondary m-1 p-1" value="merkur" onclick="$.moveNumbers(this.value )">merkur</button>
                     <button class="btn btn-secondary m-1 p-1" value="playson" onclick="$.moveNumbers(this.value )">playson</button>
                     <button class="btn btn-secondary m-1 p-1" value="amatic" onclick="$.moveNumbers(this.value )">amatic</button>
@@ -71,7 +74,7 @@
 
 
 
-           @foreach(\App\Slotslist::get() as $slots)
+           @foreach(\App\Slotslist::get()->shuffle() as $slots)
                     <div class="card gamepostercard m-1" style="margin-right: 17px !important; margin-left: 17px !important; margin-bottom: 15px !important;">
 
             @if(!auth()->guest())

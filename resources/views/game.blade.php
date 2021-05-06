@@ -35,6 +35,7 @@
 
 
 
+
 @if(!auth()->guest())
     @php $latest_game = \App\Game::latest()->where('game', $data)->where('user', auth()->user()->_id)->where('status', 'in-progress')->first(); @endphp
     @if(!is_null($latest_game))

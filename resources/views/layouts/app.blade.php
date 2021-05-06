@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" class="theme--{{ $_COOKIE['theme'] ?? 'dark' }}">
     <head>
-        <title>{{ \App\Settings::where('name', 'platform_name')->first()->value }}</title>
-        <link href="/css/webfonts.css" rel="stylesheet" type="text/css">
+        <title>Bets.sh Demo</title>
+        <link href="/css/webfonts-fr.css" rel="stylesheet" type="text/css">
         <link rel="icon" type="image/png" href="/img/logo/ico.png"/>
         <meta charset="utf-8">
         
         <noscript><meta http-equiv="refresh" content="0; /no_js"></noscript>
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, height=device-height, minimum-scale=1, maximum-scale=1, user-scalable=no">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="description" content="{{ \App\Settings::where('name', 'platform_description')->first()->value }}">
         <meta property="og:description" content="{{ \App\Settings::where('name', 'platform_description')->first()->value }}" />
@@ -215,6 +215,7 @@
                                             @foreach(\App\Games\Kernel\Game::list() as $game)
                                             @if($game->isDisabled()) @continue @endif
                                             @if($game->metadata()->id() == "slotmachine") @continue @endif
+                                            @if($game->metadata()->id() == "evoplay") @continue @endif
                                             <li class="sidenav-item">
                                                 <a onclick="redirect('/game/{{ $game->metadata()->id() }}')" class="sidenav-link"><i class="{{ $game->metadata()->icon() }} me-3"></i> {{ $game->metadata()->name() }}</a>
                                             </li>
@@ -224,6 +225,7 @@
                                     <li class="sidenav-item mt-2 mb-0"> <a  style="padding-left: 1.5rem !important;" onclick="redirect('/gamelist')" class="sidenav-link">
                                         <i style="color: #0fd560;" class="fad fa-abacus me-3"></i><span>Slots</span></a>
                                     </li>
+
                                     <li class="sidenav-item mt-2 mb-0"> <a style="padding-left: 1.5rem !important;"onclick="$.displaySearchBar()" class="sidenav-link">
                                         <i style="color: #0fd560;" class="fas fa-search me-3"></i><span>Search</span></a>
                                     </li>
@@ -299,67 +301,10 @@
                         </div>
                         <div class="footer-bottom text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
                             <img src="/img/logo/logo_bits_footer.png" alt="{{ \App\Settings::where('name', 'platform_name')->first()->value }} Logo">
-                            <a href="https://secure.ecogra.biz/validator/operator/validate=bitsarcade.com&amp;seal_id=1626f5bc489211b07f8c75b57e41e9f1e78a5a8426e197e0c6437da9ebfaea4c624094439fad0cfdd61f49fc5924bca9&amp;stamp=d4f3109f8d3bce51ca70ded5e25fd3f7/" target="_blank"><img width="65px" height="60px" src="/img/misc/basic-large-validseal.png" alt="eCOGRA License Validation"></a>
-                            <a href="https://www.bitsarcade.com/documents/RNG_Certificate_BITSARCADE_UK27February2021.pdf" target="_blank"><img width="45px" height="60px" src="/images/itechlabs.png" alt="RNG Certificate" style=""></a>
                         </div>
                     </footer>
                 </div>
-                <div class="chat">
-                    <div class="fixed">
-                        <div class="chat-input-hint chatCommands" style="display: none"></div>
-                        <div data-user-tag class="chat-input-hint" style="display: none">
-                            <div class="hint-content"></div>
-                            <div class="hint-footer">
-                                {!! __('general.chat_at') !!}
-                            </div>
-                        </div>
-                        <div class="messages"></div>
-                        <div class="message-send">
-                            @if(auth()->guest())
-                            <div class="message-auth-overlay">
-                                <button class="btn btn-block btn-secondary" onclick="$.auth()">{{ __('general.auth.login') }}</button>
-                            </div>
-                            @elseif(auth()->user()->mute != null && !auth()->user()->mute->isPast())
-                            <div class="message-auth-overlay" style="opacity: 1 !important; text-align: center; font-size: 0.8em;">
-                                {{ __('general.error.muted', [ 'time' => auth()->user()->mute ]) }}
-                            </div>
-                            @endif
-                            <div class="d-flex w-100">
-                                <div class="column">
-                                    @if(!auth()->guest())
-                                    <div class="column-icon" data-notification-view onclick="$.displayNotifications()">
-                                        <i class="fas fa-bell"></i>
-                                    </div>
-                                    @endif
-                                    @if(!auth()->guest() && auth()->user()->access == 'admin')
-                                    <div class="column-icon" id="chatCommandsToggle">
-                                        <i class="fal fa-slash fa-rotate-90"></i>
-                                    </div>
-                                    @endif
-                                    <textarea onkeydown="if(event.keyCode === 13) { $.sendChatMessage('.text-message'); return false; }" class="text-message" placeholder="{{ __('general.chat.enter_message') }}"></textarea>
-                                </div>
-                                <div class="column">
-                                    <div class="column-icon">
-                                        @if(!auth()->guest())
-                                        <div class="emoji-container">
-                                            <div class="content" data-fill-emoji-target></div>
-                                            <div class="emoji-footer">
-                                                <div class="content">
-                                                    <div class="emoji-category" onclick="$.unicodeEmojiInit()">
-                                                        <i class="fad fa-smile"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        @endif
-                                        <i class="fad fa-smile" id="emoji-container-toggle" onclick="$.unicodeEmojiInit(); $('.emoji-container').toggleClass('active')"></i>
-                                    </div>
-                                    <div class="column-icon" onclick="$.sendChatMessage('.text-message')" id="sendChatMessage"><i class="fad fa-external-link-square"></i></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
                 <div class="draggableWindow">
                     <div class="head">
                         {{ __('general.profit_monitoring.title') }}
@@ -431,19 +376,10 @@
                         @endforeach
                     </div>
                 </div>
-                <div class="floatingButtons">
-                    <div class="floatingButton" data-chat-toggle>
-                    <svg><use href="#chat"></use></svg>
-                </div>
-            </div>
             <div class="mobile-menu">
                 <div class="control" data-page-trigger="'/','/index'" data-toggle-class="active" onclick="$('.mobile-menu-games').slideToggle('fast'); $('#mobile-games-angle').toggleClass('fa-rotate-180')">
                     <i class="fas fa-spade"></i>
                     <div><i class="fal fa-angle-up" style="margin-right: 1px" id="mobile-games-angle"></i> {{ __('general.head.games') }}</div>
-                </div>
-                <div class="control" onclick="$.swapChat()">
-                    <i class="fad fa-comments"></i>
-                    <div>{{ __('general.head.chat') }}</div>
                 </div>
                 <div class="control" data-page-trigger="'/bonus'" data-toggle-class="active" onclick="redirect('/bonus')">
                     <i class="fad fa-coins"></i>
@@ -472,30 +408,5 @@
                 </div>
             </div>
             <div class="searchbar-overlay"></div>
-            @if(!auth()->guest())
-            <script>
-            window.intercomSettings = {
-            app_id: "{{ \App\Settings::where('name', 'intercom_id')->first()->value }}",
-            custom_launcher_selector:'#intercomopenlink',
-            user_id: <?php echo json_encode(auth()->user()->id) ?>,
-            name: <?php echo json_encode(auth()->user()->name) ?>,
-            email: <?php echo json_encode(auth()->user()->email) ?>,
-            register_ip: <?php echo json_encode(auth()->user()->register_ip) ?>,
-            login_ip: <?php echo json_encode(auth()->user()->login_ip) ?>,
-            accounts_registerip: <?php echo json_encode(\App\User::where('register_ip', auth()->user()->register_ip)->count()) ?>,
-            accounts_loginip: <?php echo json_encode(\App\User::where('login_ip', auth()->user()->login_ip)->count()) ?>,
-            accounts_registerhash: <?php echo json_encode(\App\User::where('register_multiaccount_hash', auth()->user()->register_multiaccount_hash)->count()) ?>,
-            accounts_loginhash: <?php echo json_encode(\App\User::where('login_multiaccount_hash', auth()->user()->login_multiaccount_hash)->count()) ?>,
-            created_at: <?php echo json_encode(auth()->user()->created_at) ?>,
-            vipLevel: <?php echo json_encode(auth()->user()->vipLevel()) ?>,
-            deposits: <?php echo json_encode(\App\Invoice::where('user', auth()->user()->_id)->where('status', 1)->where('ledger', '!=','Offerwall Credit')->count()) ?>,
-            freegames: <?php echo json_encode(auth()->user()->freegames) ?>
-            };
-            </script>
-            <script>
-            // We pre-filled your app ID in the widget URL: 'https://widget.intercom.io/widget/{{ \App\Settings::where('name', 'intercom_id')->first()->value }}'
-            (function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',w.intercomSettings);}else{var d=document;var i=function(){i.c(arguments);};i.q=[];i.c=function(args){i.q.push(args);};w.Intercom=i;var l=function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/{{ \App\Settings::where('name', 'intercom_id')->first()->value }}';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);};if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();
-            </script>
-            @endif
         </body>
     </html>
