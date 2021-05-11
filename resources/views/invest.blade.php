@@ -1,13 +1,3 @@
-@if(auth()->guest())
-    <script type="text/javascript">
-        redirect('/');
-        $.auth();
-    </script>
-@elseif(auth()->user())
-    <script type="text/javascript">
-        redirect('/');
-    </script>
-@else
 
 <div class="container-fluid">
     <div class="row investRow">
@@ -104,4 +94,3 @@
         </div>
     </div>
 </div>
-@endif

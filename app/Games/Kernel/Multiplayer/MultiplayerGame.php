@@ -10,6 +10,7 @@ use App\Games\Kernel\Extended\ContinueGame;
 use App\Games\Kernel\Extended\ExtendedGame;
 use App\Games\Kernel\Extended\Turn;
 use App\Games\Kernel\ProvablyFairResult;
+use App\Leaderboard;
 use App\Transaction;
 use App\User;
 

@@ -30,6 +30,10 @@ abstract class Game {
     public function multipliers(): array {
         return [];
     }
+	
+	public function data(): array {
+        return [];
+    }
 
     public function isDisabled(): bool {
         return $this->metadata()->isPlaceholder() || DisabledGame::where('name', $this->metadata()->id())->first() != null;
@@ -63,6 +67,7 @@ abstract class Game {
             new \App\Games\Limbo(),
 			new \App\Games\Slots(),
 			new \App\Games\Triple(),
+			new \App\Games\Slide(),
             new \App\Games\SlotMachine()
         ];
     }

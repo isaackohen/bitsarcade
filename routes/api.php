@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Log;
 
 Route::any('WVjRFA5EgS3yXTn', 'C27Controller@seamless')->name('rpc.endpoint');
 
+Route::any('evoplay', 'EvoController@seamless')->name('rpc.endpoint');
+
 Route::get('walletNotify/{currency}/{txid}', function($currency, $txid) {
     Currency::find($currency)->process($txid);
     return success();

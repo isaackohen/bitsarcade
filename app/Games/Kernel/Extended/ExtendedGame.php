@@ -101,7 +101,7 @@ abstract class ExtendedGame extends Game {
 
         $this->start($game);
 
-        return ['response' => ['id' => $game->_id, 'wager' => $data->bet()]];
+        return ['response' => ['id' => $game->_id, 'wager' => $data->bet(), 'type' => $this instanceof MultiplayerGame ? 'multiplayer' : 'extended']];
     }
 
     public function finish(\App\Game $game) {
