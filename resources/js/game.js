@@ -251,7 +251,8 @@ class SidebarComponentBuilder {
 
                     if(response.game !== undefined) { // instanceof *QuickGame
                         setTimeout(function() { $.pushStats(response.game); }, response.game.delay);
-                    } else { // instanceof ExtendedGame
+                    }  else if (response.type === 'extended') { // instanceof ExtendedGame
+
                         $.blockWager(true);
                         $.blockSidebarButtons(true);
                         $('.play-button').html($.lang('general.cancel'));
@@ -259,8 +260,12 @@ class SidebarComponentBuilder {
                         currentGameInstance.game.extendedId = response.id;
                         currentGameInstance.game.extendedState = 'in-progress';
                         $.blockPlayButton(false);
-                    }
 
+                     } else if (response.type === 'multiplayer') {
+                      currentGameInstance.game.extendedId = response.id;
+                      currentGameInstance.game.extendedState = response.canBeFinished ? 'in-progress' : 'finished';
+                      $.blockPlayButton(false);
+                    }
                     currentGameInstance.game.callback(response);
                     if(successCallback != null) successCallback(response);
 
@@ -909,10 +914,18 @@ $.blockWager = function(state) {
     state ? $('.wager-selector').prepend('<div class="wager-overlay"></div>') : $('.wager-overlay').remove();
 };
 
+$.gameData = function() {
+  return currentGameInstance.multipliers;
+};
+
+
 $.multipliers = function() {
     return currentGameInstance.multipliers;
 };
 
+$.multiplayer = function(callback) {
+  currentGameInstance.game.multiplayerCallback = callback;
+};
 $.getMinWagerSelector = function() {
     return '<div class="wager-controls"><div id="010" class="control pc">+0.0001</div><div id="050" class="control">+0.0005</div><div id="011" class="control">+0.001</div><div id="055" class="control">+0.005</div></div>'; 
 };
@@ -1016,4 +1029,57 @@ $(document).on('pjax:start', function() {
 
 $(document).on('pjax:end', function() {
     $.blockPlayButton(false);
+});
+
+$.customHistoryPopover = function(e, _ref2) {
+  var clientSeed = _ref2.clientSeed,
+      serverSeed = _ref2.serverSeed,
+      nonce = _ref2.nonce,
+      _ref2$placement = _ref2.placement,
+      placement = _ref2$placement === void 0 ? 'right' : _ref2$placement;
+  $(e).popover({
+    content: "\n            <div class=\"historypopbackground\"><strong>Client seed:</strong> ".concat(clientSeed, "</div>\n            <div><strong>Server seed:</strong> ").concat(serverSeed, "</div>\n            <div><strong>Nonce:</strong> ").concat(nonce, "</div>\n            <div><a class=\"disable-pjax\" target=\"_blank\" href=\"/fairness?verify=").concat(currentGameInstance.game.id, "-").concat(serverSeed, "-").concat(clientSeed, "-").concat(nonce, "\">").concat($.lang('general.verify'), "</a></div>\n        "),
+    html: true,
+    placement: placement,
+    trigger: 'manual'
+  }).on('mouseenter', function () {
+    var _this = this;
+
+    $(this).popover('show');
+    $('.popover').on('mouseleave', function () {
+      return $(_this).popover('hide');
+    });
+  }).on('mouseleave', function () {
+    var _this = this;
+
+    setTimeout(function () {
+      if (!$('.popover:hover').length) $(_this).popover('hide');
+    }, 10);
+  });
+  return e;
+};
+
+var validateMultiplayerAction = function validateMultiplayerAction(game_id, event, data) {
+  if (window.location.pathname.includes("/".concat(game_id))) {
+    if (currentGameInstance.game === null) {
+      setTimeout(function () {
+        return validateMultiplayerAction(game_id, event, data);
+      }, 100);
+    } else if (currentGameInstance.game.multiplayerCallback != null) {
+      console.log(event, data);
+      currentGameInstance.game.multiplayerCallback(event, data);
+    }
+  }
+};
+
+window.Echo.channel('laravel_database_Everyone').listen('MultiplayerBettingStateChange', function (e) {
+  return validateMultiplayerAction(e.game, 'MultiplayerBettingStateChange', e);
+}).listen('MultiplayerBetCancellation', function (e) {
+  return validateMultiplayerAction(e.game.game, 'MultiplayerBetCancellation', e);
+}).listen('MultiplayerGameFinished', function (e) {
+  return validateMultiplayerAction(e.game, 'MultiplayerGameFinished', e);
+}).listen('MultiplayerTimerStart', function (e) {
+  return validateMultiplayerAction(e.game, 'MultiplayerTimerStart', e);
+}).listen('MultiplayerGameBet', function (e) {
+  return validateMultiplayerAction(e.game.game, 'MultiplayerGameBet', e);
 });

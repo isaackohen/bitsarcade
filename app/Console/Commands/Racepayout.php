@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Chat;
 use App\Leaderboard;
+use App\Races;
 use App\Currency\Currency;
 use App\Events\ChatMessage;
 use App\Invoice;
@@ -52,7 +53,7 @@ class Racepayout extends Command
         $yday = Carbon::yesterday()->timestamp; 
         $index = 0;
 
-        foreach (\App\Leaderboard::where('type', 'today')->where('currency', 'usd')->where('time', $yday)->orderBy('usd_wager', 'desc')->take(10)->get() as $i=>$entry) {
+        foreach (\App\Races::where('type', 'today')->where('currency', 'usd')->where('time', $yday)->orderBy('usd_wager', 'desc')->take(10)->get() as $i=>$entry) {
             if($i == 0){
                         $user = \App\User::where('_id', $entry->user)->first();
                         $balancetype = \App\Settings::where('name', 'races_prize_currency')->first()->value;

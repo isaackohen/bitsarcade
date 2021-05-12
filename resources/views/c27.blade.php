@@ -46,9 +46,9 @@
     @foreach(\App\Slotslist::all()->where('p', $provider)->random(7) as $slots)
     <div class="card gamepostercard" style="cursor: pointer; margin-left: 10px; margin-right: 10px;">
       @if(!auth()->guest())
-      <div onclick="redirect('/slots/{{ $slots->id }}')" class="game_poster" style="background-image:url(/img/slots_webp/{{ $slots->id }}.webp)">
+      <div onclick="redirect('/slots/{{ $slots->id }}')" class="game_poster" style="background-image:url(/img/slots-wide/{{ $slots->p }}/{{ $slots->id }}.webp)">
         @else
-        <div onclick="$.auth()" class="game_poster" style="background-image:url(/img/slots_webp/{{ $slots->id }}.webp)">
+        <div onclick="$.auth()" class="game_poster" style="background-image:url(/img/slots-wide/{{ $slots->p }}/{{ $slots->id }}.webp)">
           @endif
           <div class="label">
             {{ $slots->p }}
@@ -68,9 +68,9 @@
       @foreach(\App\Slotslist::all()->random(15) as $slots)
       <div class="card gamepostercard" style="cursor: pointer; margin-left: 10px; margin-right: 10px;">
         @if(!auth()->guest())
-        <div onclick="redirect('/slots/{{ $slots->id }}')" class="game_poster" style="background-image:url(/img/slots_webp/{{ $slots->id }}.webp)">
+        <div onclick="redirect('/slots/{{ $slots->id }}')" class="game_poster" style="background-image:url(/img/slots-wide/{{ $slots->p }}/{{ $slots->id }}.webp)">
           @else
-          <div onclick="$.auth()" class="game_poster" style="background-image:url(/img/slots_webp/{{ $slots->id }}.webp)">
+          <div onclick="$.auth()" class="game_poster" style="background-image:url(/img/slots-wide/{{ $slots->p }}/{{ $slots->id }}.webp)">
             @endif
             <div class="label">
               {{ $slots->p }}

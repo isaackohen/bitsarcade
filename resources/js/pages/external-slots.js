@@ -16,15 +16,15 @@ $('.relevantgames').owlCarousel({
             items:1,
             nav:false
         },
-        450:{
+        375:{
             items:2,
             nav:false
         },
-        925:{
+        760:{
             items:3,
             nav:false
         },
-        1125:{
+        950:{
             items:4,
             nav:false
         },
@@ -51,15 +51,15 @@ $('.randomgames').owlCarousel({
             items:1,
             nav:false
         },
-        450:{
+        375:{
             items:2,
             nav:false
         },
-        925:{
+        760:{
             items:3,
             nav:false
         },
-        1125:{
+        950:{
             items:4,
             nav:false
         },

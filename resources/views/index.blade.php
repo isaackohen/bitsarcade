@@ -239,9 +239,10 @@ $notify = auth()->user()->unreadNotifications();
                   <?php
                   $getname = $game->metadata()->name();
                   ?>
-                  @if($getname == "Dice")
+
+                @if($getname == "Slide")
                   <div class="label-red">
-                    HOT!
+                    NEW!
                   </div>
                   @endif
                   <div class="label-fair">

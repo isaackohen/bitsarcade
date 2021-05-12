@@ -8,12 +8,12 @@
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <button
-          type="button"
-          class="btn-close"
-          data-mdb-dismiss="change_client_seed modal"
-          aria-label="Close"
-        ></button>
+                <button
+                type="button"
+                data-mdb-dismiss="change_client_seed modal"
+                aria-label="Close"
+                class="btn-secondary btn-close"
+                ><i class="fas fa-close-symbol"></i></button>
       </div>
       <div class="modal-body">
         <div class="ui-blocker" style="display: none;">
@@ -27,3 +27,6 @@
 
 </div>
 </div>
+
+
+

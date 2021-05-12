@@ -1,5 +1,5 @@
- @import 'variables';
- @import '~mdb-ui-kit/css/mdb.dark.min.css';
+@import 'variables';
+@import '~mdb-ui-kit/css/mdb.dark.min.css';
 @import '~owl.carousel/dist/assets/owl.carousel.css';
 @import '~izitoast/dist/css/iziToast.min.css';
 @import '~overlayscrollbars/css/OverlayScrollbars.min.css';
@@ -13,7 +13,8 @@
 $sidebar-width: 195px;
 $header-height: 50px;
 $chat-width: 275px;
-
+$cardgamehistory: inset 1px 0px 0px 0px #1f233061 !important;
+$cardgamecontent: -3px -3px 8px 1px #11141fcf, 2px 2px 8px 0px #0d0d0dcf, inset 1px 1px 0px 0px #1f233057 !important;
 $card: -3px -3px 8px 1px #11141fcf, 2px 2px 8px 0px #0d0d0dcf, inset 1px 1px 0px 0px #1f2330 !important;
 
 
@@ -171,6 +172,10 @@ $card: -3px -3px 8px 1px #11141fcf, 2px 2px 8px 0px #0d0d0dcf, inset 1px 1px 0px
 
 .game-tower {
     background-image: url('/img/game/tower.png');
+}
+
+.game-slide {
+    background-image: url('/img/game/slide.png');
 }
 
 .game-stairs {
@@ -435,7 +440,7 @@ margin: 0 auto;
 .game-card-name {
         font-size: 12px;
         font-weight: 600; 
-        text-transform: capitalize;
+        text-transform: capitalize; 
 }
 
 .game-card-provider {
@@ -447,7 +452,7 @@ margin: 0 auto;
 }
 
 .game_poster {
-    height: 160px;
+    height: 190px;
     border: 2px solid #1a2133;
     filter: brightness(0.99);
     border-top-left-radius: 10px;
@@ -2689,6 +2694,7 @@ footer {
             bottom: 0;
             left: 0;
             padding: 15px;
+            box-shadow: $cardgamehistory;
             background: darken(t('sidebar'), 2%);
             display: flex;
             width: 100%;
@@ -2726,7 +2732,7 @@ footer {
         .resultPopup {
             border: 3px solid #3bc248;
             border-radius: 3px;
-            background: darken(t('sidebar'), 2.5%);
+            background: darken(t('sidebar'), 1.5%);
             display: flex;
             flex-direction: column;
             position: absolute;
@@ -2804,13 +2810,13 @@ footer {
 
 .game-sidebar, .game-content {
     @include themed() {
-    $bg3: lighten(t('sidebar'), 0.5%);
-    $bg4: darken(t('sidebar'), 1.5%);
+    $bg3: lighten(t('sidebar'), 2.0%);
+    $bg4: lighten(t('sidebar'), 0.5%);
     background: linear-gradient($bg3, $bg4); 
             }
 
     border-radius: 5px;
-    box-shadow: $card;
+    box-shadow: $cardgamecontent;
     padding: 15px;
     height: 100%;
     position: relative;
@@ -2930,6 +2936,7 @@ footer {
                 text-align: center;
                 text-transform: uppercase;
                 width: 50%;
+                box-shadow: $cardgamehistory;
                 background: darken(t('sidebar'), 2%);
                 padding: 12px;
                 align-items: center;
@@ -3236,8 +3243,8 @@ footer {
 
         .sidebarMultiplayerBets {
             margin-top: 10px;
-            background: darken(t('sidebar'), 1.5%);
-            border-radius: 3px;
+            background: lighten(t('sidebar'), 1.5%);
+            border-radius: 16px;
             height: 100%;
             min-height: 240px;
 
@@ -3254,8 +3261,16 @@ footer {
 
         .play-button {
             font-size: 14px;
+        min-height: 35px;
         }
 
+    }
+}
+
+.historypopbackground {
+    box-shadow: $card !important;
+        @include themed() {
+    background: lighten(t('header'), 2%) !important;
     }
 }
 

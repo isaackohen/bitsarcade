@@ -151,9 +151,12 @@ const card = CARDS[Math.floor(float * 52)];</code></pre>
                     <div class="fairness-games">
                         @foreach(\App\Games\Kernel\Game::list() as $game)
                             @if($game->metadata()->isPlaceholder()) @continue @endif
+                                    @if($game->metadata()->id() == "slotmachine" || $game->isDisabled() || $game->metadata()->id() == "evoplay")
+                                    @else
                             <div class="game {{ $game->metadata()->id() == 'dice' ? 'active' : '' }}" data-fairness-game="{{ $game->metadata()->id() }}" data-toggle="tooltip" data-placement="top" title="{{ $game->metadata()->id() }}">
                                 <i class="{{ $game->metadata()->icon() }}"></i>
                             </div>
+                            @endif
                         @endforeach
                     </div>
                     <div class="mb-1 mt-1"><strong>{{ __('fairness.calculator.client_seed') }}</strong></div>

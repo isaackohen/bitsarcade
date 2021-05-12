@@ -32,6 +32,10 @@ abstract class Game {
         return [];
     }
 
+    public function data(): array {
+        return [];
+    }
+    
     public function isDisabled(): bool {
         return $this->metadata()->isPlaceholder() || DisabledGame::where('name', $this->metadata()->id())->first() != null;
     }
@@ -50,17 +54,18 @@ abstract class Game {
 
     public static function list() {
         return [
+            new \App\Games\Slide(),
             new \App\Games\Mines(),
-            new \App\Games\Dice(),
             new \App\Games\Baccarat(),
             new \App\Games\Wheel(),
+            new \App\Games\Dice(),
+            new \App\Games\Blackjack(),
             new \App\Games\Plinko(),
             new \App\Games\Coinflip(),
             new \App\Games\VideoPoker(),
             new \App\Games\Tower(),
             new \App\Games\Keno(),
             new \App\Games\Stairs(),
-            new \App\Games\Blackjack(),
             new \App\Games\Diamonds(),
             new \App\Games\Roulette(),
             new \App\Games\Crash(),

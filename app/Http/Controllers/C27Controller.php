@@ -107,7 +107,7 @@ class C27Controller extends Controller
 
        if(auth()->user()->access == 'moderator') {
             $this->client->setPlayer(['Id' => $user->id . '-' . 'eth' . '-bitsarcadestreamer' , 'BankGroupId' => 'bits_streamers']);
-                                    sleep(0.10);
+                                    usleep(11000);
             $this->client->setBonus([   
                     'Id' => 'shared',   
                     'FsType' => 'original', 
@@ -137,7 +137,7 @@ class C27Controller extends Controller
 
         else {
              $this->client->setPlayer(['Id' => $user->id . '-' . 'eth' . '-bitsarcadeplayer' , 'BankGroupId' => 'bits_usd']);
-             sleep(0.10);
+             usleep(11000);
         $this->client->setBonus([   
                     'Id' => 'shared',   
                     'FsType' => 'original', 
@@ -169,7 +169,7 @@ class C27Controller extends Controller
         {
        if(auth()->user()->access == 'moderator') {
             $this->client->setPlayer(['Id' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-bitsarcadestreamer' , 'BankGroupId' => 'bits_streamers']);
-                                    sleep(0.10);
+                                    usleep(11000);
             $game = $this->client->createSession(
                 [
                     'GameId' => $slugsanitize,
@@ -182,13 +182,13 @@ class C27Controller extends Controller
              }
 
             else {
-                $this->client->setPlayer(['Id' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-bitsarcadeplayer' , 'BankGroupId' => 'bits_usd']);
-                        sleep(0.10);
+                $this->client->setPlayer(['Id' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-dkk' , 'BankGroupId' => 'dkk']);
+        usleep(11000);
                 $game = $this->client->createSession(
                 [
                     'GameId' => $slugsanitize,
                     'StaticHost' => 'static.respin.sh',
-                    'PlayerId' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-bitsarcadeplayer',
+                    'PlayerId' => $user->id . '-' . auth()->user()->clientCurrency()->id() . '-dkk',
                     'AlternativeId' => time() . '_' . $user->id . '_' . auth()->user()->clientCurrency()->id(),
                     'RestorePolicy' => 'Last'
                 ]
@@ -204,7 +204,7 @@ class C27Controller extends Controller
         $url = 'https://' . $game['SessionId'] . '.spins.sh/?' . $slugsanitize;
         }
         $view = view('c27')->with('data', $game)->with('url', $url);
-        sleep(0.95);
+        usleep(150000);
         return view('layouts.app')->with('page', $view);
         
 
@@ -440,7 +440,7 @@ class C27Controller extends Controller
 
     public function getBalance(Request $request)
     {
-        sleep(0.05);
+        usleep(12000);
         try {
             $content = json_decode($request->getContent());
 
