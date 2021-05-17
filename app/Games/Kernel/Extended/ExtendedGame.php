@@ -21,56 +21,56 @@ abstract class ExtendedGame extends Game {
 
     public function process(Data $data) {
         if(!$this->acceptsDemo() && ($data->guest() || $data->demo())) return ['error' => [-7, 'This game does not accept any demo bets']];
-        if($this instanceof MultiplayerGame && $this->state()->hasBetFrom($data->user()->_id)) return ['code' => -6, 'message' => "Can't place more than one bet"];
+        if($this instanceof MultiplayerGame && $this->state()->hasBetFrom($data->user()->_id)) return ['error' => [-6, "Can't place more than one bet"]];
         if(!$this->acceptBet($data)) return ['error' => [-6, 'Game won\'t accept any bets right now']];
 
         if(!$data->guest()) $data->user()->balance(Currency::find($data->currency()))->demo($data->demo())->subtract($data->bet(), Transaction::builder()->game($data->id())->message('Game')->get());
         if(!$data->guest()){
-			if(\App\Statistics::where('_id', $data->user()->_id)->first() == null) {
-				$a = \App\Statistics::create([
-					'_id' => $data->user()->_id, 'bets_btc' => 0, 'wins_btc' => 0, 'loss_btc' => 0, 'wagered_btc' => 0, 'profit_btc' => 0, 'bets_eth' => 0, 'wins_eth' => 0, 'loss_eth' => 0, 'wagered_eth' => 0, 'profit_eth' => 0, 'bets_ltc' => 0, 'wins_ltc' => 0, 'loss_ltc' => 0, 'wagered_ltc' => 0, 'profit_ltc' => 0, 'bets_doge' => 0, 'wins_doge' => 0, 'loss_doge' => 0, 'wagered_doge' => 0, 'profit_doge' => 0, 'bets_bch' => 0, 'wins_bch' => 0, 'loss_bch' => 0, 'wagered_bch' => 0, 'profit_bch' => 0, 'bets_trx' => 0, 'wins_trx' => 0, 'loss_trx' => 0, 'wagered_trx' => 0, 'profit_trx' => 0
-				]);
-			}
+            if(\App\Statistics::where('_id', $data->user()->_id)->first() == null) {
+                $a = \App\Statistics::create([
+                    '_id' => $data->user()->_id, 'bets_btc' => 0, 'wins_btc' => 0, 'loss_btc' => 0, 'wagered_btc' => 0, 'profit_btc' => 0, 'bets_eth' => 0, 'wins_eth' => 0, 'loss_eth' => 0, 'wagered_eth' => 0, 'profit_eth' => 0, 'bets_ltc' => 0, 'wins_ltc' => 0, 'loss_ltc' => 0, 'wagered_ltc' => 0, 'profit_ltc' => 0, 'bets_doge' => 0, 'wins_doge' => 0, 'loss_doge' => 0, 'wagered_doge' => 0, 'profit_doge' => 0, 'bets_bch' => 0, 'wins_bch' => 0, 'loss_bch' => 0, 'wagered_bch' => 0, 'profit_bch' => 0, 'bets_trx' => 0, 'wins_trx' => 0, 'loss_trx' => 0, 'wagered_trx' => 0, 'profit_trx' => 0
+                ]);
+            }
 
-			$stats = \App\Statistics::where('_id', $data->user()->_id)->first();
+            $stats = \App\Statistics::where('_id', $data->user()->_id)->first();
 
-			if($data->currency() == 'btc'){
-			$stats->update([
+            if($data->currency() == 'btc'){
+            $stats->update([
                 'bets_btc' => $stats->bets_btc + 1,
-				'wagered_btc' => $stats->wagered_btc + $data->bet()
+                'wagered_btc' => $stats->wagered_btc + $data->bet()
             ]);
-			}
-			if($data->currency()== 'eth'){
-			$stats->update([
+            }
+            if($data->currency()== 'eth'){
+            $stats->update([
                 'bets_eth' => $stats->bets_eth + 1,
-				'wagered_eth' => $stats->wagered_eth + $data->bet()
+                'wagered_eth' => $stats->wagered_eth + $data->bet()
             ]);
-			}
-			if($data->currency() == 'ltc'){
-			$stats->update([
+            }
+            if($data->currency() == 'ltc'){
+            $stats->update([
                 'bets_ltc' => $stats->bets_ltc + 1,
-				'wagered_ltc' => $stats->wagered_ltc + $data->bet()
+                'wagered_ltc' => $stats->wagered_ltc + $data->bet()
             ]);
-			}
-			if($data->currency() == 'doge'){
-			$stats->update([
+            }
+            if($data->currency() == 'doge'){
+            $stats->update([
                 'bets_doge' => $stats->bets_doge + 1,
-				'wagered_doge' => $stats->wagered_doge + $data->bet()
+                'wagered_doge' => $stats->wagered_doge + $data->bet()
             ]);
-			}
-			if($data->currency() == 'bch'){
-			$stats->update([
+            }
+            if($data->currency() == 'bch'){
+            $stats->update([
                 'bets_bch' => $stats->bets_bch + 1,
-				'wagered_bch' => $stats->wagered_bch + $data->bet()
+                'wagered_bch' => $stats->wagered_bch + $data->bet()
             ]);
-			}
-			if($data->currency() == 'trx'){
-			$stats->update([
+            }
+            if($data->currency() == 'trx'){
+            $stats->update([
                 'bets_trx' => $stats->bets_trx + 1,
-				'wagered_trx' => $stats->wagered_trx + $data->bet()
+                'wagered_trx' => $stats->wagered_trx + $data->bet()
             ]);
-			}
-		}
+            }
+        }
 
         if ($data->user() != null && $data->user()->referral != null) {
             $referrer = \App\User::where('_id', $data->user()->referral)->first();
@@ -101,7 +101,14 @@ abstract class ExtendedGame extends Game {
 
         $this->start($game);
 
-        return ['response' => ['id' => $game->_id, 'wager' => $data->bet()]];
+        return [
+            'response' => [
+                'id' => $game->_id, 
+                'wager' => $data->bet(),
+                'type' => $this instanceof MultiplayerGame ? 'multiplayer' : 'extended',
+                'canBeFinished' => $this instanceof MultiplayerGame ? $this->canBeFinished() : null
+            ]
+        ];
     }
 
     public function finish(\App\Game $game) {
@@ -114,56 +121,56 @@ abstract class ExtendedGame extends Game {
             $currency = Currency::find($game->currency);
             $user = User::where('_id', $game->user)->first();
 
-			if(\App\Statistics::where('_id', $game->user)->first() == null) {
-				$a = \App\Statistics::create([
-					'_id' => $game->user, 'bets_btc' => 0, 'wins_btc' => 0, 'loss_btc' => 0, 'wagered_btc' => 0, 'profit_btc' => 0, 'bets_eth' => 0, 'wins_eth' => 0, 'loss_eth' => 0, 'wagered_eth' => 0, 'profit_eth' => 0, 'bets_ltc' => 0, 'wins_ltc' => 0, 'loss_ltc' => 0, 'wagered_ltc' => 0, 'profit_ltc' => 0, 'bets_doge' => 0, 'wins_doge' => 0, 'loss_doge' => 0, 'wagered_doge' => 0, 'profit_doge' => 0, 'bets_bch' => 0, 'wins_bch' => 0, 'loss_bch' => 0, 'wagered_bch' => 0, 'profit_bch' => 0, 'bets_trx' => 0, 'wins_trx' => 0, 'loss_trx' => 0, 'wagered_trx' => 0, 'profit_trx' => 0
-				]);
-			}
+            if(\App\Statistics::where('_id', $game->user)->first() == null) {
+                $a = \App\Statistics::create([
+                    '_id' => $game->user, 'bets_btc' => 0, 'wins_btc' => 0, 'loss_btc' => 0, 'wagered_btc' => 0, 'profit_btc' => 0, 'bets_eth' => 0, 'wins_eth' => 0, 'loss_eth' => 0, 'wagered_eth' => 0, 'profit_eth' => 0, 'bets_ltc' => 0, 'wins_ltc' => 0, 'loss_ltc' => 0, 'wagered_ltc' => 0, 'profit_ltc' => 0, 'bets_doge' => 0, 'wins_doge' => 0, 'loss_doge' => 0, 'wagered_doge' => 0, 'profit_doge' => 0, 'bets_bch' => 0, 'wins_bch' => 0, 'loss_bch' => 0, 'wagered_bch' => 0, 'profit_bch' => 0, 'bets_trx' => 0, 'wins_trx' => 0, 'loss_trx' => 0, 'wagered_trx' => 0, 'profit_trx' => 0
+                ]);
+            }
 
-			$stats = \App\Statistics::where('_id', $game->user)->first();
+            $stats = \App\Statistics::where('_id', $game->user)->first();
 
-			if($game->currency == 'btc'){
-			$stats->update([
-				'wins_btc' => $stats->wins_btc + ($game->status === 'lose' ? 0 : 1),
-				'loss_btc' => $stats->loss_btc + ($game->status === 'lose' ? 1 : 0),
-				'profit_btc' => $stats->profit_btc + ($game->status === 'lose' ? -($game->wager) : ($game->wager * $game->multiplier))
+            if($game->currency == 'btc'){
+            $stats->update([
+                'wins_btc' => $stats->wins_btc + ($game->status === 'lose' ? 0 : 1),
+                'loss_btc' => $stats->loss_btc + ($game->status === 'lose' ? 1 : 0),
+                'profit_btc' => $stats->profit_btc + ($game->status === 'lose' ? -($game->wager) : ($game->wager * $game->multiplier))
             ]);
-			}
-			if($game->currency == 'eth'){
-			$stats->update([
-				'wins_eth' => $stats->wins_eth + ($game->status === 'lose' ? 0 : 1),
-				'loss_eth' => $stats->loss_eth + ($game->status === 'lose' ? 1 : 0),
-				'profit_eth' => $stats->profit_eth + ($game->status === 'lose' ? -($game->wager) : ($game->wager * $game->multiplier))
+            }
+            if($game->currency == 'eth'){
+            $stats->update([
+                'wins_eth' => $stats->wins_eth + ($game->status === 'lose' ? 0 : 1),
+                'loss_eth' => $stats->loss_eth + ($game->status === 'lose' ? 1 : 0),
+                'profit_eth' => $stats->profit_eth + ($game->status === 'lose' ? -($game->wager) : ($game->wager * $game->multiplier))
             ]);
-			}
-			if($game->currency == 'ltc'){
-			$stats->update([
-				'wins_ltc' => $stats->wins_ltc + ($game->status === 'lose' ? 0 : 1),
-				'loss_ltc' => $stats->loss_ltc + ($game->status === 'lose' ? 1 : 0),
-				'profit_ltc' => $stats->profit_ltc + ($game->status === 'lose' ? -($game->wager) : ($game->wager * $game->multiplier))
+            }
+            if($game->currency == 'ltc'){
+            $stats->update([
+                'wins_ltc' => $stats->wins_ltc + ($game->status === 'lose' ? 0 : 1),
+                'loss_ltc' => $stats->loss_ltc + ($game->status === 'lose' ? 1 : 0),
+                'profit_ltc' => $stats->profit_ltc + ($game->status === 'lose' ? -($game->wager) : ($game->wager * $game->multiplier))
             ]);
-			}
-			if($game->currency == 'doge'){
-			$stats->update([
-				'wins_doge' => $stats->wins_doge + ($game->status === 'lose' ? 0 : 1),
-				'loss_doge' => $stats->loss_doge + ($game->status === 'lose' ? 1 : 0),
-				'profit_doge' => $stats->profit_doge + ($game->status === 'lose' ? -($game->wager) : ($game->wager * $game->multiplier))
+            }
+            if($game->currency == 'doge'){
+            $stats->update([
+                'wins_doge' => $stats->wins_doge + ($game->status === 'lose' ? 0 : 1),
+                'loss_doge' => $stats->loss_doge + ($game->status === 'lose' ? 1 : 0),
+                'profit_doge' => $stats->profit_doge + ($game->status === 'lose' ? -($game->wager) : ($game->wager * $game->multiplier))
             ]);
-			}
-			if($game->currency == 'bch'){
-			$stats->update([
-				'wins_bch' => $stats->wins_bch + ($game->status === 'lose' ? 0 : 1),
-				'loss_bch' => $stats->loss_bch + ($game->status === 'lose' ? 1 : 0),
-				'profit_bch' => $stats->profit_bch + ($game->status === 'lose' ? -($game->wager) : ($game->wager * $game->multiplier))
+            }
+            if($game->currency == 'bch'){
+            $stats->update([
+                'wins_bch' => $stats->wins_bch + ($game->status === 'lose' ? 0 : 1),
+                'loss_bch' => $stats->loss_bch + ($game->status === 'lose' ? 1 : 0),
+                'profit_bch' => $stats->profit_bch + ($game->status === 'lose' ? -($game->wager) : ($game->wager * $game->multiplier))
             ]);
-			}
-			if($game->currency == 'trx'){
-			$stats->update([
-				'wins_trx' => $stats->wins_trx + ($game->status === 'lose' ? 0 : 1),
-				'loss_trx' => $stats->loss_trx + ($game->status === 'lose' ? 1 : 0),
-				'profit_trx' => $stats->profit_trx + ($game->status === 'lose' ? -($game->wager) : ($game->wager * $game->multiplier))
+            }
+            if($game->currency == 'trx'){
+            $stats->update([
+                'wins_trx' => $stats->wins_trx + ($game->status === 'lose' ? 0 : 1),
+                'loss_trx' => $stats->loss_trx + ($game->status === 'lose' ? 1 : 0),
+                'profit_trx' => $stats->profit_trx + ($game->status === 'lose' ? -($game->wager) : ($game->wager * $game->multiplier))
             ]);
-			}
+            }
 
             if($this->getTurn($game) == 0) {
                 $this->handleCancellation($game);
@@ -179,7 +186,7 @@ abstract class ExtendedGame extends Game {
                     auth()->user()->update([
                         'weekly_bonus' => (auth()->user()->weekly_bonus ?? 0) + 0.1
                     ]);
-				Leaderboard::insert($game);
+                Leaderboard::insert($game);
             }
         }
     }

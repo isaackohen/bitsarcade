@@ -15,7 +15,7 @@
 
                     <div class="earn_container">
 @if(!auth()->guest())
-<iframe src="https://wall.adgaterewards.com/n6yaqA/{{ auth()->user()->_id }}" style="position:inherit; top:0px; left:0px; bottom:0px; right:0px; width:100%; overflow:hidden;
+<iframe src="https://wall.adgaterewards.com/n62aqA/{{ auth()->user()->_id }}" style="position:inherit; top:0px; left:0px; bottom:0px; right:0px; width:100%; overflow:hidden;
  height:100%; min-height: 650px; border:none; margin:0; padding:0;  z-index:999999;">Your browser doesn't support iframes</iframe>
 
 @else

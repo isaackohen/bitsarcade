@@ -11,8 +11,8 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="description" content="{{ \App\Settings::where('name', 'platform_description')->first()->value }}">
         <meta property="og:description" content="{{ \App\Settings::where('name', 'platform_description')->first()->value }}" />
-        <meta property="og:image" content="{{ asset('/img/logo/thumb.png') }}" />
-        <meta property="og:image:secure_url" content="{{ asset('/img/logo/thumb.png') }}" />
+        <meta property="og:image" content="{{ asset('/img/logo/thumb.jpg') }}" />
+        <meta property="og:image:secure_url" content="{{ asset('/img/logo/thumb.jpg') }}" />
         <meta property="og:image:type" content="image/svg+xml" />
         <meta property="og:image:width" content="295" />
         <meta property="og:image:height" content="295" />
@@ -298,7 +298,7 @@
                             </section>
                         </div>
                         <div class="footer-bottom text-center p-3" style="background-color: rgb(95 63 208);">
-        <img src="/img/logo/lunabet_dark_footer.png" alt="" loading="lazy">
+        <img src="/img/logo/lunabet_dark_footer.png">
                         </div>
                     </footer>
                 </div>

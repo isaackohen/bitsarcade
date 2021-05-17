@@ -28,13 +28,11 @@
         </div>
 
 <div class="form-outline mt-3 mb-3">
-  <input type="text" id="login" class="form-control"/>
-  <label class="form-label" for="typeText">Display Name</label>
+  <input placeholder="Display Name" type="text" id="login" class="form-control active"/>
 </div>
 
 <div class="form-outline mt-3 mb-3">
-  <input type="password" id="password" class="form-control" />
-  <label class="form-label" for="typeText">Password</label>
+  <input placeholder="Password" type="password" id="password" class="form-control active" />
 </div>
 <div style="height: 78px; margin-bottom: 20px;">
                                        {!! NoCaptcha::display(['data-theme' => 'light'], ['data-callback' => 'recaptchaCallback']) !!}

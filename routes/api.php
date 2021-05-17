@@ -33,27 +33,22 @@ Route::get('blockNotify/{currency}/{blockId}', function($currency, $blockId) {
     return success();
 });
 
+
 Route::post('search/games', function(Request $request) {
         $request->validate([
             'text' => ['required', 'string', 'min:1']
         ]);
-        $client = new \outcomebet\casino25\api\client\Client(array(
-            'url' => 'https://api.c27.games/v1/',
-            'sslKeyPath' => env('c27_path'),
-        ));
-        $games = $client->listGames();
-        $games = array_slice($games['Games'], 0, 1500);
+        $games = \App\Slotslist::get();
         $items = json_decode(json_encode($games));
         $input = $request->text;
         $result = array_filter($items, function ($item) use ($input) {
-        if ((stripos($item->Name, $input) !== false) || (stripos($item->SectionId, $input) !== false)) {
+        if ((stripos($item->n, $input) !== false) || (stripos($item->p, $input) !== false)) {
         return true;
         }
         return false;
         });
         return success(array_values($result));
     });
-
 
 
 Route::post('chatHistory', function() {
@@ -89,7 +84,7 @@ Route::get('callback/adgatemedia', function(Request $request) {
                 ->header('Content-Type', 'text/plain'); 
 });
 
-Route::get('callback/KcxVGsn', function(Request $request) {
+Route::get('callback/UjFGmu', function(Request $request) {
             Log::notice(json_encode($request->all()));
             $balancetype = \App\Settings::where('name', 'offerwall_balancetype')->first()->value;
             $amount = $request->get('amount');
@@ -172,7 +167,7 @@ Route::middleware('auth')->prefix('wallet')->group(function() {
     Route::post('getDepositWallet', function(Request $request) {
         $currency = Currency::find($request->currency);
         $mindeposit = floatval(auth()->user()->clientCurrency()->option('mindeposit'));
-        if($request->currency == 'doge' || $request->currency == 'ltc') {
+        if($request->currency == 'doge') {
         $wallet = auth()->user()->depositWallet($currency);
         if($currency == null || !$currency->isRunning() || $wallet === 'Error') return reject(1);
         return success([

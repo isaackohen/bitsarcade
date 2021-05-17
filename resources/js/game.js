@@ -152,11 +152,11 @@ class SidebarComponentBuilder {
                     <div class="control"><i class="fas fa-asterisk"></i></div>
                     ${$.isGuest() ? '' : `<div class="control" style="padding-top: 4px;">MAX</div>`}
                 </div>
-			${$.getMinWagerSelector()}
+            ${$.getMinWagerSelector()}
             </div>
         `);
-		
-		   $('.wager-controls .control').on('click', function() {
+        
+           $('.wager-controls .control').on('click', function() {
             const input = $(`${$.sidebarSelector()} .wager-selector input`);
             if(input.val().length === 0 || isNaN(input.val()) || parseFloat(input.val()) < 0) input.val('0.00');
             const value = parseFloat(input.val());
@@ -249,23 +249,26 @@ class SidebarComponentBuilder {
                         $(this).remove();
                     });
 
-                    if(response.game !== undefined) { // instanceof *QuickGame
-                        setTimeout(function() { $.pushStats(response.game); }, response.game.delay);
-                    }  else if (response.type === 'extended') { // instanceof ExtendedGame
-
-                        $.blockWager(true);
-                        $.blockSidebarButtons(true);
-                        $('.play-button').html($.lang('general.cancel'));
-
-                        currentGameInstance.game.extendedId = response.id;
-                        currentGameInstance.game.extendedState = 'in-progress';
-                        $.blockPlayButton(false);
-
-                     } else if (response.type === 'multiplayer') {
+                    if (response.game !== undefined) {
+                      // instanceof QuickGame
+                      setTimeout(function () {
+                        $.pushStats(response.game);
+                      }, response.game.delay);
+                    } else if (response.type === 'extended') {
+                      $.blockWager(true);
+                      $.blockSidebarButtons(true);
+                      $('.play-button').html($.lang('general.cancel'));
+                      currentGameInstance.game.extendedId = response.id;
+                      currentGameInstance.game.extendedState = 'in-progress';
+                      $.blockPlayButton(false);
+                    } else if (response.type === 'multiplayer') {
                       currentGameInstance.game.extendedId = response.id;
                       currentGameInstance.game.extendedState = response.canBeFinished ? 'in-progress' : 'finished';
                       $.blockPlayButton(false);
                     }
+                    
+                    console.log('Type of game: '+ response.type);
+
                     currentGameInstance.game.callback(response);
                     if(successCallback != null) successCallback(response);
 
@@ -341,7 +344,7 @@ class SidebarComponentBuilder {
                         case -8:
                             redirect(window.location.pathname);
                             break;
-						case -9:
+                        case -9:
                             $.error($.lang('general.error.wager_max', { value: $.getMaxBet() }));
                             break;
                     }
@@ -528,12 +531,41 @@ class SidebarFooterComponent {
     }
 
     help() {
-        this.button('far fa-rectangle-wide', $.lang('general.footer.game.wide'), function() {
+        this.button('fal fa-question-circle', $.lang('general.footer.game.help'), function() {
+            $.modal('help').then(() => {
+                $('.help .heading').html(currentGameInstance.game.id.capitalize());
+                $('.help .btn').html($.lang('game_help.next'));
+                $('.help').attr('data-page', '1');
+                $('.help .help-content').html('');
 
-  const containerElement = document.getElementById("gamecontainer");
-  const newClass = containerElement.className == "container" ? "container-fluid" : "container";
-  containerElement.className = newClass;
+                let i = 1;
+                while (true) {
+                    const check = `game_help.${currentGameInstance.game.id}.${i}`;
+                    const translation = $.lang(check);
+                    if (check === translation) break;
 
+                    $('.help .help-content').append(`<div class="help-game" data-help-page="${i}">${translation}</div>`);
+
+                    i++;
+                }
+
+                $('.help .btn').on('click', function () {
+                    const page = parseInt($('.help').attr('data-page'));
+                    if (page + 2 >= i) $('.help .btn').html($.lang('game_help.close'));
+                    if (page + 2 > i) {
+                        $.modal('help');
+                        return;
+                    }
+
+                    $('[data-help-page]').hide();
+                    $(`[data-help-page="${page + 1}"]`).show();
+
+                    $('.help').attr('data-page', page + 1);
+                });
+
+                $('[data-help-page]').hide();
+                $('[data-help-page="1"]').show();
+            });
         });
         return this;
     }
@@ -584,8 +616,8 @@ class SidebarComponentValues {
         if(set != null) $(`${$.sidebarSelector()} .profit`).val(parseFloat(set).toFixed(8));
         return bitcoin(parseFloat($(`${$.sidebarSelector()} .profit`).val()), $.unit()).to('btc').value();
     }
-	
-	currency(set = null) {
+    
+    currency(set = null) {
         $('.wager-currency').remove();
         if(set != null && set != 0 && isNaN(parseFloat(set)) != true) {
             return $(`<div class="wager-currency"><div class="wager-currency-2"> ${$.getCurrencyLabel()}`+set+`<br /></div></div>`).insertAfter($(".wager-controls"));
@@ -808,7 +840,7 @@ $.setWagerSelector = function() {
                     <div class="control"><i class="fas fa-asterisk"></i></div>
                     ${$.isGuest() ? '' : `<div class="control" style="padding-top: 4px;">MAX</div>`}
                 </div>
-			${$.getMinWagerSelector()}
+            ${$.getMinWagerSelector()}
             </div>
         `);
 
@@ -914,18 +946,10 @@ $.blockWager = function(state) {
     state ? $('.wager-selector').prepend('<div class="wager-overlay"></div>') : $('.wager-overlay').remove();
 };
 
-$.gameData = function() {
-  return currentGameInstance.multipliers;
-};
-
-
 $.multipliers = function() {
     return currentGameInstance.multipliers;
 };
 
-$.multiplayer = function(callback) {
-  currentGameInstance.game.multiplayerCallback = callback;
-};
 $.getMinWagerSelector = function() {
     return '<div class="wager-controls"><div id="010" class="control pc">+0.0001</div><div id="050" class="control">+0.0005</div><div id="011" class="control">+0.001</div><div id="055" class="control">+0.005</div></div>'; 
 };
@@ -941,6 +965,10 @@ $.sidebarData = function() {
 
 $.triggerSidebarUpdate = function() {
     if(currentGameInstance.sidebarChangeCallback != null) currentGameInstance.sidebarChangeCallback();
+};
+
+$.multiplayer = function (callback) {
+  currentGameInstance.game.multiplayerCallback = callback;
 };
 
 $.multiplayerBets = function() {
@@ -1019,26 +1047,14 @@ $.abbreviate = function(value) {
     if (value >= 1e12) return +(value / 1e12).toFixed(1) + "T";
 };
 
-$.customWagerCalculation = function(callback) {
-    currentGameInstance.game.customWagerCalculation = callback;
-};
-
-$(document).on('pjax:start', function() {
-    if(currentGameInstance.game != null && $.autoBetActive()) $.autoBetStop();
-});
-
-$(document).on('pjax:end', function() {
-    $.blockPlayButton(false);
-});
-
-$.customHistoryPopover = function(e, _ref2) {
+$.customHistoryPopover = function (e, _ref2) {
   var clientSeed = _ref2.clientSeed,
       serverSeed = _ref2.serverSeed,
       nonce = _ref2.nonce,
       _ref2$placement = _ref2.placement,
       placement = _ref2$placement === void 0 ? 'right' : _ref2$placement;
   $(e).popover({
-    content: "\n            <div class=\"historypopbackground\"><strong>Client seed:</strong> ".concat(clientSeed, "</div>\n            <div><strong>Server seed:</strong> ").concat(serverSeed, "</div>\n            <div><strong>Nonce:</strong> ").concat(nonce, "</div>\n            <div><a class=\"disable-pjax\" target=\"_blank\" href=\"/fairness?verify=").concat(currentGameInstance.game.id, "-").concat(serverSeed, "-").concat(clientSeed, "-").concat(nonce, "\">").concat($.lang('general.verify'), "</a></div>\n        "),
+    content: "\n            <div><strong>Client seed:</strong> ".concat(clientSeed, "</div>\n            <div><strong>Server seed:</strong> ").concat(serverSeed, "</div>\n            <div><strong>Nonce:</strong> ").concat(nonce, "</div>\n            <div><a class=\"disable-pjax\" target=\"_blank\" href=\"/fairness?verify=").concat(currentGameInstance.game.id, "-").concat(serverSeed, "-").concat(clientSeed, "-").concat(nonce, "\">").concat($.lang('general.verify'), "</a></div>\n        "),
     html: true,
     placement: placement,
     trigger: 'manual'
@@ -1082,4 +1098,16 @@ window.Echo.channel('laravel_database_Everyone').listen('MultiplayerBettingState
   return validateMultiplayerAction(e.game, 'MultiplayerTimerStart', e);
 }).listen('MultiplayerGameBet', function (e) {
   return validateMultiplayerAction(e.game.game, 'MultiplayerGameBet', e);
+});
+
+$.customWagerCalculation = function(callback) {
+    currentGameInstance.game.customWagerCalculation = callback;
+};
+
+$(document).on('pjax:start', function() {
+    if(currentGameInstance.game != null && $.autoBetActive()) $.autoBetStop();
+});
+
+$(document).on('pjax:end', function() {
+    $.blockPlayButton(false);
 });

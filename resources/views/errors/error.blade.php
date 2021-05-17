@@ -33,6 +33,6 @@ body {
                 <p style="color: white; font-size: 0.85rem; font-weight: bold;">{{ $code ?? -1 }} {{ $desc ?? ' ' }} </p>
 
                 <small style="color: white; margin-top: 10px; font-size: 0.65rem;">📨 support@lunabet.io
-📯 t.me/lunabet</small>
+📯 https://t.me/lunabetio</small>
     </section>                            
 

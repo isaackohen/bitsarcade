@@ -98,7 +98,7 @@ $.game('slide', function (container, overviewData) {
             $('.slideCustomHistory').prepend(el);
             el.hide().slideDown('fast');
             $('.slideCustomHistoryElement:nth-child(3)').remove();
-      $.blockPlayButton(false);
+            $.blockPlayButton(false);
           }, 6000);
           break;
 
@@ -150,6 +150,7 @@ $.on('/game/slide', function () {
       $.multiplayerBets().add(data.user, data.game);
     });
   }, function() {
-      $.sidebarData().currency(($.sidebarData().bet() * $.getPriceCurrency()).toFixed(4));
+            $.sidebarData().currency(($.sidebarData().bet() * $.getPriceCurrency()).toFixed(4));
     });
 }, ['/css/pages/slide.css']); 
+Copied

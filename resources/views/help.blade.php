@@ -3,7 +3,7 @@
         <div class="heading">{{ __('help.contact_us') }}</div>
     <div class="row">
         <div class="col-12 col-md-6">
-            <div class="contact_us">
+            <div class="contact_us" style="background: transparent;">
                 <div class="icon">
                     <i class="fas fa-headphones"></i>
                 </div>
@@ -15,13 +15,13 @@
             </div>
         </div>
         <div class="col-12 col-md-6">
-            <div class="contact_us">
+            <div class="contact_us" style="background: transparent;">
                 <div class="icon">
                     <i class="fas fa-envelope"></i>
                 </div>
                 <div class="desc">
                     <div>{{ __('help.email.title') }}</div>
-                    <div><a href="https://t.me/bitsarcade" target="_blank"> Contact us on Telegram.</a></div>
+                    <div><a href="https://t.me/lunabetio" target="_blank"> Contact us on Telegram.</a></div>
                     <div>{{ __('help.email.time') }}</div>
                 </div>
             </div>

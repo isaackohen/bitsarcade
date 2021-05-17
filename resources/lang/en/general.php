@@ -258,6 +258,7 @@ return [
     'quiz_user' => 'User:',
     'chart' => 'Chart',
     'crash' => 'CRASHED',
+    'verify' => 'Check Provably Fair',
     'yes' => 'Yes',
     'no' => 'No',
     'unit' => 'View $/€',
