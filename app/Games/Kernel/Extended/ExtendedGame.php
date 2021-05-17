@@ -21,7 +21,7 @@ abstract class ExtendedGame extends Game {
 
     public function process(Data $data) {
         if(!$this->acceptsDemo() && ($data->guest() || $data->demo())) return ['error' => [-7, 'This game does not accept any demo bets']];
-        if($this instanceof MultiplayerGame && $this->state()->hasBetFrom($data->user()->_id)) return ['code' => -6, 'message' => "Can't place more than one bet"];
+        if($this instanceof MultiplayerGame && $this->state()->hasBetFrom($data->user()->_id)) return ['error' => [-6, "Can't place more than one bet"]];
         if(!$this->acceptBet($data)) return ['error' => [-6, 'Game won\'t accept any bets right now']];
 
         if(!$data->guest()) $data->user()->balance(Currency::find($data->currency()))->demo($data->demo())->subtract($data->bet(), Transaction::builder()->game($data->id())->message('Game')->get());
@@ -101,7 +101,14 @@ abstract class ExtendedGame extends Game {
 
         $this->start($game);
 
-        return ['response' => ['id' => $game->_id, 'wager' => $data->bet()]];
+        return [
+			'response' => [
+				'id' => $game->_id, 
+				'wager' => $data->bet(),
+				'type' => $this instanceof MultiplayerGame ? 'multiplayer' : 'extended',
+                'canBeFinished' => $this instanceof MultiplayerGame ? $this->canBeFinished() : null
+			]
+		];
     }
 
     public function finish(\App\Game $game) {

@@ -102,8 +102,12 @@ $.game('crash', function (container, overviewData) {
       }, 66);
     };
 
-    startTimestamp = $.gameData()['timestamp'];
+    startTimestamp = $.multipliers().timestamp;
     startGame();
+
+    _.forEach($.multipliers().players, function (data) {
+      $('.crashMultiplayerTable').append($("\n                <div class=\"user\" onclick=\"window.open('/user/".concat(data.user._id, "', '_blank')\">\n                    <div class=\"avatar\">\n                        <img src=\"").concat(data.user.avatar, "\" alt>\n                    </div>\n                    <div class=\"name\">\n                        ").concat(data.user.name, "\n                    </div>\n                    <div class=\"bet\">\n                        ").concat((data.game.wager).toFixed(8), " <i class=\"").concat(window.Laravel.currency[data.game.currency].icon, "\" style=\"color: ").concat(window.Laravel.currency[data.game.currency].style, "\"></i>\n                    </div>\n                </div>\n            ")));
+    });
 
     setTimeout(function () {
       return $('.play-button').addClass('disabled');
@@ -121,7 +125,7 @@ $.game('crash', function (container, overviewData) {
       9: ['#ff003f', '#990026']
     };
 
-    _.forEach($.multipliers()[1], function (m) {
+    _.forEach($.multipliers().history, function (m) {
       var color = hex[0];
       if (m.multiplier > 250) color = hex[9];else if (m.multiplier > 100) color = hex[8];else if (m.multiplier > 10) color = hex[7];else if (m.multiplier > 7) color = hex[6];else if (m.multiplier > 5) color = hex[5];else if (m.multiplier > 4) color = hex[4];else if (m.multiplier > 3) color = hex[3];else if (m.multiplier > 2) color = hex[2];else if (m.multiplier > 1) color = hex[1];
       $('.crashCustomHistory').append($.customHistoryPopover($("<div class=\"crashCustomHistoryElement\" style=\"background: ".concat(color[0], "; border-bottom: 1px solid ").concat(color[1], "\">").concat(m.multiplier.toFixed(2) + 'x', "</div>")), {
@@ -138,7 +142,7 @@ $.game('crash', function (container, overviewData) {
           break;
 
         case 'MultiplayerGameBet':
-          $.multiplayerBets().add(data.user, data.game);
+          $('.crashMultiplayerTable').append($("\n                        <div class=\"user\" onclick=\"window.open('/user/".concat(data.user._id, "', '_blank')\">\n                            <div class=\"avatar\">\n                                <img src=\"").concat(data.user.avatar, "\" alt>\n                            </div>\n                            <div class=\"name\">\n                                ").concat(data.user.name, "\n                            </div>\n                            <div class=\"bet\">\n                                ").concat((data.game.wager).toFixed(8), " <i class=\"").concat(window.Laravel.currency[data.game.currency].icon, "\" style=\"color: ").concat(window.Laravel.currency[data.game.currency].style, "\"></i>\n                            </div>\n                            <div class=\"crash\" data-players-cashout-id=\"").concat(data.game._id, "\" data-update=\"true\">\n                                x1.00\n                            </div>\n                        </div>\n                    ")).hide().fadeIn('fast'));
           break;
 
         case 'MultiplayerBetCancellation':
@@ -153,6 +157,7 @@ $.game('crash', function (container, overviewData) {
           break;
 
         case 'MultiplayerGameFinished':
+          $.finishExtended(false);
           crashed = true;
           $('[data-update="true"]').addClass('text-danger');
           var color = hex[0];
@@ -185,7 +190,6 @@ $.game('crash', function (container, overviewData) {
             return users.slideUp('fast');
           }, 3000);
           placedBetThisRound = false;
-          $.multiplayerBets().clear();
           setRoundTimer(6, function () {
             startTimestamp = +new Date() / 1000;
             startGame();
@@ -357,11 +361,10 @@ $.on('/game/crash', function () {
       if (!isNaN(v) && parseFloat(v) >= 1.1 && parseFloat(v) <= 1000) autoCashout = parseFloat(v);
     }, '2.00');
     component.autoBets();
-    component.play();
-    component.multiplayerBets();
-    component.footer().help().sound().stats();
-    }, function() {
-            $.sidebarData().currency(($.sidebarData().bet() * $.getPriceCurrency()).toFixed(4));
+    component.play();  
+    component.footer().sound().stats();
+  }, function() {
+			$.sidebarData().currency(($.sidebarData().bet() * $.getPriceCurrency()).toFixed(4));
     });
 }, ['/css/pages/crash.css']);
 /**

@@ -40,7 +40,7 @@ $.game('slide', function (container, overviewData) {
       9: ['#ff003f', '#990026']
     };
 
-    _.forEach($.gameData().history, function (m) {
+    _.forEach($.multipliers().history, function (m) {
       var color = hex[0];
       if (m.multiplier > 250) color = hex[9];else if (m.multiplier > 100) color = hex[8];else if (m.multiplier > 10) color = hex[7];else if (m.multiplier > 7) color = hex[6];else if (m.multiplier > 5) color = hex[5];else if (m.multiplier > 4) color = hex[4];else if (m.multiplier > 3) color = hex[3];else if (m.multiplier > 2) color = hex[2];else if (m.multiplier > 1) color = hex[1];
       $('.slideCustomHistory').append($.customHistoryPopover($("<div class=\"slideCustomHistoryElement\" style=\"cursor: pointer; background: ".concat(color[0], "; border-bottom: 1px solid ").concat(color[1], "\">").concat(m.multiplier.toFixed(2) + 'x', "</div>")), {
@@ -50,14 +50,14 @@ $.game('slide', function (container, overviewData) {
       }));
     });
 
-    _.forEach($.gameData().data.slides, function (slide) {
+    _.forEach($.multipliers().data.slides, function (slide) {
       return $('.slide_container_row').append(card(slide));
     });
 
     clone();
-    if ($.gameData().timestamp === -1) spin($.gameData().data.index, $.gameData().data.slides.length);else {
+    if ($.multipliers().timestamp === -1) spin($.multipliers().data.index, $.multipliers().data.slides.length);else {
       var now = +new Date() / 1000;
-      var left = parseInt(now - $.gameData().timestamp);
+      var left = parseInt(now - $.multipliers().timestamp);
       if (left >= 0 && left <= 6) setRoundTimer(left);
     }
     $.multiplayer(function (event, data) {
@@ -146,8 +146,10 @@ $.on('/game/slide', function () {
     component.multiplayerBets();
         component.footer().sound().stats();
 
-    _.forEach($.gameData().players, function (data) {
+    _.forEach($.multipliers().players, function (data) {
       $.multiplayerBets().add(data.user, data.game);
     });
-  });
+  }, function() {
+			$.sidebarData().currency(($.sidebarData().bet() * $.getPriceCurrency()).toFixed(4));
+    });
 }, ['/css/pages/slide.css']); 

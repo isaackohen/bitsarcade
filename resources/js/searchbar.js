@@ -38,23 +38,30 @@ function doneTyping () {
             $.request('search/games', { text: text }).then(function(response) {
                 $('#searchbar_result').html('');
                 var data = response;
-                var result = data.map(function(o){
+                var result = data.map(function(response){
+					var linkslot = function(){
+						if(response.p == 'evoplay'){
+							return `onclick="redirect('/slots-evo/${response._id}')"`;
+						} else {
+							return `onclick="redirect('/slots/${response._id}')"`;
+						}
+					};
                     return `
                     <div class="card gamepostercard m-2">
-                    <div class="slots_small_poster" onclick="redirect('/slots/${o.Id}')"  >
-                    <img class="img-small-slots" data-src="/img/slots_webp/${o.Id}.webp">
-                    <div class="label">${o.SectionId}</div>
+                    <div class="slots_small_poster" ` + linkslot() + ` >
+					<img class="img-small-slots" data-src="/img/slots-wide/${response.p}/${response._id}.webp">
+                    <div class="label">${response.p}</div>
                     <div class="name">
                     <div class="name-text">
-                    <div class="title">${o.Name}</div>
-                    <div class="desc">${o.Description}</div>
-                    <button class="btn btn-secondary" onclick="redirect('/slots/${o.Id}')">Play</button>                  
+                    <div class="title">${response.n}</div>
+                    <div class="desc">${response.desc}</div>
+                    <button class="btn btn-secondary" ` + linkslot() + ` >Play</button>                  
                     </div>
                     </div>
                     </div>
                     <div class="card-footer p-2" style="max-width: 190px;">
-                    <small><p class="card-title">${o.Name}</p>
-                    <span class="cardprovider"><a href="/provider/${o.SectionId}">${o.SectionId}</a></span></small></div>
+                    <small><p class="card-title">${response.n}</p>
+                    <span class="cardprovider"><a href="/provider/${response.p}">${response.p}</a></span></small></div>
                     </div>
                     `;
                 });

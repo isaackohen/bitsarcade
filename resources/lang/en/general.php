@@ -260,6 +260,7 @@ return [
     'crash' => 'CRASHED',
     'yes' => 'Yes',
     'no' => 'No',
+	'verify' => 'Check Provably Fair',
     'unit' => 'View $/€',
     'coming_soon' => 'Coming Soon',
     'reload' => 'Cooldown:',

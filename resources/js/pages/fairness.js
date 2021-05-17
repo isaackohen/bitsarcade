@@ -14,6 +14,8 @@ import Tower from './fairness/games/Tower';
 import Cards from './fairness/games/Cards';
 import Triple from './fairness/games/Triple';
 import Slots from './fairness/games/Slots';
+import Slide from './fairness/games/Slide';
+import Double from './fairness/games/Double';
 
 const bundle = {
     'dice': {
@@ -41,6 +43,11 @@ const bundle = {
             return new Crash().verify({ serverSeed, clientSeed, nonce });
         }
     },
+	'slide': {
+        verify: function({ serverSeed, clientSeed, nonce }) {
+            return new Slide().verify({ serverSeed, clientSeed, nonce });
+        }
+    },
     'mines': {
         verify: function({ serverSeed, clientSeed, nonce }) {
             let result = [];
@@ -64,6 +71,11 @@ const bundle = {
                 new Wheel().verify({ serverSeed, clientSeed, nonce }, 14) + ' (Double)',
                 new Wheel().verify({ serverSeed, clientSeed, nonce }, 56) + ' (X50)'
             ];
+        }
+    },
+	'double': {
+        verify: function({ serverSeed, clientSeed, nonce }) {
+            return new Double().verify({ serverSeed, clientSeed, nonce });
         }
     },
     'blackjack': {

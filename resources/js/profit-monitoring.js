@@ -153,4 +153,10 @@ $(document).ready(function() {
 
     $.stats().chart = chart;
     $.stats().reset();
+	  if (!$.isGuest()) window.Echo.channel('laravel_database_Everyone').listen('LiveFeedGame', function (e) {
+    if (e.game.type !== 'multiplayer' || e.game.user !== window.Laravel.userId) return;
+    setTimeout(function () {
+      return $.pushStats(e.game);
+    }, e.delay);
+  });
 });

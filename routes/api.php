@@ -37,16 +37,11 @@ Route::post('search/games', function(Request $request) {
         $request->validate([
             'text' => ['required', 'string', 'min:1']
         ]);
-        $client = new \outcomebet\casino25\api\client\Client(array(
-            'url' => 'https://api.c27.games/v1/',
-            'sslKeyPath' => env('c27_path'),
-        ));
-        $games = $client->listGames();
-        $games = array_slice($games['Games'], 0, 1500);
+        $games = \App\Slotslist::get();
         $items = json_decode(json_encode($games));
         $input = $request->text;
         $result = array_filter($items, function ($item) use ($input) {
-        if ((stripos($item->Name, $input) !== false) || (stripos($item->SectionId, $input) !== false)) {
+        if ((stripos($item->n, $input) !== false) || (stripos($item->p, $input) !== false)) {
         return true;
         }
         return false;

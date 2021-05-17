@@ -4,6 +4,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+	flex-direction: column;
     position: relative;
 
     .cashout {
@@ -19,12 +20,12 @@
 
     .crashCustomHistory {
         position: absolute;
-        right: 30px;
+		right: 30px;
         top: 30px;
         display: flex;
         flex-direction: column;
         text-align: center;
-        height: calc(100% - 70px);
+        height: 228px;
         width: 45px;
         border-radius: 5px;
         overflow: hidden;
@@ -42,11 +43,69 @@
             color: black;
         }
     }
+	
+	.crashMultiplayerTable { 
+	  width: 100%;
+	  border-top: 5px solid #ff9900;
+	  margin-top: 5px;
+	  display: flex;
+	  flex-direction: column;
+	}
+
+	.crashMultiplayerTable .user {
+	  display: flex;
+	  flex-direction: row;
+	  align-items: center;
+	  padding: 15px;
+	  @include themed() {
+            background: lighten(t('body'), 3%);
+      }
+	  transition: background 0.3s ease;
+	  cursor: pointer;
+	}
+
+	.crashMultiplayerTable .user:hover {
+	  background: #171f2c;
+	}
+
+	.crashMultiplayerTable .user:first-child {
+	  margin-top: 5px;
+	}
+
+	.crashMultiplayerTable .user:nth-child(even) {
+	  @include themed() {
+            background: lighten(t('body'), 3%);
+      }
+	}
+
+	.crashMultiplayerTable .user:nth-child(even):hover {
+	  background: #171f2c !important;
+	}
+
+	.crashMultiplayerTable .user .avatar img {
+	  border-radius: 50%;
+	  width: 32px;
+	  height: 32px;
+	}
+
+	.crashMultiplayerTable .user .name {
+	  margin-left: 5px;
+	}
+
+	.crashMultiplayerTable .user .bet {
+	  margin-left: auto;
+	}
+
+	.crashMultiplayerTable .user .crash {
+	  margin-left: 5px;
+	}
 
     .game-history {
         height: 10px;
         padding: 0 !important;
         position: relative;
+		top: 0 !important;
+		bottom: unset !important;
 
         .history-crash {
             position: absolute;
@@ -55,6 +114,7 @@
             height: 100%;
             width: 0;
             will-change: width;
+			background: #1957ec;
 
             span {
                 position: absolute;
@@ -63,10 +123,6 @@
                 transform: translateY(-50%);
                 color: white;
                 font-size: 0.65em;
-            }
-
-            @include themed() {
-                background: t('secondary');
             }
         }
     }
