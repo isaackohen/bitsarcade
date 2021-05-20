@@ -134,7 +134,7 @@
     aria-labelledby="wallet_modal"
     aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content" style="min-height: 500px;">
+        <div class="modal-content" style="min-height: 450px;">
             <div class="modal-header">
                 <div class="tabs">
                     <div class="tab active" data-wallet-toggle-tab="deposit">
@@ -155,8 +155,8 @@
                 ><i class="fas fa-close-symbol"></i></button>
             </div>
             <div class="modal-body">
-                <div class="ui-blocker" style="display: none;">
-                    <div class="loader"><div></div></div>
+                <div class="ui-blocker" style="height: 91%; display: none;">
+                    <div class="loader" style="height: 90%;"><div></div></div>
                 </div>
                 <div class="modal-scrollable-content">
                     <div data-wallet-tab-content="deposit">
@@ -173,19 +173,18 @@
                             </div>
                             <div class="description">{{ __('general.error.offline_node') }}</div>
                         </div>
-                        <div class="alert alert-light mb-4 p-2 text-center" role="alert">We accept 0 confirmation deposits and instant auto-withdrawals on <i class="{{ \App\Currency\Currency::find('ltc')->icon() }}" style="color: {{ \App\Currency\Currency::find('ltc')->style() }}"></i> LTC, <i class="{{ \App\Currency\Currency::find('bch')->icon() }}" style="color: {{ \App\Currency\Currency::find('bch')->style() }}"></i> BCH and <i class="{{ \App\Currency\Currency::find('doge')->icon() }}" style="color: {{ \App\Currency\Currency::find('doge')->style() }}"></i> DOGE!</div>
-                        <div class="walletMinDeposit" style="display: none">
+                        <div id="currency-label"></div>
+                        <div>
+                            <input id="walletadd" onclick="this.select()" style="cursor: pointer !important;" data-mdb-toggle="tooltip" title="{{ __('wallet.copy') }}" type="text" readonly>
+                        </div>
+                                                <div class="walletMinDeposit" style="display: none">
                             <div class="icon">
                                 <i class="fal fa-exclamation-triangle"></i>
                             </div>
-                            <div class="description">{{ __('wallet.deposit.minimumdepo') }} <b><span id="minimumdepo"> </span>$</b>.</div>
+                            <div class="description">{{ __('wallet.deposit.minimumdepo') }} <b><span id="minimumdepousd"> </span>$</b> or <b><span id="minimumdepo"> </span><b><span style="margin-left: 3px; text-transform: uppercase" id="depocurrency"></span></b>.</div>
                         </div>
-                        <div id="currency-label"></div>
-                        <div>
-                            <input onclick="this.select()" style="cursor: pointer !important;" data-mdb-toggle="tooltip" title="{{ __('wallet.copy') }}" type="text" readonly>
-                        </div>
-                        <div class="btn btn-primary" onclick="getDepositAddress()" id="generatorbutton" style="margin: 0px; padding: 10px; margin-top:10px;margin-bottom:10px;">Generate deposit address</div>
                     </div>
+
                     <div data-wallet-tab-content="withdraw" style="display: none">
                         <select class="currency-selector-withdraw">
                             @foreach(\App\Currency\Currency::all() as $currency)
@@ -197,7 +196,7 @@
                         <div id="withdraw-address"></div>
                         <input id="withdraw-address-value" type="text">
                         <div id="withdraw-min"></div>
-                        <input id="withdraw-amount-value" type="text">
+                      <input id="withdraw-amount-value" type="text">
                         <button class="btn btn-primary" id="withdraw">{{ __('wallet.withdraw.button') }}</button>
                         <div class="alert alert-info mb-1 p-2 text-center" role="alert"> <div id="withdraw-warning" style="color: #22738e !important;"></div></div>
                     </div>
@@ -226,6 +225,10 @@ $(`[data-wallet-tab-content="deposit"] .input-loader .loader`).remove();
 $(`[data-wallet-tab-content="deposit"] input`).val(response.wallet);
 $(`[data-wallet-tab-content="deposit"] #minimumdepo`).html("");
 document.getElementById('minimumdepo').innerHTML += response.mindeposit;
+$(`[data-wallet-tab-content="deposit"] #minimumdepousd`).html("");
+document.getElementById('minimumdepousd').innerHTML += response.mindepositusd;
+$(`[data-wallet-tab-content="deposit"] #depocurrency`).html("");
+document.getElementById('depocurrency').innerHTML += response.currency;
 $(`[data-wallet-tab-content="deposit"] .walletMinDeposit`).fadeIn('fast');
 setTimeout(function(){
 $('#generatorbutton').toggleClass('disabled');

@@ -14,13 +14,9 @@ class Deposit implements ShouldBroadcastNow {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     private User $user;
-    private Currency $currency;
-    private float $amount;
 
-    public function __construct(User $user, Currency $currency, float $amount) {
+    public function __construct(User $user) {
         $this->user = $user;
-        $this->currency = $currency;
-        $this->amount = $amount;
     }
 
     /**
@@ -34,8 +30,6 @@ class Deposit implements ShouldBroadcastNow {
 
     public function broadcastWith() {
         return [
-            'currency' => $this->currency->name(),
-            'amount' => $this->amount
         ];
     }
 

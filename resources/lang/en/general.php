@@ -173,7 +173,7 @@ return [
             'title' => 'bitsarcade',
             'message' => 'Do not forget to add email address, otherwise you could lose access to your account! <a href="/user/'.(auth()->guest() ? '' : auth()->user()->_id).'#security">Add email address</a>'
         ],
-        'deposit' => 'New deposit: :sum :currency'
+        'deposit' => 'Your deposit has entered blockchain and will be credited after 1 confirmation.'
     ],
     'fairness' => [
         'client_seed' => 'Client seed:',

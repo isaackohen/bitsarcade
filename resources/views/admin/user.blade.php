@@ -36,6 +36,14 @@
                                         <td>{{ $user->login_ip }}</td>
                                     </tr>
                                     <tr>
+                                        <th scope="row">Referrals</th>
+                                        <td>{{ \App\User::where('referral', $user->id)->count() }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Active Referrals</th>
+                                        <td>{{ count($user->referral_wager_obtained ?? []) }}</td>
+                                    </tr>
+                                    <tr>
                                         <th scope="row">Created at</th>
                                         <td class="text-muted">{{ $user->created_at }}</th>
                                     </tr>

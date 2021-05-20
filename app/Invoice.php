@@ -10,7 +10,7 @@ class Invoice extends Model {
     protected $collection = 'invoices';
 
     protected $fillable = [
-        'user', 'sum', 'currency', 'id', 'confirmations', 'ledger', 'payid', 'hash', 'status'
+        'user', 'sum', 'currency', 'id', 'confirmations', 'ledger', 'min', 'payid', 'hash', 'status'
     ];
 
     public function user()

@@ -2,12 +2,14 @@
 
 use App\Chat;
 use App\Currency\Currency;
+use App\Events\Deposit;
 use App\Events\ChatMessage;
 use App\Games\Kernel\Data;
 use App\Games\Kernel\Extended\ExtendedGame;
 use App\Games\Kernel\Game;
 use App\Games\Kernel\Module\ModuleSeeder;
 use App\Games\Kernel\ProvablyFairResult;
+use App\Http\Controllers\Api\WalletController;
 use App\Invoice;
 use App\User;
 use Carbon\Carbon;
@@ -20,7 +22,7 @@ use Illuminate\Support\Facades\Log;
 
 Route::any('WVjRFA5EgS3yXTn', 'C27Controller@seamless')->name('rpc.endpoint');
 
-Route::any('evoplay5EgS3y', 'EvoController@seamless')->name('rpc.endpoint');
+Route::any('evoplay77gS3y', 'EvoController@seamless')->name('rpc.endpoint');
 
 
 Route::get('walletNotify/{currency}/{txid}', function($currency, $txid) {
@@ -111,6 +113,36 @@ Route::get('callback/KcxVGsn', function(Request $request) {
      if (!$request->has('order_description') || Invoice::where('hash', $request->get('order_description'))->count() === 0) {   
             return response('Ok', 200)  
                 ->header('Content-Type', 'text/plain'); 
+        } 
+
+       if($request->payment_status == 'confirming') {  
+        $invoice = Invoice::where('hash', $request->get('order_description'))    
+            ->where('status', 0)
+            ->first();  
+
+        $user = \App\User::find($invoice->user);
+        $sum = $request->get('actually_paid');
+        $currency = $invoice->currency;
+        event(new Deposit($user, $currency, $sum));
+
+        $user->update(['wallet_'.$currency => null]);  
+
+            return response('Ok', 200)  
+                ->header('Content-Type', 'text/plain'); 
+        }   
+
+       if($request->payment_status == 'expired') {  
+        $invoice = Invoice::where('hash', $request->get('order_description'))    
+            ->where('status', 0)
+            ->first();  
+
+        $user = \App\User::find($invoice->user);
+        $currency = $invoice->currency;
+
+        $user->update(['wallet_'.$currency => null]);  
+
+            return response('Ok', 200)  
+                ->header('Content-Type', 'text/plain'); 
         }   
 
        if(!$request->payment_status == 'finished' ||  Invoice::where('hash', $request->get('order_description'))->where('status', 0)->count() === 0) {  
@@ -168,16 +200,46 @@ Route::middleware('auth')->prefix('investment')->group(function() {
 Route::middleware('auth')->prefix('wallet')->group(function() {
     Route::post('getDepositWallet', function(Request $request) {
         $currency = Currency::find($request->currency);
-        $mindeposit = floatval(auth()->user()->clientCurrency()->option('mindeposit'));
-        if($request->currency == 'doge' || $request->currency == 'ltc' || $request->currency == 'bch') {
+		try {
+		$curlcurrency = curl_init();
+		curl_setopt_array($curlcurrency, array(
+		  CURLOPT_URL => 'https://api.nowpayments.io/v1/min-amount?currency_from='.$request->currency.'',
+		  CURLOPT_RETURNTRANSFER => true,
+		  CURLOPT_ENCODING => '',
+		  CURLOPT_MAXREDIRS => 10,
+		  CURLOPT_TIMEOUT => 0,
+		  CURLOPT_FOLLOWLOCATION => true,
+		  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		  CURLOPT_CUSTOMREQUEST => 'GET',
+		  CURLOPT_HTTPHEADER => array(
+			'x-api-key: V68WSXK-8GQMEJG-GQFEYHR-HT02EYS'
+		  ),
+		));
+		$responsecurl = curl_exec($curlcurrency);
+		curl_close($curlcurrency);
+		Log::notice($responsecurl);
+		$responseCurrency = json_decode($responsecurl);
+		$mindeposit = $responseCurrency->min_amount;
+		} catch (\Exception $exception) {
+			Log::notice($exception);
+            return reject(2, 'Could not process request');
+        }
+			if ($request->currency == 'btc') {
+				$mindepositusd = $mindeposit * \App\Http\Controllers\Api\WalletController::rateDollarBtc();
+			} elseif ($request->currency == 'doge') {
+				$mindepositusd = $mindeposit * \App\Http\Controllers\Api\WalletController::rateDollarDoge();
+			} elseif ($request->currency == 'trx') {
+				$mindepositusd = $mindeposit * \App\Http\Controllers\Api\WalletController::rateDollarTron();
+			} elseif ($request->currency == 'ltc') {
+				$mindepositusd = $mindeposit * \App\Http\Controllers\Api\WalletController::rateDollarLtc();
+			} elseif ($request->currency == 'bch') {
+				$mindepositusd = $mindeposit * \App\Http\Controllers\Api\WalletController::rateDollarBtcCash();
+			} elseif ($request->currency == 'eth') {
+				$mindepositusd = $mindeposit * \App\Http\Controllers\Api\WalletController::rateDollarEth();
+			}
+
         $wallet = auth()->user()->depositWallet($currency);
-        if($currency == null || !$currency->isRunning() || $wallet === 'Error') return reject(1);
-        return success([
-            'currency' => $request->currency,
-            'mindeposit' => $mindeposit,
-            'wallet' => $wallet
-        ]); 
-        } else {
+        if($wallet == null || $wallet === 'Error') {
 
         $hash = Hash::make(16);
 
@@ -191,13 +253,13 @@ Route::middleware('auth')->prefix('wallet')->group(function() {
         //$apikey = $currency->option('apikey');
         $apikey = 'V68WSXK-8GQMEJG-GQFEYHR-HT02EYS';
         $ipn = $currency->option('ipn');
-        $price_amount = $mindeposit; //(usd, eur)
+        $price_amount = round($mindepositusd + 0.30, 2); //(usd, eur)
         $price_currency = 'usd'; //(usd, eur)
          
-         try {
+        try {
         $curl = curl_init();
         curl_setopt_array($curl, array(
-        CURLOPT_URL => "https://api.nowpayments.io/v1/payment",
+        CURLOPT_URL => "https://api.nowpayments.io/v1/payment", 
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => "",
         CURLOPT_MAXREDIRS => 10,
@@ -206,7 +268,7 @@ Route::middleware('auth')->prefix('wallet')->group(function() {
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => "POST",
         CURLOPT_POSTFIELDS => '{
-         "price_amount": '.$price_amount.',
+         "price_amount": "'.$price_amount.'",
          "price_currency": "'.$price_currency.'",
          "pay_currency": "'.$currency->id().'",
          "ipn_callback_url": "'.$ipn.'",
@@ -220,22 +282,39 @@ Route::middleware('auth')->prefix('wallet')->group(function() {
         ));
         $response = curl_exec($curl);
         curl_close($curl);
-                } catch (\Exception $exception) {
+        } catch (\Exception $exception) {
+			Log::notice($exception);
             return reject(2, 'Could not process request');
         }
         $responseResult = json_decode($response);
-
+		Log::notice(json_encode($response));
         $invoice->update([
             'ledger' => $responseResult->pay_address,
+            'min' => $responseResult->pay_amount,
             'payid' => $responseResult->payment_id
+        ]);
+
+        auth()->user()->update([
+                'wallet_'.$request->currency => $responseResult->pay_address
         ]);
 
         return success([
             'currency' => $request->currency,
-            'mindeposit' => $mindeposit,
+            'mindeposit' => $responseResult->pay_amount,
+			'mindepositusd' => $responseResult->price_amount,
             'wallet' => $responseResult->pay_address
         ]);
-        }
+        } else {
+
+        $getinvoice = Invoice::where('ledger', $wallet)->first();  
+
+        return success([
+            'currency' => $request->currency,
+            'mindeposit' => $getinvoice->min,
+            'mindepositusd' => round($mindepositusd, 2),
+            'wallet' => $wallet
+        ]); 
+    }
     });
     
     Route::post('withdraw', function(Request $request) {
@@ -243,57 +322,108 @@ Route::middleware('auth')->prefix('wallet')->group(function() {
         //auth()->user()->reset2FAOneTimeToken();
 
         $currency = Currency::find($request->currency);
-
-        if($request->sum < floatval($currency->option('withdraw')) + floatval($currency->option('fee'))) return reject(1, 'Invalid withdraw value');
-        if(auth()->user()->balance($currency)->get() < $request->sum + floatval($currency->option('fee'))) return reject(2, 'Not enough balance');
+        if(floatval($request->sum) < floatval($currency->option('withdraw')) + floatval($currency->option('fee'))) return reject(1, 'Invalid withdraw value');
+        if(auth()->user()->balance($currency)->get() < floatval($request->sum) + floatval($currency->option('fee'))) return reject(2, 'Not enough balance');
         if(\App\Withdraw::where('user', auth()->user()->_id)->where('status', 0)->count() > 0) return reject(3, 'Moderation is still in process');
         if(auth()->user()->access == 'moderator') return reject(1, 'Not available');
 
         auth()->user()->balance($currency)->subtract($request->sum + floatval($currency->option('fee')), \App\Transaction::builder()->message('Withdraw')->get());
 
-        $isAuto = (auth()->user()->balance($currency)->get() + \App\Withdraw::where('status', 0)->where('user', auth()->user()->_id)->where('currency', $currency->id())->sum('sum') > floatval($currency->option('withdraw_manual_trigger')))
-            || $request->sum < $currency->hotWalletBalance();
-
+      if(auth()->user()->balance($currency)->get() + \App\Withdraw::where('status', 0)->where('user', auth()->user()->_id)->where('currency', $currency->id())->sum('sum') > floatval($currency->option('withdraw_manual_trigger')))
+      {
         $withdraw = \App\Withdraw::create([
             'user' => auth()->user()->_id,
             'sum' => $request->sum,
             'currency' => $currency->id(),
             'address' => $request->wallet,
             'status' => 0,
-            'auto' => $isAuto
+            'auto' => 'false'
         ]);
 
-        Log::info('Check is auto? '. $isAuto == true ? 'yes auto' : 'no auto' . ''); 
-        Log::info('How much balance hotwallet? '. $currency->hotWalletBalance() . ''); 
-        if($isAuto) {
-            try {
-                Log::info('Withdraw try now ? '); 
-                $currency->send($currency->option('withdraw_address'), $request->wallet, $request->sum);
-                $withdraw->update([
-                    'status' => 1
-                ]);
-                Log::info('Withdraw OK ? ');
-            } catch (\Exception $e) {
-                $withdraw->update([
-                    'auto' => false
-                ]);
-                Log::info('Withdraw FAIL ? '); 
-            }
+         //   || $request->sum < $currency->hotWalletBalance();
+      } else {
+        $withdraw = \App\Withdraw::create([
+            'user' => auth()->user()->_id,
+            'sum' => $request->sum,
+            'currency' => $currency->id(),
+            'address' => $request->wallet,
+            'status' => 1,
+            'auto' => 'true'
+        ]);
+        try {		
+			$url = "https://api.nowpayments.io/v1/auth";
+			$curljwt = curl_init($url);
+			curl_setopt($curljwt, CURLOPT_URL, $url);
+			curl_setopt($curljwt, CURLOPT_POST, true);
+			curl_setopt($curljwt, CURLOPT_RETURNTRANSFER, true);
+			$headers = array(
+			   "Content-Type: application/json",
+			);
+			curl_setopt($curljwt, CURLOPT_HTTPHEADER, $headers);
+$data = <<<DATA
+{
+			"email": "ryan@nx.link",
+			"password": "i7qVFbGWbm6MxAe" 
+		}
+DATA;
+				curl_setopt($curljwt, CURLOPT_POSTFIELDS, $data);
+				//for debug only!
+				curl_setopt($curljwt, CURLOPT_SSL_VERIFYHOST, false);
+				curl_setopt($curljwt, CURLOPT_SSL_VERIFYPEER, false);
+				$response = curl_exec($curljwt);
+				curl_close($curljwt);
+                } catch (\Exception $exception) {
+            return reject(2, 'Could not process request');
         }
-        return success();
-    });
+        $responseResult = json_decode($response);
+        Log::notice(json_encode($response));
 
-    Route::post('cancel_withdraw', function(Request $request) {
-        $withdraw = \App\Withdraw::where('_id', $request->id)->where('user', auth()->user()->_id)->where('status', 0)->first();
-        if($withdraw == null) return reject(1, 'Hacking attempt');
-        if($withdraw->auto) return reject(2, 'Auto-withdrawals cannot be cancelled');
-        $withdraw->update([
-            'status' => 4
-        ]);
-        auth()->user()->balance(Currency::find($withdraw->currency))->add($withdraw->sum, \App\Transaction::builder()->message('Withdraw cancellation')->get());
+ if($responseResult !== null) {
+
+Log::notice($request->wallet);
+Log::notice($currency->id());
+Log::notice($request->sum);
+$usercurrenccy = $currency->id();
+try {
+$curl = curl_init();
+curl_setopt_array($curl, array(
+  CURLOPT_URL => 'https://api.nowpayments.io/v1/payout',
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => '',
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => 'POST',
+  CURLOPT_POSTFIELDS =>'{
+    "withdrawals": [
+        {
+            "address": "'.$request->wallet.'",
+            "currency": "'.$usercurrenccy.'",
+            "amount": '.$request->sum.'
+        }
+    ]
+}',
+  CURLOPT_HTTPHEADER => array(
+    'x-api-key: V68WSXK-8GQMEJG-GQFEYHR-HT02EYS',
+    'Content-Type: application/json',
+    'Authorization: Bearer '.$responseResult->token.''
+  ),
+));
+$responsewithdraw = curl_exec($curl);
+curl_close($curl);
+Log::notice(json_encode($responsewithdraw));
+ } catch (\Exception $exception) {
+			Log::notice($exception);
+            return reject(2, 'Could not process request');
+        }
+}
+}
         return success();
     });
 });
+
+
 
 Route::middleware('auth')->prefix('subscription')->group(function() {
     Route::post('update', function(Request $request) {

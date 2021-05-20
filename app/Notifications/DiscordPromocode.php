@@ -28,7 +28,7 @@ class DiscordPromocode extends Notification {
     public function toDiscord($notifiable) {
         return (new DiscordMessage())->embed([
             'title' => 'New Promocode!',
-            'description' => "**{$this->code}** - ".number_format($this->sum, 2, '.', '')." ETH! {$this->usages} max uses.\nEnter promocode at: https://bitsarcade.com/bonus/",
+            'description' => "**{$this->code}** - ".number_format($this->sum, 7, '.', '')." ETH! {$this->usages} max uses.\nEnter promocode at: https://bitsarcade.com/bonus/",
             'color' => '15158332'
         ]);
     }

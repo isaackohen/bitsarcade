@@ -23,7 +23,7 @@
 <hr>
       @else
 <div id="slotcontainer" class="container">
-  <div class="card p-1" style="background: #1a1d29;">
+  <div class="card p-1">
     <div id=parent>
 
 
@@ -42,9 +42,10 @@
   <div class="bonus-box-small mt-3 mb-3" style="z-index: 1;">
   <button onclick="redirect('/provider/{{ $provider }}')" style="padding-top: 5px; font-size: 10px; padding-left: 10px;" class="btn btn-success m-2 p-1">More {{ $provider }}</a></button>
   <h5 style="padding-top: 9px; padding-left: 6px; font-weight: 600;">Relevant Games</h5>
+  <div id="customNav71" class="owl-nav d-none d-md-block" style="padding-top: 6px;"></div>
   <div class="container-flex owl-carousel relevantgames"  style="z-index: 1;">
     @foreach(\App\Slotslist::all()->where('p', $provider)->random(7) as $slots)
-    <div class="card gamepostercard" style="cursor: pointer; margin-left: 10px; margin-right: 10px;">
+    <div class="card gamepostercard" style="cursor: pointer; margin-left: 5px; margin-right: 5px;">
       @if(!auth()->guest())
       <div onclick="redirect('/slots/{{ $slots->id }}')" class="game_poster" style="background-image:url(/img/slots-wide/{{ $slots->p }}/{{ $slots->id }}.webp)">
         @else
@@ -61,12 +62,11 @@
     </div>
   </div>
   <div class="bonus-box-small mt-3 mb-3" style="z-index: 1;">
-    @if(!auth()->guest())<div style="cursor: pointer; padding-top: 11px; padding-left: 4px; font-weight: 600;" class="action" onclick="$.displaySearchBar()"><i class="fas fa-search"></i></div>@endif
-    <div id="customNav1" class="owl-nav"></div>
-    <h5 style="padding-top: 9px; padding-left: 7px; font-weight: 600;">Random Games</h5>
+      <h5 style="padding-top: 9px; padding-left: 10px; font-weight: 600;"><i style="color: #5f3fd0; margin-right: 7px;" class="fad fa-random"></i>  Random Games</h5>
+      <div id="customNav1" class="owl-nav d-none d-md-block" style="padding-top: 6px;"></div>
     <div class="container-flex owl-carousel randomgames"  style="z-index: 1;">
-      @foreach(\App\Slotslist::all()->random(15) as $slots)
-      <div class="card gamepostercard" style="cursor: pointer; margin-left: 10px; margin-right: 10px;">
+      @foreach(\App\Slotslist::all()->random(10) as $slots)
+      <div class="card gamepostercard" style="cursor: pointer; margin-left: 5px; margin-right: 5px;">
         @if(!auth()->guest())
         <div onclick="redirect('/slots/{{ $slots->id }}')" class="game_poster" style="background-image:url(/img/slots-wide/{{ $slots->p }}/{{ $slots->id }}.webp)">
           @else

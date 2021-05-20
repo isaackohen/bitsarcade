@@ -92,6 +92,10 @@
       <div class="text">{{ $notification->text }}</div>
     </div>
   </div>
+    <div class="alert alert-danger p-2 m-t2 mb-3"style="border-radius: 4px !important; padding: 1rem !important; padding: 1rem;
+      margin-bottom: 1rem; font-weight: 500 !important; color: #22738e !important; background-image: url(/img/misc/arrows.svg) !important;">
+      <div class="text">New Multiplayer Game added! - Introducing <a href="/game/double"><b>Double</b></a> to the in-house gamepool. Enjoy!</div>
+    </div>
 </div>
 @endforeach
 
@@ -106,7 +110,7 @@ $notify = auth()->user()->unreadNotifications();
 @endphp
 @if(auth()->user()->freegames > '1')
 <div class="alert alert-info mb-3 mt-3" role="alert">
-  You have <strong>{{ auth()->user()->freegames }} free <i class="{{ \App\Currency\Currency::find('eth')->icon() }}" style="color: {{ \App\Currency\Currency::find('eth')->style() }}"></i> spins</strong> on your account! Get spinning on Netent's <a href="/slots/{{ $slotname->id }}" span style="capitalize; font-weight: 600 !important;">{{ $slotname->n }}</a> or on EvoPlay's <a href="/slots-evo/{{ $evoslotabsolute }}" span style="capitalize; font-weight: 600 !important;">{{ $evoslotname }}</a>.</b>
+  You have <strong>{{ auth()->user()->freegames }} free <i class="{{ \App\Currency\Currency::find('eth')->icon() }}" style="color: {{ \App\Currency\Currency::find('eth')->style() }}"></i> spins</strong> on your account! Get spinning on {{ $slotname->p }}'s <a href="/slots/{{ $slotname->id }}" span style="capitalize; font-weight: 600 !important;">{{ $slotname->n }}</a> or on EvoPlay's <a href="/slots-evo/{{ $evoslotabsolute }}" span style="capitalize; font-weight: 600 !important;">{{ $evoslotname }}</a>.</b>
 </span>
 </div>
 @endif
@@ -194,7 +198,36 @@ $notify = auth()->user()->unreadNotifications();
               </div>
             </div>
 
+        <div class="games-box" style="z-index: 1;">
+          @if(!auth()->guest())<div style="cursor: pointer; padding-top: 11px; padding-left: 15px; font-weight: 600;" class="action" onclick="$.displaySearchBar()"><i class="fas fa-search"></i></div>@endif
+          <div id="customNav1123" class="owl-nav"></div>
+          <h5 style="padding-top: 9px; padding-left: 7px; font-weight: 600;">Bonus Buy Games</h5>
+          <div class="container-flex owl-carousel mascot" style="z-index: 1;">
+            @foreach(\App\Slotslist::get()->shuffle() as $slots)
+            @if($slots->f == '7')
+            <div class="card gamepostercard" style="cursor: pointer; margin-left: 7px; margin-right: 7px;">
+              @if(!auth()->guest())
+              @if($slots->p == 'evoplay') 
+              <div onclick="redirect('/slots-evo/{{ $slots->id }}')" class="game_poster" style="background-image:url(/img/slots-wide/{{ $slots->p }}/{{ $slots->id }}.webp)">
+              @else
+              <div onclick="redirect('/slots/{{ $slots->id }}')" class="game_poster" style="background-image:url(/img/slots-wide/{{ $slots->p }}/{{ $slots->id }}.webp)">
+              @endif
+                @else
+                <div onclick="$.auth()" class="game_poster" style="background-image:url(/img/slots-wide/{{ $slots->p }}/{{ $slots->id }}.webp)">
+                  @endif
+   
+                </div>
+                    <div class="card-footer">
+                      <span class="game-card-name">{{ $slots->n }}</span><br>
+                      <small><span class="game-card-provider">{{ $slots->p }}</span></small></div>
+                    </div>
+                @endif
+                @endforeach
+              </div>
+            </div>
+
 @if(!auth()->guest() || auth()->guest())
+
         <div class="games-box" style="z-index: 1;">
                           @if(!auth()->guest())<div style="cursor: pointer; padding-top: 11px; padding-left: 15px; font-weight: 600;" class="action" onclick="$.displaySearchBar()"><i class="fas fa-search"></i></div>@endif
 
@@ -285,6 +318,7 @@ $notify = auth()->user()->unreadNotifications();
                     @endforeach
                   </div>
                 </div>
+
 
               <div class="games-box" style="z-index: 1;">
                 @if(!auth()->guest())<div style="cursor: pointer; padding-top: 11px; padding-left: 15px; font-weight: 600;" class="action" onclick="$.displaySearchBar()"><i class="fas fa-search"></i></div>@endif

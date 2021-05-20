@@ -15,7 +15,7 @@ class EvoController extends Controller
 
 {
     private $system_id = '1103';
-    private $secret_key = '097d8eafb3d81c7d54a44b565c27a44b';
+    private $secret_key = 'fedf17be1580355d1edc7206fac69083';
     private $version = '1';
     private $currency = 'USD';
     

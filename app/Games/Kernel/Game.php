@@ -55,6 +55,7 @@ abstract class Game {
     public static function list() {
         return [
             new \App\Games\Slide(),
+            new \App\Games\Double(),
             new \App\Games\Mines(),
             new \App\Games\Baccarat(),
             new \App\Games\Wheel(),
@@ -73,7 +74,6 @@ abstract class Game {
             new \App\Games\Limbo(),
 			new \App\Games\Slots(),
 			new \App\Games\Triple(),
-			new \App\Games\Double(),
             new \App\Games\EvoPlay(),
             new \App\Games\SlotMachine()
         ];

@@ -30,7 +30,6 @@
                         @endif
                         
                         <div>{!! __('partner.analytics.referrals', ['count' => \App\User::where('referral', auth()->user()->_id)->count()])  !!}</div>
-                        <div>{!! __('partner.analytics.referrals_bonus', ['count' => count(auth()->user()->referral_wager_obtained ?? [])]) !!}</div>
                         <div>{!! __('partner.analytics.referrals_wheel', ['count' => auth()->user()->referral_bonus_obtained ?? 0]) !!}</div>
 
                         <div class="divider"></div>

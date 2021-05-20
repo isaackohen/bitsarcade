@@ -474,27 +474,30 @@
                 </div>
             </div>
             <div class="searchbar-overlay"></div>
-            @if(!auth()->guest())
-<script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="f21aff7c-4109-4ccb-8b4f-1ff1556bd897";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();
-
-</script>
-    <?php
-    $deposits = (\App\Invoice::where('user', auth()->user()->_id)->where('status', 1)->where('ledger', '!=','Offerwall Credit')->count());
-
-    $registercount = (\App\User::where('register_multiaccount_hash', auth()->user()->register_multiaccount_hash)->count());
-    $logincount = (\App\User::where('login_multiaccount_hash', auth()->user()->login_multiaccount_hash)->count());
-    $registeripcount = (\App\User::where('register_ip', auth()->user()->register_ip)->count());
-    $loginipcount = (\App\User::where('login_ip', auth()->user()->login_ip)->count());
-
-    ?>
-
+     @if(!auth()->guest())
             <script>
-                            $crisp.push(["set", "user:nickname", ["{{ auth()->user()->name }}"]])
-                            $crisp.push(["set", "user:email", ["{{ auth()->user()->email }}"]])
-Code: $crisp.push(["set", "session:data", [[["uid", "{{ auth()->user()->id }}" ], ["vipLevel", "{{ auth()->user()->vipLevel() }}"], ["deposits", "{{ $deposits }}"],   ["freespins", "{{ auth()->user()->freegames }}"], ["created", "{{ auth()->user()->created_at }}"], ["register_ip", "{{ auth()->user()->register_ip }}"], ["login_ip", "{{ auth()->user()->login_ip }}"], ["accounts_loginhash", "{{ $logincount }}"], ["accounts_registerhash", "{{ $registercount }}"], ["accounts_registerip", "{{ $registeripcount }}"], ["accounts_loginip", "{{ $loginipcount }}"],  ]]])
-
+            window.intercomSettings = {
+            app_id: "{{ \App\Settings::where('name', 'intercom_id')->first()->value }}",
+            custom_launcher_selector:'#intercomopenlink',
+            user_id: <?php echo json_encode(auth()->user()->id) ?>,
+            name: <?php echo json_encode(auth()->user()->name) ?>,
+            email: <?php echo json_encode(auth()->user()->email) ?>,
+            register_ip: <?php echo json_encode(auth()->user()->register_ip) ?>,
+            login_ip: <?php echo json_encode(auth()->user()->login_ip) ?>,
+            accounts_registerip: <?php echo json_encode(\App\User::where('register_ip', auth()->user()->register_ip)->count()) ?>,
+            accounts_loginip: <?php echo json_encode(\App\User::where('login_ip', auth()->user()->login_ip)->count()) ?>,
+            accounts_registerhash: <?php echo json_encode(\App\User::where('register_multiaccount_hash', auth()->user()->register_multiaccount_hash)->count()) ?>,
+            accounts_loginhash: <?php echo json_encode(\App\User::where('login_multiaccount_hash', auth()->user()->login_multiaccount_hash)->count()) ?>,
+            created_at: <?php echo json_encode(auth()->user()->created_at) ?>,
+            vipLevel: <?php echo json_encode(auth()->user()->vipLevel()) ?>,
+            deposits: <?php echo json_encode(\App\Invoice::where('user', auth()->user()->_id)->where('status', 1)->where('ledger', '!=','Offerwall Credit')->count()) ?>,
+            freegames: <?php echo json_encode(auth()->user()->freegames) ?>
+            };
             </script>
-
+            <script>
+            // We pre-filled your app ID in the widget URL: 'https://widget.intercom.io/widget/{{ \App\Settings::where('name', 'intercom_id')->first()->value }}'
+            (function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',w.intercomSettings);}else{var d=document;var i=function(){i.c(arguments);};i.q=[];i.c=function(args){i.q.push(args);};w.Intercom=i;var l=function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/{{ \App\Settings::where('name', 'intercom_id')->first()->value }}';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);};if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();
+            </script>
             @endif
         </body>
     </html>

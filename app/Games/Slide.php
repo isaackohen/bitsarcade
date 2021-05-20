@@ -92,9 +92,9 @@ class Slide extends MultiplayerGame {
     }
 
     function result(ProvablyFairResult $result): array {
-        $max_multiplier = 1000; $house_edge = 2.00;
+        $max_multiplier = 10; $house_edge = 2.00;
         $float_point = $max_multiplier / ($result->extractFloat() * $max_multiplier) * $house_edge;
-        return [floor($float_point * 100) / 875];
+        return [floor($float_point * 100) / 1750];
     }
 
 }
