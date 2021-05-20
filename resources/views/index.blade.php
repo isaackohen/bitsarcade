@@ -92,10 +92,7 @@
       <div class="text">{{ $notification->text }}</div>
     </div>
   </div>
-    <div class="alert alert-danger p-2 m-t2 mb-3"style="border-radius: 4px !important; padding: 1rem !important; padding: 1rem;
-      margin-bottom: 1rem; font-weight: 500 !important; color: #22738e !important; background-image: url(/img/misc/arrows.svg) !important;">
-      <div class="text">New Multiplayer Game added! - Introducing <a href="/game/double"><b>Double</b></a> to the in-house gamepool. Enjoy!</div>
-    </div>
+
 </div>
 @endforeach
 

@@ -155,11 +155,11 @@ return [
     'notifications' => [
         'title' => 'Notifications',
         'withdraw_accepted' => [
-            'title' => 'bitsarcade',
+            'title' => 'Bitsarcade',
             'message' => 'Your payment request created :diff (:sum :currency) was accepted.'
         ],
         'withdraw_declined' => [
-            'title' => 'bitsarcade',
+            'title' => 'Bitsarcade',
             'message' => 'Your payment request created :diff (:sum :currency) was declined. Reason: :reason'
         ],
         'vip_discord' => [
@@ -170,9 +170,10 @@ return [
                          <br><br><a href='javascript:void(0)' onclick='$(\".notifications-overlay\").click(); $.vip();' class='disable-pjax'>Loyalty Rewards and Bonuses</a>"
         ],
         'email_reminder' => [
-            'title' => 'bitsarcade',
+            'title' => 'Bitsarcade',
             'message' => 'Do not forget to add email address, otherwise you could lose access to your account! <a href="/user/'.(auth()->guest() ? '' : auth()->user()->_id).'#security">Add email address</a>'
         ],
+        'depositcredited' => 'Your deposit has been credited.',
         'deposit' => 'Your deposit has entered blockchain and will be credited after 1 confirmation.'
     ],
     'fairness' => [
@@ -210,7 +211,7 @@ return [
         'websocket_connect_error' => 'Connecting to the server...',
         'token_grant_error' => 'Failed to connect to the server. Retrying in :seconds second(s)...',
         'token_grant_reconnecting' => 'Connecting to the server...',
-        'offline_node' => 'We are currency unable to process payments for this currency.',
+        'offline_node' => 'Please wait a moment while we retry generating deposit address for you..',
         'auth' => 'Authorization is required',
         'wager' => 'Default amount - :value',
         'wager_min' => 'Minimal amount - :value',

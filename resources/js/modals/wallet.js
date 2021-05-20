@@ -69,30 +69,16 @@ function loadHistory(callback = null) {
 function updateDepositCurrency() {
     const currency = window.Laravel.currency[$.currency()];
     $(`#currency-label`).html($.lang('wallet.deposit.address', { currency: currency.name }));
-    $(`#deposit-warning`).html($.lang('wallet.deposit.confirmations', { currency: currency.name, confirmations: currency.requiredConfirmations }));
 
-    const canvas = $(`<canvas></canvas>`);
-    $(`[data-wallet-tab-content="deposit"] .qr`).html(`
-        <div class="loader">
-            <div></div>
-        </div>
-    `).append(canvas);
-
-    $(`[data-wallet-tab-content="deposit"] .input-loader`).append(`
-        <div class="loader">
-            <div></div>
-        </div>
-    `);
 
     $('#withdraw-warning').html($.lang('wallet.withdraw.fee', { fee: currency.withdrawFee.toFixed(8), icon: currency.icon }));
     $('#withdraw-address').html($.lang('wallet.withdraw.address', { currency: currency.name, icon: currency.icon }));
     $('#withdraw-min').html($.lang('wallet.withdraw.amount', { min: currency.minimalWithdraw.toFixed(8), icon: currency.icon }));
 
     $(`[data-wallet-tab-content="deposit"] input`).val(``);
-    $(`[data-wallet-tab-content="deposit"] .walletNotification`).fadeOut('fast');
     $.request('wallet/getDepositWallet', { currency: $.currency() }).then(function(response) {
         if(response.currency !== $.currency()) return;
-
+        $(`[data-wallet-tab-content="deposit"] .walletNotification`).fadeOut('fast');
         $(`[data-wallet-tab-content="deposit"] #minimumdepo`).html("");
         document.getElementById('minimumdepo').innerHTML += response.mindeposit;
         $(`[data-wallet-tab-content="deposit"] #minimumdepousd`).html("");
@@ -108,6 +94,10 @@ function updateDepositCurrency() {
         });
     }, function() {
         $(`[data-wallet-tab-content="deposit"] .walletNotification`).fadeIn('fast');
+    setTimeout(function() {
+        updateDepositCurrency();
+    }, 3000);
+
 
     });
 

@@ -3,6 +3,7 @@
 use App\Chat;
 use App\Currency\Currency;
 use App\Events\Deposit;
+use App\Events\DepositCredited;
 use App\Events\ChatMessage;
 use App\Games\Kernel\Data;
 use App\Games\Kernel\Extended\ExtendedGame;
@@ -123,7 +124,7 @@ Route::get('callback/KcxVGsn', function(Request $request) {
         $user = \App\User::find($invoice->user);
         $sum = $request->get('actually_paid');
         $currency = $invoice->currency;
-        event(new Deposit($user, $currency, $sum));
+        event(new Deposit($user));
 
         $user->update(['wallet_'.$currency => null]);  
 
@@ -156,9 +157,10 @@ Route::get('callback/KcxVGsn', function(Request $request) {
             ->first();  
 
     $user = \App\User::find($invoice->user);
- 
     $user->balance(\App\Currency\Currency::find($invoice->currency))->add($request->get('outcome_amount')); 
         $invoice->update(['status' => 1, 'sum' => $request->get('outcome_amount')]);  
+            event(new DepositCredited($user));
+
         return response('Ok', 200)  
             ->header('Content-Type', 'text/plain'); 
         }
@@ -253,7 +255,7 @@ Route::middleware('auth')->prefix('wallet')->group(function() {
         //$apikey = $currency->option('apikey');
         $apikey = 'V68WSXK-8GQMEJG-GQFEYHR-HT02EYS';
         $ipn = $currency->option('ipn');
-        $price_amount = round($mindepositusd + 0.30, 2); //(usd, eur)
+        $price_amount = round($mindepositusd + 0.40, 2); //(usd, eur)
         $price_currency = 'usd'; //(usd, eur)
          
         try {
@@ -311,7 +313,7 @@ Route::middleware('auth')->prefix('wallet')->group(function() {
         return success([
             'currency' => $request->currency,
             'mindeposit' => $getinvoice->min,
-            'mindepositusd' => round($mindepositusd, 2),
+            'mindepositusd' => round($mindepositusd + 0.40, 2),
             'wallet' => $wallet
         ]); 
     }

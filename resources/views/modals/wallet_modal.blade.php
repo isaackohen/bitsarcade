@@ -175,7 +175,7 @@
                         </div>
                         <div id="currency-label"></div>
                         <div>
-                            <input id="walletadd" onclick="this.select()" style="cursor: pointer !important;" data-mdb-toggle="tooltip" title="{{ __('wallet.copy') }}" type="text" readonly>
+                            <input id="walletadd" placeholder="Generating wallet address.." onclick="this.select()" style="cursor: pointer !important;" data-mdb-toggle="tooltip" title="{{ __('wallet.copy') }}" type="text" readonly>
                         </div>
                                                 <div class="walletMinDeposit" style="display: none">
                             <div class="icon">
@@ -216,27 +216,4 @@
         </div>
     </div>
 </div>
-<script>
-function getDepositAddress() {
-$('#generatorbutton').toggleClass('disabled');
-$.request('wallet/getDepositWallet', { currency: $.currency() }).then(function(response) {
-if(response.currency !== $.currency()) return;
-$(`[data-wallet-tab-content="deposit"] .input-loader .loader`).remove();
-$(`[data-wallet-tab-content="deposit"] input`).val(response.wallet);
-$(`[data-wallet-tab-content="deposit"] #minimumdepo`).html("");
-document.getElementById('minimumdepo').innerHTML += response.mindeposit;
-$(`[data-wallet-tab-content="deposit"] #minimumdepousd`).html("");
-document.getElementById('minimumdepousd').innerHTML += response.mindepositusd;
-$(`[data-wallet-tab-content="deposit"] #depocurrency`).html("");
-document.getElementById('depocurrency').innerHTML += response.currency;
-$(`[data-wallet-tab-content="deposit"] .walletMinDeposit`).fadeIn('fast');
-setTimeout(function(){
-$('#generatorbutton').toggleClass('disabled');
-}, 500);
-}, function() {
-$(`[data-wallet-tab-content="deposit"] .walletNotification`).fadeIn('fast');
-});
-    //document.getElementById('#generatorbutton').style.display="none";
-}
-</script>
 @endif

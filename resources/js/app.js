@@ -635,6 +635,10 @@ $(document).ready(function() {
                 $.success($.lang('general.notifications.deposit', { sum: bitcoin(e.amount, 'btc').to($.unit()).value().toFixed(8), currency: e.currency }));
                 $.playSound('/sounds/ball4.mp3');
             })
+            .listen('DepositCredited', function(e) {
+                $.success($.lang('general.notifications.depositcredited', { sum: bitcoin(e.amount, 'btc').to($.unit()).value().toFixed(8), currency: e.currency }));
+                $.playSound('/sounds/guessed.mp3');
+            })     
             .listen('BalanceModification', function(e) {
             const display = function() {
                 $(`[data-currency-value="${e.currency}"]`).html(bitcoin(e.balance, 'btc').to($.unit()).value().toFixed(8));
